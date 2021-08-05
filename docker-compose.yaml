@@ -1,0 +1,16 @@
+
+version: '3.7'
+services:
+  hive-graph:
+    build:
+      context: .
+    networks:
+      - hive-graph-network
+    ports:
+      - 8085:8085
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+networks:
+  hive-graph-network:
