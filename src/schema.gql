@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Account implements BaseAccount {
+  address: String!
+  coins: [Coin!]!
+  public_key: PublicKeyUnion
+  account_number: Int!
+  sequence: Int!
+}
+
+interface BaseAccount {
+  address: String!
+  coins: [Coin!]!
+  public_key: PublicKeyUnion
+  account_number: Int!
+  sequence: Int!
+}
+
+union PublicKeyUnion = PublicKey | MultisigPublicKey
+
+type MultisigPublicKey {
+  type: String!
+  threshold: String!
+  pubkeys: [PublicKey!]!
+}
+
+type Auth {
+  accountInfo(address: String!): Account!
+}
+
+type Coin {
+  denom: String!
+  amount: String!
+}
+
+type PublicKey {
+  type: String!
+  value: String!
+}
+
+type ScheduleEntry {
+  start_time: String!
+  end_time: String!
+  ratio: String!
+}
+
+type VestingSchedule {
+  denom: String!
+  schedules: [ScheduleEntry!]!
+}
+
+type Query {
+  ping: String!
+  auth: Auth!
+}
