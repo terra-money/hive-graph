@@ -15,7 +15,21 @@ import { LoggerOptions } from 'pino'
 import { AppResolver } from './app.resolver'
 import { AuthModule } from './auth/auth.module'
 import { BankModule } from './bank/bank.module'
+import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
+import { GovModule } from './gov/gov.module'
+import { MarketModule } from './market/market.module'
+import { MintModule } from './mint/mint.module'
+import { MsgauthModule } from './msgauth/msgauth.module'
+import { OracleModule } from './oracle/oracle.module'
+import { SlashingModule } from './slashing/slashing.module'
+import { StakingModule } from './staking/staking.module'
+import { SupplyModule } from './supply/supply.module'
+import { TendermintModule } from './tendermint/tendermint.module'
+import { TreasuryModule } from './treasury/treasury.module'
+import { TxModule } from './tx/tx.module'
+import { UtilsModule } from './utils/utils.module'
+import { WasmModule } from './wasm/wasm.module'
 
 @Module({
   imports: [
@@ -72,6 +86,20 @@ import { validate } from './env.validation'
     }),
     AuthModule,
     BankModule,
+    DistributionModule,
+    GovModule,
+    MarketModule,
+    MintModule,
+    MsgauthModule,
+    OracleModule,
+    SlashingModule,
+    StakingModule,
+    SupplyModule,
+    TendermintModule,
+    TreasuryModule,
+    WasmModule,
+    TxModule,
+    UtilsModule,
   ],
   providers: [AppResolver],
 })
