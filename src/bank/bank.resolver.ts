@@ -1,7 +1,7 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { Coin } from 'src/common/models'
 import { BankService } from './bank.service'
-import { Bank } from './models/bank.model'
+import { Bank } from './models'
 
 @Resolver(Bank)
 export class BankResolver {

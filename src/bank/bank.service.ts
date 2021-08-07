@@ -16,10 +16,7 @@ export class BankService {
     try {
       const balance = await this.terraClient.bank.balance(address)
 
-      return balance.toArray().map<Coin>((coin) => ({
-        denom: coin.denom,
-        amount: coin.amount.toFixed(),
-      }))
+      return Coin.fromTerraCoins(balance)
     } catch (err) {
       this.logger.error({ err }, 'Error getting balance for %s.', address)
 

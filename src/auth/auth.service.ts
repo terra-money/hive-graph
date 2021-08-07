@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PinoLogger, InjectPinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, Account as TerraAccount } from 'nestjs-terra'
+import { Coin } from 'src/common/models'
 import { Account, VestingAccount, PublicKey, MultisigPublicKey } from './models'
 
 @Injectable()
@@ -33,10 +34,7 @@ export class AuthService {
 
       const account: Account = {
         address: accountInfo.address,
-        coins: accountInfo.coins.toArray().map((coin) => ({
-          denom: coin.denom,
-          amount: coin.amount.toFixed(),
-        })),
+        coins: Coin.fromTerraCoins(accountInfo.coins),
         public_key: publicKey,
         account_number: accountInfo.account_number,
         sequence: accountInfo.sequence,
@@ -48,18 +46,9 @@ export class AuthService {
 
       return {
         ...account,
-        original_vesting: accountInfo.original_vesting.toArray().map((coin) => ({
-          denom: coin.denom,
-          amount: coin.amount.toFixed(),
-        })),
-        delegated_free: accountInfo.delegated_free.toArray().map((coin) => ({
-          denom: coin.denom,
-          amount: coin.amount.toFixed(),
-        })),
-        delegated_vesting: accountInfo.delegated_vesting.toArray().map((coin) => ({
-          denom: coin.denom,
-          amount: coin.amount.toFixed(),
-        })),
+        original_vesting: Coin.fromTerraCoins(accountInfo.original_vesting),
+        delegated_free: Coin.fromTerraCoins(accountInfo.delegated_free),
+        delegated_vesting: Coin.fromTerraCoins(accountInfo.delegated_vesting),
         end_time: accountInfo.end_time,
         vesting_schedules: accountInfo.vesting_schedules.map((schedule) => ({
           denom: schedule.denom,

@@ -55,8 +55,39 @@ type Bank {
   balance(address: String!): [Coin!]!
 }
 
+type DistributionParams {
+  community_tax: String!
+  base_proposer_reward: String!
+  bonus_proposer_reward: String!
+  withdraw_addr_enabled: Boolean!
+}
+
+type RewardItem {
+  validator_address: String!
+  reward: [Coin!]!
+}
+
+type Rewards {
+  rewards: [RewardItem!]!
+  total: [Coin!]!
+}
+
+type ValidatorRewards {
+  self_bond_rewards: [Coin!]!
+  val_commission: [Coin!]!
+}
+
+type Distribution {
+  rewards(delegator: String!): Rewards!
+  validatorRewards(validator: String!): ValidatorRewards!
+  withdrawAddress(delegator: String!): String!
+  communityPool: [Coin!]!
+  parameters: DistributionParams!
+}
+
 type Query {
   ping: String!
   auth: Auth!
   bank: Bank!
+  distribution: Distribution!
 }

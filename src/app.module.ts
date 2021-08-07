@@ -82,7 +82,7 @@ import { WasmModule } from './wasm/wasm.module'
       },
     }),
     GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
     }),
     AuthModule,
     BankModule,
