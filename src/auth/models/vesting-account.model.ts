@@ -1,8 +1,8 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
 import { AccAddress } from '@terra-money/terra.js'
+import { Coin } from 'src/common/models'
 import { BaseAccount } from '../interfaces'
 import { PublicKeyUnion } from '../unions'
-import { Coin } from './coin.model'
 import { VestingSchedule } from './vesting-schedule.model'
 
 @ObjectType({
