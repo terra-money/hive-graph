@@ -85,9 +85,208 @@ type Distribution {
   parameters: DistributionParams!
 }
 
+type DepositParams {
+  min_deposit: [Coin!]!
+  max_deposit_period: Int!
+}
+
+type Deposit {
+  proposal_id: Float!
+  depositor: String!
+  amount: [Coin!]!
+}
+
+type TallyParams {
+  quorum: String!
+  threshold: String!
+  veto: String!
+}
+
+type VotingParams {
+  voting_period: Int!
+}
+
+type GovParams {
+  deposit_params: DepositParams
+  voting_params: VotingParams
+  tally_params: TallyParams
+}
+
+type Gov {
+  proposals: [Proposal!]!
+  proposal(proposalId: Float!): Proposal!
+  proposer(proposalId: Float!): String!
+  deposits(proposalId: Float!): [Deposit!]!
+  votes(proposalId: Float!): [Vote!]!
+  tally(proposalId: Float!): Tally!
+  depositParameters: DepositParams!
+  votingParameters: VotingParams!
+  tallyParameters: TallyParams!
+  parameters: GovParams!
+}
+
+type OracleWhitelist {
+  name: String!
+  tobin_tax: String!
+}
+
+type Tally {
+  yes: Int!
+  abstain: Int!
+  no: Int!
+  no_with_veto: Int!
+}
+
+type Proposal {
+  id: ID!
+  content: ProposalContentUnion!
+  proposal_status: ProposalStatus!
+  final_tally_result: Tally!
+  submit_time: String!
+  deposit_end_time: String!
+  total_deposit: [Coin!]!
+  voting_start_time: String!
+  voting_end_time: String!
+}
+
+union ProposalContentUnion = CommunityPoolSpendContent | ParameterChangeContent | RewardWeightUpdateContent | TaxRateUpdateContent | TextContent
+
+type CommunityPoolSpendContent implements ProposalContent {
+  title: String!
+  description: String!
+  recipient: String!
+  amount: [Coin!]!
+}
+
+interface ProposalContent {
+  title: String!
+  description: String!
+}
+
+type ParameterChangeContent implements ProposalContent {
+  title: String!
+  description: String!
+  changes: ParameterChangesUnion
+}
+
+union ParameterChangesUnion = DistributionChanges | GovParams | MarketChanges | MintChanges | OracleChanges | SlashingChanges | StakingChanges | TreasuryChanges | WasmParamChanges
+
+type DistributionChanges {
+  community_tax: String
+  base_proposer_reward: String
+  bonus_proposer_reward: String
+  withdraw_add_renabled: Boolean
+}
+
+type MarketChanges {
+  pool_recovery_period: Int
+  base_pool: String
+  min_stability_spread: String
+}
+
+type MintChanges {
+  mint_denom: String
+  inflation_rate: String
+  inflation_max: String
+  inflation_min: String
+  goal_bonded: String
+  blocks_per_year: Int
+}
+
+type OracleChanges {
+  vote_period: Int
+  vote_threshold: String
+  reward_band: String
+  reward_distribution_window: Int
+  whitelist: [OracleWhitelist!]
+  slash_fraction: String
+  slash_window: Int
+  min_validper_window: String
+}
+
+type SlashingChanges {
+  max_evidence_age: Int
+  signed_blocks_window: Int
+  min_signed_per_window: String
+  downtime_jail_duration: Int
+  slash_fraction_double_sign: String
+  slash_fraction_downtime: String
+}
+
+type StakingChanges {
+  unbonding_time: Int
+  max_validators: Int
+  key_max_entries: Int
+  bond_denom: String
+}
+
+type TreasuryChanges {
+  tax_policy: PolicyConstraints
+  reward_policy: PolicyConstraints
+  seigniorage_burden_target: String
+  mining_increment: String
+  window_short: Int
+  window_long: Int
+  window_probation: Int
+}
+
+type WasmParamChanges {
+  max_contract_size: Int
+  max_contract_gas: Int
+  max_contract_msg_size: Int
+}
+
+type RewardWeightUpdateContent implements ProposalContent {
+  title: String!
+  description: String!
+  reward_weight: String!
+}
+
+type TaxRateUpdateContent implements ProposalContent {
+  title: String!
+  description: String!
+  tax_rate: String!
+}
+
+type TextContent implements ProposalContent {
+  title: String!
+  description: String!
+}
+
+enum ProposalStatus {
+  NIL
+  DEPOSIT_PERIOD
+  VOTING_PERIOD
+  PASSED
+  REJECTED
+  FAILED
+}
+
+type PolicyConstraints {
+  rate_min: String!
+  rate_max: String!
+  cap: Coin!
+  change_max: String!
+}
+
+type Vote {
+  proposal_id: Float!
+  voter: String!
+  option: MsgVoteOption!
+}
+
+enum MsgVoteOption {
+  EMPTY
+  YES
+  ABSTAIN
+  NO
+  NO_WITH_VETO
+}
+
 type Query {
   ping: String!
   auth: Auth!
   bank: Bank!
   distribution: Distribution!
+  gov: Gov!
 }

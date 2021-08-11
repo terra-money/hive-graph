@@ -12,7 +12,7 @@ export class Coin {
   public static fromTerraCoins(coins: TerraCoins): Coin[] {
     return coins.toArray().map<Coin>((coin) => ({
       denom: coin.denom,
-      amount: coin.amount.toFixed(),
+      amount: coin.amount.toString(),
     }))
   }
 }

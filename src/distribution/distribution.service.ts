@@ -34,6 +34,7 @@ export class DistributionService {
   public async validatorRewards(validator: ValAddress): Promise<ValidatorRewards> {
     try {
       const validatorRewardsData = await this.terraClient.distribution.validatorRewards(validator)
+      console.log(validatorRewardsData)
 
       return {
         self_bond_rewards: Coin.fromTerraCoins(validatorRewardsData.self_bond_rewards),
@@ -73,9 +74,9 @@ export class DistributionService {
       const params = await this.terraClient.distribution.parameters()
 
       return {
-        community_tax: params.community_tax.toFixed(),
-        base_proposer_reward: params.base_proposer_reward.toFixed(),
-        bonus_proposer_reward: params.bonus_proposer_reward.toFixed(),
+        community_tax: params.community_tax.toString(),
+        base_proposer_reward: params.base_proposer_reward.toString(),
+        bonus_proposer_reward: params.bonus_proposer_reward.toString(),
         withdraw_addr_enabled: params.withdraw_addr_enabled,
       }
     } catch (err) {

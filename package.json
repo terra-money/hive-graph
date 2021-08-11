@@ -33,6 +33,7 @@
     "class-validator": "0.13.1",
     "compression": "^1.7.4",
     "graphql": "15.5.1",
+    "graphql-type-json": "^0.3.2",
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
     "nestjs-pino": "^1.4.0",

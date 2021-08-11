@@ -1,1 +1,1 @@
-export { PublicKeyUnion } from './public-key-value.union'
+export { PublicKeyType, PublicKeyUnion } from './public-key-value.union'

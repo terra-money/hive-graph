@@ -5,3 +5,5 @@ export const PublicKeyUnion = createUnionType({
   name: 'PublicKeyUnion',
   types: () => [PublicKey, MultisigPublicKey],
 })
+
+export type PublicKeyType = typeof PublicKeyUnion
