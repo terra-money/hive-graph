@@ -15,6 +15,11 @@ export enum Denom {
   uchf = 'uchf',
   uaud = 'uaud',
   usgd = 'usgd',
+  udkk = 'udkk', // No in terrajs
+  uhkd = 'uhkd', // No in terrajs
+  unok = 'unok', // No in terrajs
+  usek = 'usek', // No in terrajs
+  uthb = 'uthb', // No in terrajs
 }
 
 export enum ProposalStatus {

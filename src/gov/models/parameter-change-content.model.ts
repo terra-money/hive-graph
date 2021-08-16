@@ -1,6 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql'
 import { ParamChanges } from 'nestjs-terra'
-import { Coin } from 'src/common/models'
+import { Coin, OracleWhitelist } from 'src/common/models'
 import { ProposalContent } from '../interfaces'
 import {
   DistributionChanges,
@@ -8,7 +8,6 @@ import {
   MarketChanges,
   MintChanges,
   OracleChanges,
-  OracleWhitelist,
   SlashingChanges,
   StakingChanges,
   TreasuryChanges,

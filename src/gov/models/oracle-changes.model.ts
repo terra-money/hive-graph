@@ -1,13 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql'
-
-@ObjectType()
-export class OracleWhitelist {
-  @Field()
-  name!: string
-
-  @Field()
-  tobin_tax!: string
-}
+import { OracleWhitelist } from 'src/common/models'
 
 @ObjectType()
 export class OracleChanges {

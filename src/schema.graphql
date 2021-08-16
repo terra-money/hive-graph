@@ -10,6 +10,17 @@ type Account implements BaseAccount {
   sequence: Int!
 }
 
+type AggregateExchangeRatePrevote {
+  hash: String!
+  submit_block: Int!
+  voter: String!
+}
+
+type AggregateExchangeRateVote {
+  exchange_rate_tuples: [Coin!]!
+  voter: String!
+}
+
 type Auth {
   accountInfo(address: String!): Account!
 }
@@ -55,15 +66,20 @@ enum Denom {
   ucad
   uchf
   ucny
+  udkk
   ueur
   ugbp
+  uhkd
   uinr
   ujpy
   ukrw
   uluna
   umnt
+  unok
   usdr
+  usek
   usgd
+  uthb
   uusd
 }
 
@@ -98,6 +114,19 @@ type DistributionParams {
   bonus_proposer_reward: String!
   community_tax: String!
   withdraw_addr_enabled: Boolean!
+}
+
+type ExchangeRatePrevote {
+  denom: Denom
+  hash: String
+  submit_block: Int
+  voter: String
+}
+
+type ExchangeRateVote {
+  denom: Denom
+  exchange_rate: String!
+  voter: String
 }
 
 type GenericAuthorization {
@@ -175,6 +204,19 @@ type MultisigPublicKey {
   type: String!
 }
 
+type Oracle {
+  activeDenoms: [Denom!]!
+  aggregatePrevote(validator: String!): AggregateExchangeRatePrevote!
+  aggregateVote(validator: String!): AggregateExchangeRateVote!
+  exchangeRate(denom: String!): Coin
+  exchangeRates: [Coin!]!
+  feederAddress(validator: String!): String!
+  misses(validator: String!): Int!
+  parameters: OracleParams!
+  prevotes(denom: String, validator: String): [ExchangeRatePrevote!]!
+  votes(denom: String, validator: String): [ExchangeRateVote!]!
+}
+
 type OracleChanges {
   min_validper_window: String
   reward_band: String
@@ -184,6 +226,17 @@ type OracleChanges {
   vote_period: Int
   vote_threshold: String
   whitelist: [OracleWhitelist!]
+}
+
+type OracleParams {
+  min_valid_per_window: String!
+  reward_band: String!
+  reward_distribution_window: Int!
+  slash_fraction: String!
+  slash_window: Int!
+  vote_period: Int!
+  vote_threshold: String!
+  whitelist: [OracleWhitelist!]!
 }
 
 type OracleWhitelist {
@@ -248,6 +301,7 @@ type Query {
   market: Market!
   mint: Mint!
   msgauth: Msgauth!
+  oracle: Oracle!
   ping: String!
 }
 
