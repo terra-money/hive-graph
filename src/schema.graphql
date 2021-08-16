@@ -130,6 +130,12 @@ type MarketParams {
   pool_recovery_period: Int!
 }
 
+type Mint {
+  annualProvisions: String!
+  inflation: String!
+  parameters: MintingParams!
+}
+
 type MintChanges {
   blocks_per_year: Int
   goal_bonded: String
@@ -137,6 +143,15 @@ type MintChanges {
   inflation_min: String
   inflation_rate: String
   mint_denom: String
+}
+
+type MintingParams {
+  blocks_per_year: Int!
+  goal_bonded: String!
+  inflation_max: String!
+  inflation_min: String!
+  inflation_rate_change: String!
+  mint_denom: Denom!
 }
 
 type MultisigPublicKey {
@@ -216,6 +231,7 @@ type Query {
   distribution: Distribution!
   gov: Gov!
   market: Market!
+  mint: Mint!
   ping: String!
 }
 
