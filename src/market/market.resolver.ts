@@ -1,4 +1,30 @@
-import { Resolver } from '@nestjs/graphql'
+import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Coin } from 'src/common/models'
+import { CoinArgs } from './arguments'
+import { MarketService } from './market.service'
+import { Market, MarketParams } from './models'
 
-@Resolver()
-export class MarketResolver {}
+@Resolver(Market)
+export class MarketResolver {
+  constructor(private readonly marketService: MarketService) {}
+
+  @Query(() => Market)
+  public async market(): Promise<Market> {
+    return {} as Market
+  }
+
+  @ResolveField(() => Coin)
+  public async swapRate(@Args() args: CoinArgs): Promise<Coin> {
+    return this.marketService.swapRate(args.offerCoin, args.askDenom)
+  }
+
+  @ResolveField(() => String)
+  public async terraPoolDelta(): Promise<string> {
+    return this.marketService.terraPoolDelta()
+  }
+
+  @ResolveField(() => MarketParams)
+  public async parameters(): Promise<MarketParams> {
+    return this.marketService.parameters()
+  }
+}

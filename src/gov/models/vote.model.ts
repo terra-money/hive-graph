@@ -1,9 +1,6 @@
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { AccAddress, MsgVote } from 'nestjs-terra'
-
-registerEnumType(MsgVote.Option, {
-  name: 'MsgVoteOption',
-})
+import { Field, ObjectType } from '@nestjs/graphql'
+import { AccAddress } from 'nestjs-terra'
+import { VoteOption } from 'src/common/enums'
 
 @ObjectType()
 export class Vote {
@@ -13,6 +10,6 @@ export class Vote {
   @Field(() => String)
   voter!: AccAddress
 
-  @Field(() => MsgVote.Option)
-  option!: MsgVote.Option
+  @Field(() => VoteOption)
+  option!: string
 }

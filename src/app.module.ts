@@ -15,6 +15,7 @@ import { LoggerOptions } from 'pino'
 import { AppResolver } from './app.resolver'
 import { AuthModule } from './auth/auth.module'
 import { BankModule } from './bank/bank.module'
+import { registerEnums } from './common/enums'
 import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
@@ -81,8 +82,19 @@ import { WasmModule } from './wasm/wasm.module'
         }
       },
     }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+    GraphQLModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        registerEnums() // register enums graphql
+
+        return {
+          sortSchema: true,
+          debug: config.get<string>('GRAPHQL_DEBUG', 'false') === 'true',
+          playground: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true',
+          autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+        }
+      },
     }),
     AuthModule,
     BankModule,

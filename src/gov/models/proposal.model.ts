@@ -1,12 +1,8 @@
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
-import { Proposal as TerraProposal } from 'nestjs-terra'
+import { Field, ID, ObjectType } from '@nestjs/graphql'
+import { ProposalStatus } from 'src/common/enums'
 import { Coin } from 'src/common/models'
 import { ProposalContentUnion, ProposalContentType } from '../unions'
 import { Tally } from './tally.model'
-
-registerEnumType(TerraProposal.Status, {
-  name: 'ProposalStatus',
-})
 
 @ObjectType()
 export class Proposal {
@@ -16,8 +12,8 @@ export class Proposal {
   @Field(() => ProposalContentUnion)
   content!: ProposalContentType
 
-  @Field(() => TerraProposal.Status)
-  proposal_status!: TerraProposal.Status
+  @Field(() => ProposalStatus)
+  proposal_status!: string
 
   @Field(() => Tally)
   final_tally_result?: Tally

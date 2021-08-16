@@ -25,8 +25,8 @@ In the project directory, you can run:
 
 ### `npm run start:dev`
 
-Runs the NodeJs and Postgres services in the development mode.\
-Open [localhost:8086/api/v1/ping](http://localhost:8086/api/v1/ping) to view it in the browser or Postman.
+Runs the NodeJs services in the development mode.\
+Open [localhost:8085/graphql](http://localhost:8085/graphql) to view it in the browser or Postman.
 
 The service will reload if you make edits.
 

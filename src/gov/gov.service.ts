@@ -93,7 +93,6 @@ export class GovService {
   public async proposal(proposalId: number): Promise<Proposal> {
     try {
       const proposal = await this.terraClient.gov.proposal(proposalId)
-      console.log(proposal)
 
       return this.fromTerraProposal(proposal)
     } catch (err) {

@@ -34,7 +34,6 @@ export class DistributionService {
   public async validatorRewards(validator: ValAddress): Promise<ValidatorRewards> {
     try {
       const validatorRewardsData = await this.terraClient.distribution.validatorRewards(validator)
-      console.log(validatorRewardsData)
 
       return {
         self_bond_rewards: Coin.fromTerraCoins(validatorRewardsData.self_bond_rewards),

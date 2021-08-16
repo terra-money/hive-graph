@@ -1,9 +1,11 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType, InputType } from '@nestjs/graphql'
 import { Coins as TerraCoins } from 'nestjs-terra'
+import { Denom } from '../enums'
 
-@ObjectType()
+@InputType('CoinInput')
+@ObjectType('Coin')
 export class Coin {
-  @Field()
+  @Field(() => Denom)
   denom!: string
 
   @Field()
