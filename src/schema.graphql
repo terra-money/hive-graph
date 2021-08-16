@@ -14,6 +14,13 @@ type Auth {
   accountInfo(address: String!): Account!
 }
 
+type AuthorizationGrant {
+  authorization: AuthorizationUnion!
+  expiration: String!
+}
+
+union AuthorizationUnion = GenericAuthorization | SendAuthorization
+
 type Bank {
   balance(address: String!): [Coin!]!
 }
@@ -93,6 +100,10 @@ type DistributionParams {
   withdraw_addr_enabled: Boolean!
 }
 
+type GenericAuthorization {
+  grant_msg_type: String!
+}
+
 type Gov {
   depositParameters: DepositParams!
   deposits(proposalId: Float!): [Deposit!]!
@@ -152,6 +163,10 @@ type MintingParams {
   inflation_min: String!
   inflation_rate_change: String!
   mint_denom: Denom!
+}
+
+type Msgauth {
+  grants(grantee: String!, granter: String!, msgType: String): [AuthorizationGrant!]!
 }
 
 type MultisigPublicKey {
@@ -232,6 +247,7 @@ type Query {
   gov: Gov!
   market: Market!
   mint: Mint!
+  msgauth: Msgauth!
   ping: String!
 }
 
@@ -255,6 +271,10 @@ type ScheduleEntry {
   end_time: String!
   ratio: String!
   start_time: String!
+}
+
+type SendAuthorization {
+  spend_limit: [Coin!]!
 }
 
 type SlashingChanges {
