@@ -1,6 +1,13 @@
 import { createUnionType } from '@nestjs/graphql'
-import { SlashingParams, OracleParams, MintingParams, MarketParams, DistributionParams } from 'src/common/models'
-import { GovParams, StakingChanges, TreasuryChanges, WasmParamChanges } from '../models'
+import {
+  SlashingParams,
+  OracleParams,
+  MintingParams,
+  MarketParams,
+  DistributionParams,
+  StakingParams,
+} from 'src/common/models'
+import { GovParams, TreasuryChanges, WasmParamChanges } from '../models'
 
 export const ParameterChangesUnion = createUnionType({
   name: 'ParameterChangesUnion',
@@ -11,7 +18,7 @@ export const ParameterChangesUnion = createUnionType({
     MintingParams,
     OracleParams,
     SlashingParams,
-    StakingChanges,
+    StakingParams,
     TreasuryChanges,
     WasmParamChanges,
   ],

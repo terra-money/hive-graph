@@ -11,8 +11,8 @@ export class CommunityPoolSpendContent implements ProposalContent {
 
   description: string
 
-  @Field(() => String)
-  recipient: AccAddress
+  @Field()
+  recipient: string
 
   @Field(() => [Coin])
   amount: Coin[]

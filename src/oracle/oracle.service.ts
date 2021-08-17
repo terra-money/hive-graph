@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
 import { Denom } from 'src/common/enums'
+import { LCDClientError } from 'src/common/errors'
 import { Coin, OracleWhitelist, OracleParams } from 'src/common/models'
 import {
   AggregateExchangeRatePrevote,
@@ -31,7 +32,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the currently casted votes for the exchange rate of LUNA.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -49,7 +50,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the currently casted vprevotes.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -64,7 +65,7 @@ export class OracleService {
         'Error getting the Oracle currently registered exchange rate for LUNA in all available denominations.',
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -76,17 +77,14 @@ export class OracleService {
         return null
       }
 
-      return {
-        denom: rate.denom,
-        amount: rate.amount.toString(),
-      }
+      return Coin.fromTerraCoin(rate)
     } catch (err) {
       this.logger.error(
         { err },
         'Error getting the Oracle currently registered exchange rate for the specific denomination.',
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -96,7 +94,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current list of active denominations.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -110,7 +108,7 @@ export class OracleService {
         validator,
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -123,7 +121,7 @@ export class OracleService {
         'Error getting the number of missed oracle votes for the validator over the current slash window.',
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -139,7 +137,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the validator %s current submitted aggregate prevote.', validator)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -154,7 +152,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the validator %s current submitted aggregate vote.', validator)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -178,7 +176,7 @@ export class OracleService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current Oracle parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

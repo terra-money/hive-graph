@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { SlashingParams } from 'src/common/models'
 import { SigningInfo } from './models'
 
@@ -28,7 +29,7 @@ export class SlashingService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting all signing info, or just the signing info of a particular validator.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -47,7 +48,7 @@ export class SlashingService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current Slashing parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

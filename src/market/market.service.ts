@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { Denom, InjectTerraLCDClient, TerraLCDClient, Coin as TerraCoin } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin, MarketParams } from 'src/common/models'
 
 @Injectable()
@@ -18,10 +19,7 @@ export class MarketService {
     try {
       const coin = await this.terraClient.market.swapRate(new TerraCoin(denom.toString(), amount), askDenom)
 
-      return {
-        denom: coin.denom,
-        amount: coin.amount.toString(),
-      }
+      return Coin.fromTerraCoin(coin)
     } catch (err) {
       this.logger.error(
         { err },
@@ -30,7 +28,7 @@ export class MarketService {
         askDenom,
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -42,7 +40,7 @@ export class MarketService {
     } catch (err) {
       this.logger.error({ err }, 'current value of the pool delta.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -58,7 +56,7 @@ export class MarketService {
     } catch (err) {
       this.logger.error({ err }, 'he current Market module parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

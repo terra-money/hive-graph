@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin, DistributionParams } from 'src/common/models'
 import { Rewards, RewardItem, ValidatorRewards } from './models'
 
@@ -27,7 +28,7 @@ export class DistributionService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting delegator rewards for %s.', delegator)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -42,7 +43,7 @@ export class DistributionService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting validator rewards for %s.', validator)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -52,7 +53,7 @@ export class DistributionService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the withdraw address for %s.', delegator)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -64,7 +65,7 @@ export class DistributionService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current value of the community pool.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -81,7 +82,7 @@ export class DistributionService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current distribution parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

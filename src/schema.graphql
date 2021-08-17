@@ -54,11 +54,29 @@ input CoinInput {
   denom: Denom!
 }
 
+type Commission {
+  commission_rates: CommissionRates!
+  update_time: String!
+}
+
+type CommissionRates {
+  max_change_rate: String!
+  max_rate: String!
+  rate: String!
+}
+
 type CommunityPoolSpendContent implements ProposalContent {
   amount: [Coin!]!
   description: String!
   recipient: String!
   title: String!
+}
+
+type Delegation {
+  balance: Coin!
+  delegator_address: String!
+  shares: String!
+  validator_address: String!
 }
 
 enum Denom {
@@ -217,7 +235,7 @@ type ParameterChangeContent implements ProposalContent {
   title: String!
 }
 
-union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingChanges | TreasuryChanges | WasmParamChanges
+union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingParams | TreasuryChanges | WasmParamChanges
 
 type PolicyConstraints {
   cap: Coin!
@@ -271,6 +289,22 @@ type Query {
   oracle: Oracle!
   ping: String!
   slashing: Slashing!
+  staking: Staking!
+}
+
+type Redelegation {
+  delegator_address: String!
+  entries: [RedelegationEntry!]!
+  validator_dst_address: String!
+  validator_src_address: String!
+}
+
+type RedelegationEntry {
+  balance: String!
+  completion_time: String!
+  creation_height: Int!
+  initial_balance: String!
+  shares_dst: String!
 }
 
 type RewardItem {
@@ -322,11 +356,30 @@ type SlashingParams {
   slash_fraction_downtime: String
 }
 
-type StakingChanges {
-  bond_denom: String
-  key_max_entries: Int
+type Staking {
+  bondedValidators(delegator: String!): [Validator!]!
+  delegation(delegator: String!, validator: String!): Delegation
+  delegations(delegator: String, validator: String): [Delegation!]!
+  parameters: StakingParams!
+  pool: StakingPool!
+  redelegations(delegator: String, validatorDst: String, validatorSrc: String): [Redelegation!]!
+  unbondingDelegation(delegator: String, validator: String): UnbondingDelegation
+  unbondingDelegations(delegator: String, validator: String): [UnbondingDelegation!]!
+  validator(validator: String!): Validator
+  validators: [Validator!]!
+}
+
+type StakingParams {
+  bond_denom: Denom
+  historical_entries: Int
+  max_entries: Int
   max_validators: Int
-  unbonding_time: Int
+  unbonding_time: String
+}
+
+type StakingPool {
+  bonded_tokens: Coin!
+  not_bonded_tokens: Coin!
 }
 
 type Tally {
@@ -361,6 +414,41 @@ type TreasuryChanges {
   window_long: Int
   window_probation: Int
   window_short: Int
+}
+
+type UnbondingDelegation {
+  delegator_address: String!
+  entries: [UnbondingDelegationEntry!]!
+  validator_address: String!
+}
+
+type UnbondingDelegationEntry {
+  balance: String!
+  completion_time: String!
+  creation_height: Int!
+  initial_balance: String!
+}
+
+type Validator {
+  commission: Commission!
+  consensus_pubkey: String!
+  delegator_shares: String!
+  description: ValidatorDescription!
+  jailed: Boolean!
+  min_self_delegation: String!
+  operator_address: String!
+  status: Int!
+  tokens: String!
+  unbonding_height: Int!
+  unbonding_time: String!
+}
+
+type ValidatorDescription {
+  details: String!
+  identity: String!
+  moniker: String!
+  security_contact: String!
+  website: String!
 }
 
 type ValidatorRewards {

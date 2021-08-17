@@ -10,6 +10,7 @@ import {
   Proposal as TerraProposal,
   MsgDeposit,
 } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
 import {
   Tally,
@@ -86,7 +87,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting all proposals.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -98,7 +99,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d.', proposalId)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -108,7 +109,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d proposer.', proposalId)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -124,7 +125,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d deposits.', proposalId)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -135,7 +136,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d votes.', proposalId)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -152,7 +153,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting current tally for proposal %d.', proposalId)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -167,7 +168,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting deposit parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -181,7 +182,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting voting parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -197,7 +198,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting tally parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -217,7 +218,7 @@ export class GovService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

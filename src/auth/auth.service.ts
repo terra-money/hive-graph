@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PinoLogger, InjectPinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, Account as TerraAccount } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
 import { Account, VestingAccount, PublicKey, MultisigPublicKey } from './models'
 
@@ -58,7 +59,7 @@ export class AuthService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting account info for %s.', address)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
 
 @Injectable()
@@ -20,7 +21,7 @@ export class BankService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting balance for %s.', address)
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

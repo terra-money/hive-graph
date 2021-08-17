@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, SendAuthorization, TerraLCDClient } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
 import { AuthorizationGrant } from './models'
 
@@ -44,7 +45,7 @@ export class MsgauthService {
         grantee,
       )
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

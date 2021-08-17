@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
 import { MintingParams } from 'src/common/models'
 
 @Injectable()
@@ -20,7 +21,7 @@ export class MintService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current minting inflation value.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -32,7 +33,7 @@ export class MintService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current minting annaul provisions value.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 
@@ -51,7 +52,7 @@ export class MintService {
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current minting module parameters.')
 
-      throw err
+      throw new LCDClientError(err)
     }
   }
 }

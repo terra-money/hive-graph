@@ -8,9 +8,10 @@ import {
   MintingParams,
   MarketParams,
   DistributionParams,
+  StakingParams,
 } from 'src/common/models'
 import { ProposalContent } from '../interfaces'
-import { GovParams, StakingChanges, TreasuryChanges, WasmParamChanges } from '../models'
+import { GovParams, TreasuryChanges, WasmParamChanges } from '../models'
 import { ParameterChangesUnion, ParameterChangesType } from '../unions'
 
 export enum ParameterChangesSubspaces {
@@ -252,12 +253,12 @@ export class ParameterChangeContent implements ProposalContent {
 
     return slashingResult
   }
-  private parseStakingChanges(changes: ParamChanges): StakingChanges {
+  private parseStakingChanges(changes: ParamChanges): StakingParams {
     const staking = changes?.staking ?? {}
-    const stakingResult = new StakingChanges()
+    const stakingResult = new StakingParams()
 
     if (staking.UnbondingTime) {
-      stakingResult.unbonding_time = staking.UnbondingTime
+      stakingResult.unbonding_time = staking.UnbondingTime.toString()
     }
 
     if (staking.MaxValidators) {
@@ -265,7 +266,7 @@ export class ParameterChangeContent implements ProposalContent {
     }
 
     if (staking.KeyMaxEntries) {
-      stakingResult.key_max_entries = staking.KeyMaxEntries
+      stakingResult.max_entries = staking.KeyMaxEntries
     }
 
     if (staking.BondDenom) {
@@ -283,10 +284,7 @@ export class ParameterChangeContent implements ProposalContent {
       treasuryResult.tax_policy = {
         rate_min: treasury.taxpolicy.rate_min.toString(),
         rate_max: treasury.taxpolicy.rate_max.toString(),
-        cap: {
-          denom: treasury.taxpolicy.cap.denom,
-          amount: treasury.taxpolicy.cap.amount.toString(),
-        },
+        cap: Coin.fromTerraCoin(treasury.taxpolicy.cap),
         change_max: treasury.taxpolicy.change_max.toString(),
       }
     }
@@ -295,10 +293,7 @@ export class ParameterChangeContent implements ProposalContent {
       treasuryResult.reward_policy = {
         rate_min: treasury.rewardpolicy.rate_min.toString(),
         rate_max: treasury.rewardpolicy.rate_max.toString(),
-        cap: {
-          denom: treasury.rewardpolicy.cap.denom,
-          amount: treasury.rewardpolicy.cap.amount.toString(),
-        },
+        cap: Coin.fromTerraCoin(treasury.rewardpolicy.cap),
         change_max: treasury.rewardpolicy.change_max.toString(),
       }
     }
