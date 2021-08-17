@@ -1,13 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Denom } from 'src/common/enums'
-import { Coin } from 'src/common/models'
-import {
-  ExchangeRateVote,
-  ExchangeRatePrevote,
-  AggregateExchangeRatePrevote,
-  AggregateExchangeRateVote,
-  OracleParams,
-} from '.'
+import { Coin, OracleParams } from 'src/common/models'
+import { ExchangeRateVote, ExchangeRatePrevote, AggregateExchangeRatePrevote, AggregateExchangeRateVote } from '.'
 
 @ObjectType()
 export class Oracle {

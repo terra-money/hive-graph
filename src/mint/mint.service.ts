@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
-import { MintingParams } from './models'
+import { MintingParams } from 'src/common/models'
 
 @Injectable()
 export class MintService {

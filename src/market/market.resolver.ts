@@ -1,8 +1,8 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Coin } from 'src/common/models'
+import { Coin, MarketParams } from 'src/common/models'
 import { CoinArgs } from './arguments'
 import { MarketService } from './market.service'
-import { Market, MarketParams } from './models'
+import { Market } from './models'
 
 @Resolver(Market)
 export class MarketResolver {

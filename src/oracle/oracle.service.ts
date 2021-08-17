@@ -2,13 +2,12 @@ import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
 import { Denom } from 'src/common/enums'
-import { Coin, OracleWhitelist } from 'src/common/models'
+import { Coin, OracleWhitelist, OracleParams } from 'src/common/models'
 import {
   AggregateExchangeRatePrevote,
   AggregateExchangeRateVote,
   ExchangeRatePrevote,
   ExchangeRateVote,
-  OracleParams,
 } from './models'
 
 @Injectable()

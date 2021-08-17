@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Coin } from 'src/common/models'
-import { DistributionParams } from './distribution-params.model'
+import { Coin, DistributionParams } from 'src/common/models'
 import { Rewards } from './rewards.model'
 import { ValidatorRewards } from './validator-rewards.model'
 

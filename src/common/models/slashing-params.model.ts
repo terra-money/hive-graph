@@ -1,7 +1,7 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class SlashingChanges {
+export class SlashingParams {
   @Field(() => Int, { nullable: true })
   max_evidence_age?: number
 
@@ -11,8 +11,9 @@ export class SlashingChanges {
   @Field({ nullable: true })
   min_signed_per_window?: string
 
-  @Field(() => Int, { nullable: true })
-  downtime_jail_duration?: number
+  // GraphQL doesn't support integers larger than 32 bits
+  @Field({ nullable: true })
+  downtime_jail_duration?: string
 
   @Field({ nullable: true })
   slash_fraction_double_sign?: string

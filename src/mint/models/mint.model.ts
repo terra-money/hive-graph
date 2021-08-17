@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { MintingParams } from './minting-params.model'
+import { MintingParams } from 'src/common/models'
 
 @ObjectType()
 export class Mint {

@@ -1,14 +1,13 @@
 import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { ValAddress } from 'nestjs-terra'
 import { Denom } from 'src/common/enums'
-import { Coin } from 'src/common/models'
+import { Coin, OracleParams } from 'src/common/models'
 import {
   AggregateExchangeRatePrevote,
   AggregateExchangeRateVote,
   ExchangeRatePrevote,
   ExchangeRateVote,
   Oracle,
-  OracleParams,
 } from './models'
 import { OracleService } from './oracle.service'
 

@@ -1,7 +1,7 @@
-import { ObjectType, Field } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class DistributionChanges {
+export class DistributionParams {
   @Field({ nullable: true })
   community_tax?: string
 
@@ -12,5 +12,5 @@ export class DistributionChanges {
   bonus_proposer_reward?: string
 
   @Field({ nullable: true })
-  withdraw_add_renabled?: boolean
+  withdraw_addr_enabled?: boolean
 }

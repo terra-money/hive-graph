@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
-import { Coin } from 'src/common/models'
-import { Rewards, RewardItem, ValidatorRewards, DistributionParams } from './models'
+import { Coin, DistributionParams } from 'src/common/models'
+import { Rewards, RewardItem, ValidatorRewards } from './models'
 
 @Injectable()
 export class DistributionService {

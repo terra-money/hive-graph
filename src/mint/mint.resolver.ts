@@ -1,6 +1,7 @@
 import { Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { MintingParams } from 'src/common/models'
 import { MintService } from './mint.service'
-import { Mint, MintingParams } from './models'
+import { Mint } from './models'
 
 @Resolver(Mint)
 export class MintResolver {

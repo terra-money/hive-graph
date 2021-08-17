@@ -102,18 +102,11 @@ type Distribution {
   withdrawAddress(delegator: String!): String!
 }
 
-type DistributionChanges {
+type DistributionParams {
   base_proposer_reward: String
   bonus_proposer_reward: String
   community_tax: String
-  withdraw_add_renabled: Boolean
-}
-
-type DistributionParams {
-  base_proposer_reward: String!
-  bonus_proposer_reward: String!
-  community_tax: String!
-  withdraw_addr_enabled: Boolean!
+  withdraw_addr_enabled: Boolean
 }
 
 type ExchangeRatePrevote {
@@ -158,16 +151,10 @@ type Market {
   terraPoolDelta: String!
 }
 
-type MarketChanges {
+type MarketParams {
   base_pool: String
   min_stability_spread: String
   pool_recovery_period: Int
-}
-
-type MarketParams {
-  base_pool: String!
-  min_spread: String!
-  pool_recovery_period: Int!
 }
 
 type Mint {
@@ -176,22 +163,13 @@ type Mint {
   parameters: MintingParams!
 }
 
-type MintChanges {
+type MintingParams {
   blocks_per_year: Int
   goal_bonded: String
   inflation_max: String
   inflation_min: String
-  inflation_rate: String
-  mint_denom: String
-}
-
-type MintingParams {
-  blocks_per_year: Int!
-  goal_bonded: String!
-  inflation_max: String!
-  inflation_min: String!
-  inflation_rate_change: String!
-  mint_denom: Denom!
+  inflation_rate_change: String
+  mint_denom: Denom
 }
 
 type Msgauth {
@@ -217,8 +195,8 @@ type Oracle {
   votes(denom: String, validator: String): [ExchangeRateVote!]!
 }
 
-type OracleChanges {
-  min_validper_window: String
+type OracleParams {
+  min_valid_per_window: String
   reward_band: String
   reward_distribution_window: Int
   slash_fraction: String
@@ -226,17 +204,6 @@ type OracleChanges {
   vote_period: Int
   vote_threshold: String
   whitelist: [OracleWhitelist!]
-}
-
-type OracleParams {
-  min_valid_per_window: String!
-  reward_band: String!
-  reward_distribution_window: Int!
-  slash_fraction: String!
-  slash_window: Int!
-  vote_period: Int!
-  vote_threshold: String!
-  whitelist: [OracleWhitelist!]!
 }
 
 type OracleWhitelist {
@@ -250,7 +217,7 @@ type ParameterChangeContent implements ProposalContent {
   title: String!
 }
 
-union ParameterChangesUnion = DistributionChanges | GovParams | MarketChanges | MintChanges | OracleChanges | SlashingChanges | StakingChanges | TreasuryChanges | WasmParamChanges
+union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingChanges | TreasuryChanges | WasmParamChanges
 
 type PolicyConstraints {
   cap: Coin!
@@ -303,6 +270,7 @@ type Query {
   msgauth: Msgauth!
   oracle: Oracle!
   ping: String!
+  slashing: Slashing!
 }
 
 type RewardItem {
@@ -331,8 +299,22 @@ type SendAuthorization {
   spend_limit: [Coin!]!
 }
 
-type SlashingChanges {
-  downtime_jail_duration: Int
+type SigningInfo {
+  address: String!
+  index_offset: Int!
+  jailed_until: String!
+  missed_blocks_counter: Int!
+  start_height: Int!
+  tombstoned: Boolean!
+}
+
+type Slashing {
+  parameters: SlashingParams!
+  signingInfos(valConsPubKey: String): [SigningInfo!]!
+}
+
+type SlashingParams {
+  downtime_jail_duration: String
   max_evidence_age: Int
   min_signed_per_window: String
   signed_blocks_window: Int

@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Coin } from 'src/common/models'
-import { MarketParams } from './market-params.model'
+import { Coin, MarketParams } from 'src/common/models'
 
 @ObjectType()
 export class Market {

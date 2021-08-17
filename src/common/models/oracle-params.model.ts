@@ -1,8 +1,8 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
-import { OracleWhitelist } from 'src/common/models'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { OracleWhitelist } from './oracle-whitelist.model'
 
 @ObjectType()
-export class OracleChanges {
+export class OracleParams {
   @Field(() => Int, { nullable: true })
   vote_period?: number
 
@@ -25,5 +25,5 @@ export class OracleChanges {
   slash_window?: number
 
   @Field({ nullable: true })
-  min_validper_window?: string
+  min_valid_per_window?: string
 }

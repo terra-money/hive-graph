@@ -1,12 +1,13 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
+import { Field, ObjectType, Int } from '@nestjs/graphql'
+import { Denom } from 'src/common/enums'
 
 @ObjectType()
-export class MintChanges {
-  @Field({ nullable: true })
+export class MintingParams {
+  @Field(() => Denom, { nullable: true })
   mint_denom?: string
 
   @Field({ nullable: true })
-  inflation_rate?: string
+  inflation_rate_change?: string
 
   @Field({ nullable: true })
   inflation_max?: string

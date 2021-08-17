@@ -1,18 +1,16 @@
 import { ObjectType, Field } from '@nestjs/graphql'
 import { ParamChanges } from 'nestjs-terra'
-import { Coin, OracleWhitelist } from 'src/common/models'
-import { ProposalContent } from '../interfaces'
 import {
-  DistributionChanges,
-  GovParams,
-  MarketChanges,
-  MintChanges,
-  OracleChanges,
-  SlashingChanges,
-  StakingChanges,
-  TreasuryChanges,
-  WasmParamChanges,
-} from '../models'
+  Coin,
+  OracleWhitelist,
+  SlashingParams,
+  OracleParams,
+  MintingParams,
+  MarketParams,
+  DistributionParams,
+} from 'src/common/models'
+import { ProposalContent } from '../interfaces'
+import { GovParams, StakingChanges, TreasuryChanges, WasmParamChanges } from '../models'
 import { ParameterChangesUnion, ParameterChangesType } from '../unions'
 
 export enum ParameterChangesSubspaces {
@@ -81,9 +79,9 @@ export class ParameterChangeContent implements ProposalContent {
     }
   }
 
-  private parseDistributionChange(changes: ParamChanges): DistributionChanges {
+  private parseDistributionChange(changes: ParamChanges): DistributionParams {
     const distribution = changes?.distribution ?? {}
-    const distributionResult = new DistributionChanges()
+    const distributionResult = new DistributionParams()
 
     if (distribution.communitytax) {
       distributionResult.community_tax = distribution.communitytax.toString()
@@ -98,7 +96,7 @@ export class ParameterChangeContent implements ProposalContent {
     }
 
     if (distribution.withdrawaddrenabled) {
-      distributionResult.withdraw_add_renabled = distribution.withdrawaddrenabled
+      distributionResult.withdraw_addr_enabled = distribution.withdrawaddrenabled
     }
 
     return distributionResult
@@ -132,9 +130,9 @@ export class ParameterChangeContent implements ProposalContent {
     return govResult
   }
 
-  private parseMarketChanges(changes: ParamChanges): MarketChanges {
+  private parseMarketChanges(changes: ParamChanges): MarketParams {
     const market = changes?.market ?? {}
-    const marketResult = new MarketChanges()
+    const marketResult = new MarketParams()
 
     if (market.poolrecoveryperiod) {
       marketResult.pool_recovery_period = market.poolrecoveryperiod
@@ -151,16 +149,16 @@ export class ParameterChangeContent implements ProposalContent {
     return marketResult
   }
 
-  private parseMintChanges(changes: ParamChanges): MintChanges {
+  private parseMintChanges(changes: ParamChanges): MintingParams {
     const mint = changes?.mint ?? {}
-    const mintResult = new MintChanges()
+    const mintResult = new MintingParams()
 
     if (mint.MintDenom) {
       mintResult.mint_denom = mint.MintDenom
     }
 
     if (mint.InflationRateChange) {
-      mintResult.inflation_rate = mint.InflationRateChange.toString()
+      mintResult.inflation_rate_change = mint.InflationRateChange.toString()
     }
 
     if (mint.InflationMax) {
@@ -182,9 +180,9 @@ export class ParameterChangeContent implements ProposalContent {
     return mintResult
   }
 
-  private parseOracleChanges(changes: ParamChanges): OracleChanges {
+  private parseOracleChanges(changes: ParamChanges): OracleParams {
     const oracle = changes?.oracle ?? {}
-    const oracleResult = new OracleChanges()
+    const oracleResult = new OracleParams()
 
     if (oracle.voteperiod) {
       oracleResult.vote_period = oracle.voteperiod
@@ -218,15 +216,15 @@ export class ParameterChangeContent implements ProposalContent {
     }
 
     if (oracle.minvalidperwindow) {
-      oracleResult.min_validper_window = oracle.minvalidperwindow.toString()
+      oracleResult.min_valid_per_window = oracle.minvalidperwindow.toString()
     }
 
     return oracleResult
   }
 
-  private parseSlashingChanges(changes: ParamChanges): SlashingChanges {
+  private parseSlashingChanges(changes: ParamChanges): SlashingParams {
     const slashing = changes?.slashing ?? {}
-    const slashingResult = new SlashingChanges()
+    const slashingResult = new SlashingParams()
 
     if (slashing.MaxEvidenceAge) {
       slashingResult.max_evidence_age = slashing.MaxEvidenceAge
@@ -241,7 +239,7 @@ export class ParameterChangeContent implements ProposalContent {
     }
 
     if (slashing.DowntimeJailDuration) {
-      slashingResult.downtime_jail_duration = slashing.DowntimeJailDuration
+      slashingResult.downtime_jail_duration = slashing.DowntimeJailDuration.toString()
     }
 
     if (slashing.SlashFractionDoubleSign) {

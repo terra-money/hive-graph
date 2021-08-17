@@ -1,7 +1,7 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
+import { Field, ObjectType, Int } from '@nestjs/graphql'
 
 @ObjectType()
-export class MarketChanges {
+export class MarketParams {
   @Field(() => Int, { nullable: true })
   pool_recovery_period?: number
 

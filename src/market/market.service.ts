@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { Denom, InjectTerraLCDClient, TerraLCDClient, Coin as TerraCoin } from 'nestjs-terra'
-import { Coin } from 'src/common/models'
-import { MarketParams } from './models'
+import { Coin, MarketParams } from 'src/common/models'
 
 @Injectable()
 export class MarketService {
@@ -54,7 +53,7 @@ export class MarketService {
       return {
         pool_recovery_period: params.pool_recovery_period,
         base_pool: params.base_pool.toString(),
-        min_spread: params.min_spread.toString(),
+        min_stability_spread: params.min_spread.toString(),
       }
     } catch (err) {
       this.logger.error({ err }, 'he current Market module parameters.')

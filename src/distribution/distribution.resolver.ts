@@ -1,7 +1,7 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Coin } from 'src/common/models'
+import { Coin, DistributionParams } from 'src/common/models'
 import { DistributionService } from './distribution.service'
-import { Distribution, DistributionParams, Rewards, ValidatorRewards } from './models'
+import { Distribution, Rewards, ValidatorRewards } from './models'
 
 @Resolver(Distribution)
 export class DistributionResolver {

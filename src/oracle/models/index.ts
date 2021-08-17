@@ -2,5 +2,4 @@ export { AggregateExchangeRatePrevote } from './aggregate-exchange-rate-prevote.
 export { AggregateExchangeRateVote } from './aggregate-exchange-rate-vote.model'
 export { ExchangeRatePrevote } from './exchange-rate-prevote.model'
 export { ExchangeRateVote } from './exchange-rate-vote.model'
-export { OracleParams } from './oracle-params.model'
 export { Oracle } from './oracle.model'
