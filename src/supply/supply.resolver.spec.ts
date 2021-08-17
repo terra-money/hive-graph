@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { SupplyResolver } from './supply.resolver'
+import { SupplyService } from './supply.service'
 
 describe('SupplyResolver', () => {
   let resolver: SupplyResolver
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SupplyResolver],
+      providers: [SupplyResolver, { provide: SupplyService, useValue: {} }],
     }).compile()
 
     resolver = module.get<SupplyResolver>(SupplyResolver)

@@ -290,6 +290,7 @@ type Query {
   ping: String!
   slashing: Slashing!
   staking: Staking!
+  supply: Supply!
 }
 
 type Redelegation {
@@ -380,6 +381,10 @@ type StakingParams {
 type StakingPool {
   bonded_tokens: Coin!
   not_bonded_tokens: Coin!
+}
+
+type Supply {
+  total: [Coin!]!
 }
 
 type Tally {
