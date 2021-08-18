@@ -21,6 +21,17 @@ type AggregateExchangeRateVote {
   voter: String!
 }
 
+type ApplicationVersion {
+  build_deps: [String!]!
+  build_tags: String!
+  client_name: String!
+  commit: String!
+  go: String!
+  name: String!
+  server_name: String!
+  version: String!
+}
+
 type Auth {
   accountInfo(address: String!): Account!
 }
@@ -42,6 +53,27 @@ interface BaseAccount {
   coins: [Coin!]!
   public_key: PublicKeyUnion
   sequence: Int!
+}
+
+type Block {
+  data: BlockData!
+  evidence: Evidence!
+  header: Header!
+  last_commit: LastCommit!
+}
+
+type BlockData {
+  txs: [String!]
+}
+
+type BlockId {
+  hash: String!
+  parts: Parts!
+}
+
+type BlockInfo {
+  block: Block!
+  block_id: BlockId!
 }
 
 type Coin {
@@ -70,6 +102,13 @@ type CommunityPoolSpendContent implements ProposalContent {
   description: String!
   recipient: String!
   title: String!
+}
+
+type DelegateValidator {
+  address: String!
+  proposer_priority: String!
+  pub_key: String!
+  voting_power: String!
 }
 
 type Delegation {
@@ -127,6 +166,10 @@ type DistributionParams {
   withdraw_addr_enabled: Boolean
 }
 
+type Evidence {
+  evidence: String
+}
+
 type ExchangeRatePrevote {
   denom: Denom
   hash: String
@@ -161,6 +204,30 @@ type GovParams {
   deposit_params: DepositParams
   tally_params: TallyParams
   voting_params: VotingParams
+}
+
+type Header {
+  app_hash: String!
+  chain_id: String!
+  consensus_hash: String!
+  data_hash: String!
+  evidence_hash: String!
+  height: String!
+  last_block_id: BlockId!
+  last_commit_hash: String!
+  last_results_hash: String!
+  next_validators_hash: String!
+  proposer_address: String!
+  time: String!
+  validators_hash: String!
+  version: Version!
+}
+
+type LastCommit {
+  block_id: BlockId!
+  height: String!
+  round: String!
+  signatures: [Signature!]!
 }
 
 type Market {
@@ -200,6 +267,18 @@ type MultisigPublicKey {
   type: String!
 }
 
+type NodeInfo {
+  application_version: ApplicationVersion!
+  channels: String!
+  id: ID!
+  listen_addr: String!
+  moniker: String!
+  network: String!
+  other: OtherInfo!
+  protocol_version: ProtocolVersion!
+  version: String!
+}
+
 type Oracle {
   activeDenoms: [Denom!]!
   aggregatePrevote(validator: String!): AggregateExchangeRatePrevote!
@@ -229,6 +308,11 @@ type OracleWhitelist {
   tobin_tax: String!
 }
 
+type OtherInfo {
+  rpc_address: String!
+  tx_index: String!
+}
+
 type ParameterChangeContent implements ProposalContent {
   changes: ParameterChangesUnion
   description: String!
@@ -236,6 +320,11 @@ type ParameterChangeContent implements ProposalContent {
 }
 
 union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingParams | TreasuryChanges | WasmParamChanges
+
+type Parts {
+  hash: String!
+  total: String!
+}
 
 type PolicyConstraints {
   cap: Coin!
@@ -271,6 +360,12 @@ enum ProposalStatus {
   VotingPeriod
 }
 
+type ProtocolVersion {
+  app: String!
+  block: String!
+  p2p: String!
+}
+
 type PublicKey {
   type: String!
   value: String!
@@ -291,6 +386,7 @@ type Query {
   slashing: Slashing!
   staking: Staking!
   supply: Supply!
+  tendermint: Tendermint!
 }
 
 type Redelegation {
@@ -332,6 +428,13 @@ type ScheduleEntry {
 
 type SendAuthorization {
   spend_limit: [Coin!]!
+}
+
+type Signature {
+  block_id_flag: Int!
+  signature: String!
+  timestamp: String!
+  validator_address: String!
 }
 
 type SigningInfo {
@@ -406,6 +509,13 @@ type TaxRateUpdateContent implements ProposalContent {
   title: String!
 }
 
+type Tendermint {
+  blockInfo(height: Float): BlockInfo!
+  nodeInfo: NodeInfo!
+  syncing: Boolean!
+  validatorSet(height: Float): ValidatorSet!
+}
+
 type TextContent implements ProposalContent {
   description: String!
   title: String!
@@ -459,6 +569,16 @@ type ValidatorDescription {
 type ValidatorRewards {
   self_bond_rewards: [Coin!]!
   val_commission: [Coin!]!
+}
+
+type ValidatorSet {
+  block_height: String!
+  validators: [DelegateValidator!]!
+}
+
+type Version {
+  app: String!
+  block: String!
 }
 
 type VestingSchedule {

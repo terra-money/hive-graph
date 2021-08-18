@@ -5,6 +5,8 @@ export class LCDClientError extends Error {
     super()
 
     this.name = this.constructor.name
+    this.message = err.message
+
     Error.captureStackTrace(this, this.constructor)
 
     if (err.isAxiosError) {
