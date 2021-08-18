@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { StakingParams } from 'src/common/models'
-import { Delegation, UnbondingDelegation, Redelegation, Validator, StakingPool } from '.'
+import { StakingParams, Validator } from 'src/common/models'
+import { Delegation, UnbondingDelegation, Redelegation, StakingPool } from '.'
 
 @ObjectType()
 export class Staking {

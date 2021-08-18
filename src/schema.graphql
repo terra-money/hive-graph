@@ -389,6 +389,7 @@ type Query {
   supply: Supply!
   tendermint: Tendermint!
   treasury: Treasury!
+  utils: Utils!
 }
 
 type Redelegation {
@@ -555,6 +556,11 @@ type UnbondingDelegationEntry {
   initial_balance: String!
 }
 
+type Utils {
+  calculateTax(coin: CoinInput!): Coin!
+  validatorsWithVotingPower: [ValidatorVotingPower!]!
+}
+
 type Validator {
   commission: Commission!
   consensus_pubkey: String!
@@ -585,6 +591,12 @@ type ValidatorRewards {
 type ValidatorSet {
   block_height: String!
   validators: [DelegateValidator!]!
+}
+
+type ValidatorVotingPower {
+  proposer_priority: Int!
+  validator: Validator!
+  voting_power: Int!
 }
 
 type Version {

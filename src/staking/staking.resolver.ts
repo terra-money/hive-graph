@@ -1,7 +1,7 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { AccAddress, ValAddress } from 'nestjs-terra'
-import { StakingParams } from 'src/common/models'
-import { Delegation, Redelegation, Staking, StakingPool, UnbondingDelegation, Validator } from './models'
+import { StakingParams, Validator } from 'src/common/models'
+import { Delegation, Redelegation, Staking, StakingPool, UnbondingDelegation } from './models'
 import { StakingService } from './staking.service'
 
 @Resolver(Staking)

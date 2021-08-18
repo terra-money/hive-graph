@@ -7,18 +7,10 @@ import {
   ValAddress,
   Delegation as TerraDelegation,
   UnbondingDelegation as TerraUnbondingDelegation,
-  Validator as TerraValidator,
 } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
-import { Coin, StakingParams } from 'src/common/models'
-import {
-  Delegation,
-  Redelegation,
-  StakingPool,
-  UnbondingDelegation,
-  UnbondingDelegationEntry,
-  Validator,
-} from './models'
+import { Coin, StakingParams, Validator } from 'src/common/models'
+import { Delegation, Redelegation, StakingPool, UnbondingDelegation, UnbondingDelegationEntry } from './models'
 
 @Injectable()
 export class StakingService {
@@ -48,35 +40,6 @@ export class StakingService {
         creation_height: entry.creation_height,
         completion_time: entry.completion_time.toISOString(),
       })),
-    }
-  }
-
-  private fromTerraValidator(validator: TerraValidator): Validator {
-    return {
-      operator_address: validator.operator_address,
-      consensus_pubkey: validator.consensus_pubkey,
-      jailed: validator.jailed,
-      status: validator.status,
-      tokens: validator.tokens.toString(),
-      delegator_shares: validator.delegator_shares.toString(),
-      description: {
-        moniker: validator.description.moniker,
-        identity: validator.description.identity,
-        website: validator.description.website,
-        details: validator.description.details,
-        security_contact: validator.description.security_contact,
-      },
-      unbonding_height: validator.unbonding_height,
-      unbonding_time: validator.unbonding_time.toISOString(),
-      commission: {
-        commission_rates: {
-          rate: validator.commission.commission_rates.rate.toString(),
-          max_rate: validator.commission.commission_rates.max_rate.toString(),
-          max_change_rate: validator.commission.commission_rates.max_change_rate.toString(),
-        },
-        update_time: validator.commission.update_time.toISOString(),
-      },
-      min_self_delegation: validator.min_self_delegation.toString(),
     }
   }
 
@@ -180,7 +143,7 @@ export class StakingService {
     try {
       const validators = await this.terraClient.staking.bondedValidators(delegator)
 
-      return validators.map<Validator>(this.fromTerraValidator)
+      return validators.map<Validator>(Validator.fromTerraValidator)
     } catch (err) {
       this.logger.error({ err }, 'Error getting all bonded validators for delegator %s.', delegator)
 
@@ -192,7 +155,7 @@ export class StakingService {
     try {
       const validators = await this.terraClient.staking.validators()
 
-      return validators.map<Validator>(this.fromTerraValidator)
+      return validators.map<Validator>(Validator.fromTerraValidator)
     } catch (err) {
       this.logger.error({ err }, 'Error getting all current registered validators.')
 
@@ -208,7 +171,7 @@ export class StakingService {
         return null
       }
 
-      return this.fromTerraValidator(data)
+      return Validator.fromTerraValidator(data)
     } catch (err) {
       this.logger.error({ err }, 'Error getting the validator information for validator %s.', validator)
 

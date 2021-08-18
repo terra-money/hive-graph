@@ -17,7 +17,7 @@ export class MarketService {
     const { denom, amount } = offerCoin
 
     try {
-      const coin = await this.terraClient.market.swapRate(new TerraCoin(denom.toString(), amount), askDenom)
+      const coin = await this.terraClient.market.swapRate(new TerraCoin(denom, amount), askDenom)
 
       return Coin.fromTerraCoin(coin)
     } catch (err) {
