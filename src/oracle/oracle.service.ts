@@ -39,7 +39,6 @@ export class OracleService {
   public async prevotes(denom?: Denom, validator?: ValAddress): Promise<ExchangeRatePrevote[]> {
     try {
       const prevotes = await this.terraClient.oracle.prevotes(denom, validator)
-      console.log(prevotes)
 
       return prevotes.map<ExchangeRatePrevote>((prevote) => ({
         hash: prevote.hash,

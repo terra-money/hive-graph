@@ -20,6 +20,7 @@ export enum Denom {
   unok = 'unok', // No in terrajs
   usek = 'usek', // No in terrajs
   uthb = 'uthb', // No in terrajs
+  unused = 'unused', // No in terrajs
 }
 
 export enum ProposalStatus {

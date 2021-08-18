@@ -9,9 +9,10 @@ import {
   MarketParams,
   DistributionParams,
   StakingParams,
+  TreasuryParams,
 } from 'src/common/models'
 import { ProposalContent } from '../interfaces'
-import { GovParams, TreasuryChanges, WasmParamChanges } from '../models'
+import { GovParams, WasmParamChanges } from '../models'
 import { ParameterChangesUnion, ParameterChangesType } from '../unions'
 
 export enum ParameterChangesSubspaces {
@@ -276,9 +277,9 @@ export class ParameterChangeContent implements ProposalContent {
     return stakingResult
   }
 
-  private parseTreasuryChanges(changes: ParamChanges): TreasuryChanges {
+  private parseTreasuryChanges(changes: ParamChanges): TreasuryParams {
     const treasury = changes?.treasury ?? {}
-    const treasuryResult = new TreasuryChanges()
+    const treasuryResult = new TreasuryParams()
 
     if (treasury.taxpolicy) {
       treasuryResult.tax_policy = {

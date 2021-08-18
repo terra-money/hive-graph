@@ -6,8 +6,9 @@ import {
   MarketParams,
   DistributionParams,
   StakingParams,
+  TreasuryParams,
 } from 'src/common/models'
-import { GovParams, TreasuryChanges, WasmParamChanges } from '../models'
+import { GovParams, WasmParamChanges } from '../models'
 
 export const ParameterChangesUnion = createUnionType({
   name: 'ParameterChangesUnion',
@@ -19,7 +20,7 @@ export const ParameterChangesUnion = createUnionType({
     OracleParams,
     SlashingParams,
     StakingParams,
-    TreasuryChanges,
+    TreasuryParams,
     WasmParamChanges,
   ],
 })

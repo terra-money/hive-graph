@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql'
-import { Coin } from 'src/common/models'
+import { Coin } from '.'
 
 @ObjectType()
 export class PolicyConstraints {
@@ -17,7 +17,7 @@ export class PolicyConstraints {
 }
 
 @ObjectType()
-export class TreasuryChanges {
+export class TreasuryParams {
   @Field(() => PolicyConstraints, { nullable: true })
   tax_policy?: PolicyConstraints
 

@@ -133,6 +133,7 @@ enum Denom {
   uluna
   umnt
   unok
+  unused
   usdr
   usek
   usgd
@@ -189,14 +190,14 @@ type GenericAuthorization {
 
 type Gov {
   depositParameters: DepositParams!
-  deposits(proposalId: Float!): [Deposit!]!
+  deposits(proposalId: Int!): [Deposit!]!
   parameters: GovParams!
-  proposal(proposalId: Float!): Proposal!
+  proposal(proposalId: Int!): Proposal!
   proposals: [Proposal!]!
-  proposer(proposalId: Float!): String!
-  tally(proposalId: Float!): Tally!
+  proposer(proposalId: Int!): String!
+  tally(proposalId: Int!): Tally!
   tallyParameters: TallyParams!
-  votes(proposalId: Float!): [Vote!]!
+  votes(proposalId: Int!): [Vote!]!
   votingParameters: VotingParams!
 }
 
@@ -319,7 +320,7 @@ type ParameterChangeContent implements ProposalContent {
   title: String!
 }
 
-union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingParams | TreasuryChanges | WasmParamChanges
+union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingParams | TreasuryParams | WasmParamChanges
 
 type Parts {
   hash: String!
@@ -387,6 +388,7 @@ type Query {
   staking: Staking!
   supply: Supply!
   tendermint: Tendermint!
+  treasury: Treasury!
 }
 
 type Redelegation {
@@ -510,10 +512,10 @@ type TaxRateUpdateContent implements ProposalContent {
 }
 
 type Tendermint {
-  blockInfo(height: Float): BlockInfo!
+  blockInfo(height: Int): BlockInfo!
   nodeInfo: NodeInfo!
   syncing: Boolean!
-  validatorSet(height: Float): ValidatorSet!
+  validatorSet(height: Int): ValidatorSet!
 }
 
 type TextContent implements ProposalContent {
@@ -521,7 +523,16 @@ type TextContent implements ProposalContent {
   title: String!
 }
 
-type TreasuryChanges {
+type Treasury {
+  parameters: TreasuryParams!
+  rewardWeight: String!
+  seigniorageProceeds: Coin!
+  taxCap(denom: Denom!): Coin!
+  taxProceeds: [Coin!]!
+  taxRate(height: Int): String!
+}
+
+type TreasuryParams {
   mining_increment: String
   reward_policy: PolicyConstraints
   seigniorage_burden_target: String
