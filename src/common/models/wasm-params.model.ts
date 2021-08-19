@@ -1,7 +1,7 @@
 import { ObjectType, Int, Field } from '@nestjs/graphql'
 
 @ObjectType()
-export class WasmParamChanges {
+export class WasmParams {
   @Field(() => Int, { nullable: true })
   max_contract_size?: number
 

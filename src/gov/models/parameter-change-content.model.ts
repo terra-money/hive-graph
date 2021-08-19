@@ -10,9 +10,10 @@ import {
   DistributionParams,
   StakingParams,
   TreasuryParams,
+  WasmParams,
 } from 'src/common/models'
 import { ProposalContent } from '../interfaces'
-import { GovParams, WasmParamChanges } from '../models'
+import { GovParams } from '../models'
 import { ParameterChangesUnion, ParameterChangesType } from '../unions'
 
 export enum ParameterChangesSubspaces {
@@ -322,9 +323,9 @@ export class ParameterChangeContent implements ProposalContent {
     return treasuryResult
   }
 
-  private parseWasmParamChanges(changes: ParamChanges): WasmParamChanges {
+  private parseWasmParamChanges(changes: ParamChanges): WasmParams {
     const wasm = changes?.wasm ?? {}
-    const wasmResult = new WasmParamChanges()
+    const wasmResult = new WasmParams()
 
     if (wasm.maxcontractsize) {
       wasmResult.max_contract_size = wasm.maxcontractsize

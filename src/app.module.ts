@@ -12,6 +12,7 @@ import {
 } from 'nestjs-terra'
 import { join } from 'path'
 import { LoggerOptions } from 'pino'
+import { AnythingScalar } from './anything.scalar'
 import { AppResolver } from './app.resolver'
 import { AuthModule } from './auth/auth.module'
 import { BankModule } from './bank/bank.module'
@@ -113,6 +114,6 @@ import { WasmModule } from './wasm/wasm.module'
     TxModule,
     UtilsModule,
   ],
-  providers: [AppResolver],
+  providers: [AppResolver, AnythingScalar],
 })
 export class AppModule {}
