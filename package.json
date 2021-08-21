@@ -19,6 +19,10 @@
     "test:cov": "jest --verbose --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
+  "precommit": [
+    "lint:ci",
+    "test"
+  ],
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.0.1",
@@ -40,6 +44,7 @@
     "nestjs-terra": "^0.1.4",
     "pino": "^6.13.0",
     "pino-pretty": "^5.1.2",
+    "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
