@@ -1,7 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql'
 import { AccAddress, Coins as TerraCoins } from 'nestjs-terra'
-import { Coin } from 'src/common/models'
 import { ProposalContent } from '../interfaces'
+import { Coin } from '../models'
 
 @ObjectType({
   implements: () => [ProposalContent],

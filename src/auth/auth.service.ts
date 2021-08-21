@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { PinoLogger, InjectPinoLogger } from 'nestjs-pino'
 import { AccAddress, InjectTerraLCDClient, TerraLCDClient, Account as TerraAccount } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
-import { Coin } from 'src/common/models'
-import { Account, VestingAccount, PublicKey, MultisigPublicKey } from './models'
+import { Coin, PublicKey } from 'src/common/models'
+import { Account, VestingAccount } from './models'
 
 @Injectable()
 export class AuthService {
@@ -17,26 +17,11 @@ export class AuthService {
   public async accountInfo(address: AccAddress): Promise<Account | VestingAccount> {
     try {
       const accountInfo = await this.terraClient.auth.accountInfo(address)
-      let publicKey: PublicKey | MultisigPublicKey | null = null
-
-      if (accountInfo.public_key) {
-        const publicKeyData = accountInfo.public_key.toData()
-
-        if (typeof publicKeyData.value === 'string') {
-          publicKey = new PublicKey(publicKeyData.type, publicKeyData.value)
-        } else {
-          publicKey = new MultisigPublicKey(
-            publicKeyData.type,
-            publicKeyData.value.threshold,
-            publicKeyData.value.pubkeys,
-          )
-        }
-      }
 
       const account: Account = {
         address: accountInfo.address,
         coins: Coin.fromTerraCoins(accountInfo.coins),
-        public_key: publicKey,
+        public_key: PublicKey.fromTerraKey(accountInfo.public_key),
         account_number: accountInfo.account_number,
         sequence: accountInfo.sequence,
       }

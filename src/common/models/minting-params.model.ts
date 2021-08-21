@@ -1,5 +1,5 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
-import { Denom } from 'src/common/enums'
+import { Denom } from '../enums'
 
 @ObjectType()
 export class MintingParams {

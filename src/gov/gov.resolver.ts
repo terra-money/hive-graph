@@ -1,6 +1,7 @@
 import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { DepositParams, MsgDeposit, MsgVote, VotingParams, TallyParams, GovParams } from 'src/common/models'
 import { GovService } from './gov.service'
-import { Gov, Proposal, DepositParams, Deposit, Vote, Tally, VotingParams, TallyParams, GovParams } from './models'
+import { Gov, Proposal, Tally } from './models'
 
 @Resolver(Gov)
 export class GovResolver {
@@ -26,13 +27,13 @@ export class GovResolver {
     return this.govService.proposer(proposalId)
   }
 
-  @ResolveField(() => [Deposit])
-  public async deposits(@Args('proposalId', { type: () => Int }) proposalId: number): Promise<Deposit[]> {
+  @ResolveField(() => [MsgDeposit])
+  public async deposits(@Args('proposalId', { type: () => Int }) proposalId: number): Promise<MsgDeposit[]> {
     return this.govService.deposits(proposalId)
   }
 
-  @ResolveField(() => [Vote])
-  public async votes(@Args('proposalId', { type: () => Int }) proposalId: number): Promise<Vote[]> {
+  @ResolveField(() => [MsgVote])
+  public async votes(@Args('proposalId', { type: () => Int }) proposalId: number): Promise<MsgVote[]> {
     return this.govService.votes(proposalId)
   }
 

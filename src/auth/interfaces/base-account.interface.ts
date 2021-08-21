@@ -1,7 +1,7 @@
 import { Field, InterfaceType, Int } from '@nestjs/graphql'
 import { AccAddress } from '@terra-money/terra.js'
 import { Coin } from 'src/common/models'
-import { PublicKeyUnion, PublicKeyType } from '../unions'
+import { PublicKeyUnion, PublicKeyType } from 'src/common/unions'
 
 @InterfaceType()
 export abstract class BaseAccount {

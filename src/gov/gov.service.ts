@@ -3,30 +3,21 @@ import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import {
   InjectTerraLCDClient,
   TerraLCDClient,
-  CommunityPoolSpendProposal,
-  TaxRateUpdateProposal,
-  RewardWeightUpdateProposal,
-  ParameterChangeProposal,
   Proposal as TerraProposal,
-  MsgDeposit,
+  MsgDeposit as TerraMsgDeposit,
 } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
-import { Coin } from 'src/common/models'
 import {
-  Tally,
+  Coin,
+  MsgVote,
+  MsgDeposit,
   DepositParams,
-  Deposit,
   GovParams,
-  Proposal,
-  CommunityPoolSpendContent,
-  ParameterChangeContent,
-  RewardWeightUpdateContent,
-  TaxRateUpdateContent,
-  TextContent,
   TallyParams,
   VotingParams,
-  Vote,
-} from './models'
+  ProposalContent,
+} from 'src/common/models'
+import { Tally, Proposal } from './models'
 
 @Injectable()
 export class GovService {
@@ -38,14 +29,7 @@ export class GovService {
   ) {}
 
   private fromTerraProposal(proposal: TerraProposal): Proposal {
-    const { title, description } = proposal.content ?? {}
     let tally: Tally | undefined
-    let content:
-      | CommunityPoolSpendContent
-      | ParameterChangeContent
-      | RewardWeightUpdateContent
-      | TaxRateUpdateContent
-      | TextContent = new TextContent(title, description)
 
     if (proposal.final_tally_result) {
       tally = new Tally(
@@ -56,19 +40,9 @@ export class GovService {
       )
     }
 
-    if (proposal.content instanceof CommunityPoolSpendProposal) {
-      content = new CommunityPoolSpendContent(title, description, proposal.content.recipient, proposal.content.amount)
-    } else if (proposal.content instanceof TaxRateUpdateProposal) {
-      content = new TaxRateUpdateContent(title, description, proposal.content.tax_rate.toString())
-    } else if (proposal.content instanceof RewardWeightUpdateProposal) {
-      content = new RewardWeightUpdateContent(title, description, proposal.content.reward_weight.toString())
-    } else if (proposal.content instanceof ParameterChangeProposal) {
-      content = new ParameterChangeContent(title, description, proposal.content.changes)
-    }
-
     return {
       id: proposal.id,
-      content,
+      content: ProposalContent.fromTerra(proposal.content),
       proposal_status: proposal.proposal_status,
       final_tally_result: tally,
       submit_time: proposal.submit_time.toISOString(),
@@ -113,11 +87,11 @@ export class GovService {
     }
   }
 
-  public async deposits(proposalId: number): Promise<Deposit[]> {
+  public async deposits(proposalId: number): Promise<MsgDeposit[]> {
     try {
-      const deposits = (await this.terraClient.gov.deposits(proposalId)) as MsgDeposit[]
+      const deposits = (await this.terraClient.gov.deposits(proposalId)) as TerraMsgDeposit[]
 
-      return deposits.map<Deposit>((deposit) => ({
+      return deposits.map<MsgDeposit>((deposit) => ({
         proposal_id: deposit.proposal_id,
         depositor: deposit.depositor,
         amount: Coin.fromTerraCoins(deposit.amount),
@@ -129,7 +103,7 @@ export class GovService {
     }
   }
 
-  public async votes(proposalId: number): Promise<Vote[]> {
+  public async votes(proposalId: number): Promise<MsgVote[]> {
     try {
       // TODO: PENDING FOR FIX IN TERRA.JS
       return []

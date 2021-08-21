@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql'
 import { ParamChanges } from 'nestjs-terra'
+import { ProposalContent } from '../interfaces'
 import {
   Coin,
   OracleWhitelist,
@@ -11,9 +12,8 @@ import {
   StakingParams,
   TreasuryParams,
   WasmParams,
-} from 'src/common/models'
-import { ProposalContent } from '../interfaces'
-import { GovParams } from '../models'
+  GovParams,
+} from '../models'
 import { ParameterChangesUnion, ParameterChangesType } from '../unions'
 
 export enum ParameterChangesSubspaces {

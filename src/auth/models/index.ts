@@ -1,7 +1,5 @@
 export { Account } from './account.model'
 export { Auth } from './auth.model'
-export { MultisigPublicKey } from './multisig-public-key.model'
-export { PublicKey } from './public-key.model'
 export { ScheduleEntry } from './schedule-entry.model'
 export { VestingSchedule } from './vesting-schedule.model'
 export { VestingAccount } from './vesting-account.model'

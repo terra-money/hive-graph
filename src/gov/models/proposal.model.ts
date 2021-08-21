@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 import { ProposalStatus } from 'src/common/enums'
 import { Coin } from 'src/common/models'
-import { ProposalContentUnion, ProposalContentType } from '../unions'
+import { ProposalContentUnion, ProposalContentType } from 'src/common/unions'
 import { Tally } from './tally.model'
 
 @ObjectType()

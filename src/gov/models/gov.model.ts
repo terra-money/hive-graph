@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Proposal, DepositParams, Deposit, Vote, Tally, VotingParams, TallyParams, GovParams } from './'
+import { DepositParams, MsgDeposit, MsgVote, VotingParams, TallyParams, GovParams } from 'src/common/models'
+import { Proposal, Tally } from './'
 
 @ObjectType()
 export class Gov {
@@ -12,11 +13,11 @@ export class Gov {
   @Field(() => String)
   proposer!: Promise<string>
 
-  @Field(() => [Deposit])
-  deposits!: Promise<Deposit[]>
+  @Field(() => [MsgDeposit])
+  deposits!: Promise<MsgDeposit[]>
 
-  @Field(() => [Vote])
-  votes!: Promise<Vote[]>
+  @Field(() => [MsgVote])
+  votes!: Promise<MsgVote[]>
 
   @Field(() => Tally)
   tally!: Promise<Tally>

@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class GenericAuthorization {
+export class MsgUnjail {
   @Field()
-  grant_msg_type!: string
+  address!: string
 }

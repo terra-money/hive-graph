@@ -8,8 +8,8 @@ import {
   StakingParams,
   TreasuryParams,
   WasmParams,
-} from 'src/common/models'
-import { GovParams } from '../models'
+  GovParams,
+} from '../models'
 
 export const ParameterChangesUnion = createUnionType({
   name: 'ParameterChangesUnion',

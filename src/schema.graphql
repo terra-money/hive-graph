@@ -93,11 +93,6 @@ input CoinInput {
   denom: Denom!
 }
 
-type Commission {
-  commission_rates: CommissionRates!
-  update_time: String!
-}
-
 type CommissionRates {
   max_change_rate: String!
   max_rate: String!
@@ -156,12 +151,6 @@ enum Denom {
   uusd
 }
 
-type Deposit {
-  amount: [Coin!]!
-  depositor: String!
-  proposal_id: Float!
-}
-
 type DepositParams {
   max_deposit_period: Int!
   min_deposit: [Coin!]!
@@ -205,14 +194,14 @@ type GenericAuthorization {
 
 type Gov {
   depositParameters: DepositParams!
-  deposits(proposalId: Int!): [Deposit!]!
+  deposits(proposalId: Int!): [MsgDeposit!]!
   parameters: GovParams!
   proposal(proposalId: Int!): Proposal!
   proposals: [Proposal!]!
   proposer(proposalId: Int!): String!
   tally(proposalId: Int!): Tally!
   tallyParameters: TallyParams!
-  votes(proposalId: Int!): [Vote!]!
+  votes(proposalId: Int!): [MsgVote!]!
   votingParameters: VotingParams!
 }
 
@@ -237,6 +226,11 @@ type Header {
   time: String!
   validators_hash: String!
   version: Version!
+}
+
+type IOData {
+  address: String!
+  coins: [Coin!]!
 }
 
 """
@@ -276,6 +270,187 @@ type MintingParams {
   inflation_min: String
   inflation_rate_change: String
   mint_denom: Denom
+}
+
+type MsgAggregateExchangeRatePrevote {
+  feeder: String!
+  hash: String!
+  validator: String!
+}
+
+type MsgAggregateExchangeRateVote {
+  exchange_rates: [Coin!]!
+  feeder: String!
+  salt: String!
+  validator: String!
+}
+
+type MsgBeginRedelegate {
+  amount: Coin!
+  delegator_address: String!
+  validator_dst_address: String!
+  validator_src_address: String!
+}
+
+type MsgCreateValidator {
+  commission: CommissionRates!
+  delegator_address: String!
+  description: ValidatorDescription!
+  min_self_delegation: String!
+  pubkey: String!
+  validator_address: String!
+  value: Coin!
+}
+
+type MsgDelegate {
+  amount: Coin!
+  delegator_address: String!
+  validator_address: String!
+}
+
+type MsgDelegateFeedConsent {
+  delegate: String!
+  operator: String!
+}
+
+type MsgDeposit {
+  amount: [Coin!]!
+  depositor: String!
+  proposal_id: Int!
+}
+
+type MsgEditValidator {
+  address: String!
+  commission_rate: String
+  description: ValidatorDescription!
+  min_self_delegation: String
+}
+
+type MsgExchangeRatePrevote {
+  denom: Denom!
+  feeder: String!
+  hash: String!
+  validator: String!
+}
+
+type MsgExchangeRateVote {
+  denom: Denom!
+  exchange_rate: String!
+  feeder: String!
+  salt: String!
+  validator: String!
+}
+
+type MsgExecAuthorized {
+  grantee: String!
+  msgs: [MsgUnion!]!
+}
+
+type MsgExecuteContract {
+  coins: [Coin!]!
+  contract: String!
+  execute_msg: JSON!
+  sender: String!
+}
+
+type MsgFundCommunityPool {
+  amount: [Coin!]!
+  depositor: String!
+}
+
+type MsgGrantAuthorization {
+  authorization: AuthorizationUnion!
+  grantee: String!
+  granter: String!
+  period: String!
+}
+
+type MsgInstantiateContract {
+  code_id: Int!
+  init_coins: [Coin!]!
+  init_msg: JSON!
+  migratable: Boolean!
+  owner: String!
+}
+
+type MsgMigrateContract {
+  contract: String!
+  migrate_msg: JSON!
+  new_code_id: Float!
+  owner: String!
+}
+
+type MsgModifyWithdrawAddress {
+  delegator_address: String!
+  withdraw_address: String!
+}
+
+type MsgMultiSend {
+  inputs: [IOData!]!
+  outputs: [IOData!]!
+}
+
+type MsgRevokeAuthorization {
+  authorization_msg_type: String!
+  grantee: String!
+  granter: String!
+}
+
+type MsgSend {
+  amount: [Coin!]!
+  from_address: String!
+  to_address: String!
+}
+
+type MsgStoreCode {
+  sender: String!
+  wasm_byte_code: String!
+}
+
+type MsgSubmitProposal {
+  content: ProposalContentUnion!
+  initial_deposit: [Coin!]!
+  proposer: String!
+}
+
+type MsgSwap {
+  ask_denom: Denom!
+  offer_coin: Coin!
+  trader: String!
+}
+
+type MsgSwapSend {
+  ask_denom: Denom!
+  from_address: String!
+  offer_coin: Coin!
+  to_address: String!
+}
+
+union MsgUnion = MsgAggregateExchangeRatePrevote | MsgAggregateExchangeRateVote | MsgBeginRedelegate | MsgCreateValidator | MsgDelegate | MsgDelegateFeedConsent | MsgDeposit | MsgEditValidator | MsgExchangeRatePrevote | MsgExchangeRateVote | MsgExecAuthorized | MsgExecuteContract | MsgFundCommunityPool | MsgGrantAuthorization | MsgInstantiateContract | MsgMigrateContract | MsgModifyWithdrawAddress | MsgMultiSend | MsgRevokeAuthorization | MsgSend | MsgStoreCode | MsgSubmitProposal | MsgSwap | MsgSwapSend | MsgUnjail | MsgUpdateContractOwner | MsgVote | MsgWithdrawDelegationReward | MsgWithdrawValidatorCommission
+
+type MsgUnjail {
+  address: String!
+}
+
+type MsgUpdateContractOwner {
+  contract: String!
+  new_owner: String!
+  owner: String!
+}
+
+type MsgVote {
+  option: VoteOption!
+  proposal_id: Int!
+  voter: String!
+}
+
+type MsgWithdrawDelegationReward {
+  delegator_address: String!
+  validator_address: String!
+}
+
+type MsgWithdrawValidatorCommission {
+  validator_address: String!
 }
 
 type Msgauth {
@@ -409,6 +584,7 @@ type Query {
   supply: Supply!
   tendermint: Tendermint!
   treasury: Treasury!
+  tx: Tx!
   utils: Utils!
   wasm: Wasm!
 }
@@ -510,6 +686,23 @@ type StakingPool {
   not_bonded_tokens: Coin!
 }
 
+type StdFee {
+  amount: [Coin!]!
+  gas: Float!
+}
+
+type StdSignature {
+  pub_key: PublicKeyUnion
+  signature: String!
+}
+
+type StdTx {
+  fee: StdFee!
+  memo: String!
+  msg: [MsgUnion!]!
+  signatures: [StdSignature!]!
+}
+
 type Supply {
   total: [Coin!]!
 }
@@ -564,6 +757,39 @@ type TreasuryParams {
   window_short: Int
 }
 
+type Tx {
+  txInfo(txHash: String!): TxInfo!
+}
+
+type TxEventKV {
+  key: String!
+  value: String!
+}
+
+type TxEventLog {
+  attributes: [TxEventKV!]!
+  type: String!
+}
+
+type TxInfo {
+  code: Int!
+  codespace: String
+  gas_used: Int!
+  gas_wanted: Int!
+  height: Int!
+  logs: [TxLog!]
+  raw_log: String!
+  timestamp: String!
+  tx: StdTx!
+  txhash: String!
+}
+
+type TxLog {
+  events: [TxEventLog!]!
+  log: String!
+  msg_index: Int!
+}
+
 type UnbondingDelegation {
   delegator_address: String!
   entries: [UnbondingDelegationEntry!]!
@@ -583,7 +809,7 @@ type Utils {
 }
 
 type Validator {
-  commission: Commission!
+  commission: ValidatorCommission!
   consensus_pubkey: String!
   delegator_shares: String!
   description: ValidatorDescription!
@@ -594,6 +820,11 @@ type Validator {
   tokens: String!
   unbonding_height: Int!
   unbonding_time: String!
+}
+
+type ValidatorCommission {
+  commission_rates: CommissionRates!
+  update_time: String!
 }
 
 type ValidatorDescription {
@@ -628,12 +859,6 @@ type Version {
 type VestingSchedule {
   denom: String!
   schedules: [ScheduleEntry!]!
-}
-
-type Vote {
-  option: VoteOption!
-  proposal_id: Float!
-  voter: String!
 }
 
 enum VoteOption {

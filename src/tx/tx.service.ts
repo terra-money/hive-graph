@@ -1,4 +1,121 @@
 import { Injectable } from '@nestjs/common'
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
+import { InjectTerraLCDClient, TerraLCDClient, StdTx as TerraStdTx, TxInfo as TerraTxInfo } from 'nestjs-terra'
+import { LCDClientError } from 'src/common/errors'
+import { Coin, PublicKey } from 'src/common/models'
+// import { CreateTxOptions, StdFee, StdSignMsg, StdTx, TxInfo, TxSearchResult, Msg } from './models'
+// import { MsgType } from './unions'
+import { StdTx, TxInfo, Msg } from './models'
 
 @Injectable()
-export class TxService {}
+export class TxService {
+  constructor(
+    @InjectPinoLogger(TxService.name)
+    private readonly logger: PinoLogger,
+    @InjectTerraLCDClient()
+    private readonly terraClient: TerraLCDClient,
+  ) {}
+
+  private fromTerraStdTx(tx: TerraStdTx): StdTx {
+    return {
+      msg: Msg.fromTerraMsgs(tx.msg),
+      fee: {
+        gas: tx.fee.gas,
+        amount: Coin.fromTerraCoins(tx.fee.amount),
+      },
+      signatures: tx.signatures.map((signature) => {
+        return {
+          signature: signature.signature,
+          pub_key: PublicKey.fromTerraKey(signature.pub_key),
+        }
+      }),
+      memo: tx.memo,
+    }
+  }
+
+  private fromTerraTxInfo(txInfo: TerraTxInfo): TxInfo {
+    return {
+      height: txInfo.height,
+      txhash: txInfo.txhash,
+      raw_log: txInfo.raw_log,
+      logs: (txInfo.logs ?? []).map((log) => ({
+        msg_index: log.msg_index,
+        log: log.log,
+        events: log.events,
+      })),
+      gas_wanted: txInfo.gas_wanted,
+      gas_used: txInfo.gas_used,
+      tx: this.fromTerraStdTx(txInfo.tx),
+      timestamp: txInfo.timestamp,
+      code: txInfo.code,
+      codespace: txInfo.codespace,
+    }
+  }
+
+  public async txInfo(txHash: string): Promise<TxInfo> {
+    try {
+      const tx = await this.terraClient.tx.txInfo(txHash)
+
+      return this.fromTerraTxInfo(tx)
+    } catch (err) {
+      this.logger.error({ err }, 'Error getting tx %s info.')
+
+      throw new LCDClientError(err)
+    }
+  }
+
+  // TODO: MUTATION PENDING
+  // public async create(sourceAddress: string, options: CreateTxOptions): Promise<StdSignMsg> {
+  //   try {
+  //     const tx = await this.terraClient.tx.create(sourceAddress, options)
+  //   } catch (err) {
+  //     this.logger.error({ err, options }, 'Error creating tx %s.', sourceAddress)
+
+  //     throw new LCDClientError(err)
+  //   }
+  // }
+
+  public async txInfosByHeight(height?: number): Promise<TxInfo[]> {
+    try {
+      const txs = await this.terraClient.tx.txInfosByHeight(height)
+
+      return txs.map(this.fromTerraTxInfo)
+    } catch (err) {
+      this.logger.error({ err }, 'Error getting tx infos.')
+
+      throw new LCDClientError(err)
+    }
+  }
+
+  // public async estimateFee(
+  //   sourceAddress: string,
+  //   msgs: MsgType[],
+  //   options?: {
+  //     memo?: string
+  //     gas?: string
+  //     gasPrices?: Coin[]
+  //     gasAdjustment?: string
+  //     feeDenoms?: string[]
+  //   },
+  // ): Promise<StdFee> {
+  //   try {
+  //     const fee = await this.terraClient.tx.estimateFee(sourceAddress, msgs, options)
+  //   } catch (err) {
+  //     this.logger.error({ err }, 'Error getting estimate Fee.')
+
+  //     throw new LCDClientError(err)
+  //   }
+  // }
+
+  // public async encode(tx: StdTx): Promise<string> {}
+
+  // public async hash(tx: StdTx): Promise<string> {}
+
+  // public async broadcast(tx: StdTx): Promise<TxBroadcastResult> {}
+
+  // public async broadcastSync(tx: StdTx): Promise<TxBroadcastResult> {}
+
+  // public async broadcastAsync(tx: StdTx): Promise<TxBroadcastResult> {}
+
+  // public async search(page?: number, limit?: number): Promise<TxSearchResult> {}
+}
