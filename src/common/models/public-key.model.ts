@@ -9,25 +9,30 @@ export class PublicKey {
   @Field()
   value!: string
 
+  constructor(data: PublicKey) {
+    Object.assign(this, data)
+  }
+
   static fromTerraKey(key: TerraPublicKey | null): PublicKey | MultisigPublicKey | null {
     if (!key) {
       return null
     }
 
     if (typeof key.value === 'string') {
-      return {
+      return new PublicKey({
         type: key.type,
         value: key.value,
-      }
+      })
     }
-    return {
+
+    return new MultisigPublicKey({
       type: key.type,
       threshold: key.value.threshold,
       pubkeys: key.value.pubkeys.map<PublicKey>((pk) => ({
         type: pk.type,
         value: pk.value,
       })),
-    }
+    })
   }
 }
 
@@ -41,4 +46,8 @@ export class MultisigPublicKey {
 
   @Field(() => [PublicKey])
   pubkeys!: PublicKey[]
+
+  constructor(data: MultisigPublicKey) {
+    Object.assign(this, data)
+  }
 }

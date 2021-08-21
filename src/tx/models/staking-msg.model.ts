@@ -19,6 +19,10 @@ export class MsgDelegate {
 
   @Field(() => Coin)
   amount!: Coin
+
+  constructor(data: MsgDelegate) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -34,6 +38,10 @@ export class MsgBeginRedelegate {
 
   @Field(() => Coin)
   amount!: Coin
+
+  constructor(data: MsgBeginRedelegate) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -58,6 +66,10 @@ export class MsgCreateValidator {
 
   @Field(() => Coin)
   value!: Coin
+
+  constructor(data: MsgCreateValidator) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -73,29 +85,33 @@ export class MsgEditValidator {
 
   @Field({ nullable: true })
   min_self_delegation?: string
+
+  constructor(data: MsgEditValidator) {
+    Object.assign(this, data)
+  }
 }
 
 export class StakingMsg {
   static fromTerraMsg(msg: TerraStakingMsg): MsgDelegate | MsgBeginRedelegate | MsgCreateValidator | MsgEditValidator {
     if (msg instanceof TerraMsgDelegate || msg instanceof TerraMsgUndelegate) {
-      return {
+      return new MsgDelegate({
         delegator_address: msg.delegator_address,
         validator_address: msg.delegator_address,
         amount: Coin.fromTerraCoin(msg.amount),
-      }
+      })
     }
 
     if (msg instanceof TerraMsgBeginRedelegate) {
-      return {
+      return new MsgBeginRedelegate({
         delegator_address: msg.delegator_address,
         validator_src_address: msg.validator_src_address,
         validator_dst_address: msg.validator_dst_address,
         amount: Coin.fromTerraCoin(msg.amount),
-      }
+      })
     }
 
     if (msg instanceof TerraMsgCreateValidator) {
-      return {
+      return new MsgCreateValidator({
         description: ValidatorDescription.fromTerra(msg.description),
         commission: CommissionRates.fromTerra(msg.commission),
         min_self_delegation: msg.min_self_delegation.toString(),
@@ -103,14 +119,14 @@ export class StakingMsg {
         validator_address: msg.validator_address,
         pubkey: msg.pubkey,
         value: Coin.fromTerraCoin(msg.value),
-      }
+      })
     }
 
-    return {
+    return new MsgEditValidator({
       description: ValidatorDescription.fromTerra(msg.description),
       address: msg.address,
       commission_rate: msg.commission_rate?.toString(),
       min_self_delegation: msg.min_self_delegation?.toString(),
-    }
+    })
   }
 }

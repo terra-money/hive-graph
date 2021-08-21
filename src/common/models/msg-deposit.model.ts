@@ -11,4 +11,8 @@ export class MsgDeposit {
 
   @Field(() => [Coin])
   amount!: Coin[]
+
+  constructor(data: MsgDeposit) {
+    Object.assign(this, data)
+  }
 }

@@ -14,6 +14,10 @@ export class MsgModifyWithdrawAddress {
 
   @Field()
   withdraw_address!: string
+
+  constructor(data: MsgModifyWithdrawAddress) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -23,12 +27,20 @@ export class MsgWithdrawDelegationReward {
 
   @Field()
   validator_address!: string
+
+  constructor(data: MsgWithdrawDelegationReward) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
 export class MsgWithdrawValidatorCommission {
   @Field()
   validator_address!: string
+
+  constructor(data: MsgWithdrawValidatorCommission) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -38,6 +50,10 @@ export class MsgFundCommunityPool {
 
   @Field(() => [Coin])
   amount!: Coin[]
+
+  constructor(data: MsgFundCommunityPool) {
+    Object.assign(this, data)
+  }
 }
 
 export class DistributionMsg {
@@ -45,28 +61,28 @@ export class DistributionMsg {
     msg: TerraDistributionMsg,
   ): MsgModifyWithdrawAddress | MsgWithdrawDelegationReward | MsgWithdrawValidatorCommission | MsgFundCommunityPool {
     if (msg instanceof TerraMsgModifyWithdrawAddress) {
-      return {
+      return new MsgModifyWithdrawAddress({
         delegator_address: msg.delegator_address,
         withdraw_address: msg.withdraw_address,
-      }
+      })
     }
 
     if (msg instanceof TerraMsgWithdrawDelegationReward) {
-      return {
+      return new MsgWithdrawDelegationReward({
         delegator_address: msg.delegator_address,
         validator_address: msg.validator_address,
-      }
+      })
     }
 
     if (msg instanceof TerraMsgWithdrawValidatorCommission) {
-      return {
+      return new MsgWithdrawValidatorCommission({
         validator_address: msg.validator_address,
-      }
+      })
     }
 
-    return {
+    return new MsgFundCommunityPool({
       depositor: msg.depositor,
       amount: Coin.fromTerraCoins(msg.amount),
-    }
+    })
   }
 }

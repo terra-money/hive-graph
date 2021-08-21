@@ -772,7 +772,7 @@ type TxEventLog {
 }
 
 type TxInfo {
-  code: Int!
+  code: Int
   codespace: String
   gas_used: Int!
   gas_wanted: Int!

@@ -12,6 +12,10 @@ export class MsgSend {
 
   @Field(() => [Coin])
   amount!: Coin[]
+
+  constructor(data: MsgSend) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -30,6 +34,10 @@ export class MsgMultiSend {
 
   @Field(() => [IOData])
   outputs!: IOData[]
+
+  constructor(data: MsgMultiSend) {
+    Object.assign(this, data)
+  }
 }
 
 export class BankMsg {
@@ -42,16 +50,16 @@ export class BankMsg {
 
   static fromTerraMsg(msg: TerraBankMsg): MsgSend | MsgMultiSend {
     if (msg instanceof TerraMsgMultiSend) {
-      return {
+      return new MsgMultiSend({
         inputs: msg.inputs.map<IOData>(BankMsg.fromTerraIOData),
         outputs: msg.outputs.map<IOData>(BankMsg.fromTerraIOData),
-      }
+      })
     }
 
-    return {
+    return new MsgSend({
       from_address: msg.from_address,
       to_address: msg.to_address,
       amount: Coin.fromTerraCoins(msg.amount),
-    }
+    })
   }
 }

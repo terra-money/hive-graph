@@ -28,7 +28,7 @@ export class TxInfo {
   @Field()
   timestamp!: string
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   code?: number
 
   @Field({ nullable: true })

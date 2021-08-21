@@ -11,4 +11,8 @@ export class MsgVote {
 
   @Field(() => VoteOption)
   option!: string
+
+  constructor(data: MsgVote) {
+    Object.assign(this, data)
+  }
 }

@@ -2,6 +2,8 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 import GraphQLJSON from 'graphql-type-json'
 import {
   WasmMsg as TerraWasmMsg,
+  MsgMigrateContract as TerraMsgMigrateContract,
+  MsgUpdateContractOwner as TerraMsgUpdateContractOwner,
   MsgInstantiateContract as TerraMsgInstantiateContract,
   MsgExecuteContract as TerraMsgExecuteContract,
 } from 'nestjs-terra'
@@ -14,6 +16,10 @@ export class MsgStoreCode {
 
   @Field()
   wasm_byte_code!: string
+
+  constructor(data: MsgStoreCode) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -32,6 +38,10 @@ export class MsgInstantiateContract {
 
   @Field()
   migratable!: boolean
+
+  constructor(data: MsgInstantiateContract) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -47,6 +57,10 @@ export class MsgExecuteContract {
 
   @Field(() => [Coin])
   coins!: Coin[]
+
+  constructor(data: MsgExecuteContract) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -62,6 +76,10 @@ export class MsgMigrateContract {
 
   @Field(() => GraphQLJSON)
   migrate_msg!: Record<string, any>
+
+  constructor(data: MsgMigrateContract) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -74,6 +92,10 @@ export class MsgUpdateContractOwner {
 
   @Field()
   contract!: string
+
+  constructor(data: MsgUpdateContractOwner) {
+    Object.assign(this, data)
+  }
 }
 
 export class WasmMsg {
@@ -81,24 +103,32 @@ export class WasmMsg {
     msg: TerraWasmMsg,
   ): MsgStoreCode | MsgInstantiateContract | MsgExecuteContract | MsgMigrateContract | MsgUpdateContractOwner {
     if (msg instanceof TerraMsgInstantiateContract) {
-      return {
+      return new MsgInstantiateContract({
         owner: msg.owner,
         code_id: msg.code_id,
         init_msg: msg.init_msg,
         init_coins: Coin.fromTerraCoins(msg.init_coins),
         migratable: msg.migratable,
-      }
+      })
     }
 
     if (msg instanceof TerraMsgExecuteContract) {
-      return {
+      return new MsgExecuteContract({
         sender: msg.sender,
         contract: msg.contract,
         execute_msg: msg.execute_msg,
         coins: Coin.fromTerraCoins(msg.coins),
-      }
+      })
     }
 
-    return msg
+    if (msg instanceof TerraMsgMigrateContract) {
+      return new MsgMigrateContract(msg)
+    }
+
+    if (msg instanceof TerraMsgUpdateContractOwner) {
+      return new MsgUpdateContractOwner(msg)
+    }
+
+    return new MsgStoreCode(msg)
   }
 }

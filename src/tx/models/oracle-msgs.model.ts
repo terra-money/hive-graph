@@ -1,6 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import {
   OracleMsg as TerraOracleMsg,
+  MsgExchangeRatePrevote as TerraMsgExchangeRatePrevote,
+  MsgDelegateFeedConsent as TerraMsgDelegateFeedConsent,
   MsgExchangeRateVote as TerraMsgExchangeRateVote,
   MsgAggregateExchangeRateVote as TerraMsgAggregateExchangeRateVote,
 } from 'nestjs-terra'
@@ -23,6 +25,10 @@ export class MsgExchangeRateVote {
 
   @Field()
   validator!: string
+
+  constructor(data: MsgExchangeRateVote) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -38,6 +44,10 @@ export class MsgExchangeRatePrevote {
 
   @Field()
   validator!: string
+
+  constructor(data: MsgExchangeRatePrevote) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -47,6 +57,10 @@ export class MsgDelegateFeedConsent {
 
   @Field()
   delegate!: string
+
+  constructor(data: MsgDelegateFeedConsent) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -62,6 +76,10 @@ export class MsgAggregateExchangeRateVote {
 
   @Field()
   validator!: string
+
+  constructor(data: MsgAggregateExchangeRateVote) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -74,6 +92,10 @@ export class MsgAggregateExchangeRatePrevote {
 
   @Field()
   validator!: string
+
+  constructor(data: MsgAggregateExchangeRatePrevote) {
+    Object.assign(this, data)
+  }
 }
 
 export class OracleMsg {
@@ -86,24 +108,40 @@ export class OracleMsg {
     | MsgAggregateExchangeRateVote
     | MsgAggregateExchangeRatePrevote {
     if (msg instanceof TerraMsgExchangeRateVote) {
-      return {
+      return new MsgExchangeRateVote({
         exchange_rate: msg.exchange_rate.toString(),
         denom: msg.denom,
         salt: msg.salt,
         feeder: msg.feeder,
         validator: msg.validator,
-      }
+      })
+    }
+
+    if (msg instanceof TerraMsgExchangeRatePrevote) {
+      return new MsgExchangeRatePrevote({
+        hash: msg.hash,
+        denom: msg.denom,
+        feeder: msg.feeder,
+        validator: msg.validator,
+      })
+    }
+
+    if (msg instanceof TerraMsgDelegateFeedConsent) {
+      return new MsgDelegateFeedConsent({
+        operator: msg.operator,
+        delegate: msg.delegate,
+      })
     }
 
     if (msg instanceof TerraMsgAggregateExchangeRateVote) {
-      return {
+      return new MsgAggregateExchangeRateVote({
         exchange_rates: Coin.fromTerraCoins(msg.exchange_rates),
         salt: msg.salt,
         feeder: msg.feeder,
         validator: msg.validator,
-      }
+      })
     }
 
-    return msg
+    return new MsgAggregateExchangeRatePrevote(msg)
   }
 }

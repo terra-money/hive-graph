@@ -30,7 +30,17 @@ import {
   MsgMigrateContract,
   MsgUpdateContractOwner,
 } from 'nestjs-terra'
-import { BankMsg, DistributionMsg, GovMsg, MarketMsg, MsgAuthMsg, OracleMsg, StakingMsg, WasmMsg } from '../models'
+import {
+  BankMsg,
+  DistributionMsg,
+  GovMsg,
+  MarketMsg,
+  MsgAuthMsg,
+  OracleMsg,
+  StakingMsg,
+  WasmMsg,
+  MsgUnjail,
+} from '../models'
 import { MsgType } from '../unions'
 
 export class Msg {
@@ -94,7 +104,7 @@ export class Msg {
       return WasmMsg.fromTerraMsg(msg)
     }
 
-    return msg
+    return new MsgUnjail(msg)
   }
 
   static fromTerraMsgs(msgs: TerraMsg[]): MsgType[] {

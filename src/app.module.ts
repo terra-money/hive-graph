@@ -3,13 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
-import {
-  TerraModule,
-  TERRA_LCD_BASE_URL,
-  TERRA_TESTNET_LCD_BASE_URL,
-  TERRA_TESTNET_CHAIN_ID,
-  TERRA_MAINNET_CHAIN_ID,
-} from 'nestjs-terra'
+import { TerraModule, TERRA_LCD_BASE_URL, TERRA_MAINNET_CHAIN_ID } from 'nestjs-terra'
 import { join } from 'path'
 import { LoggerOptions } from 'pino'
 import { AnythingScalar } from './anything.scalar'
@@ -69,17 +63,9 @@ import { WasmModule } from './wasm/wasm.module'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        let URL = TERRA_LCD_BASE_URL
-        let chainID = TERRA_MAINNET_CHAIN_ID
-
-        if (config.get<string>('NODE_ENV') !== 'production') {
-          URL = TERRA_TESTNET_LCD_BASE_URL
-          chainID = TERRA_TESTNET_CHAIN_ID
-        }
-
         return {
-          URL,
-          chainID,
+          URL: config.get<string>('LCD_URL', TERRA_LCD_BASE_URL),
+          chainID: config.get<string>('CHAIN_ID', TERRA_MAINNET_CHAIN_ID),
         }
       },
     }),

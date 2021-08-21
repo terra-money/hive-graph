@@ -1,5 +1,6 @@
 import { plainToClass } from 'class-transformer'
 import { IsEnum, IsString, validateSync } from 'class-validator'
+import { TERRA_LCD_BASE_URL, TERRA_MAINNET_CHAIN_ID } from 'nestjs-terra'
 
 export enum Environment {
   Development = 'development',
@@ -25,6 +26,12 @@ export class EnvironmentVariables {
 
   @IsString()
   THROTTLE_LIMIT = 20 // The maximum number of requests within the TTL limit
+
+  @IsString()
+  LCD_URL = TERRA_LCD_BASE_URL
+
+  @IsString()
+  CHAIN_ID = TERRA_MAINNET_CHAIN_ID
 }
 
 export function validate(config: Record<string, unknown>) {

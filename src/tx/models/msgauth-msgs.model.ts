@@ -22,6 +22,10 @@ export class MsgGrantAuthorization {
 
   @Field()
   period!: string
+
+  constructor(data: MsgGrantAuthorization) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -34,6 +38,10 @@ export class MsgRevokeAuthorization {
 
   @Field()
   authorization_msg_type!: string
+
+  constructor(data: MsgRevokeAuthorization) {
+    Object.assign(this, data)
+  }
 }
 
 @ObjectType()
@@ -43,30 +51,34 @@ export class MsgExecAuthorized {
 
   @Field(() => [MsgUnion])
   msgs!: MsgType[]
+
+  constructor(data: MsgExecAuthorized) {
+    Object.assign(this, data)
+  }
 }
 
 export class MsgAuthMsg {
   static fromTerraMsg(msg: TerraMsgAuthMsg): MsgGrantAuthorization | MsgRevokeAuthorization | MsgExecAuthorized {
     if (msg instanceof TerraMsgGrantAuthorization) {
-      return {
+      return new MsgGrantAuthorization({
         granter: msg.granter,
         grantee: msg.grantee,
         authorization: Authorization.fromTerra(msg.authorization),
         period: msg.period.toString(),
-      }
+      })
     }
 
     if (msg instanceof TerraMsgRevokeAuthorization) {
-      return {
+      return new MsgRevokeAuthorization({
         granter: msg.granter,
         grantee: msg.grantee,
         authorization_msg_type: msg.authorization_msg_type,
-      }
+      })
     }
 
-    return {
+    return new MsgExecAuthorized({
       grantee: msg.grantee,
       msgs: Msg.fromTerraMsgs(msg.msgs),
-    }
+    })
   }
 }
