@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
-import { TerraModule, TERRA_LCD_BASE_URL, TERRA_MAINNET_CHAIN_ID } from 'nestjs-terra'
+import { TerraModule } from 'nestjs-terra'
 import { join } from 'path'
 import { LoggerOptions } from 'pino'
 import { AnythingScalar } from './anything.scalar'
@@ -63,9 +63,16 @@ import { WasmModule } from './wasm/wasm.module'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
+        const URL = config.get<string>('LEGACY_LCD_URL')
+        const chainID = config.get<string>('LEGACY_CHAIN_ID')
+
+        if (!URL || !chainID) {
+          throw new Error('Invalid LEGACY_LCD_URL or LEGACY_CHAIN_ID variables.')
+        }
+
         return {
-          URL: config.get<string>('LCD_URL', TERRA_LCD_BASE_URL),
-          chainID: config.get<string>('CHAIN_ID', TERRA_MAINNET_CHAIN_ID),
+          URL,
+          chainID,
         }
       },
     }),
