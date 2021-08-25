@@ -1,7 +1,7 @@
 {
   "name": "hive-graph",
-  "version": "0.1.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "GraphQL interface for Terra blockchain",
   "author": "Terra Engineering <engineering@terra.money>",
   "license": "MIT",
   "scripts": {

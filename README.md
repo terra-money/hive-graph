@@ -1,4 +1,14 @@
-# Terra Hive GraphQL Service
+![logo](./assets/hivegraph_logo.png)
+
+GraphQL interface for Terra blockchain based on [terra.js](https://github.com/terra-money/terra.js)
+
+## Features
+
+- **Written in TypeScript**, with type definitions.
+- Based on [terra.js](https://github.com/terra-money/terra.js) LCDClient spec.
+- GraphQL **Schema** auto-generate with decorators and TypeScript classes.
+- GraphQL **Types** compatible with columbus-4 and columbus-5.
+- **LRU** cache for every GraphQL query. 
 
 ## Environment setup
 
