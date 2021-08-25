@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectTerraLCDClient, TerraLCDClient, StdTx as TerraStdTx, TxInfo as TerraTxInfo } from 'nestjs-terra'
+import { StdTx as TerraStdTx, TxInfo as TerraTxInfo } from 'nestjs-terra'
+import { StdTx as LegacyTerraStdTx, TxInfo as LegacyTerraTxInfo } from 'nestjs-terra-legacy'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, PublicKey } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 // import { CreateTxOptions, StdFee, StdSignMsg, StdTx, TxInfo, TxSearchResult, Msg } from './models'
 // import { MsgType } from './unions'
 import { StdTx, TxInfo, Msg } from './models'
@@ -12,11 +14,10 @@ export class TxService {
   constructor(
     @InjectPinoLogger(TxService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  private fromTerraStdTx(tx: TerraStdTx): StdTx {
+  private fromTerraStdTx(tx: TerraStdTx | LegacyTerraStdTx): StdTx {
     return {
       msg: Msg.fromTerraMsgs(tx.msg),
       fee: {
@@ -33,15 +34,15 @@ export class TxService {
     }
   }
 
-  private fromTerraTxInfo(txInfo: TerraTxInfo): TxInfo {
+  private fromTerraTxInfo(txInfo: TerraTxInfo | LegacyTerraTxInfo): TxInfo {
     return {
       height: txInfo.height,
       txhash: txInfo.txhash,
       raw_log: txInfo.raw_log,
       logs: (txInfo.logs ?? []).map((log) => ({
-        msg_index: log.msg_index,
-        log: log.log,
-        events: log.events,
+        msg_index: log.msg_index ?? null,
+        log: log.log ?? null,
+        events: log.events ?? [],
       })),
       gas_wanted: txInfo.gas_wanted,
       gas_used: txInfo.gas_used,
@@ -52,9 +53,9 @@ export class TxService {
     }
   }
 
-  public async txInfo(txHash: string): Promise<TxInfo> {
+  public async txInfo(txHash: string, height?: number): Promise<TxInfo> {
     try {
-      const tx = await this.terraClient.tx.txInfo(txHash)
+      const tx = await this.lcdService.getLCDClient(height).tx.txInfo(txHash)
 
       return this.fromTerraTxInfo(tx)
     } catch (err) {
@@ -67,7 +68,7 @@ export class TxService {
   // TODO: MUTATION PENDING
   // public async create(sourceAddress: string, options: CreateTxOptions): Promise<StdSignMsg> {
   //   try {
-  //     const tx = await this.terraClient.tx.create(sourceAddress, options)
+  //     const tx = await this.lcdService.getLCDClient(height).tx.create(sourceAddress, options)
   //   } catch (err) {
   //     this.logger.error({ err, options }, 'Error creating tx %s.', sourceAddress)
 
@@ -77,7 +78,7 @@ export class TxService {
 
   public async txInfosByHeight(height?: number): Promise<TxInfo[]> {
     try {
-      const txs = await this.terraClient.tx.txInfosByHeight(height)
+      const txs = await this.lcdService.getLCDClient(height).tx.txInfosByHeight(height)
 
       return txs.map(this.fromTerraTxInfo)
     } catch (err) {
@@ -99,7 +100,7 @@ export class TxService {
   //   },
   // ): Promise<StdFee> {
   //   try {
-  //     const fee = await this.terraClient.tx.estimateFee(sourceAddress, msgs, options)
+  //     const fee = await this.lcdService.getLCDClient(height).tx.estimateFee(sourceAddress, msgs, options)
   //   } catch (err) {
   //     this.logger.error({ err }, 'Error getting estimate Fee.')
 

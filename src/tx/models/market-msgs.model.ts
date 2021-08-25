@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { MarketMsg as TerraMarketMsg, MsgSwap as TerraMsgSwap } from 'nestjs-terra'
+import { MarketMsg as LegacyTerraMarketMsg, MsgSwap as LegacyMsgSwap } from 'nestjs-terra-legacy'
 import { Denom } from 'src/common/enums'
 import { Coin } from 'src/common/models'
 
@@ -39,8 +40,8 @@ export class MsgSwap {
 }
 
 export class MarketMsg {
-  static fromTerraMsg(msg: TerraMarketMsg): MsgSwapSend | MsgSwap {
-    if (msg instanceof TerraMsgSwap) {
+  static fromTerraMsg(msg: TerraMarketMsg | LegacyTerraMarketMsg): MsgSwapSend | MsgSwap {
+    if (msg instanceof TerraMsgSwap || msg instanceof LegacyMsgSwap) {
       return new MsgSwap({
         trader: msg.trader,
         offer_coin: Coin.fromTerraCoin(msg.offer_coin),

@@ -1,10 +1,11 @@
-import { Proposal as TerraProposal } from 'nestjs-terra'
+import { Proposal as TerraProposal, CommunityPoolSpendProposal, ParameterChangeProposal } from 'nestjs-terra'
 import {
-  CommunityPoolSpendProposal,
-  ParameterChangeProposal,
-  RewardWeightUpdateProposal,
-  TaxRateUpdateProposal,
-} from 'nestjs-terra'
+  Proposal as LegacyTerraProposal,
+  CommunityPoolSpendProposal as LegacyCommunityPoolSpendProposal,
+  ParameterChangeProposal as LegacyParameterChangeProposal,
+  RewardWeightUpdateProposal as LegacyRewardWeightUpdateProposal,
+  TaxRateUpdateProposal as LegacyTaxRateUpdateProposal,
+} from 'nestjs-terra-legacy'
 import {
   CommunityPoolSpendContent,
   ParameterChangeContent,
@@ -15,21 +16,21 @@ import {
 import { ProposalContentType } from 'src/common/unions'
 
 export class ProposalContent {
-  static fromTerra(content: TerraProposal.Content): ProposalContentType {
+  static fromTerra(content: TerraProposal.Content | LegacyTerraProposal.Content): ProposalContentType {
     const { title, description } = content ?? {}
 
-    if (content instanceof CommunityPoolSpendProposal) {
+    if (content instanceof CommunityPoolSpendProposal || content instanceof LegacyCommunityPoolSpendProposal) {
       return new CommunityPoolSpendContent(title, description, content.recipient, content.amount)
     }
 
-    if (content instanceof TaxRateUpdateProposal) {
+    if (content instanceof LegacyTaxRateUpdateProposal) {
       return new TaxRateUpdateContent(title, description, content.tax_rate.toString())
     }
 
-    if (content instanceof RewardWeightUpdateProposal) {
+    if (content instanceof LegacyRewardWeightUpdateProposal) {
       return new RewardWeightUpdateContent(title, description, content.reward_weight.toString())
     }
-    if (content instanceof ParameterChangeProposal) {
+    if (content instanceof ParameterChangeProposal || content instanceof LegacyParameterChangeProposal) {
       return new ParameterChangeContent(title, description, content.changes)
     }
 

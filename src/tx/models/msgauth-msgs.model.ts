@@ -4,6 +4,11 @@ import {
   MsgGrantAuthorization as TerraMsgGrantAuthorization,
   MsgRevokeAuthorization as TerraMsgRevokeAuthorization,
 } from 'nestjs-terra'
+import {
+  MsgAuthMsg as LegacyTerraMsgAuthMsg,
+  MsgGrantAuthorization as LegacyMsgGrantAuthorization,
+  MsgRevokeAuthorization as LegacyMsgRevokeAuthorization,
+} from 'nestjs-terra-legacy'
 import { Authorization } from 'src/common/models'
 import { AuthorizationUnion, AuthorizationType } from 'src/common/unions'
 import { MsgUnion, MsgType } from '../unions'
@@ -21,7 +26,7 @@ export class MsgGrantAuthorization {
   authorization!: AuthorizationType
 
   @Field()
-  period!: string
+  expiration!: string
 
   constructor(data: MsgGrantAuthorization) {
     Object.assign(this, data)
@@ -58,21 +63,24 @@ export class MsgExecAuthorized {
 }
 
 export class MsgAuthMsg {
-  static fromTerraMsg(msg: TerraMsgAuthMsg): MsgGrantAuthorization | MsgRevokeAuthorization | MsgExecAuthorized {
-    if (msg instanceof TerraMsgGrantAuthorization) {
+  static fromTerraMsg(
+    msg: TerraMsgAuthMsg | LegacyTerraMsgAuthMsg,
+  ): MsgGrantAuthorization | MsgRevokeAuthorization | MsgExecAuthorized {
+    if (msg instanceof TerraMsgGrantAuthorization || msg instanceof LegacyMsgGrantAuthorization) {
       return new MsgGrantAuthorization({
         granter: msg.granter,
         grantee: msg.grantee,
         authorization: Authorization.fromTerra(msg.authorization),
-        period: msg.period.toString(),
+        expiration: msg instanceof TerraMsgGrantAuthorization ? msg.expiration.toISOString() : msg.period.toString(),
       })
     }
 
-    if (msg instanceof TerraMsgRevokeAuthorization) {
+    if (msg instanceof TerraMsgRevokeAuthorization || msg instanceof LegacyMsgRevokeAuthorization) {
       return new MsgRevokeAuthorization({
         granter: msg.granter,
         grantee: msg.grantee,
-        authorization_msg_type: msg.authorization_msg_type,
+        authorization_msg_type:
+          msg instanceof TerraMsgRevokeAuthorization ? msg.msg_type_url : msg.authorization_msg_type,
       })
     }
 

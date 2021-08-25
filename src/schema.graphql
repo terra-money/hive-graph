@@ -108,9 +108,10 @@ type CommunityPoolSpendContent implements ProposalContent {
 
 type ContractInfo {
   address: String!
+  admin: String
   code_id: Int!
   init_msg: JSON!
-  migratable: Boolean!
+  migratable: Boolean
   owner: String!
 }
 
@@ -292,6 +293,11 @@ type MsgBeginRedelegate {
   validator_src_address: String!
 }
 
+type MsgClearContractAdmin {
+  admin: String!
+  contract: String!
+}
+
 type MsgCreateValidator {
   commission: CommissionRates!
   delegator_address: String!
@@ -360,23 +366,30 @@ type MsgFundCommunityPool {
 
 type MsgGrantAuthorization {
   authorization: AuthorizationUnion!
+  expiration: String!
   grantee: String!
   granter: String!
-  period: String!
 }
 
 type MsgInstantiateContract {
+  admin: String
   code_id: Int!
   init_coins: [Coin!]!
   init_msg: JSON!
-  migratable: Boolean!
+  migratable: Boolean
   owner: String!
+}
+
+type MsgMigrateCode {
+  code_id: Int!
+  sender: String!
+  wasm_byte_code: String!
 }
 
 type MsgMigrateContract {
   contract: String!
   migrate_msg: JSON!
-  new_code_id: Float!
+  new_code_id: Int!
   owner: String!
 }
 
@@ -426,10 +439,16 @@ type MsgSwapSend {
   to_address: String!
 }
 
-union MsgUnion = MsgAggregateExchangeRatePrevote | MsgAggregateExchangeRateVote | MsgBeginRedelegate | MsgCreateValidator | MsgDelegate | MsgDelegateFeedConsent | MsgDeposit | MsgEditValidator | MsgExchangeRatePrevote | MsgExchangeRateVote | MsgExecAuthorized | MsgExecuteContract | MsgFundCommunityPool | MsgGrantAuthorization | MsgInstantiateContract | MsgMigrateContract | MsgModifyWithdrawAddress | MsgMultiSend | MsgRevokeAuthorization | MsgSend | MsgStoreCode | MsgSubmitProposal | MsgSwap | MsgSwapSend | MsgUnjail | MsgUpdateContractOwner | MsgVote | MsgWithdrawDelegationReward | MsgWithdrawValidatorCommission
+union MsgUnion = MsgAggregateExchangeRatePrevote | MsgAggregateExchangeRateVote | MsgBeginRedelegate | MsgClearContractAdmin | MsgCreateValidator | MsgDelegate | MsgDelegateFeedConsent | MsgDeposit | MsgEditValidator | MsgExchangeRatePrevote | MsgExchangeRateVote | MsgExecAuthorized | MsgExecuteContract | MsgFundCommunityPool | MsgGrantAuthorization | MsgInstantiateContract | MsgMigrateCode | MsgMigrateContract | MsgModifyWithdrawAddress | MsgMultiSend | MsgRevokeAuthorization | MsgSend | MsgStoreCode | MsgSubmitProposal | MsgSwap | MsgSwapSend | MsgUnjail | MsgUpdateContractAdmin | MsgUpdateContractOwner | MsgVote | MsgWithdrawDelegationReward | MsgWithdrawValidatorCommission
 
 type MsgUnjail {
   address: String!
+}
+
+type MsgUpdateContractAdmin {
+  admin: String!
+  contract: String!
+  new_admin: String!
 }
 
 type MsgUpdateContractOwner {
@@ -786,8 +805,8 @@ type TxInfo {
 
 type TxLog {
   events: [TxEventLog!]!
-  log: String!
-  msg_index: Int!
+  log: String
+  msg_index: Int
 }
 
 type UnbondingDelegation {

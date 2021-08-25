@@ -1,15 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import {
-  AccAddress,
-  InjectTerraLCDClient,
-  TerraLCDClient,
-  ValAddress,
-  Delegation as TerraDelegation,
-  UnbondingDelegation as TerraUnbondingDelegation,
-} from 'nestjs-terra'
+import { Delegation as TerraDelegation, UnbondingDelegation as TerraUnbondingDelegation } from 'nestjs-terra'
+import { Delegation as LegacyTerraDelegation } from 'nestjs-terra-legacy'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, StakingParams, Validator } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 import { Delegation, Redelegation, StakingPool, UnbondingDelegation, UnbondingDelegationEntry } from './models'
 
 @Injectable()
@@ -17,11 +12,10 @@ export class StakingService {
   constructor(
     @InjectPinoLogger(StakingService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  private fromTerraDelegation(delegation: TerraDelegation): Delegation {
+  private fromTerraDelegation(delegation: TerraDelegation | LegacyTerraDelegation): Delegation {
     return {
       delegator_address: delegation.delegator_address,
       validator_address: delegation.validator_address,
@@ -43,9 +37,9 @@ export class StakingService {
     }
   }
 
-  public async delegations(delegator?: AccAddress, validator?: ValAddress): Promise<Delegation[]> {
+  public async delegations(delegator?: string, validator?: string, height?: number): Promise<Delegation[]> {
     try {
-      const delegations = await this.terraClient.staking.delegations(delegator, validator)
+      const delegations = await this.lcdService.getLCDClient(height).staking.delegations(delegator, validator)
 
       return delegations.map<Delegation>(this.fromTerraDelegation)
     } catch (err) {
@@ -55,9 +49,9 @@ export class StakingService {
     }
   }
 
-  public async delegation(delegator: AccAddress, validator: ValAddress): Promise<Delegation | null> {
+  public async delegation(delegator: string, validator: string, height?: number): Promise<Delegation | null> {
     try {
-      const delegation = await this.terraClient.staking.delegation(delegator, validator)
+      const delegation = await this.lcdService.getLCDClient(height).staking.delegation(delegator, validator)
 
       if (!delegation) {
         return null
@@ -76,9 +70,13 @@ export class StakingService {
     }
   }
 
-  public async unbondingDelegations(delegator?: AccAddress, validator?: ValAddress): Promise<UnbondingDelegation[]> {
+  public async unbondingDelegations(
+    delegator?: string,
+    validator?: string,
+    height?: number,
+  ): Promise<UnbondingDelegation[]> {
     try {
-      const delegations = await this.terraClient.staking.unbondingDelegations(delegator, validator)
+      const delegations = await this.lcdService.getLCDClient(height).staking.unbondingDelegations(delegator, validator)
 
       return delegations.map<UnbondingDelegation>(this.fromTerraUnbondingDelegation)
     } catch (err) {
@@ -89,11 +87,12 @@ export class StakingService {
   }
 
   public async unbondingDelegation(
-    delegator?: AccAddress,
-    validator?: ValAddress,
+    delegator?: string,
+    validator?: string,
+    height?: number,
   ): Promise<UnbondingDelegation | null> {
     try {
-      const delegation = await this.terraClient.staking.unbondingDelegation(delegator, validator)
+      const delegation = await this.lcdService.getLCDClient(height).staking.unbondingDelegation(delegator, validator)
 
       if (!delegation) {
         return null
@@ -113,12 +112,15 @@ export class StakingService {
   }
 
   public async redelegations(
-    delegator?: AccAddress,
-    validatorSrc?: ValAddress,
-    validatorDst?: ValAddress,
+    delegator?: string,
+    validatorSrc?: string,
+    validatorDst?: string,
+    height?: number,
   ): Promise<Redelegation[]> {
     try {
-      const redelegations = await this.terraClient.staking.redelegations(delegator, validatorSrc, validatorDst)
+      const redelegations = await this.lcdService
+        .getLCDClient(height)
+        .staking.redelegations(delegator, validatorSrc, validatorDst)
 
       return redelegations.map<Redelegation>((redelegation) => ({
         delegator_address: redelegation.delegator_address,
@@ -139,9 +141,9 @@ export class StakingService {
     }
   }
 
-  public async bondedValidators(delegator: AccAddress): Promise<Validator[]> {
+  public async bondedValidators(delegator: string, height?: number): Promise<Validator[]> {
     try {
-      const validators = await this.terraClient.staking.bondedValidators(delegator)
+      const validators = await this.lcdService.getLCDClient(height).staking.bondedValidators(delegator)
 
       return validators.map<Validator>(Validator.fromTerraValidator)
     } catch (err) {
@@ -151,9 +153,9 @@ export class StakingService {
     }
   }
 
-  public async validators(): Promise<Validator[]> {
+  public async validators(height?: number): Promise<Validator[]> {
     try {
-      const validators = await this.terraClient.staking.validators()
+      const validators = await this.lcdService.getLCDClient(height).staking.validators()
 
       return validators.map<Validator>(Validator.fromTerraValidator)
     } catch (err) {
@@ -163,9 +165,9 @@ export class StakingService {
     }
   }
 
-  public async validator(validator: ValAddress): Promise<Validator | null> {
+  public async validator(validator: string, height?: number): Promise<Validator | null> {
     try {
-      const data = await this.terraClient.staking.validator(validator)
+      const data = await this.lcdService.getLCDClient(height).staking.validator(validator)
 
       if (!data) {
         return null
@@ -179,9 +181,9 @@ export class StakingService {
     }
   }
 
-  public async pool(): Promise<StakingPool> {
+  public async pool(height?: number): Promise<StakingPool> {
     try {
-      const pool = await this.terraClient.staking.pool()
+      const pool = await this.lcdService.getLCDClient(height).staking.pool()
 
       return {
         bonded_tokens: Coin.fromTerraCoin(pool.bonded_tokens),
@@ -194,9 +196,9 @@ export class StakingService {
     }
   }
 
-  public async parameters(): Promise<StakingParams> {
+  public async parameters(height?: number): Promise<StakingParams> {
     try {
-      const params = await this.terraClient.staking.parameters()
+      const params = await this.lcdService.getLCDClient(height).staking.parameters()
 
       return {
         unbonding_time: params.unbonding_time.toString(),

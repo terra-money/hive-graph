@@ -1,21 +1,21 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { AccAddress, InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
+import { AccAddress } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class BankService {
   constructor(
     @InjectPinoLogger(BankService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async balance(address: AccAddress): Promise<Coin[]> {
+  public async balance(address: AccAddress, height?: number): Promise<Coin[]> {
     try {
-      const balance = await this.terraClient.bank.balance(address)
+      const balance = await this.lcdService.getLCDClient(height).bank.balance(address)
 
       return Coin.fromTerraCoins(balance)
     } catch (err) {

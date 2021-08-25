@@ -1,11 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import {
-  InjectTerraLCDClient,
-  TerraLCDClient,
-  Proposal as TerraProposal,
-  MsgDeposit as TerraMsgDeposit,
-} from 'nestjs-terra'
+import { Proposal as TerraProposal } from 'nestjs-terra'
+import { Proposal as LegacyTerraProposal } from 'nestjs-terra-legacy'
 import { LCDClientError } from 'src/common/errors'
 import {
   Coin,
@@ -17,6 +13,7 @@ import {
   VotingParams,
   ProposalContent,
 } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 import { Tally, Proposal } from './models'
 
 @Injectable()
@@ -24,11 +21,10 @@ export class GovService {
   constructor(
     @InjectPinoLogger(GovService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  private fromTerraProposal(proposal: TerraProposal): Proposal {
+  private fromTerraProposal(proposal: TerraProposal | LegacyTerraProposal): Proposal {
     let tally: Tally | undefined
 
     if (proposal.final_tally_result) {
@@ -53,9 +49,9 @@ export class GovService {
     }
   }
 
-  public async proposals(): Promise<Proposal[]> {
+  public async proposals(height?: number): Promise<Proposal[]> {
     try {
-      const proposals = await this.terraClient.gov.proposals()
+      const proposals = await this.lcdService.getLCDClient(height).gov.proposals()
 
       return proposals.map<Proposal>((proposal) => this.fromTerraProposal(proposal))
     } catch (err) {
@@ -65,9 +61,9 @@ export class GovService {
     }
   }
 
-  public async proposal(proposalId: number): Promise<Proposal> {
+  public async proposal(proposalId: number, height?: number): Promise<Proposal> {
     try {
-      const proposal = await this.terraClient.gov.proposal(proposalId)
+      const proposal = await this.lcdService.getLCDClient(height).gov.proposal(proposalId)
 
       return this.fromTerraProposal(proposal)
     } catch (err) {
@@ -77,9 +73,9 @@ export class GovService {
     }
   }
 
-  public async proposer(proposalId: number): Promise<string> {
+  public async proposer(proposalId: number, height?: number): Promise<string> {
     try {
-      return this.terraClient.gov.proposer(proposalId)
+      return this.lcdService.getLCDClient(height).gov.proposer(proposalId)
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d proposer.', proposalId)
 
@@ -89,13 +85,16 @@ export class GovService {
 
   public async deposits(proposalId: number): Promise<MsgDeposit[]> {
     try {
-      const deposits = (await this.terraClient.gov.deposits(proposalId)) as TerraMsgDeposit[]
+      // TODO: NEED A FIX IN TERRAJS
+      // const deposits = (await this.lcdService.getLCDClient(height).gov.deposits(proposalId)) as TerraMsgDeposit[]
 
-      return deposits.map<MsgDeposit>((deposit) => ({
-        proposal_id: deposit.proposal_id,
-        depositor: deposit.depositor,
-        amount: Coin.fromTerraCoins(deposit.amount),
-      }))
+      // return deposits.map<MsgDeposit>((deposit) => ({
+      //   proposal_id: deposit.proposal_id,
+      //   depositor: deposit.depositor,
+      //   amount: Coin.fromTerraCoins(deposit.amount),
+      // }))
+
+      return []
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d deposits.', proposalId)
 
@@ -105,7 +104,8 @@ export class GovService {
 
   public async votes(proposalId: number): Promise<MsgVote[]> {
     try {
-      // TODO: PENDING FOR FIX IN TERRA.JS
+      // TODO: NEED A FIX IN TERRAJS
+      // const votes = await this.lcdService.getLCDClient(height).gov.votes(proposalId)
       return []
     } catch (err) {
       this.logger.error({ err }, 'Error getting proposal %d votes.', proposalId)
@@ -114,9 +114,9 @@ export class GovService {
     }
   }
 
-  public async tally(proposalId: number): Promise<Tally> {
+  public async tally(proposalId: number, height?: number): Promise<Tally> {
     try {
-      const tally = await this.terraClient.gov.tally(proposalId)
+      const tally = await this.lcdService.getLCDClient(height).gov.tally(proposalId)
 
       return new Tally(
         tally.yes.toNumber(),
@@ -131,9 +131,9 @@ export class GovService {
     }
   }
 
-  public async depositParameters(): Promise<DepositParams> {
+  public async depositParameters(height?: number): Promise<DepositParams> {
     try {
-      const depositParameters = await this.terraClient.gov.depositParameters()
+      const depositParameters = await this.lcdService.getLCDClient(height).gov.depositParameters()
 
       return {
         min_deposit: Coin.fromTerraCoins(depositParameters.min_deposit),
@@ -146,9 +146,9 @@ export class GovService {
     }
   }
 
-  public async votingParameters(): Promise<VotingParams> {
+  public async votingParameters(height?: number): Promise<VotingParams> {
     try {
-      const votingParameters = await this.terraClient.gov.votingParameters()
+      const votingParameters = await this.lcdService.getLCDClient(height).gov.votingParameters()
 
       return {
         voting_period: votingParameters.voting_period,
@@ -160,13 +160,23 @@ export class GovService {
     }
   }
 
-  public async tallyParameters(): Promise<TallyParams> {
+  public async tallyParameters(height?: number): Promise<TallyParams> {
     try {
-      const votingParameters = await this.terraClient.gov.tallyParameters()
+      const votingParameters = await this.lcdService.getLCDClient(height).gov.tallyParameters()
+      const quorum = votingParameters.quorum.toString()
+      const threshold = votingParameters.threshold.toString()
+
+      if ('veto_threshold' in votingParameters) {
+        return {
+          quorum,
+          threshold,
+          veto: votingParameters?.veto_threshold.toString(),
+        }
+      }
 
       return {
-        quorum: votingParameters.quorum.toString(),
-        threshold: votingParameters.threshold.toString(),
+        quorum,
+        threshold,
         veto: votingParameters.veto.toString(),
       }
     } catch (err) {
@@ -176,12 +186,12 @@ export class GovService {
     }
   }
 
-  public async parameters(): Promise<GovParams> {
+  public async parameters(height?: number): Promise<GovParams> {
     try {
       const [deposit_params, voting_params, tally_params] = await Promise.all([
-        this.depositParameters(),
-        this.votingParameters(),
-        this.tallyParameters(),
+        this.depositParameters(height),
+        this.votingParameters(height),
+        this.tallyParameters(height),
       ])
 
       return {
@@ -190,7 +200,7 @@ export class GovService {
         tally_params,
       }
     } catch (err) {
-      this.logger.error({ err }, 'Error getting parameters.')
+      this.logger.error({ err }, 'Error getting Gov parameters.')
 
       throw new LCDClientError(err)
     }

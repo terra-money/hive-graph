@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
+import { SlashingParams as LegacyTerraSlashingParams, SlashingAPI as LegacySlashingAPI } from 'nestjs-terra-legacy'
 import { LCDClientError } from 'src/common/errors'
 import { SlashingParams } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 import { SigningInfo } from './models'
 
 @Injectable()
@@ -10,13 +11,12 @@ export class SlashingService {
   constructor(
     @InjectPinoLogger(SlashingService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async signingInfos(valConsPubKey?: string): Promise<SigningInfo[]> {
+  public async signingInfos(valConsPubKey?: string, height?: number): Promise<SigningInfo[]> {
     try {
-      const infos = await this.terraClient.slashing.signingInfos(valConsPubKey)
+      const infos = await this.lcdService.getLCDClient(height).slashing.signingInfos(valConsPubKey)
 
       return infos.map<SigningInfo>((info) => ({
         address: info.address,
@@ -33,12 +33,19 @@ export class SlashingService {
     }
   }
 
-  public async parameters(): Promise<SlashingParams> {
+  public async parameters(height?: number): Promise<SlashingParams> {
     try {
-      const params = await this.terraClient.slashing.parameters()
+      let maxEvidenceAge: number | null = null
+      const slashingApi = this.lcdService.getLCDClient(height).slashing
+      const params = await slashingApi.parameters()
+
+      if (slashingApi instanceof LegacySlashingAPI) {
+        const value = (params as LegacyTerraSlashingParams)?.max_evidence_age
+        maxEvidenceAge = !isNaN(value) ? value : 0
+      }
 
       return {
-        max_evidence_age: !isNaN(params.max_evidence_age) ? params.max_evidence_age : 0,
+        max_evidence_age: maxEvidenceAge,
         signed_blocks_window: params.signed_blocks_window,
         min_signed_per_window: params.min_signed_per_window.toString(),
         downtime_jail_duration: params.downtime_jail_duration.toString(),

@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql'
 import { ParamChanges } from 'nestjs-terra'
+import { ParamChanges as LegacyParamChanges } from 'nestjs-terra-legacy'
 import { ProposalContent } from '../interfaces'
 import {
   Coin,
@@ -28,6 +29,8 @@ export enum ParameterChangesSubspaces {
   WASM = 'wasm',
 }
 
+export type TerraParamChangesType = ParamChanges | LegacyParamChanges
+
 @ObjectType({
   implements: () => [ProposalContent],
 })
@@ -39,13 +42,13 @@ export class ParameterChangeContent implements ProposalContent {
   @Field(() => ParameterChangesUnion, { nullable: true })
   changes?: ParameterChangesType | null
 
-  constructor(title: string, description: string, changes: ParamChanges) {
+  constructor(title: string, description: string, changes: TerraParamChangesType) {
     this.title = title
     this.description = description
     this.changes = this.fromTerraParamChange(changes)
   }
 
-  private fromTerraParamChange(changes: ParamChanges): ParameterChangesType | null {
+  private fromTerraParamChange(changes: TerraParamChangesType): ParameterChangesType | null {
     const subspaces = Object.keys(changes) ?? []
 
     if (subspaces.length > 1) {
@@ -82,7 +85,7 @@ export class ParameterChangeContent implements ProposalContent {
     }
   }
 
-  private parseDistributionChange(changes: ParamChanges): DistributionParams {
+  private parseDistributionChange(changes: TerraParamChangesType): DistributionParams {
     const distribution = changes?.distribution ?? {}
     const distributionResult = new DistributionParams()
 
@@ -105,7 +108,7 @@ export class ParameterChangeContent implements ProposalContent {
     return distributionResult
   }
 
-  private parseGovParams(changes: ParamChanges): GovParams {
+  private parseGovParams(changes: TerraParamChangesType): GovParams {
     const gov = changes?.gov ?? {}
     const govResult = new GovParams()
 
@@ -126,33 +129,44 @@ export class ParameterChangeContent implements ProposalContent {
       govResult.tally_params = {
         quorum: gov.tallyparams.quorum.toString(),
         threshold: gov.tallyparams.threshold.toString(),
-        veto: gov.tallyparams.veto.toString(),
+        veto:
+          'veto_threshold' in gov.tallyparams
+            ? gov.tallyparams.veto_threshold.toString()
+            : gov.tallyparams.veto.toString(),
       }
     }
 
     return govResult
   }
 
-  private parseMarketChanges(changes: ParamChanges): MarketParams {
+  private parseMarketChanges(changes: TerraParamChangesType): MarketParams {
     const market = changes?.market ?? {}
     const marketResult = new MarketParams()
 
-    if (market.poolrecoveryperiod) {
+    if ('poolrecoveryperiod' in market && market.poolrecoveryperiod) {
       marketResult.pool_recovery_period = market.poolrecoveryperiod
     }
 
-    if (market.basepool) {
+    if ('PoolRecoveryPeriod' in market && market.PoolRecoveryPeriod) {
+      marketResult.pool_recovery_period = market.PoolRecoveryPeriod
+    }
+
+    if ('basepool' in market && market.basepool) {
       marketResult.base_pool = market.basepool.toString()
     }
 
-    if (market.minstabilityspread) {
+    if ('BasePool' in market && market.BasePool) {
+      marketResult.base_pool = market.BasePool.toString()
+    }
+
+    if ('minstabilityspread' in market && market.minstabilityspread) {
       marketResult.min_stability_spread = market.minstabilityspread.toString()
     }
 
     return marketResult
   }
 
-  private parseMintChanges(changes: ParamChanges): MintingParams {
+  private parseMintChanges(changes: TerraParamChangesType): MintingParams {
     const mint = changes?.mint ?? {}
     const mintResult = new MintingParams()
 
@@ -183,49 +197,84 @@ export class ParameterChangeContent implements ProposalContent {
     return mintResult
   }
 
-  private parseOracleChanges(changes: ParamChanges): OracleParams {
+  private parseOracleChanges(changes: TerraParamChangesType): OracleParams {
     const oracle = changes?.oracle ?? {}
     const oracleResult = new OracleParams()
 
-    if (oracle.voteperiod) {
+    if ('voteperiod' in oracle && oracle.voteperiod) {
       oracleResult.vote_period = oracle.voteperiod
     }
 
-    if (oracle.votethreshold) {
+    if ('votethreshold' in oracle && oracle.votethreshold) {
       oracleResult.vote_threshold = oracle.votethreshold.toString()
     }
 
-    if (oracle.rewardband) {
+    if ('rewardband' in oracle && oracle.rewardband) {
       oracleResult.reward_band = oracle.rewardband.toString()
     }
 
-    if (oracle.rewarddistributionwindow) {
+    if ('rewarddistributionwindow' in oracle && oracle.rewarddistributionwindow) {
       oracleResult.reward_distribution_window = oracle.rewarddistributionwindow
     }
 
-    if (oracle.whitelist && oracle.whitelist.length > 0) {
+    if ('whitelist' in oracle && oracle.whitelist && oracle.whitelist.length > 0) {
       oracleResult.whitelist = oracle.whitelist.map<OracleWhitelist>((item) => ({
         name: item.name,
         tobin_tax: item.tobin_tax.toString(),
       }))
     }
 
-    if (oracle.slashfraction) {
+    if ('slashfraction' in oracle && oracle.slashfraction) {
       oracleResult.slash_fraction = oracle.slashfraction.toString()
     }
 
-    if (oracle.slashwindow) {
+    if ('slashwindow' in oracle && oracle.slashwindow) {
       oracleResult.slash_window = oracle.slashwindow
     }
 
-    if (oracle.minvalidperwindow) {
+    if ('minvalidperwindow' in oracle && oracle.minvalidperwindow) {
       oracleResult.min_valid_per_window = oracle.minvalidperwindow.toString()
+    }
+
+    if ('VotePeriod' in oracle && oracle.VotePeriod) {
+      oracleResult.vote_period = oracle.VotePeriod
+    }
+
+    if ('VoteThreshold' in oracle && oracle.VoteThreshold) {
+      oracleResult.vote_threshold = oracle.VoteThreshold.toString()
+    }
+
+    if ('RewardBand' in oracle && oracle.RewardBand) {
+      oracleResult.reward_band = oracle.RewardBand.toString()
+    }
+
+    if ('RewardDistributionWindow' in oracle && oracle.RewardDistributionWindow) {
+      oracleResult.reward_distribution_window = oracle.RewardDistributionWindow
+    }
+
+    if ('Whitelist' in oracle && oracle.Whitelist && oracle.Whitelist.length > 0) {
+      oracleResult.whitelist = oracle.Whitelist.map<OracleWhitelist>((item) => ({
+        name: item.name,
+        tobin_tax: item.tobin_tax.toString(),
+      }))
+    }
+
+    if ('SlashFraction' in oracle && oracle.SlashFraction) {
+      oracleResult.slash_fraction = oracle.SlashFraction.toString()
+    }
+
+    if ('SlashWindow' in oracle && oracle.SlashWindow) {
+      oracleResult.slash_window = oracle.SlashWindow
+    }
+
+    if ('MinValidPerWindow' in oracle && oracle.MinValidPerWindow) {
+      oracleResult.min_valid_per_window = oracle.MinValidPerWindow.toString()
     }
 
     return oracleResult
   }
 
-  private parseSlashingChanges(changes: ParamChanges): SlashingParams {
+  private parseSlashingChanges(changes: TerraParamChangesType): SlashingParams {
     const slashing = changes?.slashing ?? {}
     const slashingResult = new SlashingParams()
 
@@ -255,7 +304,7 @@ export class ParameterChangeContent implements ProposalContent {
 
     return slashingResult
   }
-  private parseStakingChanges(changes: ParamChanges): StakingParams {
+  private parseStakingChanges(changes: TerraParamChangesType): StakingParams {
     const staking = changes?.staking ?? {}
     const stakingResult = new StakingParams()
 
@@ -278,11 +327,11 @@ export class ParameterChangeContent implements ProposalContent {
     return stakingResult
   }
 
-  private parseTreasuryChanges(changes: ParamChanges): TreasuryParams {
+  private parseTreasuryChanges(changes: TerraParamChangesType): TreasuryParams {
     const treasury = changes?.treasury ?? {}
     const treasuryResult = new TreasuryParams()
 
-    if (treasury.taxpolicy) {
+    if ('taxpolicy' in treasury && treasury.taxpolicy) {
       treasuryResult.tax_policy = {
         rate_min: treasury.taxpolicy.rate_min.toString(),
         rate_max: treasury.taxpolicy.rate_max.toString(),
@@ -291,7 +340,7 @@ export class ParameterChangeContent implements ProposalContent {
       }
     }
 
-    if (treasury.rewardpolicy) {
+    if ('rewardpolicy' in treasury && treasury.rewardpolicy) {
       treasuryResult.reward_policy = {
         rate_min: treasury.rewardpolicy.rate_min.toString(),
         rate_max: treasury.rewardpolicy.rate_max.toString(),
@@ -300,43 +349,93 @@ export class ParameterChangeContent implements ProposalContent {
       }
     }
 
-    if (treasury.seigniorageburdentarget) {
+    if ('seigniorageburdentarget' in treasury && treasury.seigniorageburdentarget) {
       treasuryResult.seigniorage_burden_target = treasury.seigniorageburdentarget.toString()
     }
 
-    if (treasury.miningincrement) {
+    if ('miningincrement' in treasury && treasury.miningincrement) {
       treasuryResult.mining_increment = treasury.miningincrement.toString()
     }
 
-    if (treasury.windowshort) {
+    if ('windowshort' in treasury && treasury.windowshort) {
       treasuryResult.window_short = treasury.windowshort
     }
 
-    if (treasury.windowlong) {
+    if ('windowlong' in treasury && treasury.windowlong) {
       treasuryResult.window_long = treasury.windowlong
     }
 
-    if (treasury.windowprobation) {
+    if ('windowprobation' in treasury && treasury.windowprobation) {
       treasuryResult.window_probation = treasury.windowprobation
+    }
+
+    if ('TaxPolicy' in treasury && treasury.TaxPolicy) {
+      treasuryResult.tax_policy = {
+        rate_min: treasury.TaxPolicy.rate_min.toString(),
+        rate_max: treasury.TaxPolicy.rate_max.toString(),
+        cap: Coin.fromTerraCoin(treasury.TaxPolicy.cap),
+        change_max: treasury.TaxPolicy.change_rate_max.toString(),
+      }
+    }
+
+    if ('RewardPolicy' in treasury && treasury.RewardPolicy) {
+      treasuryResult.reward_policy = {
+        rate_min: treasury.RewardPolicy.rate_min.toString(),
+        rate_max: treasury.RewardPolicy.rate_max.toString(),
+        cap: Coin.fromTerraCoin(treasury.RewardPolicy.cap),
+        change_max: treasury.RewardPolicy.change_rate_max.toString(),
+      }
+    }
+
+    if ('SeigniorageBurdenTarget' in treasury && treasury.SeigniorageBurdenTarget) {
+      treasuryResult.seigniorage_burden_target = treasury.SeigniorageBurdenTarget.toString()
+    }
+
+    if ('MiningIncrement' in treasury && treasury.MiningIncrement) {
+      treasuryResult.mining_increment = treasury.MiningIncrement.toString()
+    }
+
+    if ('WindowShort' in treasury && treasury.WindowShort) {
+      treasuryResult.window_short = treasury.WindowShort
+    }
+
+    if ('WindowLong' in treasury && treasury.WindowLong) {
+      treasuryResult.window_long = treasury.WindowLong
+    }
+
+    if ('WindowProbation' in treasury && treasury.WindowProbation) {
+      treasuryResult.window_probation = treasury.WindowProbation
     }
 
     return treasuryResult
   }
 
-  private parseWasmParamChanges(changes: ParamChanges): WasmParams {
+  private parseWasmParamChanges(changes: TerraParamChangesType): WasmParams {
     const wasm = changes?.wasm ?? {}
     const wasmResult = new WasmParams()
 
-    if (wasm.maxcontractsize) {
+    if ('maxcontractsize' in wasm && wasm.maxcontractsize) {
       wasmResult.max_contract_size = wasm.maxcontractsize
     }
 
-    if (wasm.maxcontractgas) {
+    if ('maxcontractgas' in wasm && wasm.maxcontractgas) {
       wasmResult.max_contract_gas = wasm.maxcontractgas
     }
 
-    if (wasm.maxcontractmsgsize) {
+    if ('maxcontractmsgsize' in wasm && wasm.maxcontractmsgsize) {
       wasmResult.max_contract_msg_size = wasm.maxcontractmsgsize
+    }
+
+    if ('MaxContractSize' in wasm && wasm.MaxContractSize) {
+      wasmResult.max_contract_size = wasm.MaxContractSize
+    }
+
+    if ('MaxContractGas' in wasm && wasm.MaxContractGas) {
+      wasmResult.max_contract_gas = wasm.MaxContractGas
+    }
+
+    if ('MaxContractMsgSize' in wasm && wasm.MaxContractMsgSize) {
+      wasmResult.max_contract_msg_size = wasm.MaxContractMsgSize
     }
 
     return wasmResult

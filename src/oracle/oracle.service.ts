@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
-import { Denom } from 'src/common/enums'
+import { OracleAPI } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, OracleWhitelist, OracleParams } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 import {
   AggregateExchangeRatePrevote,
   AggregateExchangeRateVote,
@@ -16,13 +16,18 @@ export class OracleService {
   constructor(
     @InjectPinoLogger(OracleService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async votes(denom?: Denom, validator?: ValAddress): Promise<ExchangeRateVote[]> {
+  public async votes(denom?: string, validator?: string, height?: number): Promise<ExchangeRateVote[]> {
     try {
-      const votes = await this.terraClient.oracle.votes(denom, validator)
+      const oracleApi = this.lcdService.getLCDClient(height).oracle
+
+      if (oracleApi instanceof OracleAPI) {
+        throw new Error('The OracleAPI do not implement votes endpoint.')
+      }
+
+      const votes = await oracleApi.votes(denom, validator)
 
       return votes.map<ExchangeRateVote>((vote) => ({
         exchange_rate: vote.exchange_rate.toString(),
@@ -36,9 +41,15 @@ export class OracleService {
     }
   }
 
-  public async prevotes(denom?: Denom, validator?: ValAddress): Promise<ExchangeRatePrevote[]> {
+  public async prevotes(denom?: string, validator?: string, height?: number): Promise<ExchangeRatePrevote[]> {
     try {
-      const prevotes = await this.terraClient.oracle.prevotes(denom, validator)
+      const oracleApi = this.lcdService.getLCDClient(height).oracle
+
+      if (oracleApi instanceof OracleAPI) {
+        throw new Error('The OracleAPI do not implement prevotes endpoint.')
+      }
+
+      const prevotes = await oracleApi.prevotes(denom, validator)
 
       return prevotes.map<ExchangeRatePrevote>((prevote) => ({
         hash: prevote.hash,
@@ -53,9 +64,9 @@ export class OracleService {
     }
   }
 
-  public async exchangeRates(): Promise<Coin[]> {
+  public async exchangeRates(height?: number): Promise<Coin[]> {
     try {
-      const rates = await this.terraClient.oracle.exchangeRates()
+      const rates = await this.lcdService.getLCDClient(height).oracle.exchangeRates()
 
       return Coin.fromTerraCoins(rates)
     } catch (err) {
@@ -68,9 +79,9 @@ export class OracleService {
     }
   }
 
-  public async exchangeRate(denom: Denom): Promise<Coin | null> {
+  public async exchangeRate(denom: string, height?: number): Promise<Coin | null> {
     try {
-      const rate = await this.terraClient.oracle.exchangeRate(denom)
+      const rate = await this.lcdService.getLCDClient(height).oracle.exchangeRate(denom)
 
       if (!rate) {
         return null
@@ -87,9 +98,9 @@ export class OracleService {
     }
   }
 
-  public async activeDenoms(): Promise<string[]> {
+  public async activeDenoms(height?: number): Promise<string[]> {
     try {
-      return this.terraClient.oracle.activeDenoms()
+      return this.lcdService.getLCDClient(height).oracle.activeDenoms()
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current list of active denominations.')
 
@@ -97,9 +108,9 @@ export class OracleService {
     }
   }
 
-  public async feederAddress(validator: ValAddress): Promise<AccAddress> {
+  public async feederAddress(validator: string, height?: number): Promise<string> {
     try {
-      return this.terraClient.oracle.feederAddress(validator)
+      return this.lcdService.getLCDClient(height).oracle.feederAddress(validator)
     } catch (err) {
       this.logger.error(
         { err },
@@ -111,9 +122,9 @@ export class OracleService {
     }
   }
 
-  public async misses(validator: ValAddress): Promise<number> {
+  public async misses(validator: string, height?: number): Promise<number> {
     try {
-      return this.terraClient.oracle.misses(validator)
+      return this.lcdService.getLCDClient(height).oracle.misses(validator)
     } catch (err) {
       this.logger.error(
         { err },
@@ -124,9 +135,9 @@ export class OracleService {
     }
   }
 
-  public async aggregatePrevote(validator: ValAddress): Promise<AggregateExchangeRatePrevote> {
+  public async aggregatePrevote(validator: string, height?: number): Promise<AggregateExchangeRatePrevote> {
     try {
-      const aggregatePrevote = await this.terraClient.oracle.aggregatePrevote(validator)
+      const aggregatePrevote = await this.lcdService.getLCDClient(height).oracle.aggregatePrevote(validator)
 
       return {
         hash: aggregatePrevote.hash,
@@ -140,9 +151,9 @@ export class OracleService {
     }
   }
 
-  public async aggregateVote(validator: ValAddress): Promise<AggregateExchangeRateVote> {
+  public async aggregateVote(validator: string, height?: number): Promise<AggregateExchangeRateVote> {
     try {
-      const aggregateVote = await this.terraClient.oracle.aggregateVote(validator)
+      const aggregateVote = await this.lcdService.getLCDClient(height).oracle.aggregateVote(validator)
 
       return {
         exchange_rate_tuples: Coin.fromTerraCoins(aggregateVote.exchange_rate_tuples),
@@ -155,9 +166,9 @@ export class OracleService {
     }
   }
 
-  public async parameters(): Promise<OracleParams> {
+  public async parameters(height?: number): Promise<OracleParams> {
     try {
-      const params = await this.terraClient.oracle.parameters()
+      const params = await this.lcdService.getLCDClient(height).oracle.parameters()
 
       return {
         vote_period: params.vote_period,

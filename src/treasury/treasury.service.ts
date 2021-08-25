@@ -1,22 +1,21 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
 import { Denom } from 'src/common/enums'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, TreasuryParams } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class TreasuryService {
   constructor(
     @InjectPinoLogger(TreasuryService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async taxCap(denom: Denom): Promise<Coin> {
+  public async taxCap(denom: Denom, height?: number): Promise<Coin> {
     try {
-      const tax = await this.terraClient.treasury.taxCap(denom)
+      const tax = await this.lcdService.getLCDClient(height).treasury.taxCap(denom)
 
       return Coin.fromTerraCoin(tax)
     } catch (err) {
@@ -28,7 +27,7 @@ export class TreasuryService {
 
   public async taxRate(height?: number): Promise<string> {
     try {
-      const tax = await this.terraClient.treasury.taxRate(height)
+      const tax = await this.lcdService.getLCDClient(height).treasury.taxRate(height)
 
       return tax.toString()
     } catch (err) {
@@ -38,9 +37,9 @@ export class TreasuryService {
     }
   }
 
-  public async rewardWeight(): Promise<string> {
+  public async rewardWeight(height?: number): Promise<string> {
     try {
-      const reward = await this.terraClient.treasury.rewardWeight()
+      const reward = await this.lcdService.getLCDClient(height).treasury.rewardWeight()
 
       return reward.toString()
     } catch (err) {
@@ -50,9 +49,9 @@ export class TreasuryService {
     }
   }
 
-  public async taxProceeds(): Promise<Coin[]> {
+  public async taxProceeds(height?: number): Promise<Coin[]> {
     try {
-      const proceeds = await this.terraClient.treasury.taxProceeds()
+      const proceeds = await this.lcdService.getLCDClient(height).treasury.taxProceeds()
 
       return Coin.fromTerraCoins(proceeds)
     } catch (err) {
@@ -62,9 +61,9 @@ export class TreasuryService {
     }
   }
 
-  public async seigniorageProceeds(): Promise<Coin> {
+  public async seigniorageProceeds(height?: number): Promise<Coin> {
     try {
-      const proceeds = await this.terraClient.treasury.seigniorageProceeds()
+      const proceeds = await this.lcdService.getLCDClient(height).treasury.seigniorageProceeds()
 
       return Coin.fromTerraCoin(proceeds)
     } catch (err) {
@@ -74,22 +73,28 @@ export class TreasuryService {
     }
   }
 
-  public async parameters(): Promise<TreasuryParams> {
+  public async parameters(height?: number): Promise<TreasuryParams> {
     try {
-      const params = await this.terraClient.treasury.parameters()
+      const params = await this.lcdService.getLCDClient(height).treasury.parameters()
 
       return {
         tax_policy: {
           rate_min: params.tax_policy.rate_min.toString(),
           rate_max: params.tax_policy.rate_max.toString(),
           cap: Coin.fromTerraCoin(params.tax_policy.cap),
-          change_max: params.tax_policy.change_max.toString(),
+          change_max:
+            'change_max' in params.tax_policy
+              ? params.tax_policy.change_max.toString()
+              : params.tax_policy.change_rate_max.toString(),
         },
         reward_policy: {
           rate_min: params.reward_policy.rate_min.toString(),
           rate_max: params.reward_policy.rate_max.toString(),
           cap: Coin.fromTerraCoin(params.reward_policy.cap),
-          change_max: params.reward_policy.change_max.toString(),
+          change_max:
+            'change_max' in params.reward_policy
+              ? params.reward_policy.change_max.toString()
+              : params.reward_policy.change_rate_max.toString(),
         },
         seigniorage_burden_target: params.seigniorage_burden_target.toString(),
         mining_increment: params.mining_increment.toString(),

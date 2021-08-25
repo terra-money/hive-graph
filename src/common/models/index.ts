@@ -1,4 +1,4 @@
-export { Coin } from './coin.model'
+export { Coin, TerraCoinsType, TerraCoinType } from './coin.model'
 export { OracleWhitelist } from './oracle-whitelist.model'
 export { SlashingParams } from './slashing-params.model'
 export { OracleParams } from './oracle-params.model'

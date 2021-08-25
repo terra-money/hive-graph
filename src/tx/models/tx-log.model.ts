@@ -20,12 +20,12 @@ export class TxEventLog {
 
 @ObjectType()
 export class TxLog {
-  @Field(() => Int)
-  msg_index!: number
+  @Field(() => Int, { nullable: true })
+  msg_index?: number | null
 
-  @Field()
-  log!: string
+  @Field(() => String, { nullable: true })
+  log?: string | string
 
   @Field(() => [TxEventLog])
-  events!: TxEventLog[]
+  events: TxEventLog[] = []
 }

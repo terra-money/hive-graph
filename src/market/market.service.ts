@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { Denom, InjectTerraLCDClient, TerraLCDClient, Coin as TerraCoin } from 'nestjs-terra'
+import { Coin as TerraCoin, MarketAPI } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, MarketParams } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class MarketService {
   constructor(
     @InjectPinoLogger(MarketService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async swapRate(offerCoin: Coin, askDenom: Denom): Promise<Coin> {
+  public async swapRate(offerCoin: Coin, askDenom: string, height?: number): Promise<Coin> {
     const { denom, amount } = offerCoin
 
     try {
-      const coin = await this.terraClient.market.swapRate(new TerraCoin(denom, amount), askDenom)
+      const coin = await this.lcdService.getLCDClient(height).market.swapRate(new TerraCoin(denom, amount), askDenom)
 
       return Coin.fromTerraCoin(coin)
     } catch (err) {
@@ -32,9 +32,16 @@ export class MarketService {
     }
   }
 
-  public async terraPoolDelta(): Promise<string> {
+  public async terraPoolDelta(height?: number): Promise<string> {
     try {
-      const delta = await this.terraClient.market.terraPoolDelta()
+      let delta
+      const marketApi = this.lcdService.getLCDClient(height).market
+
+      if (marketApi instanceof MarketAPI) {
+        delta = await marketApi.poolDelta()
+      } else {
+        delta = await marketApi.terraPoolDelta()
+      }
 
       return delta.toString()
     } catch (err) {
@@ -44,14 +51,15 @@ export class MarketService {
     }
   }
 
-  public async parameters(): Promise<MarketParams> {
+  public async parameters(height?: number): Promise<MarketParams> {
     try {
-      const params = await this.terraClient.market.parameters()
+      const params = await this.lcdService.getLCDClient(height).market.parameters()
 
       return {
         pool_recovery_period: params.pool_recovery_period,
         base_pool: params.base_pool.toString(),
-        min_stability_spread: params.min_spread.toString(),
+        min_stability_spread:
+          'min_spread' in params ? params.min_spread.toString() : params.min_stability_spread.toString(),
       }
     } catch (err) {
       this.logger.error({ err }, 'he current Market module parameters.')

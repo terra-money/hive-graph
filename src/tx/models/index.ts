@@ -36,5 +36,8 @@ export {
   MsgExecuteContract,
   MsgMigrateContract,
   MsgUpdateContractOwner,
+  MsgMigrateCode,
+  MsgUpdateContractAdmin,
+  MsgClearContractAdmin,
   WasmMsg,
 } from './wasm-msgs.model'

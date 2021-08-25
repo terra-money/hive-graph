@@ -1,5 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Authorization as TerraAuthorization, SendAuthorization as TerraSendAuthorization } from 'nestjs-terra'
+import {
+  Authorization as LegacyTerraAuthorization,
+  SendAuthorization as LegacyTerraSendAuthorization,
+} from 'nestjs-terra-legacy'
 import { Coin } from 'src/common/models'
 
 @ObjectType()
@@ -15,8 +19,10 @@ export class GenericAuthorization {
 }
 
 export class Authorization {
-  static fromTerra(authorization: TerraAuthorization): SendAuthorization | GenericAuthorization {
-    if (authorization instanceof TerraSendAuthorization) {
+  static fromTerra(
+    authorization: TerraAuthorization | LegacyTerraAuthorization,
+  ): SendAuthorization | GenericAuthorization {
+    if (authorization instanceof TerraSendAuthorization || authorization instanceof LegacyTerraSendAuthorization) {
       return {
         spend_limit: Coin.fromTerraCoins(authorization.spend_limit),
       }

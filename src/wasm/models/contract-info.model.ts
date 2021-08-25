@@ -15,6 +15,9 @@ export class ContractInfo {
   @Field(() => GraphQLJSON)
   init_msg!: Record<string, any>
 
-  @Field()
-  migratable!: boolean
+  @Field(() => String, { nullable: true })
+  admin?: string | null
+
+  @Field(() => Boolean, { nullable: true })
+  migratable?: boolean | null
 }

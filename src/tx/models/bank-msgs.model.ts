@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { BankMsg as TerraBankMsg, MsgMultiSend as TerraMsgMultiSend } from 'nestjs-terra'
+import { BankMsg as LegacyTerraBankMsg, MsgMultiSend as LegacyMsgMultiSend } from 'nestjs-terra-legacy'
 import { Coin } from 'src/common/models'
 
 @ObjectType()
@@ -41,15 +42,15 @@ export class MsgMultiSend {
 }
 
 export class BankMsg {
-  static fromTerraIOData(io: TerraMsgMultiSend.IO): IOData {
+  static fromTerraIOData(io: TerraMsgMultiSend.IO | LegacyMsgMultiSend.IO): IOData {
     return {
       address: io.address,
       coins: Coin.fromTerraCoins(io.coins),
     }
   }
 
-  static fromTerraMsg(msg: TerraBankMsg): MsgSend | MsgMultiSend {
-    if (msg instanceof TerraMsgMultiSend) {
+  static fromTerraMsg(msg: TerraBankMsg | LegacyTerraBankMsg): MsgSend | MsgMultiSend {
+    if (msg instanceof TerraMsgMultiSend || msg instanceof LegacyMsgMultiSend) {
       return new MsgMultiSend({
         inputs: msg.inputs.map<IOData>(BankMsg.fromTerraIOData),
         outputs: msg.outputs.map<IOData>(BankMsg.fromTerraIOData),

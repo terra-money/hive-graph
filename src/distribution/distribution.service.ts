@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { AccAddress, InjectTerraLCDClient, TerraLCDClient, ValAddress } from 'nestjs-terra'
+import { AccAddress, ValAddress } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, DistributionParams } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 import { Rewards, RewardItem, ValidatorRewards } from './models'
 
 @Injectable()
@@ -10,13 +11,12 @@ export class DistributionService {
   constructor(
     @InjectPinoLogger(DistributionService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async rewards(delegator: AccAddress): Promise<Rewards> {
+  public async rewards(delegator: AccAddress, height?: number): Promise<Rewards> {
     try {
-      const rewardsData = await this.terraClient.distribution.rewards(delegator)
+      const rewardsData = await this.lcdService.getLCDClient(height).distribution.rewards(delegator)
 
       return {
         rewards: Object.entries(rewardsData.rewards).map<RewardItem>(([validator, coins]) => ({
@@ -32,9 +32,9 @@ export class DistributionService {
     }
   }
 
-  public async validatorRewards(validator: ValAddress): Promise<ValidatorRewards> {
+  public async validatorRewards(validator: ValAddress, height?: number): Promise<ValidatorRewards> {
     try {
-      const validatorRewardsData = await this.terraClient.distribution.validatorRewards(validator)
+      const validatorRewardsData = await this.lcdService.getLCDClient(height).distribution.validatorRewards(validator)
 
       return {
         self_bond_rewards: Coin.fromTerraCoins(validatorRewardsData.self_bond_rewards),
@@ -47,9 +47,9 @@ export class DistributionService {
     }
   }
 
-  public async withdrawAddress(delegator: AccAddress): Promise<string> {
+  public async withdrawAddress(delegator: AccAddress, height?: number): Promise<string> {
     try {
-      return this.terraClient.distribution.withdrawAddress(delegator)
+      return this.lcdService.getLCDClient(height).distribution.withdrawAddress(delegator)
     } catch (err) {
       this.logger.error({ err }, 'Error getting the withdraw address for %s.', delegator)
 
@@ -57,9 +57,9 @@ export class DistributionService {
     }
   }
 
-  public async communityPool(): Promise<Coin[]> {
+  public async communityPool(height?: number): Promise<Coin[]> {
     try {
-      const coins = await this.terraClient.distribution.communityPool()
+      const coins = await this.lcdService.getLCDClient(height).distribution.communityPool()
 
       return Coin.fromTerraCoins(coins)
     } catch (err) {
@@ -69,9 +69,9 @@ export class DistributionService {
     }
   }
 
-  public async parameters(): Promise<DistributionParams> {
+  public async parameters(height?: number): Promise<DistributionParams> {
     try {
-      const params = await this.terraClient.distribution.parameters()
+      const params = await this.lcdService.getLCDClient(height).distribution.parameters()
 
       return {
         community_tax: params.community_tax.toString(),

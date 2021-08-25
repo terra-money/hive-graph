@@ -5,6 +5,12 @@ import {
   MsgWithdrawDelegationReward as TerraMsgWithdrawDelegationReward,
   MsgWithdrawValidatorCommission as TerraMsgWithdrawValidatorCommission,
 } from 'nestjs-terra'
+import {
+  DistributionMsg as LegacyTerraDistributionMsg,
+  MsgModifyWithdrawAddress as LegacyMsgModifyWithdrawAddress,
+  MsgWithdrawDelegationReward as LegacyMsgWithdrawDelegationReward,
+  MsgWithdrawValidatorCommission as LegacyMsgWithdrawValidatorCommission,
+} from 'nestjs-terra-legacy'
 import { Coin } from 'src/common/models'
 
 @ObjectType()
@@ -58,23 +64,23 @@ export class MsgFundCommunityPool {
 
 export class DistributionMsg {
   static fromTerraMsg(
-    msg: TerraDistributionMsg,
+    msg: TerraDistributionMsg | LegacyTerraDistributionMsg,
   ): MsgModifyWithdrawAddress | MsgWithdrawDelegationReward | MsgWithdrawValidatorCommission | MsgFundCommunityPool {
-    if (msg instanceof TerraMsgModifyWithdrawAddress) {
+    if (msg instanceof TerraMsgModifyWithdrawAddress || msg instanceof LegacyMsgModifyWithdrawAddress) {
       return new MsgModifyWithdrawAddress({
         delegator_address: msg.delegator_address,
         withdraw_address: msg.withdraw_address,
       })
     }
 
-    if (msg instanceof TerraMsgWithdrawDelegationReward) {
+    if (msg instanceof TerraMsgWithdrawDelegationReward || msg instanceof LegacyMsgWithdrawDelegationReward) {
       return new MsgWithdrawDelegationReward({
         delegator_address: msg.delegator_address,
         validator_address: msg.validator_address,
       })
     }
 
-    if (msg instanceof TerraMsgWithdrawValidatorCommission) {
+    if (msg instanceof TerraMsgWithdrawValidatorCommission || msg instanceof LegacyMsgWithdrawValidatorCommission) {
       return new MsgWithdrawValidatorCommission({
         validator_address: msg.validator_address,
       })

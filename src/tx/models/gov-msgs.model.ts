@@ -1,5 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { GovMsg as TerraGovMsg, MsgDeposit as TerraMsgDeposit, MsgVote as TerraMsgVote } from 'nestjs-terra'
+import {
+  GovMsg as LegacyTerraGovMsg,
+  MsgDeposit as LegacyMsgDeposit,
+  MsgVote as LegacyMsgVote,
+} from 'nestjs-terra-legacy'
 import { Coin, MsgDeposit, MsgVote, ProposalContent } from 'src/common/models'
 import { ProposalContentUnion, ProposalContentType } from 'src/common/unions'
 
@@ -20,8 +25,8 @@ export class MsgSubmitProposal {
 }
 
 export class GovMsg {
-  static fromTerraMsg(msg: TerraGovMsg): MsgSubmitProposal | MsgDeposit | MsgVote {
-    if (msg instanceof TerraMsgDeposit) {
+  static fromTerraMsg(msg: TerraGovMsg | LegacyTerraGovMsg): MsgSubmitProposal | MsgDeposit | MsgVote {
+    if (msg instanceof TerraMsgDeposit || msg instanceof LegacyMsgDeposit) {
       return new MsgDeposit({
         proposal_id: msg.proposal_id,
         depositor: msg.depositor,
@@ -29,7 +34,7 @@ export class GovMsg {
       })
     }
 
-    if (msg instanceof TerraMsgVote) {
+    if (msg instanceof TerraMsgVote || msg instanceof LegacyMsgVote) {
       return new MsgVote({
         proposal_id: msg.proposal_id,
         voter: msg.voter,

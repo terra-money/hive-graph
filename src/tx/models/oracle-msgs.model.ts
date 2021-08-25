@@ -1,11 +1,16 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import {
   OracleMsg as TerraOracleMsg,
-  MsgExchangeRatePrevote as TerraMsgExchangeRatePrevote,
   MsgDelegateFeedConsent as TerraMsgDelegateFeedConsent,
-  MsgExchangeRateVote as TerraMsgExchangeRateVote,
   MsgAggregateExchangeRateVote as TerraMsgAggregateExchangeRateVote,
 } from 'nestjs-terra'
+import {
+  OracleMsg as LegacyTerraOracleMsg,
+  MsgDelegateFeedConsent as LegacyMsgDelegateFeedConsent,
+  MsgAggregateExchangeRateVote as LegacyMsgAggregateExchangeRateVote,
+  MsgExchangeRatePrevote as LegacyMsgExchangeRatePrevote,
+  MsgExchangeRateVote as LegacyMsgExchangeRateVote,
+} from 'nestjs-terra-legacy'
 import { Denom } from 'src/common/enums'
 import { Coin } from 'src/common/models'
 
@@ -100,14 +105,14 @@ export class MsgAggregateExchangeRatePrevote {
 
 export class OracleMsg {
   static fromTerraMsg(
-    msg: TerraOracleMsg,
+    msg: TerraOracleMsg | LegacyTerraOracleMsg,
   ):
     | MsgExchangeRateVote
     | MsgExchangeRatePrevote
     | MsgDelegateFeedConsent
     | MsgAggregateExchangeRateVote
     | MsgAggregateExchangeRatePrevote {
-    if (msg instanceof TerraMsgExchangeRateVote) {
+    if (msg instanceof LegacyMsgExchangeRateVote) {
       return new MsgExchangeRateVote({
         exchange_rate: msg.exchange_rate.toString(),
         denom: msg.denom,
@@ -117,7 +122,7 @@ export class OracleMsg {
       })
     }
 
-    if (msg instanceof TerraMsgExchangeRatePrevote) {
+    if (msg instanceof LegacyMsgExchangeRatePrevote) {
       return new MsgExchangeRatePrevote({
         hash: msg.hash,
         denom: msg.denom,
@@ -126,14 +131,14 @@ export class OracleMsg {
       })
     }
 
-    if (msg instanceof TerraMsgDelegateFeedConsent) {
+    if (msg instanceof TerraMsgDelegateFeedConsent || msg instanceof LegacyMsgDelegateFeedConsent) {
       return new MsgDelegateFeedConsent({
         operator: msg.operator,
         delegate: msg.delegate,
       })
     }
 
-    if (msg instanceof TerraMsgAggregateExchangeRateVote) {
+    if (msg instanceof TerraMsgAggregateExchangeRateVote || msg instanceof LegacyMsgAggregateExchangeRateVote) {
       return new MsgAggregateExchangeRateVote({
         exchange_rates: Coin.fromTerraCoins(msg.exchange_rates),
         salt: msg.salt,

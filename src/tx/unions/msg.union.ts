@@ -28,6 +28,9 @@ import {
   MsgExecuteContract,
   MsgMigrateContract,
   MsgUpdateContractOwner,
+  MsgMigrateCode,
+  MsgUpdateContractAdmin,
+  MsgClearContractAdmin,
 } from '../models'
 
 export const MsgUnion = createUnionType({
@@ -62,6 +65,9 @@ export const MsgUnion = createUnionType({
     MsgExecuteContract,
     MsgMigrateContract,
     MsgUpdateContractOwner,
+    MsgMigrateCode,
+    MsgUpdateContractAdmin,
+    MsgClearContractAdmin,
   ],
 })
 

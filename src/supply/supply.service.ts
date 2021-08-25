@@ -1,21 +1,20 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
+import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class SupplyService {
   constructor(
     @InjectPinoLogger(SupplyService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async total(): Promise<Coin[]> {
+  public async total(height?: number): Promise<Coin[]> {
     try {
-      const total = await this.terraClient.supply.total()
+      const total = await this.lcdService.getLCDClient(height).supply.total()
 
       return Coin.fromTerraCoins(total)
     } catch (err) {

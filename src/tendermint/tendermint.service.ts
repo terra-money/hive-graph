@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectTerraLCDClient, TerraLCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
+import { LcdService } from 'src/lcd/lcd.service'
 import { NodeInfo, ValidatorSet, BlockInfo, DelegateValidator } from './models'
 
 @Injectable()
@@ -9,13 +9,12 @@ export class TendermintService {
   constructor(
     @InjectPinoLogger(TendermintService.name)
     private readonly logger: PinoLogger,
-    @InjectTerraLCDClient()
-    private readonly terraClient: TerraLCDClient,
+    private readonly lcdService: LcdService,
   ) {}
 
-  public async nodeInfo(): Promise<NodeInfo> {
+  public async nodeInfo(height?: number): Promise<NodeInfo> {
     try {
-      const data = (await this.terraClient.tendermint.nodeInfo()) as any
+      const data = (await this.lcdService.getLCDClient(height).tendermint.nodeInfo()) as any
 
       return {
         id: data.node_info.id,
@@ -51,9 +50,9 @@ export class TendermintService {
     }
   }
 
-  public async syncing(): Promise<boolean> {
+  public async syncing(height?: number): Promise<boolean> {
     try {
-      return this.terraClient.tendermint.syncing()
+      return this.lcdService.getLCDClient(height).tendermint.syncing()
     } catch (err) {
       this.logger.error({ err }, 'Error getting the syncing mode.')
 
@@ -63,13 +62,13 @@ export class TendermintService {
 
   public async validatorSet(height?: number): Promise<ValidatorSet> {
     try {
-      const info = await this.terraClient.tendermint.validatorSet(height)
+      const info = await this.lcdService.getLCDClient(height).tendermint.validatorSet(height)
 
       return {
         block_height: info.block_height,
         validators: info.validators.map<DelegateValidator>((validator) => ({
           address: validator.address,
-          pub_key: validator.pub_key,
+          pub_key: typeof validator.pub_key === 'string' ? validator.pub_key : validator.pub_key.value,
           proposer_priority: validator.proposer_priority,
           voting_power: validator.voting_power,
         })),
@@ -83,7 +82,7 @@ export class TendermintService {
 
   public async blockInfo(height?: number): Promise<BlockInfo> {
     try {
-      const info = await this.terraClient.tendermint.blockInfo(height)
+      const info = await this.lcdService.getLCDClient(height).tendermint.blockInfo(height)
 
       return {
         block_id: info.block_id,

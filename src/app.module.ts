@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
-import { TerraModule, TERRA_LCD_BASE_URL, TERRA_MAINNET_CHAIN_ID } from 'nestjs-terra'
 import { join } from 'path'
 import { LoggerOptions } from 'pino'
 import { AnythingScalar } from './anything.scalar'
@@ -14,6 +13,7 @@ import { registerEnums } from './common/enums'
 import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
+import { LcdModule } from './lcd/lcd.module'
 import { MarketModule } from './market/market.module'
 import { MintModule } from './mint/mint.module'
 import { MsgauthModule } from './msgauth/msgauth.module'
@@ -59,16 +59,6 @@ import { WasmModule } from './wasm/wasm.module'
         limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
       }),
     }),
-    TerraModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          URL: config.get<string>('LCD_URL', TERRA_LCD_BASE_URL),
-          chainID: config.get<string>('CHAIN_ID', TERRA_MAINNET_CHAIN_ID),
-        }
-      },
-    }),
     GraphQLModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -83,6 +73,7 @@ import { WasmModule } from './wasm/wasm.module'
         }
       },
     }),
+    LcdModule,
     AuthModule,
     BankModule,
     DistributionModule,
