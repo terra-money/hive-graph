@@ -11,13 +11,12 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
   const configService = app.get(ConfigService)
   const port = configService.get('PORT')
-  const env = configService.get('NODE_ENV')
   const helmetOptions = {
     frameguard: false,
     dnsPrefetchControl: {
       allow: true,
     },
-    contentSecurityPolicy: env === 'production' ? undefined : false,
+    contentSecurityPolicy: false,
   }
 
   app.useGlobalPipes(
