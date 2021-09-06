@@ -66,10 +66,11 @@ import { WasmModule } from './wasm/wasm.module'
         registerEnums() // register enums graphql
 
         return {
-          sortSchema: true,
+          sortSchema: config.get<string>('GRAPHQL_SORT_SCHEMA', 'true') === 'true',
           debug: config.get<string>('GRAPHQL_DEBUG', 'false') === 'true',
           playground: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true',
           autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+          introspection: config.get<string>('GRAPHQL_INTROSPECTION', 'true') === 'true',
         }
       },
     }),
