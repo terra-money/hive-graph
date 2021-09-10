@@ -15,4 +15,9 @@ export class TxResolver {
   public async txInfo(@Args('txHash') txHash: string): Promise<TxInfo> {
     return this.txService.txInfo(txHash)
   }
+
+  @ResolveField(() => [TxInfo])
+  public async byHeight(@Args('height') height: number): Promise<TxInfo[]> {
+    return this.txService.txInfosByHeightFromFCD(height)
+  }
 }

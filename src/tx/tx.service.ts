@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { StdTx as TerraStdTx, TxInfo as TerraTxInfo } from 'nestjs-terra'
 import { StdTx as LegacyTerraStdTx, TxInfo as LegacyTerraTxInfo } from 'nestjs-terra-legacy'
@@ -7,7 +8,7 @@ import { Coin, PublicKey } from 'src/common/models'
 import { LcdService } from 'src/lcd/lcd.service'
 // import { CreateTxOptions, StdFee, StdSignMsg, StdTx, TxInfo, TxSearchResult, Msg } from './models'
 // import { MsgType } from './unions'
-import { StdTx, TxInfo, Msg } from './models'
+import { StdTx, TxInfo } from './models'
 
 @Injectable()
 export class TxService {
@@ -19,7 +20,15 @@ export class TxService {
 
   private fromTerraStdTx(tx: TerraStdTx | LegacyTerraStdTx): StdTx {
     return {
-      msg: Msg.fromTerraMsgs(tx.msg),
+      // fix..
+      msg: tx.msg.map((m) => {
+        const a = JSON.parse(m.toJSON())
+
+        return {
+          type: a.type,
+          value: a.value,
+        }
+      }),
       fee: {
         gas: tx.fee.gas,
         amount: Coin.fromTerraCoins(tx.fee.amount),
@@ -35,6 +44,10 @@ export class TxService {
   }
 
   private fromTerraTxInfo(txInfo: TerraTxInfo | LegacyTerraTxInfo): TxInfo {
+    if (!(txInfo.tx instanceof TerraStdTx)) {
+      txInfo.tx = TerraStdTx.fromData(txInfo.tx as unknown as TerraStdTx.Data)
+    }
+
     return {
       height: txInfo.height,
       txhash: txInfo.txhash,
@@ -75,6 +88,18 @@ export class TxService {
   //     throw new LCDClientError(err)
   //   }
   // }
+
+  // temp!
+  public async txInfosByHeightFromFCD(height: number): Promise<TxInfo[]> {
+    const getTxs = (offset: number) =>
+      axios.get<{ limit: number; txs: TerraTxInfo[] }>(
+        `https://bombay-fcd.terra.dev/v1/txs?block=${height}&offset=${offset}`,
+      )
+
+    const fcdResult = await getTxs(0)
+
+    return fcdResult.data.txs.reverse().map((tx) => this.fromTerraTxInfo(tx))
+  }
 
   public async txInfosByHeight(height?: number): Promise<TxInfo[]> {
     try {

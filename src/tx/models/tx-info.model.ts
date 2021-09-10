@@ -10,8 +10,8 @@ export class TxInfo {
   @Field()
   txhash!: string
 
-  @Field()
-  raw_log!: string
+  @Field({ nullable: true })
+  raw_log?: string
 
   @Field(() => [TxLog], { nullable: true })
   logs?: TxLog[]
