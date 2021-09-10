@@ -77,7 +77,6 @@ jobs:
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.sha }}
-            ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.base_ref }}
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
