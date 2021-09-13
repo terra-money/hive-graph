@@ -601,7 +601,7 @@ type Tx {
 
 type TxEventKV {
   key: String!
-  value: String!
+  value: String
 }
 
 type TxEventLog {

@@ -5,8 +5,8 @@ export class TxEventKV {
   @Field()
   key!: string
 
-  @Field()
-  value!: string
+  @Field({ nullable: true })
+  value?: string
 }
 
 @ObjectType()
