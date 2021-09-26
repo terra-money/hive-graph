@@ -4,18 +4,9 @@ import { StdFee } from './std-fee.model'
 import { StdSignature } from './std-signature.model'
 
 @ObjectType()
-class MsgWhatever {
-  @Field()
-  type!: string
-
-  @Field()
-  value!: AnythingScalar
-}
-
-@ObjectType()
 export class StdTx {
-  @Field(() => [MsgWhatever])
-  msg!: MsgWhatever[]
+  @Field(() => [AnythingScalar])
+  msg!: any[]
 
   @Field(() => StdFee)
   fee!: StdFee

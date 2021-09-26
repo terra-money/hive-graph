@@ -285,11 +285,6 @@ type MsgVote {
   voter: String!
 }
 
-type MsgWhatever {
-  type: String!
-  value: Anything!
-}
-
 type Msgauth {
   grants(grantee: String!, granter: String!, msgType: String): [AuthorizationGrant!]!
 }
@@ -391,6 +386,41 @@ enum ProposalStatus {
   Passed
   Rejected
   VotingPeriod
+}
+
+type ProtoAuthInfo {
+  fee: ProtoFee!
+  signer_infos: [ProtoSignerInfos!]!
+}
+
+type ProtoCoin {
+  amount: String!
+  denom: String!
+}
+
+type ProtoFee {
+  amount: [ProtoCoin!]!
+  gas_limit: String!
+  granter: String!
+  payer: String!
+}
+
+type ProtoSignerInfos {
+  mode_info: Anything!
+  public_key: Anything!
+  sequence: String!
+}
+
+type ProtoTx {
+  auth_info: ProtoAuthInfo!
+  body: ProtoTxBody!
+  signatures: [String!]!
+}
+
+type ProtoTxBody {
+  memo: String!
+  messages: [Anything!]!
+  timeout_height: Float!
 }
 
 type ProtocolVersion {
@@ -536,7 +566,7 @@ type StdSignature {
 type StdTx {
   fee: StdFee!
   memo: String!
-  msg: [MsgWhatever!]!
+  msg: [Anything!]!
   signatures: [StdSignature!]!
 }
 
@@ -618,7 +648,7 @@ type TxInfo {
   logs: [TxLog!]
   raw_log: String
   timestamp: String!
-  tx: StdTx!
+  tx: ProtoTx!
   txhash: String!
 }
 

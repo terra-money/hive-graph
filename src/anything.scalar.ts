@@ -12,6 +12,7 @@ function parseObject(ast: ObjectValueNode): Record<string, any> {
 }
 
 function parseLiteral(ast: ValueNode): any {
+  console.log(ast)
   switch (ast.kind) {
     case Kind.STRING:
     case Kind.BOOLEAN:
@@ -37,6 +38,14 @@ export class AnythingScalar implements CustomScalar<string, any> {
   }
 
   serialize(value: any): any {
+    // see if value implements toData() interface
+    // if it does, use that
+    // otherwise, return as is (unknown)
+    if (typeof value === 'object' && Reflect.has(value, 'toData')) {
+      const toData = Reflect.get(value, 'toData')
+      return Reflect.apply(toData, value, [])
+    }
+
     return value
   }
 
