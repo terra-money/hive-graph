@@ -28,8 +28,9 @@ export class WasmResolver {
   public async contractQuery(
     @Args('contractAddress') contractAddress: string,
     @Args('query', { type: () => GraphQLJSON }) query: Record<string, any>,
+    @Args('height', { nullable: true }) height: number,
   ): Promise<any> {
-    return this.wasmService.contractQuery(contractAddress, query)
+    return this.wasmService.contractQuery(contractAddress, query, height)
   }
 
   @ResolveField(() => WasmParams)

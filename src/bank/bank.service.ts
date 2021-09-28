@@ -15,7 +15,7 @@ export class BankService {
 
   public async balance(address: AccAddress, height?: number): Promise<Coin[]> {
     try {
-      const balance = await this.lcdService.getLCDClient(height).bank.balance(address)
+      const balance = await this.lcdService.getLCDClient(height).bank.balance(address, { height })
 
       return Coin.fromTerraCoins(balance)
     } catch (err) {

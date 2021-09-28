@@ -13,7 +13,10 @@ export class BankResolver {
   }
 
   @ResolveField(() => [Coin])
-  public async balance(@Args('address') address: string): Promise<Coin[]> {
-    return this.bankService.balance(address)
+  public async balance(
+    @Args('address') address: string,
+    @Args('height', { nullable: true }) height: number,
+  ): Promise<Coin[]> {
+    return this.bankService.balance(address, height)
   }
 }
