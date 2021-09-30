@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common'
+import { TxInfo, hashAmino } from '@terra-money/terra.js'
+import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { StdTx as TerraStdTx, TxInfo as TerraTxInfo } from 'nestjs-terra'
-import { StdTx as LegacyTerraStdTx, TxInfo as LegacyTerraTxInfo } from 'nestjs-terra-legacy'
 import { LCDClientError } from 'src/common/errors'
-import { Coin, PublicKey } from 'src/common/models'
 import { LcdService } from 'src/lcd/lcd.service'
-// import { CreateTxOptions, StdFee, StdSignMsg, StdTx, TxInfo, TxSearchResult, Msg } from './models'
-// import { MsgType } from './unions'
-import { StdTx, TxInfo, Msg } from './models'
+import { TendermintBlockResponse, TendermintTxResponse } from './types'
 
 @Injectable()
 export class TxService {
@@ -17,47 +14,11 @@ export class TxService {
     private readonly lcdService: LcdService,
   ) {}
 
-  private fromTerraStdTx(tx: TerraStdTx | LegacyTerraStdTx): StdTx {
-    return {
-      msg: Msg.fromTerraMsgs(tx.msg),
-      fee: {
-        gas: tx.fee.gas,
-        amount: Coin.fromTerraCoins(tx.fee.amount),
-      },
-      signatures: tx.signatures.map((signature) => {
-        return {
-          signature: signature.signature,
-          pub_key: PublicKey.fromTerraKey(signature.pub_key),
-        }
-      }),
-      memo: tx.memo,
-    }
-  }
-
-  private fromTerraTxInfo(txInfo: TerraTxInfo | LegacyTerraTxInfo): TxInfo {
-    return {
-      height: txInfo.height,
-      txhash: txInfo.txhash,
-      raw_log: txInfo.raw_log,
-      logs: (txInfo.logs ?? []).map((log) => ({
-        msg_index: log.msg_index ?? null,
-        log: log.log ?? null,
-        events: log.events ?? [],
-      })),
-      gas_wanted: txInfo.gas_wanted,
-      gas_used: txInfo.gas_used,
-      tx: this.fromTerraStdTx(txInfo.tx),
-      timestamp: txInfo.timestamp,
-      code: txInfo.code,
-      codespace: txInfo.codespace,
-    }
-  }
-
   public async txInfo(txHash: string, height?: number): Promise<TxInfo> {
     try {
-      const tx = await this.lcdService.getLCDClient(height).tx.txInfo(txHash)
+      const tx = await this.getTx(txHash)
 
-      return this.fromTerraTxInfo(tx)
+      return TxInfo.fromData(tx.tx_response)
     } catch (err) {
       this.logger.error({ err }, 'Error getting tx %s info.')
 
@@ -76,47 +37,24 @@ export class TxService {
   //   }
   // }
 
-  public async txInfosByHeight(height?: number): Promise<TxInfo[]> {
-    try {
-      const txs = await this.lcdService.getLCDClient(height).tx.txInfosByHeight(height)
+  // temp!
+  public async txInfosByHeight(height: number): Promise<TxInfo[]> {
+    const config = this.lcdService.getLCDConfig()
+    const getBlock = (height: number) =>
+      axios
+        .get<TendermintBlockResponse>(`${config.URL}/cosmos/base/tendermint/v1beta1/blocks/${height}`)
+        .then((r) => r.data)
 
-      return txs.map(this.fromTerraTxInfo)
-    } catch (err) {
-      this.logger.error({ err }, 'Error getting tx infos.')
+    const block = await getBlock(height)
+    const txs = await Promise.all(
+      block.block.data.txs.map((tx) => this.getTx(hashAmino(tx)).then((r) => r.tx_response)),
+    )
 
-      throw new LCDClientError(err)
-    }
+    return txs.map(TxInfo.fromData)
   }
 
-  // public async estimateFee(
-  //   sourceAddress: string,
-  //   msgs: MsgType[],
-  //   options?: {
-  //     memo?: string
-  //     gas?: string
-  //     gasPrices?: Coin[]
-  //     gasAdjustment?: string
-  //     feeDenoms?: string[]
-  //   },
-  // ): Promise<StdFee> {
-  //   try {
-  //     const fee = await this.lcdService.getLCDClient(height).tx.estimateFee(sourceAddress, msgs, options)
-  //   } catch (err) {
-  //     this.logger.error({ err }, 'Error getting estimate Fee.')
-
-  //     throw new LCDClientError(err)
-  //   }
-  // }
-
-  // public async encode(tx: StdTx): Promise<string> {}
-
-  // public async hash(tx: StdTx): Promise<string> {}
-
-  // public async broadcast(tx: StdTx): Promise<TxBroadcastResult> {}
-
-  // public async broadcastSync(tx: StdTx): Promise<TxBroadcastResult> {}
-
-  // public async broadcastAsync(tx: StdTx): Promise<TxBroadcastResult> {}
-
-  // public async search(page?: number, limit?: number): Promise<TxSearchResult> {}
+  private async getTx(txHash: string): Promise<TendermintTxResponse> {
+    const config = this.lcdService.getLCDConfig()
+    return axios.get<TendermintTxResponse>(`${config.URL}/cosmos/tx/v1beta1/txs/${txHash}`).then((r) => r.data)
+  }
 }

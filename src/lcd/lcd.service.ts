@@ -6,6 +6,11 @@ import {
   TerraLCDClient as LegacyTerraLCDClient,
 } from 'nestjs-terra-legacy'
 
+interface LCDConfig {
+  chainID: string
+  URL: string
+}
+
 @Injectable()
 export class LcdService {
   private readonly legacyMaxHeight: number
@@ -30,5 +35,12 @@ export class LcdService {
     }
 
     return this.terraClientLegacy
+  }
+
+  public getLCDConfig(): LCDConfig {
+    return {
+      URL: this.config.get<string>('LCD_URL')!,
+      chainID: this.config.get<string>('CHAIN_ID')!,
+    }
   }
 }

@@ -1,12 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { MsgUnion, MsgType } from '../unions'
+import { AnythingScalar } from 'src/anything.scalar'
 import { StdFee } from './std-fee.model'
 import { StdSignature } from './std-signature.model'
 
 @ObjectType()
 export class StdTx {
-  @Field(() => [MsgUnion])
-  msg!: MsgType[]
+  @Field(() => [AnythingScalar])
+  msg!: any[]
 
   @Field(() => StdFee)
   fee!: StdFee

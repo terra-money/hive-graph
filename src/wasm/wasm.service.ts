@@ -49,7 +49,7 @@ export class WasmService {
 
   public async contractQuery(contractAddress: string, query: Record<string, any>, height?: number): Promise<any> {
     try {
-      const data = await this.lcdService.getLCDClient(height).wasm.contractQuery(contractAddress, query)
+      const data = await this.lcdService.getLCDClient(height).wasm.contractQuery(contractAddress, query, { height })
 
       return data
     } catch (err) {
