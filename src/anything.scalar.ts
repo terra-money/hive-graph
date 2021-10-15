@@ -12,7 +12,6 @@ function parseObject(ast: ObjectValueNode): Record<string, any> {
 }
 
 function parseLiteral(ast: ValueNode): any {
-  console.log(ast)
   switch (ast.kind) {
     case Kind.STRING:
     case Kind.BOOLEAN:

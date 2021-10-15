@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TxInfo, hashAmino } from '@terra-money/terra.js'
+import { TxInfo, hashToHex } from '@terra-money/terra.js'
 import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
@@ -47,7 +47,7 @@ export class TxService {
 
     const block = await getBlock(height)
     const txs = await Promise.all(
-      block.block.data.txs.map((tx) => this.getTx(hashAmino(tx)).then((r) => r.tx_response)),
+      block.block.data.txs.map((tx) => this.getTx(hashToHex(tx)).then((r) => r.tx_response)),
     )
 
     return txs.map(TxInfo.fromData)

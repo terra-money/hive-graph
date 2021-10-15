@@ -23,24 +23,4 @@ export class TxResolver {
   public async byHeight(@Args('height') height: number): Promise<ProtoTxInfo[]> {
     return this.txService.txInfosByHeight(height)
   }
-
-  // @ResolveField(() => )
-  // public async txInfo(@Args('txHash') txHash: string): Promise<ProtoTx> {
-  //   return this.txService.T
-  // }
-
-  // @ResolveField(() => [TxInfo])
-  // public async txInfo(@Args('txHash') txHash: string): Promise<TxInfo> {
-
-  // }
-
-  // @ResolveField(() => TxInfoAmino)
-  // public async txInfoAmino(@Args('txHash') txHash: string): Promise<TxInfoAmino> {
-  //   return this.txService.txInfo(txHash)
-  // }
-
-  // @ResolveField(() => [TxInfoAmino])
-  // public async byHeightLegacy(@Args('height') height: number): Promise<TxInfoAmino[]> {
-  //   return this.txService.txInfosByHeightFromFCD(height)
-  // }
 }
