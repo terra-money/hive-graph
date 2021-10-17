@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
-import { TxInfo, hashToHex } from '@terra-money/terra.js'
+import { TxInfo } from '@terra-money/terra.js'
 import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
 import { LcdService } from 'src/lcd/lcd.service'
-import { TendermintBlockResponse, TendermintTxResponse } from './types'
+import { TendermintTxResponse } from './types'
 
 @Injectable()
 export class TxService {
@@ -40,17 +40,7 @@ export class TxService {
   // temp!
   public async txInfosByHeight(height: number): Promise<TxInfo[]> {
     const config = this.lcdService.getLCDConfig()
-    const getBlock = (height: number) =>
-      axios
-        .get<TendermintBlockResponse>(`${config.URL}/cosmos/base/tendermint/v1beta1/blocks/${height}`)
-        .then((r) => r.data)
-
-    const block = await getBlock(height)
-    const txs = await Promise.all(
-      block.block.data.txs.map((tx) => this.getTx(hashToHex(tx)).then((r) => r.tx_response)),
-    )
-
-    return txs.map(TxInfo.fromData)
+    return axios.get<TxInfo[]>(`${config.URL}/index/tx/by_height/${height}`).then((r) => r.data)
   }
 
   private async getTx(txHash: string): Promise<TendermintTxResponse> {
