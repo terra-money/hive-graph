@@ -37,13 +37,16 @@ export class OracleResolver {
   }
 
   @ResolveField(() => [Coin])
-  public async exchangeRates(): Promise<Coin[]> {
-    return this.oracleService.exchangeRates()
+  public async exchangeRates(@Args('height', { nullable: true }) height: number): Promise<Coin[]> {
+    return this.oracleService.exchangeRates(height)
   }
 
   @ResolveField(() => Coin, { nullable: true })
-  public async exchangeRate(@Args('denom') denom: Denom): Promise<Coin | null> {
-    return this.oracleService.exchangeRate(denom)
+  public async exchangeRate(
+    @Args('denom') denom: Denom,
+    @Args('height', { nullable: true }) height: number,
+  ): Promise<Coin | null> {
+    return this.oracleService.exchangeRate(denom, height)
   }
 
   @ResolveField(() => [String])
