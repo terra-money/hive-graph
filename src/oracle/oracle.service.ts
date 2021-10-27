@@ -66,7 +66,7 @@ export class OracleService {
 
   public async exchangeRates(height?: number): Promise<Coin[]> {
     try {
-      const rates = await this.lcdService.getLCDClient(height).oracle.exchangeRates()
+      const rates = await this.lcdService.getLCDClient(height).oracle.exchangeRates({ height })
 
       return Coin.fromTerraCoins(rates)
     } catch (err) {
@@ -100,7 +100,7 @@ export class OracleService {
 
   public async activeDenoms(height?: number): Promise<string[]> {
     try {
-      return this.lcdService.getLCDClient(height).oracle.activeDenoms()
+      return this.lcdService.getLCDClient(height).oracle.activeDenoms({ height })
     } catch (err) {
       this.logger.error({ err }, 'Error getting the current list of active denominations.')
 
@@ -110,7 +110,7 @@ export class OracleService {
 
   public async feederAddress(validator: string, height?: number): Promise<string> {
     try {
-      return this.lcdService.getLCDClient(height).oracle.feederAddress(validator)
+      return this.lcdService.getLCDClient(height).oracle.feederAddress(validator, { height })
     } catch (err) {
       this.logger.error(
         { err },

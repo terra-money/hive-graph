@@ -248,7 +248,7 @@ type LastCommit {
 
 type Market {
   parameters: MarketParams!
-  swapRate(askDenom: Denom!, offerCoin: CoinInput!): Coin!
+  swapRate(askDenom: Denom!, height: Float, offerCoin: CoinInput!): Coin!
   terraPoolDelta: String!
 }
 
