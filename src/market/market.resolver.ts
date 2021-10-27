@@ -14,8 +14,8 @@ export class MarketResolver {
   }
 
   @ResolveField(() => Coin)
-  public async swapRate(@Args() args: CoinArgs): Promise<Coin> {
-    return this.marketService.swapRate(args.offerCoin, args.askDenom)
+  public async swapRate(@Args() args: CoinArgs, @Args('height', { nullable: true }) height: number): Promise<Coin> {
+    return this.marketService.swapRate(args.offerCoin, args.askDenom, height)
   }
 
   @ResolveField(() => String)

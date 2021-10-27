@@ -311,8 +311,8 @@ type Oracle {
   activeDenoms: [Denom!]!
   aggregatePrevote(validator: String!): AggregateExchangeRatePrevote!
   aggregateVote(validator: String!): AggregateExchangeRateVote!
-  exchangeRate(denom: String!): Coin
-  exchangeRates: [Coin!]!
+  exchangeRate(denom: String!, height: Float): Coin
+  exchangeRates(height: Float): [Coin!]!
   feederAddress(validator: String!): String!
   misses(validator: String!): Int!
   parameters: OracleParams!
