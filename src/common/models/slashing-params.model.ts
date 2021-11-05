@@ -3,9 +3,6 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 @ObjectType()
 export class SlashingParams {
   @Field(() => Int, { nullable: true })
-  max_evidence_age?: number | null
-
-  @Field(() => Int, { nullable: true })
   signed_blocks_window?: number | null
 
   @Field(() => String, { nullable: true })

@@ -13,7 +13,7 @@ export class Proposal {
   content!: ProposalContentType
 
   @Field(() => ProposalStatus)
-  proposal_status!: string
+  status!: number
 
   @Field(() => Tally)
   final_tally_result?: Tally

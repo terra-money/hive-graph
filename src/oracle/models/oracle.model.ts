@@ -1,16 +1,10 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Denom } from 'src/common/enums'
 import { Coin, OracleParams } from 'src/common/models'
-import { ExchangeRateVote, ExchangeRatePrevote, AggregateExchangeRatePrevote, AggregateExchangeRateVote } from '.'
+import { AggregateExchangeRatePrevote, AggregateExchangeRateVote } from '.'
 
 @ObjectType()
 export class Oracle {
-  @Field(() => [ExchangeRateVote])
-  votes!: Promise<ExchangeRateVote[]>
-
-  @Field(() => [ExchangeRatePrevote])
-  prevotes!: Promise<ExchangeRatePrevote[]>
-
   @Field(() => [Coin])
   exchangeRates!: Promise<Coin[]>
 

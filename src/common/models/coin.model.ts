@@ -1,10 +1,6 @@
 import { Field, ObjectType, InputType } from '@nestjs/graphql'
 import { Coins as TerraCoins, Coin as TerraCoin } from 'nestjs-terra'
-import { Coins as LegacyTerraCoins, Coin as LegacyTerraCoin } from 'nestjs-terra-legacy'
 import { Denom } from '../enums'
-
-export type TerraCoinsType = TerraCoins | LegacyTerraCoins
-export type TerraCoinType = TerraCoin | LegacyTerraCoin
 
 @InputType('CoinInput')
 @ObjectType('Coin')
@@ -15,11 +11,11 @@ export class Coin {
   @Field()
   amount!: string
 
-  public static fromTerraCoins(coins: TerraCoinsType): Coin[] {
+  public static fromTerraCoins(coins: TerraCoins): Coin[] {
     return coins.toArray().map<Coin>(Coin.fromTerraCoin)
   }
 
-  public static fromTerraCoin(coin: TerraCoinType): Coin {
+  public static fromTerraCoin(coin: TerraCoin): Coin {
     return {
       denom: coin.denom,
       amount: coin.amount.toString(),

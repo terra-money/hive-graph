@@ -1,20 +1,18 @@
-import { ObjectType } from '@nestjs/graphql'
-import { AccAddress } from '@terra-money/terra.js'
-import { Coin } from 'src/common/models'
-import { PublicKeyType } from 'src/common/unions'
-import { BaseAccount } from '../interfaces'
+import { Field, ObjectType, Int } from '@nestjs/graphql'
+import { AccAddress } from 'nestjs-terra'
+import { PublicKeyType, PublicKeyUnion } from 'src/common/unions'
 
-@ObjectType({
-  implements: () => [BaseAccount],
-})
-export class Account implements BaseAccount {
+@ObjectType()
+export class Account {
+  @Field(() => String)
   address!: AccAddress
 
-  coins!: Coin[]
-
+  @Field(() => PublicKeyUnion, { nullable: true })
   public_key?: PublicKeyType | null
 
+  @Field(() => Int)
   account_number!: number
 
+  @Field(() => Int)
   sequence!: number
 }

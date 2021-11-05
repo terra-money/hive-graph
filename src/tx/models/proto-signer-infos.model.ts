@@ -1,11 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { ModeInfo, PublicKey } from '@terra-money/terra.js'
+import { ModeInfo } from 'nestjs-terra'
 import { AnythingScalar } from 'src/anything.scalar'
+import { PublicKeyUnion, PublicKeyType } from 'src/common/unions'
 
 @ObjectType()
 export class ProtoSignerInfos {
-  @Field(() => AnythingScalar)
-  public_key!: PublicKey.Data
+  @Field(() => PublicKeyUnion)
+  public_key!: PublicKeyType
 
   @Field(() => AnythingScalar)
   mode_info!: ModeInfo.Data

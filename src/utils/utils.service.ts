@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { Coin as TerraCoin } from 'nestjs-terra'
+import { Coin as TerraCoin, InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, Validator } from 'src/common/models'
-import { LcdService } from 'src/lcd/lcd.service'
 import { ValidatorVotingPower } from './models'
 
 @Injectable()
@@ -11,14 +10,15 @@ export class UtilsService {
   constructor(
     @InjectPinoLogger(UtilsService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
-  public async calculateTax(coin: Coin, height?: number): Promise<Coin> {
+  public async calculateTax(coin: Coin): Promise<Coin> {
     const { denom, amount } = coin
 
     try {
-      const tax = await this.lcdService.getLCDClient(height).utils.calculateTax(new TerraCoin(denom, amount))
+      const tax = await this.lcdService.utils.calculateTax(new TerraCoin(denom, amount))
 
       return Coin.fromTerraCoin(tax)
     } catch (err) {
@@ -28,9 +28,9 @@ export class UtilsService {
     }
   }
 
-  public async validatorsWithVotingPower(height?: number): Promise<ValidatorVotingPower[]> {
+  public async validatorsWithVotingPower(): Promise<ValidatorVotingPower[]> {
     try {
-      const data = await this.lcdService.getLCDClient(height).utils.validatorsWithVotingPower()
+      const data = await this.lcdService.utils.validatorsWithVotingPower()
       const validators = Object.values(data) ?? []
 
       return validators.map((item) => ({

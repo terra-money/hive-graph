@@ -1,20 +1,21 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
+import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { MintingParams } from 'src/common/models'
-import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class MintService {
   constructor(
     @InjectPinoLogger(MintService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
   public async inflation(height?: number): Promise<string> {
     try {
-      const inflation = await this.lcdService.getLCDClient(height).mint.inflation()
+      const inflation = await this.lcdService.mint.inflation({ height })
 
       return inflation.toString()
     } catch (err) {
@@ -26,7 +27,7 @@ export class MintService {
 
   public async annualProvisions(height?: number): Promise<string> {
     try {
-      const provisions = await this.lcdService.getLCDClient(height).mint.annualProvisions()
+      const provisions = await this.lcdService.mint.annualProvisions({ height })
 
       return provisions.toString()
     } catch (err) {
@@ -38,7 +39,7 @@ export class MintService {
 
   public async parameters(height?: number): Promise<MintingParams> {
     try {
-      const params = await this.lcdService.getLCDClient(height).mint.parameters()
+      const params = await this.lcdService.mint.parameters({ height })
 
       return {
         mint_denom: params.mint_denom,

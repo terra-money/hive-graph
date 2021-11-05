@@ -17,7 +17,4 @@ export class ContractInfo {
 
   @Field(() => String, { nullable: true })
   admin?: string | null
-
-  @Field(() => Boolean, { nullable: true })
-  migratable?: boolean | null
 }

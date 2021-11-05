@@ -1,7 +1,10 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { AccAddress, ValAddress } from 'nestjs-terra'
+import { GetBaseArgs } from 'src/common/arguments/base.args'
+import { GetOptionalValidatorArgs, GetOptionalDelegatorArgs } from 'src/common/arguments/optional.args'
+import { GetRequiredDelegatorArgs, GetRequiredValidatorArgs } from 'src/common/arguments/required.args'
 import { StakingParams, Validator } from 'src/common/models'
 import { Delegation, Redelegation, Staking, StakingPool, UnbondingDelegation } from './models'
+import { GetStakingArgs } from './staking.args'
 import { StakingService } from './staking.service'
 
 @Resolver(Staking)
@@ -15,67 +18,66 @@ export class StakingResolver {
 
   @ResolveField(() => [Delegation])
   public async delegations(
-    @Args('delegator', { nullable: true }) delegator?: AccAddress,
-    @Args('validator', { nullable: true }) validator?: ValAddress,
+    @Args() delArgs: GetOptionalDelegatorArgs,
+    @Args() valArgs: GetOptionalValidatorArgs,
   ): Promise<Delegation[]> {
-    return this.stakingService.delegations(delegator, validator)
+    return this.stakingService.delegations(delArgs.delegator, valArgs.validator, valArgs.height)
   }
 
   @ResolveField(() => Delegation, { nullable: true })
   public async delegation(
-    @Args('delegator') delegator: AccAddress,
-    @Args('validator') validator: ValAddress,
+    @Args() delArgs: GetRequiredDelegatorArgs,
+    @Args() valArgs: GetRequiredValidatorArgs,
   ): Promise<Delegation | null> {
-    return this.stakingService.delegation(delegator, validator)
+    return this.stakingService.delegation(delArgs.delegator, valArgs.validator)
   }
 
   @ResolveField(() => [UnbondingDelegation])
   public async unbondingDelegations(
-    @Args('delegator', { nullable: true }) delegator?: AccAddress,
-    @Args('validator', { nullable: true }) validator?: ValAddress,
+    @Args() delArgs: GetOptionalDelegatorArgs,
+    @Args() valArgs: GetOptionalValidatorArgs,
   ): Promise<UnbondingDelegation[]> {
-    return this.stakingService.unbondingDelegations(delegator, validator)
+    return this.stakingService.unbondingDelegations(delArgs.delegator, valArgs.validator, valArgs.height)
   }
 
   @ResolveField(() => UnbondingDelegation, { nullable: true })
   public async unbondingDelegation(
-    @Args('delegator', { nullable: true }) delegator?: AccAddress,
-    @Args('validator', { nullable: true }) validator?: ValAddress,
+    @Args() delArgs: GetOptionalDelegatorArgs,
+    @Args() valArgs: GetOptionalValidatorArgs,
   ): Promise<UnbondingDelegation | null> {
-    return this.stakingService.unbondingDelegation(delegator, validator)
+    return this.stakingService.unbondingDelegation(delArgs.delegator, valArgs.validator)
   }
 
   @ResolveField(() => [Redelegation])
-  public async redelegations(
-    @Args('delegator', { nullable: true }) delegator?: AccAddress,
-    @Args('validatorSrc', { nullable: true }) validatorSrc?: ValAddress,
-    @Args('validatorDst', { nullable: true }) validatorDst?: ValAddress,
-  ): Promise<Redelegation[]> {
-    return this.stakingService.redelegations(delegator, validatorSrc, validatorDst)
+  public async redelegations(@Args() args: GetStakingArgs): Promise<Redelegation[]> {
+    return this.stakingService.redelegations(args.delegator, args.validatorSrc, args.validatorDst)
   }
 
   @ResolveField(() => [Validator])
-  public async bondedValidators(@Args('delegator') delegator: AccAddress): Promise<Validator[]> {
-    return this.stakingService.bondedValidators(delegator)
+  public async bondedValidators(
+    @Args() args: GetRequiredDelegatorArgs,
+    @Args() basArgs: GetBaseArgs,
+  ): Promise<Validator[]> {
+    return this.stakingService.bondedValidators(args.delegator, basArgs.height)
   }
 
   @ResolveField(() => [Validator])
-  public async validators(): Promise<Validator[]> {
-    return this.stakingService.validators()
+  public async validators(@Args() args: GetBaseArgs): Promise<Validator[]> {
+    return this.stakingService.validators(args.height)
   }
 
   @ResolveField(() => Validator, { nullable: true })
-  public async validator(@Args('validator') validator: ValAddress): Promise<Validator | null> {
-    return this.stakingService.validator(validator)
+  public async validator(@Args() args: GetRequiredValidatorArgs): Promise<Validator | null> {
+    return this.stakingService.validator(args.validator, args.height)
   }
 
   @ResolveField(() => StakingPool)
-  public async pool(): Promise<StakingPool> {
-    return this.stakingService.pool()
+  public async pool(@Args() args: GetBaseArgs): Promise<StakingPool> {
+    return this.stakingService.pool(args.height)
   }
 
   @ResolveField(() => StakingParams)
-  public async parameters(): Promise<StakingParams> {
-    return this.stakingService.parameters()
+  public async parameters(@Args() args: GetBaseArgs): Promise<StakingParams> {
+    return this.stakingService.parameters(args.height)
   }
 }

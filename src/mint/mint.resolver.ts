@@ -1,4 +1,5 @@
-import { Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { Query, ResolveField, Resolver, Args } from '@nestjs/graphql'
+import { GetBaseArgs } from 'src/common/arguments/base.args'
 import { MintingParams } from 'src/common/models'
 import { MintService } from './mint.service'
 import { Mint } from './models'
@@ -13,17 +14,17 @@ export class MintResolver {
   }
 
   @ResolveField(() => String)
-  public async inflation(): Promise<string> {
-    return this.mintService.inflation()
+  public async inflation(@Args() args: GetBaseArgs): Promise<string> {
+    return this.mintService.inflation(args.height)
   }
 
   @ResolveField(() => String)
-  public async annualProvisions(): Promise<string> {
-    return this.mintService.annualProvisions()
+  public async annualProvisions(@Args() args: GetBaseArgs): Promise<string> {
+    return this.mintService.annualProvisions(args.height)
   }
 
   @ResolveField(() => MintingParams)
-  public async parameters(): Promise<MintingParams> {
-    return this.mintService.parameters()
+  public async parameters(@Args() args: GetBaseArgs): Promise<MintingParams> {
+    return this.mintService.parameters(args.height)
   }
 }

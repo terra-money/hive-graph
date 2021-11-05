@@ -3,8 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
+import { TerraModule } from 'nestjs-terra'
 import { join } from 'path'
-import { LoggerOptions } from 'pino'
+import pino from 'pino'
 import { AnythingScalar } from './anything.scalar'
 import { AppResolver } from './app.resolver'
 import { AuthModule } from './auth/auth.module'
@@ -13,14 +14,12 @@ import { registerEnums } from './common/enums'
 import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
-import { LcdModule } from './lcd/lcd.module'
 import { MarketModule } from './market/market.module'
 import { MintModule } from './mint/mint.module'
 import { MsgauthModule } from './msgauth/msgauth.module'
 import { OracleModule } from './oracle/oracle.module'
 import { SlashingModule } from './slashing/slashing.module'
 import { StakingModule } from './staking/staking.module'
-import { SupplyModule } from './supply/supply.module'
 import { TendermintModule } from './tendermint/tendermint.module'
 import { TreasuryModule } from './treasury/treasury.module'
 import { TxModule } from './tx/tx.module'
@@ -34,7 +33,7 @@ import { WasmModule } from './wasm/wasm.module'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => {
-        const pinoHttp: LoggerOptions = {
+        const pinoHttp: pino.LoggerOptions = {
           name: config.get<string>('LOG_NAME'),
           level: config.get<string>('LOG_LEVEL'),
           prettyPrint: false,
@@ -74,7 +73,23 @@ import { WasmModule } from './wasm/wasm.module'
         }
       },
     }),
-    LcdModule,
+    TerraModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const URL = config.get<string>('LCD_URL')
+        const chainID = config.get<string>('CHAIN_ID')
+
+        if (!URL || !chainID) {
+          throw new Error('Invalid LCD_URL or CHAIN_ID variables.')
+        }
+
+        return {
+          URL,
+          chainID,
+        }
+      },
+    }),
     AuthModule,
     BankModule,
     DistributionModule,
@@ -85,7 +100,6 @@ import { WasmModule } from './wasm/wasm.module'
     OracleModule,
     SlashingModule,
     StakingModule,
-    SupplyModule,
     TendermintModule,
     TreasuryModule,
     WasmModule,

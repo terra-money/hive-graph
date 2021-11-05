@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
+import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Authorization } from 'src/common/models'
-import { LcdService } from 'src/lcd/lcd.service'
 import { AuthorizationGrant } from './models'
 
 @Injectable()
@@ -10,7 +10,8 @@ export class MsgauthService {
   constructor(
     @InjectPinoLogger(MsgauthService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
   public async grants(
@@ -20,7 +21,7 @@ export class MsgauthService {
     height?: number,
   ): Promise<AuthorizationGrant[]> {
     try {
-      const grants = await this.lcdService.getLCDClient(height).msgauth.grants(granter, grantee, msgType)
+      const [grants] = await this.lcdService.authz.grants(granter, grantee, msgType, { height })
 
       return grants.map<AuthorizationGrant>((grant) => ({
         expiration: grant.expiration.toISOString(),

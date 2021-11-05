@@ -1,14 +1,8 @@
 import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { ValAddress } from 'nestjs-terra'
-import { Denom } from 'src/common/enums'
+import { GetBaseArgs } from 'src/common/arguments/base.args'
+import { GetRequiredDenomArgs, GetRequiredValidatorArgs } from 'src/common/arguments/required.args'
 import { Coin, OracleParams } from 'src/common/models'
-import {
-  AggregateExchangeRatePrevote,
-  AggregateExchangeRateVote,
-  ExchangeRatePrevote,
-  ExchangeRateVote,
-  Oracle,
-} from './models'
+import { AggregateExchangeRatePrevote, AggregateExchangeRateVote, Oracle } from './models'
 import { OracleService } from './oracle.service'
 
 @Resolver(Oracle)
@@ -20,59 +14,43 @@ export class OracleResolver {
     return {} as Oracle
   }
 
-  @ResolveField(() => [ExchangeRateVote])
-  public async votes(
-    @Args('denom', { nullable: true }) denom?: Denom,
-    @Args('validator', { nullable: true }) validator?: ValAddress,
-  ): Promise<ExchangeRateVote[]> {
-    return this.oracleService.votes(denom, validator)
-  }
-
-  @ResolveField(() => [ExchangeRatePrevote])
-  public async prevotes(
-    @Args('denom', { nullable: true }) denom?: Denom,
-    @Args('validator', { nullable: true }) validator?: ValAddress,
-  ): Promise<ExchangeRatePrevote[]> {
-    return this.oracleService.prevotes(denom, validator)
-  }
-
   @ResolveField(() => [Coin])
-  public async exchangeRates(): Promise<Coin[]> {
-    return this.oracleService.exchangeRates()
+  public async exchangeRates(@Args() args: GetBaseArgs): Promise<Coin[]> {
+    return this.oracleService.exchangeRates(args.height)
   }
 
   @ResolveField(() => Coin, { nullable: true })
-  public async exchangeRate(@Args('denom') denom: Denom): Promise<Coin | null> {
-    return this.oracleService.exchangeRate(denom)
+  public async exchangeRate(@Args() args: GetRequiredDenomArgs): Promise<Coin | null> {
+    return this.oracleService.exchangeRate(args.denom, args.height)
   }
 
   @ResolveField(() => [String])
-  public async activeDenoms(): Promise<string[]> {
-    return this.oracleService.activeDenoms()
+  public async activeDenoms(@Args() args: GetBaseArgs): Promise<string[]> {
+    return this.oracleService.activeDenoms(args.height)
   }
 
   @ResolveField(() => String)
-  public async feederAddress(@Args('validator') validator: ValAddress): Promise<string> {
-    return this.oracleService.feederAddress(validator)
+  public async feederAddress(@Args() args: GetRequiredValidatorArgs): Promise<string> {
+    return this.oracleService.feederAddress(args.validator, args.height)
   }
 
   @ResolveField(() => Int)
-  public async misses(@Args('validator') validator: ValAddress): Promise<number> {
-    return this.oracleService.misses(validator)
+  public async misses(@Args() args: GetRequiredValidatorArgs): Promise<number> {
+    return this.oracleService.misses(args.validator, args.height)
   }
 
   @ResolveField(() => AggregateExchangeRatePrevote)
-  public async aggregatePrevote(@Args('validator') validator: ValAddress): Promise<AggregateExchangeRatePrevote> {
-    return this.oracleService.aggregatePrevote(validator)
+  public async aggregatePrevote(@Args() args: GetRequiredValidatorArgs): Promise<AggregateExchangeRatePrevote> {
+    return this.oracleService.aggregatePrevote(args.validator, args.height)
   }
 
   @ResolveField(() => AggregateExchangeRateVote)
-  public async aggregateVote(@Args('validator') validator: ValAddress): Promise<AggregateExchangeRateVote> {
-    return this.oracleService.aggregateVote(validator)
+  public async aggregateVote(@Args() args: GetRequiredValidatorArgs): Promise<AggregateExchangeRateVote> {
+    return this.oracleService.aggregateVote(args.validator, args.height)
   }
 
   @ResolveField(() => OracleParams)
-  public async parameters(): Promise<OracleParams> {
-    return this.oracleService.parameters()
+  public async parameters(@Args() args: GetBaseArgs): Promise<OracleParams> {
+    return this.oracleService.parameters(args.height)
   }
 }

@@ -1,6 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql'
+import { Coins as TerraCoins } from 'nestjs-terra'
 import { ProposalContent } from '../interfaces'
-import { Coin, TerraCoinsType } from '../models'
+import { Coin } from '../models'
 
 @ObjectType({
   implements: () => [ProposalContent],
@@ -16,7 +17,7 @@ export class CommunityPoolSpendContent implements ProposalContent {
   @Field(() => [Coin])
   amount: Coin[]
 
-  constructor(title: string, description: string, recipient: string, amount: TerraCoinsType) {
+  constructor(title: string, description: string, recipient: string, amount: TerraCoins) {
     this.title = title
     this.description = description
     this.recipient = recipient

@@ -1,6 +1,7 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { GetBaseArgs } from 'src/common/arguments/base.args'
 import { Coin, MarketParams } from 'src/common/models'
-import { CoinArgs } from './arguments'
+import { GetCoinArgs } from './market.args'
 import { MarketService } from './market.service'
 import { Market } from './models'
 
@@ -14,17 +15,17 @@ export class MarketResolver {
   }
 
   @ResolveField(() => Coin)
-  public async swapRate(@Args() args: CoinArgs): Promise<Coin> {
-    return this.marketService.swapRate(args.offerCoin, args.askDenom)
+  public async swapRate(@Args() args: GetCoinArgs): Promise<Coin> {
+    return this.marketService.swapRate(args.offerCoin, args.askDenom, args.height)
   }
 
   @ResolveField(() => String)
-  public async terraPoolDelta(): Promise<string> {
-    return this.marketService.terraPoolDelta()
+  public async terraPoolDelta(@Args() args: GetBaseArgs): Promise<string> {
+    return this.marketService.terraPoolDelta(args.height)
   }
 
   @ResolveField(() => MarketParams)
-  public async parameters(): Promise<MarketParams> {
-    return this.marketService.parameters()
+  public async parameters(@Args() args: GetBaseArgs): Promise<MarketParams> {
+    return this.marketService.parameters(args.height)
   }
 }

@@ -2,10 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Account implements BaseAccount {
+type Account {
   account_number: Int!
   address: String!
-  coins: [Coin!]!
   public_key: PublicKeyUnion
   sequence: Int!
 }
@@ -35,7 +34,7 @@ type ApplicationVersion {
 }
 
 type Auth {
-  accountInfo(address: String!): Account!
+  accountInfo(address: String!, height: Float): Account!
 }
 
 type AuthorizationGrant {
@@ -43,18 +42,11 @@ type AuthorizationGrant {
   expiration: String!
 }
 
-union AuthorizationUnion = GenericAuthorization | SendAuthorization
+union AuthorizationUnion = GenericAuthorization | SendAuthorization | StakeAuthorization
 
 type Bank {
   balance(address: String!, height: Float): [Coin!]!
-}
-
-interface BaseAccount {
-  account_number: Int!
-  address: String!
-  coins: [Coin!]!
-  public_key: PublicKeyUnion
-  sequence: Int!
+  total: [Coin!]!
 }
 
 type Block {
@@ -70,7 +62,7 @@ type BlockData {
 
 type BlockId {
   hash: String!
-  parts: Parts!
+  part_set_header: Parts!
 }
 
 type BlockInfo {
@@ -111,7 +103,6 @@ type ContractInfo {
   admin: String
   code_id: Int!
   init_msg: JSON!
-  migratable: Boolean
   owner: String!
 }
 
@@ -158,11 +149,10 @@ type DepositParams {
 }
 
 type Distribution {
-  communityPool: [Coin!]!
-  parameters: DistributionParams!
-  rewards(delegator: String!): Rewards!
-  validatorRewards(validator: String!): ValidatorRewards!
-  withdrawAddress(delegator: String!): String!
+  communityPool(height: Float): [Coin!]!
+  parameters(height: Float): DistributionParams!
+  rewards(delegator: String!, height: Float): Rewards!
+  withdrawAddress(delegator: String!, height: Float): String!
 }
 
 type DistributionParams {
@@ -173,37 +163,24 @@ type DistributionParams {
 }
 
 type Evidence {
-  evidence: String
-}
-
-type ExchangeRatePrevote {
-  denom: Denom
-  hash: String
-  submit_block: Int
-  voter: String
-}
-
-type ExchangeRateVote {
-  denom: Denom
-  exchange_rate: String!
-  voter: String
+  evidence: [String!]
 }
 
 type GenericAuthorization {
-  grant_msg_type: String!
+  msg: String!
 }
 
 type Gov {
-  depositParameters: DepositParams!
-  deposits(proposalId: Int!): [MsgDeposit!]!
-  parameters: GovParams!
-  proposal(proposalId: Int!): Proposal!
-  proposals: [Proposal!]!
-  proposer(proposalId: Int!): String!
-  tally(proposalId: Int!): Tally!
-  tallyParameters: TallyParams!
-  votes(proposalId: Int!): [MsgVote!]!
-  votingParameters: VotingParams!
+  depositParameters(height: Float): DepositParams!
+  deposits(height: Float, proposalId: Int!): [MsgDeposit!]!
+  parameters(height: Float): GovParams!
+  proposal(height: Float, proposalId: Int!): Proposal!
+  proposals(height: Float): [Proposal!]!
+  proposer(height: Float, proposalId: Int!): String!
+  tally(height: Float, proposalId: Int!): Tally!
+  tallyParameters(height: Float): TallyParams!
+  votes(height: Float, proposalId: Int!): [MsgVote!]!
+  votingParameters(height: Float): VotingParams!
 }
 
 type GovParams {
@@ -229,11 +206,6 @@ type Header {
   version: Version!
 }
 
-type IOData {
-  address: String!
-  coins: [Coin!]!
-}
-
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -242,14 +214,19 @@ scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 type LastCommit {
   block_id: BlockId!
   height: String!
-  round: String!
+  round: Float!
   signatures: [Signature!]!
 }
 
+type LegacyAminoMultisigPublicKey {
+  public_keys: [SimplePublicKey!]!
+  threshold: Float!
+}
+
 type Market {
-  parameters: MarketParams!
-  swapRate(askDenom: Denom!, offerCoin: CoinInput!): Coin!
-  terraPoolDelta: String!
+  parameters(height: Float): MarketParams!
+  swapRate(askDenom: Denom!, height: Float, offerCoin: CoinInput!): Coin!
+  terraPoolDelta(height: Float): String!
 }
 
 type MarketParams {
@@ -259,9 +236,9 @@ type MarketParams {
 }
 
 type Mint {
-  annualProvisions: String!
-  inflation: String!
-  parameters: MintingParams!
+  annualProvisions(height: Float): String!
+  inflation(height: Float): String!
+  parameters(height: Float): MintingParams!
 }
 
 type MintingParams {
@@ -280,19 +257,13 @@ type MsgDeposit {
 }
 
 type MsgVote {
-  option: VoteOption!
+  options: [WeightedVoteOption!]!
   proposal_id: Int!
   voter: String!
 }
 
 type Msgauth {
-  grants(grantee: String!, granter: String!, msgType: String): [AuthorizationGrant!]!
-}
-
-type MultisigPublicKey {
-  pubkeys: [PublicKey!]!
-  threshold: String!
-  type: String!
+  grants(grantee: String!, granter: String!, height: Float, msgType: String): [AuthorizationGrant!]!
 }
 
 type NodeInfo {
@@ -308,16 +279,14 @@ type NodeInfo {
 }
 
 type Oracle {
-  activeDenoms: [Denom!]!
-  aggregatePrevote(validator: String!): AggregateExchangeRatePrevote!
-  aggregateVote(validator: String!): AggregateExchangeRateVote!
-  exchangeRate(denom: String!): Coin
-  exchangeRates: [Coin!]!
-  feederAddress(validator: String!): String!
-  misses(validator: String!): Int!
-  parameters: OracleParams!
-  prevotes(denom: String, validator: String): [ExchangeRatePrevote!]!
-  votes(denom: String, validator: String): [ExchangeRateVote!]!
+  activeDenoms(height: Float): [Denom!]!
+  aggregatePrevote(height: Float, validator: String!): AggregateExchangeRatePrevote!
+  aggregateVote(height: Float, validator: String!): AggregateExchangeRateVote!
+  exchangeRate(denom: Denom!, height: Float): Coin
+  exchangeRates(height: Float): [Coin!]!
+  feederAddress(height: Float, validator: String!): String!
+  misses(height: Float, validator: String!): Int!
+  parameters(height: Float): OracleParams!
 }
 
 type OracleParams {
@@ -342,12 +311,16 @@ type OtherInfo {
 }
 
 type ParameterChangeContent implements ProposalContent {
-  changes: ParameterChangesUnion
+  changes: [ParameterChanges!]
   description: String!
   title: String!
 }
 
-union ParameterChangesUnion = DistributionParams | GovParams | MarketParams | MintingParams | OracleParams | SlashingParams | StakingParams | TreasuryParams | WasmParams
+type ParameterChanges {
+  key: String!
+  subspace: String!
+  value: String!
+}
 
 type Parts {
   hash: String!
@@ -366,7 +339,7 @@ type Proposal {
   deposit_end_time: String!
   final_tally_result: Tally!
   id: ID!
-  proposal_status: ProposalStatus!
+  status: ProposalStatus!
   submit_time: String!
   total_deposit: [Coin!]!
   voting_end_time: String!
@@ -407,7 +380,7 @@ type ProtoFee {
 
 type ProtoSignerInfos {
   mode_info: Anything!
-  public_key: Anything!
+  public_key: PublicKeyUnion!
   sequence: String!
 }
 
@@ -429,12 +402,7 @@ type ProtocolVersion {
   p2p: String!
 }
 
-type PublicKey {
-  type: String!
-  value: String!
-}
-
-union PublicKeyUnion = MultisigPublicKey | PublicKey
+union PublicKeyUnion = LegacyAminoMultisigPublicKey | SimplePublicKey | ValConsPublicKey
 
 type Query {
   auth: Auth!
@@ -448,7 +416,6 @@ type Query {
   ping: String!
   slashing: Slashing!
   staking: Staking!
-  supply: Supply!
   tendermint: Tendermint!
   treasury: Treasury!
   tx: Tx!
@@ -513,31 +480,45 @@ type SigningInfo {
   tombstoned: Boolean!
 }
 
+type SimplePublicKey {
+  key: String!
+}
+
 type Slashing {
-  parameters: SlashingParams!
-  signingInfos(valConsPubKey: String): [SigningInfo!]!
+  parameters(height: Float): SlashingParams!
+  signingInfos(height: Float): [SigningInfo!]!
 }
 
 type SlashingParams {
   downtime_jail_duration: String
-  max_evidence_age: Int
   min_signed_per_window: String
   signed_blocks_window: Int
   slash_fraction_double_sign: String
   slash_fraction_downtime: String
 }
 
+type StakeAuthorization {
+  allow_list: StakeAuthorizationValidators
+  authorization_type: Float!
+  deny_list: StakeAuthorizationValidators
+  max_tokens: Coin
+}
+
+type StakeAuthorizationValidators {
+  addresses: [String!]!
+}
+
 type Staking {
-  bondedValidators(delegator: String!): [Validator!]!
-  delegation(delegator: String!, validator: String!): Delegation
-  delegations(delegator: String, validator: String): [Delegation!]!
-  parameters: StakingParams!
-  pool: StakingPool!
-  redelegations(delegator: String, validatorDst: String, validatorSrc: String): [Redelegation!]!
-  unbondingDelegation(delegator: String, validator: String): UnbondingDelegation
-  unbondingDelegations(delegator: String, validator: String): [UnbondingDelegation!]!
-  validator(validator: String!): Validator
-  validators: [Validator!]!
+  bondedValidators(delegator: String!, height: Float): [Validator!]!
+  delegation(delegator: String!, height: Float, validator: String!): Delegation
+  delegations(delegator: String, height: Float, validator: String): [Delegation!]!
+  parameters(height: Float): StakingParams!
+  pool(height: Float): StakingPool!
+  redelegations(delegator: String!, validatorDst: String, validatorSrc: String): [Redelegation!]!
+  unbondingDelegation(delegator: String, height: Float, validator: String): UnbondingDelegation
+  unbondingDelegations(delegator: String, height: Float, validator: String): [UnbondingDelegation!]!
+  validator(height: Float, validator: String!): Validator
+  validators(height: Float): [Validator!]!
 }
 
 type StakingParams {
@@ -563,17 +544,6 @@ type StdSignature {
   signature: String!
 }
 
-type StdTx {
-  fee: StdFee!
-  memo: String!
-  msg: [Anything!]!
-  signatures: [StdSignature!]!
-}
-
-type Supply {
-  total: [Coin!]!
-}
-
 type Tally {
   abstain: Int!
   no: Int!
@@ -584,7 +554,7 @@ type Tally {
 type TallyParams {
   quorum: String!
   threshold: String!
-  veto: String!
+  veto_threshold: String!
 }
 
 type TaxRateUpdateContent implements ProposalContent {
@@ -597,7 +567,7 @@ type Tendermint {
   blockInfo(height: Int): BlockInfo!
   nodeInfo: NodeInfo!
   syncing: Boolean!
-  validatorSet(height: Int): ValidatorSet!
+  validatorSet(height: Int): [DelegateValidator!]!
 }
 
 type TextContent implements ProposalContent {
@@ -606,12 +576,12 @@ type TextContent implements ProposalContent {
 }
 
 type Treasury {
-  parameters: TreasuryParams!
-  rewardWeight: String!
-  seigniorageProceeds: Coin!
-  taxCap(denom: Denom!): Coin!
-  taxProceeds: [Coin!]!
-  taxRate(height: Int): String!
+  parameters(denom: Denom!, height: Float): TreasuryParams!
+  rewardWeight(denom: Denom!, height: Float): String!
+  seigniorageProceeds(denom: Denom!, height: Float): Coin!
+  taxCap(denom: Denom!, height: Float): Coin!
+  taxProceeds(denom: Denom!, height: Float): [Coin!]!
+  taxRate(denom: Denom!, height: Float): String!
 }
 
 type TreasuryParams {
@@ -625,7 +595,6 @@ type TreasuryParams {
 }
 
 type Tx {
-  byHeight(height: Float!): [TxInfo!]!
   txInfo(txHash: String!): TxInfo!
 }
 
@@ -672,13 +641,17 @@ type UnbondingDelegationEntry {
 }
 
 type Utils {
-  calculateTax(coin: CoinInput!): Coin!
+  calculateTax(coin: CoinInput!, height: Float): Coin!
   validatorsWithVotingPower: [ValidatorVotingPower!]!
+}
+
+type ValConsPublicKey {
+  key: String!
 }
 
 type Validator {
   commission: ValidatorCommission!
-  consensus_pubkey: String!
+  consensus_pubkey: ValConsPublicKey!
   delegator_shares: String!
   description: ValidatorDescription!
   jailed: Boolean!
@@ -701,16 +674,6 @@ type ValidatorDescription {
   moniker: String!
   security_contact: String!
   website: String!
-}
-
-type ValidatorRewards {
-  self_bond_rewards: [Coin!]!
-  val_commission: [Coin!]!
-}
-
-type ValidatorSet {
-  block_height: String!
-  validators: [DelegateValidator!]!
 }
 
 type ValidatorVotingPower {
@@ -742,14 +705,19 @@ type VotingParams {
 }
 
 type Wasm {
-  codeInfo(codeID: Int!): CodeInfo!
-  contractInfo(contractAddress: String!): ContractInfo!
-  contractQuery(contractAddress: String!, height: Float, query: JSON!): Anything!
-  parameters: WasmParams!
+  codeInfo(codeID: Int!, height: Float): CodeInfo!
+  contractInfo(address: String!, height: Float): ContractInfo!
+  contractQuery(address: String!, height: Float, query: JSON!): Anything!
+  parameters(height: Float): WasmParams!
 }
 
 type WasmParams {
   max_contract_gas: Int
   max_contract_msg_size: Int
   max_contract_size: Int
+}
+
+type WeightedVoteOption {
+  option: VoteOption!
+  weight: String!
 }

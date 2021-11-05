@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { Coin as TerraCoin, MarketAPI } from 'nestjs-terra'
+import { Coin as TerraCoin, InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, MarketParams } from 'src/common/models'
-import { LcdService } from 'src/lcd/lcd.service'
 
 @Injectable()
 export class MarketService {
   constructor(
     @InjectPinoLogger(MarketService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
   public async swapRate(offerCoin: Coin, askDenom: string, height?: number): Promise<Coin> {
     const { denom, amount } = offerCoin
 
     try {
-      const coin = await this.lcdService.getLCDClient(height).market.swapRate(new TerraCoin(denom, amount), askDenom)
+      const coin = await this.lcdService.market.swapRate(new TerraCoin(denom, amount), askDenom, { height })
 
       return Coin.fromTerraCoin(coin)
     } catch (err) {
@@ -34,14 +34,7 @@ export class MarketService {
 
   public async terraPoolDelta(height?: number): Promise<string> {
     try {
-      let delta
-      const marketApi = this.lcdService.getLCDClient(height).market
-
-      if (marketApi instanceof MarketAPI) {
-        delta = await marketApi.poolDelta()
-      } else {
-        delta = await marketApi.terraPoolDelta()
-      }
+      const delta = await this.lcdService.market.poolDelta({ height })
 
       return delta.toString()
     } catch (err) {
@@ -53,13 +46,12 @@ export class MarketService {
 
   public async parameters(height?: number): Promise<MarketParams> {
     try {
-      const params = await this.lcdService.getLCDClient(height).market.parameters()
+      const params = await this.lcdService.market.parameters({ height })
 
       return {
         pool_recovery_period: params.pool_recovery_period,
         base_pool: params.base_pool.toString(),
-        min_stability_spread:
-          'min_spread' in params ? params.min_spread.toString() : params.min_stability_spread.toString(),
+        min_stability_spread: params.min_stability_spread.toString(),
       }
     } catch (err) {
       this.logger.error({ err }, 'he current Market module parameters.')

@@ -1,5 +1,5 @@
-import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Denom } from 'src/common/enums'
+import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
+import { GetRequiredDenomArgs } from 'src/common/arguments/required.args'
 import { Coin, TreasuryParams } from 'src/common/models'
 import { Treasury } from './models'
 import { TreasuryService } from './treasury.service'
@@ -14,32 +14,32 @@ export class TreasuryResolver {
   }
 
   @ResolveField(() => Coin)
-  public async taxCap(@Args('denom', { type: () => Denom }) denom: Denom): Promise<Coin> {
-    return this.treasuryService.taxCap(denom)
+  public async taxCap(@Args() args: GetRequiredDenomArgs): Promise<Coin> {
+    return this.treasuryService.taxCap(args.denom, args.height)
   }
 
   @ResolveField(() => String)
-  public async taxRate(@Args('height', { type: () => Int, nullable: true }) height?: number): Promise<string> {
-    return this.treasuryService.taxRate(height)
+  public async taxRate(@Args() args: GetRequiredDenomArgs): Promise<string> {
+    return this.treasuryService.taxRate(args.height)
   }
 
   @ResolveField(() => String)
-  public async rewardWeight(): Promise<string> {
-    return this.treasuryService.rewardWeight()
+  public async rewardWeight(@Args() args: GetRequiredDenomArgs): Promise<string> {
+    return this.treasuryService.rewardWeight(args.height)
   }
 
   @ResolveField(() => [Coin])
-  public async taxProceeds(): Promise<Coin[]> {
-    return this.treasuryService.taxProceeds()
+  public async taxProceeds(@Args() args: GetRequiredDenomArgs): Promise<Coin[]> {
+    return this.treasuryService.taxProceeds(args.height)
   }
 
   @ResolveField(() => Coin)
-  public async seigniorageProceeds(): Promise<Coin> {
-    return this.treasuryService.seigniorageProceeds()
+  public async seigniorageProceeds(@Args() args: GetRequiredDenomArgs): Promise<Coin> {
+    return this.treasuryService.seigniorageProceeds(args.height)
   }
 
   @ResolveField(() => TreasuryParams)
-  public async parameters(): Promise<TreasuryParams> {
-    return this.treasuryService.parameters()
+  public async parameters(@Args() args: GetRequiredDenomArgs): Promise<TreasuryParams> {
+    return this.treasuryService.parameters(args.height)
   }
 }

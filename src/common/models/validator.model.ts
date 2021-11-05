@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { Validator as TerraValidator } from 'nestjs-terra'
-import { Validator as LegacyTerraValidator } from 'nestjs-terra-legacy'
+import { ValConsPublicKey } from './public-key.model'
 
 @ObjectType()
 export class CommissionRates {
@@ -13,7 +13,7 @@ export class CommissionRates {
   @Field()
   max_change_rate!: string
 
-  static fromTerra(rates: TerraValidator.CommissionRates | LegacyTerraValidator.CommissionRates): CommissionRates {
+  static fromTerra(rates: TerraValidator.CommissionRates): CommissionRates {
     return {
       rate: rates.rate.toString(),
       max_rate: rates.max_rate.toString(),
@@ -30,7 +30,7 @@ export class ValidatorCommission {
   @Field()
   update_time!: string
 
-  static fromTerra(commission: TerraValidator.Commission | LegacyTerraValidator.Commission): ValidatorCommission {
+  static fromTerra(commission: TerraValidator.Commission): ValidatorCommission {
     return {
       commission_rates: CommissionRates.fromTerra(commission.commission_rates),
       update_time: commission.update_time.toISOString(),
@@ -55,7 +55,7 @@ export class ValidatorDescription {
   @Field()
   security_contact!: string
 
-  static fromTerra(description: TerraValidator.Description | LegacyTerraValidator.Description): ValidatorDescription {
+  static fromTerra(description: TerraValidator.Description): ValidatorDescription {
     return {
       moniker: description.moniker,
       identity: description.identity,
@@ -71,8 +71,8 @@ export class Validator {
   @Field()
   operator_address!: string
 
-  @Field()
-  consensus_pubkey!: string
+  @Field(() => ValConsPublicKey)
+  consensus_pubkey!: ValConsPublicKey
 
   @Field()
   jailed!: boolean
@@ -101,11 +101,10 @@ export class Validator {
   @Field()
   min_self_delegation!: string
 
-  static fromTerraValidator(validator: TerraValidator | LegacyTerraValidator): Validator {
+  static fromTerraValidator(validator: TerraValidator): Validator {
     return {
       operator_address: validator.operator_address,
-      consensus_pubkey:
-        typeof validator.consensus_pubkey === 'string' ? validator.consensus_pubkey : validator.consensus_pubkey.value,
+      consensus_pubkey: { key: validator.consensus_pubkey.key },
       jailed: validator.jailed,
       status: validator.status,
       tokens: validator.tokens.toString(),

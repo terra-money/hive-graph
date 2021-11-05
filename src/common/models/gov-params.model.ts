@@ -25,7 +25,7 @@ export class TallyParams {
   threshold!: string
 
   @Field()
-  veto!: string
+  veto_threshold!: string
 }
 
 @ObjectType()

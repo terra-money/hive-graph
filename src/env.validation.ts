@@ -27,15 +27,6 @@ export class EnvironmentVariables {
   THROTTLE_LIMIT = 20 // The maximum number of requests within the TTL limit
 
   @IsString()
-  LEGACY_LCD_URL: string | undefined
-
-  @IsString()
-  LEGACY_CHAIN_ID: string | undefined
-
-  @IsNumberString()
-  LEGACY_LCD_MAX_HEIGHT: number | undefined
-
-  @IsString()
   LCD_URL: string | undefined
 
   @IsString()

@@ -1,5 +1,5 @@
 import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Tendermint, NodeInfo, ValidatorSet, BlockInfo } from './models'
+import { Tendermint, NodeInfo, DelegateValidator, BlockInfo } from './models'
 import { TendermintService } from './tendermint.service'
 
 @Resolver(Tendermint)
@@ -21,10 +21,10 @@ export class TendermintResolver {
     return this.tendermintService.syncing()
   }
 
-  @ResolveField(() => ValidatorSet)
+  @ResolveField(() => [DelegateValidator])
   public async validatorSet(
     @Args('height', { type: () => Int, nullable: true }) height?: number,
-  ): Promise<ValidatorSet> {
+  ): Promise<DelegateValidator[]> {
     return this.tendermintService.validatorSet(height)
   }
 

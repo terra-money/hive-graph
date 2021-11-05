@@ -1,50 +1,32 @@
 import { Injectable } from '@nestjs/common'
-import { TxInfo } from '@terra-money/terra.js'
-import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
+import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
-import { LcdService } from 'src/lcd/lcd.service'
-import { TendermintTxResponse } from './types'
+import { TxInfo } from './models'
 
 @Injectable()
 export class TxService {
   constructor(
     @InjectPinoLogger(TxService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
-  public async txInfo(txHash: string, height?: number): Promise<TxInfo> {
+  public async txInfo(txHash: string): Promise<TxInfo> {
     try {
-      const tx = await this.getTx(txHash)
+      const tx = await this.lcdService.tx.txInfo(txHash)
 
-      return TxInfo.fromData(tx.tx_response)
+      return tx
     } catch (err) {
-      this.logger.error({ err }, 'Error getting tx %s info.')
+      console.log(err)
+      this.logger.error({ err }, 'Error getting tx %s info.', txHash)
 
       throw new LCDClientError(err)
     }
   }
 
-  // TODO: MUTATION PENDING
-  // public async create(sourceAddress: string, options: CreateTxOptions): Promise<StdSignMsg> {
-  //   try {
-  //     const tx = await this.lcdService.getLCDClient(height).tx.create(sourceAddress, options)
-  //   } catch (err) {
-  //     this.logger.error({ err, options }, 'Error creating tx %s.', sourceAddress)
+  // public async txInfosByHeight(height?: number): Promise<TxInfo[]> {}
 
-  //     throw new LCDClientError(err)
-  //   }
-  // }
-
-  // temp!
-  public async txInfosByHeight(height: number): Promise<TxInfo[]> {
-    const config = this.lcdService.getLCDConfig()
-    return axios.get<TxInfo[]>(`${config.URL}/index/tx/by_height/${height}`).then((r) => r.data)
-  }
-
-  private async getTx(txHash: string): Promise<TendermintTxResponse> {
-    const config = this.lcdService.getLCDConfig()
-    return axios.get<TendermintTxResponse>(`${config.URL}/cosmos/tx/v1beta1/txs/${txHash}`).then((r) => r.data)
-  }
+  // public async search(options: Partial<TxSearchOptions>): Promise<TxSearchResult> {}
 }

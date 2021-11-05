@@ -2,6 +2,15 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { VoteOption } from '../enums'
 
 @ObjectType()
+export class WeightedVoteOption {
+  @Field(() => VoteOption)
+  option!: number
+
+  @Field()
+  weight!: string
+}
+
+@ObjectType()
 export class MsgVote {
   @Field(() => Int)
   proposal_id!: number
@@ -9,8 +18,8 @@ export class MsgVote {
   @Field()
   voter!: string
 
-  @Field(() => VoteOption)
-  option!: string
+  @Field(() => [WeightedVoteOption])
+  options!: WeightedVoteOption[]
 
   constructor(data: MsgVote) {
     Object.assign(this, data)

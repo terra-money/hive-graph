@@ -1,6 +1,7 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { Coin } from 'src/common/models'
 import { Utils, ValidatorVotingPower } from './models'
+import { GetUtilsArgs } from './utils.args'
 import { UtilsService } from './utils.service'
 
 @Resolver(Utils)
@@ -13,8 +14,8 @@ export class UtilsResolver {
   }
 
   @ResolveField(() => Coin)
-  public async calculateTax(@Args('coin', { type: () => Coin }) coin: Coin): Promise<Coin> {
-    return this.utilsService.calculateTax(coin)
+  public async calculateTax(@Args() args: GetUtilsArgs): Promise<Coin> {
+    return this.utilsService.calculateTax(args.coin)
   }
 
   @ResolveField(() => ValidatorVotingPower)

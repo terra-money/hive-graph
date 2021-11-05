@@ -1,12 +1,12 @@
 import { InputType, Field, Int } from '@nestjs/graphql'
+import { AnythingScalar } from 'src/anything.scalar'
 import { Coin } from 'src/common/models'
-import { MsgType, MsgUnion } from '../unions'
 import { StdFee } from './std-fee.model'
 
 @InputType()
 export class CreateTxOptions {
-  @Field(() => [MsgUnion])
-  msgs!: MsgType[]
+  @Field(() => [AnythingScalar])
+  msgs!: any[]
 
   @Field(() => StdFee, { nullable: true })
   fee?: StdFee

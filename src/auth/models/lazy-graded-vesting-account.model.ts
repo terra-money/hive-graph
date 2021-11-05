@@ -1,22 +1,22 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
-import { AccAddress } from '@terra-money/terra.js'
+import { AccAddress } from 'nestjs-terra'
 import { Coin } from 'src/common/models'
-import { PublicKeyType } from 'src/common/unions'
-import { BaseAccount } from '../interfaces'
+import { PublicKeyType, PublicKeyUnion } from 'src/common/unions'
 import { VestingSchedule } from './vesting-schedule.model'
 
-@ObjectType({
-  implements: () => [BaseAccount],
-})
-export class VestingAccount implements BaseAccount {
+@ObjectType()
+export class LazyGradedVestingAccount {
+  @Field()
+  @Field(() => String)
   address!: AccAddress
 
-  coins!: Coin[]
-
+  @Field(() => PublicKeyUnion, { nullable: true })
   public_key?: PublicKeyType | null
 
+  @Field(() => Int)
   account_number!: number
 
+  @Field(() => Int)
   sequence!: number
 
   @Field(() => [Coin])

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { NodeInfo, ValidatorSet, BlockInfo } from '.'
+import { NodeInfo, BlockInfo, DelegateValidator } from '.'
 
 @ObjectType()
 export class Tendermint {
@@ -9,8 +9,8 @@ export class Tendermint {
   @Field(() => Boolean)
   syncing!: Promise<boolean>
 
-  @Field(() => ValidatorSet)
-  validatorSet!: Promise<ValidatorSet>
+  @Field(() => [DelegateValidator])
+  validatorSet!: Promise<DelegateValidator[]>
 
   @Field(() => BlockInfo)
   blockInfo!: Promise<BlockInfo>

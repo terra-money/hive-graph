@@ -5,4 +5,7 @@ import { Coin } from 'src/common/models'
 export class Bank {
   @Field(() => [Coin])
   balance!: Promise<Coin[]>
+
+  @Field(() => [Coin])
+  total!: Promise<Coin[]>
 }

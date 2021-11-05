@@ -1,5 +1,6 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { AuthorizationGrant, Msgauth } from './models'
+import { GetMsgauthArgs } from './msgauth.args'
 import { MsgauthService } from './msgauth.service'
 
 @Resolver(Msgauth)
@@ -12,11 +13,7 @@ export class MsgauthResolver {
   }
 
   @ResolveField(() => [AuthorizationGrant])
-  public async grants(
-    @Args('granter') granter: string,
-    @Args('grantee') grantee: string,
-    @Args('msgType', { nullable: true }) msgType?: string,
-  ): Promise<AuthorizationGrant[]> {
-    return this.msgauthService.grants(granter, grantee, msgType)
+  public async grants(@Args() args: GetMsgauthArgs): Promise<AuthorizationGrant[]> {
+    return this.msgauthService.grants(args.granter, args.grantee, args.msgType, args.height)
   }
 }

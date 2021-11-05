@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { SlashingParams as LegacyTerraSlashingParams, SlashingAPI as LegacySlashingAPI } from 'nestjs-terra-legacy'
+import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { SlashingParams } from 'src/common/models'
-import { LcdService } from 'src/lcd/lcd.service'
 import { SigningInfo } from './models'
 
 @Injectable()
@@ -11,12 +10,13 @@ export class SlashingService {
   constructor(
     @InjectPinoLogger(SlashingService.name)
     private readonly logger: PinoLogger,
-    private readonly lcdService: LcdService,
+    @InjectLCDClient()
+    private readonly lcdService: LCDClient,
   ) {}
 
-  public async signingInfos(valConsPubKey?: string, height?: number): Promise<SigningInfo[]> {
+  public async signingInfos(height?: number): Promise<SigningInfo[]> {
     try {
-      const infos = await this.lcdService.getLCDClient(height).slashing.signingInfos(valConsPubKey)
+      const infos = await this.lcdService.slashing.signingInfos({ height })
 
       return infos.map<SigningInfo>((info) => ({
         address: info.address,
@@ -35,17 +35,9 @@ export class SlashingService {
 
   public async parameters(height?: number): Promise<SlashingParams> {
     try {
-      let maxEvidenceAge: number | null = null
-      const slashingApi = this.lcdService.getLCDClient(height).slashing
-      const params = await slashingApi.parameters()
-
-      if (slashingApi instanceof LegacySlashingAPI) {
-        const value = (params as LegacyTerraSlashingParams)?.max_evidence_age
-        maxEvidenceAge = !isNaN(value) ? value : 0
-      }
+      const params = await this.lcdService.slashing.parameters({ height })
 
       return {
-        max_evidence_age: maxEvidenceAge,
         signed_blocks_window: params.signed_blocks_window,
         min_signed_per_window: params.min_signed_per_window.toString(),
         downtime_jail_duration: params.downtime_jail_duration.toString(),

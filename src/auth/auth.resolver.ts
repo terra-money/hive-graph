@@ -1,4 +1,5 @@
 import { Args, Resolver, Query, ResolveField } from '@nestjs/graphql'
+import { GetAddressArgs } from 'src/common/arguments/address.args'
 import { AuthService } from './auth.service'
 import { Account, Auth } from './models/'
 
@@ -12,7 +13,7 @@ export class AuthResolver {
   }
 
   @ResolveField(() => Account)
-  public async accountInfo(@Args('address') address: string): Promise<Account> {
-    return this.authService.accountInfo(address)
+  public async accountInfo(@Args() args: GetAddressArgs): Promise<Account> {
+    return this.authService.accountInfo(args.address)
   }
 }
