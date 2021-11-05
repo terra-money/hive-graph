@@ -1,5 +1,6 @@
 import { Args, Int, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Tendermint, NodeInfo, DelegateValidator, BlockInfo } from './models'
+import { AnythingScalar } from 'src/anything.scalar'
+import { Tendermint, DelegateValidator, BlockInfo } from './models'
 import { TendermintService } from './tendermint.service'
 
 @Resolver(Tendermint)
@@ -11,8 +12,8 @@ export class TendermintResolver {
     return {} as Tendermint
   }
 
-  @ResolveField(() => NodeInfo)
-  public async nodeInfo(): Promise<NodeInfo> {
+  @ResolveField(() => AnythingScalar)
+  public async nodeInfo(): Promise<any> {
     return this.tendermintService.nodeInfo()
   }
 

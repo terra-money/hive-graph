@@ -266,18 +266,6 @@ type Msgauth {
   grants(grantee: String!, granter: String!, height: Float, msgType: String): [AuthorizationGrant!]!
 }
 
-type NodeInfo {
-  application_version: ApplicationVersion!
-  channels: String!
-  id: ID!
-  listen_addr: String!
-  moniker: String!
-  network: String!
-  other: OtherInfo!
-  protocol_version: ProtocolVersion!
-  version: String!
-}
-
 type Oracle {
   activeDenoms(height: Float): [Denom!]!
   aggregatePrevote(height: Float, validator: String!): AggregateExchangeRatePrevote!
@@ -565,7 +553,7 @@ type TaxRateUpdateContent implements ProposalContent {
 
 type Tendermint {
   blockInfo(height: Int): BlockInfo!
-  nodeInfo: NodeInfo!
+  nodeInfo: Anything!
   syncing: Boolean!
   validatorSet(height: Int): [DelegateValidator!]!
 }
