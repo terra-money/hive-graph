@@ -1,5 +1,6 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { GetAddressArgs } from 'src/common/arguments/address.args'
+import { GetBaseArgs } from 'src/common/arguments/base.args'
 import { Coin } from 'src/common/models'
 import { BankService } from './bank.service'
 import { Bank } from './models'
@@ -19,7 +20,7 @@ export class BankResolver {
   }
 
   @ResolveField(() => [Coin])
-  public async total(): Promise<Coin[]> {
-    return this.bankService.total()
+  public async total(@Args() args: GetBaseArgs): Promise<Coin[]> {
+    return this.bankService.total(args.height)
   }
 }

@@ -1,17 +1,16 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { AnythingScalar } from 'src/anything.scalar'
-import { BlockInfo, DelegateValidator } from '.'
+import { NodeInfo, ValidatorSet, BlockInfo } from '.'
 
 @ObjectType()
 export class Tendermint {
-  @Field(() => AnythingScalar)
-  nodeInfo!: Promise<any>
+  @Field(() => NodeInfo)
+  nodeInfo!: Promise<NodeInfo>
 
   @Field(() => Boolean)
   syncing!: Promise<boolean>
 
-  @Field(() => [DelegateValidator])
-  validatorSet!: Promise<DelegateValidator[]>
+  @Field(() => ValidatorSet)
+  validatorSet!: Promise<ValidatorSet>
 
   @Field(() => BlockInfo)
   blockInfo!: Promise<BlockInfo>

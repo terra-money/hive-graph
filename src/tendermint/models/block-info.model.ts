@@ -15,7 +15,7 @@ export class BlockId {
   hash!: string
 
   @Field(() => Parts)
-  part_set_header!: Parts
+  parts!: Parts
 }
 
 @ObjectType()
@@ -26,8 +26,8 @@ export class BlockData {
 
 @ObjectType()
 export class Evidence {
-  @Field(() => [String], { nullable: true })
-  evidence!: string[] | null
+  @Field(() => String, { nullable: true })
+  evidence!: string | null
 }
 
 @ObjectType()
@@ -90,7 +90,7 @@ export class LastCommit {
   height!: string
 
   @Field()
-  round!: number
+  round!: string
 
   @Field(() => BlockId)
   block_id!: BlockId

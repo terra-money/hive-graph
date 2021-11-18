@@ -39,6 +39,11 @@ export enum VoteOption {
   NoWithVeto = 'NoWithVeto',
 }
 
+export enum OrderBy {
+  ORDER_BY_ASC = 1,
+  ORDER_BY_DESC = 2,
+}
+
 export function registerEnums() {
   registerEnumType(Denom, {
     name: 'Denom',
@@ -50,5 +55,9 @@ export function registerEnums() {
 
   registerEnumType(VoteOption, {
     name: 'VoteOption',
+  })
+
+  registerEnumType(OrderBy, {
+    name: 'OrderBy',
   })
 }

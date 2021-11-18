@@ -20,3 +20,5 @@ export { GovParams, DepositParams, TallyParams, VotingParams } from './gov-param
 export { CommunityPoolSpendContent } from './community-pool-spend-content.model'
 export { SendAuthorization, GenericAuthorization, Authorization, StakeAuthorization } from './authorization.model'
 export { PublicKey, SimplePublicKey, LegacyAminoMultisigPublicKey, ValConsPublicKey } from './public-key.model'
+export { IbcParams } from './ibc-params.model'
+export { Pagination } from './pagination.model'

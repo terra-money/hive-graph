@@ -1,22 +1,10 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
+import { ObjectType, Field } from '@nestjs/graphql'
+import { Pagination } from 'src/common/models/index'
 import { TxInfo } from './tx-info.model'
-
 @ObjectType()
 export class TxSearchResult {
-  @Field(() => Int)
-  total_count!: number
-
-  @Field(() => Int)
-  count!: number
-
-  @Field(() => Int)
-  page_number!: number
-
-  @Field(() => Int)
-  page_total!: number
-
-  @Field(() => Int)
-  limit!: number
+  @Field(() => Pagination)
+  pagination!: Pagination
 
   @Field(() => [TxInfo])
   txs!: TxInfo[]

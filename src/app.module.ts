@@ -14,6 +14,7 @@ import { registerEnums } from './common/enums'
 import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
+import { IbcModule } from './ibc/ibc.module'
 import { MarketModule } from './market/market.module'
 import { MintModule } from './mint/mint.module'
 import { MsgauthModule } from './msgauth/msgauth.module'
@@ -105,6 +106,7 @@ import { WasmModule } from './wasm/wasm.module'
     WasmModule,
     TxModule,
     UtilsModule,
+    IbcModule,
   ],
   providers: [AppResolver, AnythingScalar],
 })

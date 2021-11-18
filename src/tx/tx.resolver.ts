@@ -1,5 +1,5 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
-import { Tx, TxInfo } from './models'
+import { Tx, TxInfo, TxSearchOptions, TxSearchResult } from './models'
 import { TxService } from './tx.service'
 
 @Resolver(Tx)
@@ -11,13 +11,18 @@ export class TxResolver {
     return {} as Tx
   }
 
-  @ResolveField(() => [TxInfo])
+  @ResolveField(() => TxInfo)
   public async txInfo(@Args('txHash') txHash: string): Promise<TxInfo> {
     return this.txService.txInfo(txHash)
   }
 
-  // @ResolveField(() => [TxInfo])
-  // public async byHeight(@Args('height') height: number): Promise<ProtoTxInfo[]> {
-  //   return this.txService.txInfosByHeight(height)
-  // }
+  @ResolveField(() => [TxInfo])
+  public async byHeight(@Args('height') height: number): Promise<TxInfo[]> {
+    return this.txService.txInfosByHeight(height)
+  }
+
+  @ResolveField(() => TxSearchResult)
+  public async search(@Args('options') options: TxSearchOptions): Promise<TxSearchResult> {
+    return this.txService.search(options)
+  }
 }
