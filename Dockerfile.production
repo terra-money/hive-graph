@@ -1,7 +1,7 @@
 FROM node:14.17-alpine AS builder
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -23,20 +23,17 @@ RUN npm prune --production
 FROM node:14.17-alpine AS build
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
-
-# RUN npm ci --only=production --no-audit --no-fund
-# Copy node_modules from builder. This will contains only production dependencies
-COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 # Copy the built /dist folder from the builder image.
 # This way we are only getting the /dist directory, without the devDependencies,
 # installed in our final image.
-COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /app .
 
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
 
-CMD [ "npm", "run", "start:prod" ]
+ENTRYPOINT [ "npm", "run" ]
+CMD ["start:prod"]
