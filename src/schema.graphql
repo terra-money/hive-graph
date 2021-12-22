@@ -771,7 +771,7 @@ type VotingParams {
 type Wasm {
   codeInfo(codeID: Int!, height: Float): CodeInfo!
   contractInfo(address: String!, height: Float): ContractInfo!
-  contractQuery(address: String!, height: Float, query: JSON!): Anything!
+  contractQuery(contractAddress: String!, height: Float, query: JSON!): Anything!
   parameters(height: Float): WasmParams!
 }
 
