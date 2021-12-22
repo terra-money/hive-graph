@@ -1,6 +1,5 @@
 import { Args, Query, ResolveField, Resolver } from '@nestjs/graphql'
 import { AnythingScalar } from 'src/anything.scalar'
-import { GetAddressArgs } from 'src/common/arguments/address.args'
 import { GetBaseArgs } from 'src/common/arguments/base.args'
 import { WasmParams } from 'src/common/models'
 import { CodeInfo, ContractInfo, Wasm } from './models'
