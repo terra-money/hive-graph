@@ -425,7 +425,7 @@ type ProtoFee {
 
 type ProtoSignerInfos {
   mode_info: Anything!
-  public_key: PublicKeyUnion!
+  public_key: Anything!
   sequence: String!
 }
 
