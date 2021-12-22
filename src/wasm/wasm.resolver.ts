@@ -23,8 +23,11 @@ export class WasmResolver {
   }
 
   @ResolveField(() => ContractInfo)
-  public async contractInfo(@Args() args: GetAddressArgs): Promise<ContractInfo> {
-    return this.wasmService.contractInfo(args.address, args.height)
+  public async contractInfo(
+    @Args('contractAddress') address: string,
+    @Args('height') height: number,
+  ): Promise<ContractInfo> {
+    return this.wasmService.contractInfo(address, height)
   }
 
   @ResolveField(() => AnythingScalar)
