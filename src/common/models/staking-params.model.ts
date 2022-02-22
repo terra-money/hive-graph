@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql'
-import { Denom } from '../enums'
 
 @ObjectType()
 export class StakingParams {
@@ -15,6 +14,6 @@ export class StakingParams {
   @Field(() => Int, { nullable: true })
   historical_entries?: number
 
-  @Field(() => Denom, { nullable: true })
+  @Field(() => String, { nullable: true })
   bond_denom?: string
 }

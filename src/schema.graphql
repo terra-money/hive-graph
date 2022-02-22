@@ -77,12 +77,12 @@ type CodeInfo {
 
 type Coin {
   amount: String!
-  denom: Denom!
+  denom: String!
 }
 
 input CoinInput {
   amount: String!
-  denom: Denom!
+  denom: String!
 }
 
 type CommissionRates {
@@ -118,29 +118,6 @@ type Delegation {
   delegator_address: String!
   shares: String!
   validator_address: String!
-}
-
-enum Denom {
-  uaud
-  ucad
-  uchf
-  ucny
-  udkk
-  ueur
-  ugbp
-  uhkd
-  uinr
-  ujpy
-  ukrw
-  uluna
-  umnt
-  unok
-  unused
-  usdr
-  usek
-  usgd
-  uthb
-  uusd
 }
 
 type DenomTrace {
@@ -251,7 +228,7 @@ type LegacyAminoMultisigPublicKey {
 
 type Market {
   parameters(height: Float): MarketParams!
-  swapRate(askDenom: Denom!, height: Float, offerCoin: CoinInput!): Coin!
+  swapRate(askDenom: String!, height: Float, offerCoin: CoinInput!): Coin!
   terraPoolDelta(height: Float): String!
 }
 
@@ -273,7 +250,7 @@ type MintingParams {
   inflation_max: String
   inflation_min: String
   inflation_rate_change: String
-  mint_denom: Denom
+  mint_denom: String
 }
 
 type MsgDeposit {
@@ -305,10 +282,10 @@ type NodeInfo {
 }
 
 type Oracle {
-  activeDenoms(height: Float): [Denom!]!
+  activeDenoms(height: Float): [String!]!
   aggregatePrevote(height: Float, validator: String!): AggregateExchangeRatePrevote!
   aggregateVote(height: Float, validator: String!): AggregateExchangeRateVote!
-  exchangeRate(denom: Denom!, height: Float): Coin
+  exchangeRate(denom: String!, height: Float): Coin
   exchangeRates(height: Float): [Coin!]!
   feederAddress(height: Float, validator: String!): String!
   misses(height: Float, validator: String!): Int!
@@ -568,7 +545,7 @@ type Staking {
 }
 
 type StakingParams {
-  bond_denom: Denom
+  bond_denom: String
   historical_entries: Int
   max_entries: Int
   max_validators: Int
@@ -622,12 +599,12 @@ type TextContent implements ProposalContent {
 }
 
 type Treasury {
-  parameters(denom: Denom!, height: Float): TreasuryParams!
-  rewardWeight(denom: Denom!, height: Float): String!
-  seigniorageProceeds(denom: Denom!, height: Float): Coin!
-  taxCap(denom: Denom!, height: Float): Coin!
-  taxProceeds(denom: Denom!, height: Float): [Coin!]!
-  taxRate(denom: Denom!, height: Float): String!
+  parameters(denom: String!, height: Float): TreasuryParams!
+  rewardWeight(denom: String!, height: Float): String!
+  seigniorageProceeds(denom: String!, height: Float): Coin!
+  taxCap(denom: String!, height: Float): Coin!
+  taxProceeds(denom: String!, height: Float): [Coin!]!
+  taxRate(denom: String!, height: Float): String!
 }
 
 type TreasuryParams {

@@ -11,7 +11,7 @@ export class GetRequiredValidatorArgs extends GetBaseArgs {
 
 @ArgsType()
 export class GetRequiredDenomArgs extends GetBaseArgs {
-  @Field(() => Denom)
+  @Field(() => String)
   denom!: Denom
 }
 

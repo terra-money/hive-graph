@@ -1,5 +1,4 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Denom } from 'src/common/enums'
 import { Coin, OracleParams } from 'src/common/models'
 import { AggregateExchangeRatePrevote, AggregateExchangeRateVote } from '.'
 
@@ -11,7 +10,7 @@ export class Oracle {
   @Field(() => Coin, { nullable: true })
   exchangeRate!: Promise<Coin>
 
-  @Field(() => [Denom])
+  @Field(() => [String])
   activeDenoms!: Promise<string[]>
 
   @Field(() => String)
