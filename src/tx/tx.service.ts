@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import axios from 'axios'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
@@ -25,15 +26,16 @@ export class TxService {
     }
   }
 
-  public async txInfosByHeight(height?: number): Promise<TxInfo[]> {
+  public async txInfosByHeight(height: number): Promise<TxInfo[]> {
+    const config = this.lcdService.config
+
     try {
-      const txs = await this.lcdService.tx.txInfosByHeight(height)
-
-      return txs
+      return axios.get<TxInfo[]>(`${config.URL}/index/tx/by_height/${height}`).then((r) => r.data)
     } catch (err) {
-      this.logger.error({ err }, 'Error getting tx %s by height info.', height)
+      const error = `Error getting tx info at height ${height}`
+      this.logger.error({ err }, error)
 
-      throw new LCDClientError(err)
+      throw error
     }
   }
 
