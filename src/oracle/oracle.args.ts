@@ -8,6 +8,6 @@ export class GetOracleArgs extends GetBaseArgs {
   @Field(() => ValAddress, { nullable: true })
   validator?: ValAddress
 
-  @Field(() => Denom, { nullable: true })
+  @Field(() => String, { nullable: true })
   denom?: Denom
 }

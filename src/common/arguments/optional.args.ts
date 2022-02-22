@@ -10,7 +10,7 @@ export class GetOptionalValidatorArgs extends GetBaseArgs {
 }
 @ArgsType()
 export class GetOptionalDenomArgs extends GetBaseArgs {
-  @Field(() => Denom, { nullable: true })
+  @Field(() => String, { nullable: true })
   denom?: Denom
 }
 @ArgsType()
