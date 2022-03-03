@@ -52,10 +52,10 @@ export class WasmService {
       const data = await this.lcdService.wasm.contractQuery(contractAddress, query, { height })
 
       return data
-    } catch (err) {
+    } catch (err: any) {
       this.logger.error({ err }, 'Error getting the wasm contract %s query.', contractAddress)
 
-      throw new LCDClientError(err)
+      return {"error": (new LCDClientError(err)).toString()}
     }
   }
 

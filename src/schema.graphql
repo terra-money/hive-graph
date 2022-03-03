@@ -212,7 +212,7 @@ type IbcParams {
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+scalar JSON
 
 type LastCommit {
   block_id: BlockId!
@@ -748,7 +748,7 @@ type VotingParams {
 type Wasm {
   codeInfo(codeID: Int!, height: Float): CodeInfo!
   contractInfo(contractAddress: String!, height: Float!): ContractInfo!
-  contractQuery(contractAddress: String!, height: Float, query: JSON!): Anything!
+  contractQuery(contractAddress: String!, height: Float!, query: JSON!): Anything!
   parameters(height: Float): WasmParams!
 }
 
