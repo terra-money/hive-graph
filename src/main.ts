@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 import { Logger as NestLogger, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
@@ -15,7 +15,7 @@ import { AppModule } from './app.module'
 async function bootstrap() {
  let app: NestExpressApplication | NestFastifyApplication
   const webFramework: string = process.env.WEB_FRAMEWORK || "EXPRESS"
-  const webFrameworkLogger: boolean = process.env.LOG_WEB_FRAMEWORK == "true"
+  const webFrameworkLogger: boolean = process.env.LOG_WEB_FRAMEWORK == 'true'
 
   if (webFramework == 'EXPRESS')
     app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: webFrameworkLogger })
@@ -55,7 +55,7 @@ async function bootstrap() {
 
   NestLogger.log(`App listening on port http://localhost:${port}/`)
   if (playground) {
-    let subRoute = webFramework == "EXPRESS" ? "graphql" : "graphiql"
+    const subRoute = webFramework == "EXPRESS" ? "graphql" : "graphiql"
     NestLogger.log(`Playground at http://localhost:${port}/${subRoute}`)
   }
 }
