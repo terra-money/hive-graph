@@ -24,7 +24,7 @@ export class WasmResolver {
   @ResolveField(() => ContractInfo)
   public async contractInfo(
     @Args('contractAddress') address: string,
-    @Args('height') height: number,
+    @Args('height', { nullable: true }) height: number,
   ): Promise<ContractInfo> {
     return this.wasmService.contractInfo(address, height)
   }
@@ -33,7 +33,7 @@ export class WasmResolver {
   public async contractQuery(
     @Args('contractAddress') address: string,
     @Args() qryArgs: GetWasmQueryArgs,
-    @Args('height') height: number,
+    @Args('height', { nullable: true }) height: number,
   ): Promise<any> {
     return this.wasmService.contractQuery(address, qryArgs.query, height)
   }

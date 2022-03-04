@@ -3,6 +3,7 @@ import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { NodeInfo, ValidatorSet, BlockInfo, DelegateValidator } from './models'
+import { UtilsService } from 'src/utils/utils.service'
 
 @Injectable()
 export class TendermintService {
@@ -11,6 +12,7 @@ export class TendermintService {
     private readonly logger: PinoLogger,
     @InjectLCDClient()
     private readonly lcdService: LCDClient,
+    private readonly utilsService: UtilsService
   ) {}
 
   public async nodeInfo(height?: number): Promise<NodeInfo> {
@@ -83,7 +85,7 @@ export class TendermintService {
 
   public async blockInfo(height?: number): Promise<BlockInfo> {
     try {
-      const info = await this.lcdService.tendermint.blockInfo(height)
+      const info = await this.utilsService.getLcdNativeService().tendermint.blockInfo(height)
 
       return {
         block_id: info.block_id,
