@@ -33,10 +33,12 @@ let driver: any
 let _graphQLModule: any
 const webFramework: string = process.env.WEB_FRAMEWORK || 'EXPRESS'
 
-if (webFramework == 'EXPRESS')
+if (webFramework == 'EXPRESS') {
   driver = ApolloDriver
-else if (webFramework == 'FASTIFY')
+}
+else if (webFramework == 'FASTIFY') {
   driver = MercuriusDriver
+}
 else throw new Error('Web framework ' + webFramework + ' is not supported.')
 
 _graphQLModule = GraphQLModule.forRootAsync({

@@ -13,20 +13,22 @@ import { Logger } from 'nestjs-pino'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
- let app: NestExpressApplication | NestFastifyApplication
+  let app: NestExpressApplication | NestFastifyApplication
   const webFramework: string = process.env.WEB_FRAMEWORK || "EXPRESS"
   const webFrameworkLogger: boolean = process.env.LOG_WEB_FRAMEWORK == 'true'
 
-  if (webFramework == 'EXPRESS')
+  if (webFramework == 'EXPRESS') {
     app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: webFrameworkLogger })
-  else if (webFramework == 'FASTIFY')
+  }
+  else if (webFramework == 'FASTIFY') {
     app = await NestFactory.create<NestFastifyApplication>(
       AppModule,
       new FastifyAdapter({ logger: webFrameworkLogger }),
     )
+  }
   else throw new Error('Web framework ' + webFramework + ' is not supported.')
 
- const configService = app.get(ConfigService)
+  const configService = app.get(ConfigService)
   const port = parseInt(configService.get<string>('PORT', ''), 10)
   const env = configService.get<string>('NODE_ENV', 'production')
   const playground = configService.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true'
