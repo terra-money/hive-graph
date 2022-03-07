@@ -51,14 +51,14 @@ import { WasmModule } from './wasm/wasm.module'
         return { pinoHttp }
       },
     }),
-//     ThrottlerModule.forRootAsync({
-//       imports: [ConfigModule],
-//       inject: [ConfigService],
-//       useFactory: (config: ConfigService) => ({
-//         ttl: parseInt(config.get<string>('THROTTLE_TTL', '60'), 10),
-//         limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
-//       }),
-//     }),
+    //     ThrottlerModule.forRootAsync({
+    //       imports: [ConfigModule],
+    //       inject: [ConfigService],
+    //       useFactory: (config: ConfigService) => ({
+    //         ttl: parseInt(config.get<string>('THROTTLE_TTL', '60'), 10),
+    //         limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
+    //       }),
+    //     }),
     GraphQLModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
