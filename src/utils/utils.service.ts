@@ -17,7 +17,6 @@ export class UtilsService {
     @InjectLCDClient()
     private readonly lcdService: LCDClient,
   ) {
-
     /*eslint-disable */
     const _get = lcdService.apiRequester.get.bind(lcdService.apiRequester)
     const _getRaw = lcdService.apiRequester.getRaw.bind(lcdService.apiRequester)
@@ -27,9 +26,7 @@ export class UtilsService {
       distr_i = (distr_i + 1) % NUM_QUEUE
       const next = queues[distr_i].then(() => _get(a, b))
       // @ts-ignore
-      queues[distr_i] = next
-      console.log(distr_i)
-
+      queues[distr_i] = next.catch(() => {}) // ignore errors, flush queue
       return next
     }
 
@@ -38,9 +35,7 @@ export class UtilsService {
       distr_i = (distr_i + 1) % NUM_QUEUE
       const next = queues[distr_i].then(() => _getRaw(a))
       // @ts-ignore
-      queues[distr_i] = next
-      console.log(distr_i)
-
+      queues[distr_i] = next.catch(() => {}) // ignore errors, flush queue
       return next
     }
 
