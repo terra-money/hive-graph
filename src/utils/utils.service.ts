@@ -12,7 +12,26 @@ export class UtilsService {
     private readonly logger: PinoLogger,
     @InjectLCDClient()
     private readonly lcdService: LCDClient,
-  ) {}
+  ) {
+    // add queue
+    const queues = new Array(2048).fill(true).map(() => Promise.resolve())
+    let distr_i = 0
+
+    const _get = lcdService.apiRequester.get.bind(lcdService.apiRequester)
+    const _getRaw = lcdService.apiRequester.getRaw.bind(lcdService.apiRequester)
+    lcdService.apiRequester.get = async (a, b) => {
+      distr_i = distr_i + (1 % 2048)
+      console.log('next', distr_i)
+
+      return queues[distr_i].then(() => _get(a, b))
+    }
+
+    lcdService.apiRequester.getRaw = async (a) => {
+      distr_i = distr_i + (1 % 2048)
+      console.log('next', distr_i)
+      return queues[distr_i].then(() => _getRaw(a))
+    }
+  }
 
   public async calculateTax(coin: Coin): Promise<Coin> {
     const { denom, amount } = coin
