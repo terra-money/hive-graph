@@ -26,6 +26,37 @@ import { TreasuryModule } from './treasury/treasury.module'
 import { TxModule } from './tx/tx.module'
 import { UtilsModule } from './utils/utils.module'
 import { WasmModule } from './wasm/wasm.module'
+import { ApolloDriver } from '@nestjs/apollo'
+import { MercuriusDriver } from '@nestjs/mercurius'
+
+let driver: any
+let _graphQLModule: any
+const webFramework: string = process.env.WEB_FRAMEWORK || 'EXPRESS'
+
+if (webFramework == 'EXPRESS') {
+  driver = ApolloDriver
+}
+else if (webFramework == 'FASTIFY') {
+  driver = MercuriusDriver
+}
+else throw new Error('Web framework ' + webFramework + ' is not supported.')
+
+_graphQLModule = GraphQLModule.forRootAsync({
+  imports: [ConfigModule],
+  inject: [ConfigService],
+  driver: driver,
+  useFactory: (config: ConfigService) => {
+    registerEnums() // register enums graphql
+    return {
+      autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+      debug: config.get<string>('GRAPHQL_DEBUG', 'false') === 'true',
+      sortSchema: config.get<string>('GRAPHQL_SORT_SCHEMA', 'true') === 'true',
+      introspection: config.get<string>('GRAPHQL_INTROSPECTION', 'true') === 'true',
+      graphiql: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true', // MercuriusDriver
+      playground: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true', // ApolloDriver
+    }
+  },
+})
 
 @Module({
   imports: [
@@ -59,21 +90,7 @@ import { WasmModule } from './wasm/wasm.module'
         limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
       }),
     }),
-    GraphQLModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        registerEnums() // register enums graphql
-
-        return {
-          sortSchema: config.get<string>('GRAPHQL_SORT_SCHEMA', 'true') === 'true',
-          debug: config.get<string>('GRAPHQL_DEBUG', 'false') === 'true',
-          playground: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true',
-          autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
-          introspection: config.get<string>('GRAPHQL_INTROSPECTION', 'true') === 'true',
-        }
-      },
-    }),
+    _graphQLModule,
     TerraModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

@@ -4,15 +4,28 @@ import { Coin as TerraCoin, InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, Validator } from 'src/common/models'
 import { ValidatorVotingPower } from './models'
+import { ConfigService } from '@nestjs/config'
 
 @Injectable()
 export class UtilsService {
+  private nativeLcdService?: LCDClient = undefined
+
   constructor(
     @InjectPinoLogger(UtilsService.name)
     private readonly logger: PinoLogger,
     @InjectLCDClient()
     private readonly lcdService: LCDClient,
-  ) {}
+    private readonly config: ConfigService,
+  ) {
+    const native_lcd_url = this.config.get<string>('NATIVE_LCD_URL')
+    const native_lcd_chain_id = this.config.get<string>('NATIVE_LCD_CHAIN_ID')
+    if (native_lcd_url && native_lcd_chain_id) {
+      this.nativeLcdService = new LCDClient({
+        URL: native_lcd_url,
+        chainID: native_lcd_chain_id,
+      })
+    }
+  }
 
   public async calculateTax(coin: Coin): Promise<Coin> {
     const { denom, amount } = coin
@@ -43,5 +56,9 @@ export class UtilsService {
 
       throw new LCDClientError(err)
     }
+  }
+
+  public getLcdNativeService(): LCDClient {
+    return this.nativeLcdService ? this.nativeLcdService : this.lcdService
   }
 }
