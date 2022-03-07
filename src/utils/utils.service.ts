@@ -5,6 +5,10 @@ import { LCDClientError } from 'src/common/errors'
 import { Coin, Validator } from 'src/common/models'
 import { ValidatorVotingPower } from './models'
 
+let distr_i = 0
+const NUM_QUEUE = 2048
+const queues = new Array(NUM_QUEUE).fill(true).map(() => Promise.resolve())
+
 @Injectable()
 export class UtilsService {
   constructor(
@@ -13,22 +17,34 @@ export class UtilsService {
     @InjectLCDClient()
     private readonly lcdService: LCDClient,
   ) {
-    // add queue
-    const queues = new Array(2048).fill(true).map(() => Promise.resolve())
-    let distr_i = 0
 
-    // eslint-ignore
+    /*eslint-disable */
     const _get = lcdService.apiRequester.get.bind(lcdService.apiRequester)
     const _getRaw = lcdService.apiRequester.getRaw.bind(lcdService.apiRequester)
+
+    // @ts-ignore
     lcdService.apiRequester.get = async (a, b) => {
-      distr_i = distr_i + (1 % 2048)
-      return queues[distr_i].then(() => _get(a, b))
+      distr_i = (distr_i + 1) % NUM_QUEUE
+      const next = queues[distr_i].then(() => _get(a, b))
+      // @ts-ignore
+      queues[distr_i] = next
+      console.log(distr_i)
+
+      return next
     }
 
+    // @ts-ignore
     lcdService.apiRequester.getRaw = async (a) => {
-      distr_i = distr_i + (1 % 2048)
-      return queues[distr_i].then(() => _getRaw(a))
+      distr_i = (distr_i + 1) % NUM_QUEUE
+      const next = queues[distr_i].then(() => _getRaw(a))
+      // @ts-ignore
+      queues[distr_i] = next
+      console.log(distr_i)
+
+      return next
     }
+
+    /*eslint-enable */
   }
 
   public async calculateTax(coin: Coin): Promise<Coin> {
