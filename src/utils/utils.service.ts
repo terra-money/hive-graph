@@ -6,7 +6,7 @@ import { Coin, Validator } from 'src/common/models'
 import { ValidatorVotingPower } from './models'
 
 let distr_i = 0
-const NUM_QUEUE = 2048
+const NUM_QUEUE = Number.parseInt(process.env.NUM_PROXY_CONCURRENCY || '2000', 10)
 const queues = new Array(NUM_QUEUE).fill(true).map(() => Promise.resolve())
 
 @Injectable()
