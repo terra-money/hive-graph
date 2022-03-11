@@ -26,7 +26,7 @@ export class GovResolver {
 
   @ResolveField(() => String)
   public async proposer(@Args() args: GetGovArgs): Promise<string> {
-    return this.govService.proposer(args.proposalId, args.height)
+    return this.govService.proposer(args.proposalId)
   }
 
   @ResolveField(() => [MsgDeposit])

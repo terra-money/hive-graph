@@ -72,7 +72,7 @@ export class GovService {
     }
   }
 
-  public async proposer(proposalId: number, height?: number): Promise<string> {
+  public async proposer(proposalId: number): Promise<string> {
     try {
       return this.lcdService.gov.proposer(proposalId)
     } catch (err) {
