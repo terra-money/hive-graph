@@ -71,13 +71,21 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push docker image to AWS ECR
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build, tag, and push docker image to AWS ECR & Docker Hub
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.sha }}
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:latest
+            terramoney/hive-graph:${{ github.sha }}
+            terramoney/hive-graph:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: Dockerfile.production
