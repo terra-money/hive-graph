@@ -50,7 +50,10 @@ export class WasmService {
   public async contractQuery(contractAddress: string, query: Record<string, any>, height?: number): Promise<any> {
     try {
       const data = await this.lcdService.wasm.contractQuery(contractAddress, query, { height })
-
+      if (data === null) {
+        // some contracts return null responses yikes, terra1spdrct9mwsraqkm5dzrnwjc5ua90xq75t0s8p7 {user: {addr: addr}}  
+        return {}
+      } 
       return data
     } catch (err: any) {
       this.logger.error({ err }, 'Error getting the wasm contract %s query.', contractAddress)
