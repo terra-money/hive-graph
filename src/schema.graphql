@@ -9,17 +9,6 @@ type Account {
   sequence: Int!
 }
 
-type AggregateExchangeRatePrevote {
-  hash: String!
-  submit_block: Int!
-  voter: String!
-}
-
-type AggregateExchangeRateVote {
-  exchange_rate_tuples: [Coin!]!
-  voter: String!
-}
-
 scalar Anything
 
 type ApplicationVersion {
@@ -226,18 +215,6 @@ type LegacyAminoMultisigPublicKey {
   threshold: Float!
 }
 
-type Market {
-  parameters(height: Float): MarketParams!
-  swapRate(askDenom: String!, height: Float, offerCoin: CoinInput!): Coin!
-  terraPoolDelta(height: Float): String!
-}
-
-type MarketParams {
-  base_pool: String
-  min_stability_spread: String
-  pool_recovery_period: Int
-}
-
 type Mint {
   annualProvisions(height: Float): String!
   inflation(height: Float): String!
@@ -281,33 +258,6 @@ type NodeInfo {
   version: String!
 }
 
-type Oracle {
-  activeDenoms(height: Float): [String!]!
-  aggregatePrevote(height: Float, validator: String!): AggregateExchangeRatePrevote!
-  aggregateVote(height: Float, validator: String!): AggregateExchangeRateVote!
-  exchangeRate(denom: String!, height: Float): Coin
-  exchangeRates(height: Float): [Coin!]!
-  feederAddress(height: Float, validator: String!): String!
-  misses(height: Float, validator: String!): Int!
-  parameters(height: Float): OracleParams!
-}
-
-type OracleParams {
-  min_valid_per_window: String
-  reward_band: String
-  reward_distribution_window: Int
-  slash_fraction: String
-  slash_window: Int
-  vote_period: Int
-  vote_threshold: String
-  whitelist: [OracleWhitelist!]
-}
-
-type OracleWhitelist {
-  name: String!
-  tobin_tax: String!
-}
-
 enum OrderBy {
   ORDER_BY_ASC
   ORDER_BY_DESC
@@ -347,13 +297,6 @@ type ParameterChanges {
 type Parts {
   hash: String!
   total: String!
-}
-
-type PolicyConstraints {
-  cap: Coin!
-  change_max: String!
-  rate_max: String!
-  rate_min: String!
 }
 
 type Proposal {
@@ -432,15 +375,12 @@ type Query {
   distribution: Distribution!
   gov: Gov!
   ibc: Ibc!
-  market: Market!
   mint: Mint!
   msgauth: Msgauth!
-  oracle: Oracle!
   ping: String!
   slashing: Slashing!
   staking: Staking!
   tendermint: Tendermint!
-  treasury: Treasury!
   tx: Tx!
   utils: Utils!
   wasm: Wasm!
@@ -598,25 +538,6 @@ type TextContent implements ProposalContent {
   title: String!
 }
 
-type Treasury {
-  parameters(denom: String!, height: Float): TreasuryParams!
-  rewardWeight(denom: String!, height: Float): String!
-  seigniorageProceeds(denom: String!, height: Float): Coin!
-  taxCap(denom: String!, height: Float): Coin!
-  taxProceeds(denom: String!, height: Float): [Coin!]!
-  taxRate(denom: String!, height: Float): String!
-}
-
-type TreasuryParams {
-  mining_increment: String
-  reward_policy: PolicyConstraints
-  seigniorage_burden_target: String
-  tax_policy: PolicyConstraints
-  window_long: Int
-  window_probation: Int
-  window_short: Int
-}
-
 type Tx {
   byHeight(height: Float!): [TxInfo!]!
   search(options: TxSearchOptions!): TxSearchResult!
@@ -625,7 +546,7 @@ type Tx {
 
 type TxEventKV {
   key: String!
-  value: String
+  value: String!
 }
 
 type TxEventLog {
