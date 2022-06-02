@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
-import { ThrottlerModule } from '@nestjs/throttler'
+// import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
 import { TerraModule } from 'nestjs-terra'
 import { join } from 'path'
@@ -15,14 +15,11 @@ import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
 import { IbcModule } from './ibc/ibc.module'
-import { MarketModule } from './market/market.module'
 import { MintModule } from './mint/mint.module'
 import { MsgauthModule } from './msgauth/msgauth.module'
-import { OracleModule } from './oracle/oracle.module'
 import { SlashingModule } from './slashing/slashing.module'
 import { StakingModule } from './staking/staking.module'
 import { TendermintModule } from './tendermint/tendermint.module'
-import { TreasuryModule } from './treasury/treasury.module'
 import { TxModule } from './tx/tx.module'
 import { UtilsModule } from './utils/utils.module'
 import { WasmModule } from './wasm/wasm.module'
@@ -82,14 +79,14 @@ _graphQLModule = GraphQLModule.forRootAsync({
         return { pinoHttp }
       },
     }),
-    ThrottlerModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        ttl: parseInt(config.get<string>('THROTTLE_TTL', '60'), 10),
-        limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
-      }),
-    }),
+    //     ThrottlerModule.forRootAsync({
+    //       imports: [ConfigModule],
+    //       inject: [ConfigService],
+    //       useFactory: (config: ConfigService) => ({
+    //         ttl: parseInt(config.get<string>('THROTTLE_TTL', '60'), 10),
+    //         limit: parseInt(config.get<string>('THROTTLE_LIMIT', '20'), 10),
+    //       }),
+    //     }),
     _graphQLModule,
     TerraModule.forRootAsync({
       imports: [ConfigModule],
@@ -112,14 +109,11 @@ _graphQLModule = GraphQLModule.forRootAsync({
     BankModule,
     DistributionModule,
     GovModule,
-    MarketModule,
     MintModule,
     MsgauthModule,
-    OracleModule,
     SlashingModule,
     StakingModule,
     TendermintModule,
-    TreasuryModule,
     WasmModule,
     TxModule,
     UtilsModule,

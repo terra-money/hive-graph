@@ -2,11 +2,11 @@ import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class TxEventKV {
-  @Field()
+  @Field({ defaultValue: '' })
   key!: string
 
-  @Field({ nullable: true })
-  value?: string
+  @Field({ defaultValue: '' })
+  value!: string
 }
 
 @ObjectType()
