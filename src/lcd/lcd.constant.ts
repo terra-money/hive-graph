@@ -1,0 +1,4 @@
+export const LCD_MODULE_TOKEN = 'LCD_MODULE_TOKEN'
+export const LCD_MODULE_OPTIONS_TOKEN = 'LCD_MODULE_OPTIONS_TOKEN'
+export const GAS_PRICES = '0.15uluna'
+export const GAS_ADJUSTMENT = 2

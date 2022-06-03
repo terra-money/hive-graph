@@ -6,8 +6,8 @@ export class ContractInfo {
   @Field(() => Int)
   code_id!: number
 
-  @Field()
-  address!: string
+  @Field({ nullable: true })
+  address?: string
 
   @Field()
   owner!: string

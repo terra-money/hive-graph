@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { IbcParams } from 'src/common/models/index'
+import { InjectLCDClient, LCDClient } from 'src/lcd'
 import { PaginationOptions, DenomTraces, DenomTrace } from './models/index'
 
 @Injectable()
