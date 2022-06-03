@@ -10,7 +10,7 @@ jobs:
   integration:
     runs-on: ubuntu-latest
 
-    container: 'node:14'
+    container: 'node:lts'
 
     steps:
       - name: Checkout files
@@ -22,7 +22,7 @@ jobs:
       - name: Install Node v14
         uses: actions/setup-node@v2
         with:
-          node-version: '14.17'
+          node-version: 'lts/*'
 
       - name: Install dependencies from lock.
         run: npm ci
