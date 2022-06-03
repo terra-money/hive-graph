@@ -19,7 +19,7 @@ jobs:
       # - name: Audit
       #   run: npm audit --audit-level=high
 
-      - name: Install Node v14
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
@@ -44,7 +44,7 @@ jobs:
     needs: integration
 
     # deliver on every branch push
-    if: github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2

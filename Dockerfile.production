@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # node-gyp dependencies
-RUN apk add --update python make g++ && rm -rf /var/cache/apk/*
+RUN apk add --no-cache --virtual python make g++ && rm -rf /var/cache/apk/*
 
 # Install dependencies from package-lock.json
 RUN npm ci --no-audit --no-fund
