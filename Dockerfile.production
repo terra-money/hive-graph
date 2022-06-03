@@ -1,4 +1,4 @@
-FROM node:14.17-alpine AS builder
+FROM node:lts-alpine AS builder
 
 # Create app directory
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npm prune --production
 
 # By using the FROM statement again, we are telling Docker that it should create a new,
 # fresh image without any connection to the previous one.
-FROM node:14.17-alpine AS build
+FROM node:lts AS build
 
 # Create app directory
 WORKDIR /app
