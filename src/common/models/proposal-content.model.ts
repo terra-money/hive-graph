@@ -1,6 +1,6 @@
-import { Proposal as TerraProposal, CommunityPoolSpendProposal, ParameterChangeProposal } from 'nestjs-terra'
 import { CommunityPoolSpendContent, ParameterChangeContent, TextContent } from 'src/common/models'
 import { ProposalContentType } from 'src/common/unions'
+import { Proposal as TerraProposal, CommunityPoolSpendProposal, ParameterChangeProposal } from 'src/lcd'
 
 export class ProposalContent {
   static fromTerra(content: TerraProposal.Content): ProposalContentType {

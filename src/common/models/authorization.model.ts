@@ -1,10 +1,10 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { Coin } from 'src/common/models'
 import {
   Authorization as TerraAuthorization,
   SendAuthorization as TerraSendAuthorization,
   GenericAuthorization as TerraGenericAuthorization,
-} from 'nestjs-terra'
-import { Coin } from 'src/common/models'
+} from 'src/lcd'
 
 @ObjectType()
 export class SendAuthorization {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { Coin as TerraCoin, InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin, Validator } from 'src/common/models'
+import { Coin as TerraCoin, InjectLCDClient, LCDClient } from 'src/lcd'
 import { ValidatorVotingPower } from './models'
 
 @Injectable()

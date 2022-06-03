@@ -51,7 +51,7 @@ type BlockData {
 
 type BlockId {
   hash: String!
-  parts: Parts!
+  part_set_header: Parts!
 }
 
 type BlockInfo {
@@ -88,7 +88,7 @@ type CommunityPoolSpendContent implements ProposalContent {
 }
 
 type ContractInfo {
-  address: String!
+  address: String
   admin: String
   code_id: Int!
   init_msg: JSON!
@@ -144,7 +144,7 @@ input Event {
 }
 
 type Evidence {
-  evidence: String
+  evidence: [String!]
 }
 
 type GenericAuthorization {
@@ -206,7 +206,7 @@ scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 type LastCommit {
   block_id: BlockId!
   height: String!
-  round: String!
+  round: Float!
   signatures: [Signature!]!
 }
 
@@ -634,7 +634,6 @@ type ValidatorDescription {
 }
 
 type ValidatorSet {
-  block_height: String!
   validators: [DelegateValidator!]!
 }
 

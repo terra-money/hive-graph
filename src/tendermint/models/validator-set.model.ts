@@ -17,9 +17,6 @@ export class DelegateValidator {
 
 @ObjectType()
 export class ValidatorSet {
-  @Field()
-  block_height!: string
-
   @Field(() => [DelegateValidator])
   validators!: DelegateValidator[]
 }

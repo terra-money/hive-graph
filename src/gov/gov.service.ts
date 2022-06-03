@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectLCDClient, LCDClient, Proposal as TerraProposal } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import {
   Coin,
@@ -12,6 +11,7 @@ import {
   VotingParams,
   ProposalContent,
 } from 'src/common/models'
+import { InjectLCDClient, LCDClient, Proposal as TerraProposal } from 'src/lcd'
 import { Tally, Proposal } from './models'
 
 @Injectable()

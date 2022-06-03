@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 // import { ThrottlerModule } from '@nestjs/throttler'
 import { LoggerModule } from 'nestjs-pino'
-import { TerraModule } from 'nestjs-terra'
 import { join } from 'path'
 import pino from 'pino'
 import { AnythingScalar } from './anything.scalar'
@@ -15,6 +14,7 @@ import { DistributionModule } from './distribution/distribution.module'
 import { validate } from './env.validation'
 import { GovModule } from './gov/gov.module'
 import { IbcModule } from './ibc/ibc.module'
+import { LCDModule } from './lcd'
 import { MintModule } from './mint/mint.module'
 import { MsgauthModule } from './msgauth/msgauth.module'
 import { SlashingModule } from './slashing/slashing.module'
@@ -71,7 +71,7 @@ import { WasmModule } from './wasm/wasm.module'
         }
       },
     }),
-    TerraModule.forRootAsync({
+    LCDModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {

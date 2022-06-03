@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { getLoggerToken } from 'nestjs-pino'
-import { getTerraToken } from 'nestjs-terra'
+import { LCD_MODULE_TOKEN } from 'src/lcd/lcd.constant'
 import { SlashingService } from './slashing.service'
 
 describe('SlashingService', () => {
@@ -17,7 +17,7 @@ describe('SlashingService', () => {
           },
         },
         {
-          provide: getTerraToken(),
+          provide: LCD_MODULE_TOKEN,
           useValue: {},
         },
       ],

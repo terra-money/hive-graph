@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { ModeInfo } from 'nestjs-terra'
 import { AnythingScalar } from 'src/anything.scalar'
 import { PublicKeyType } from 'src/common/unions'
+import { ModeInfo } from 'src/lcd'
 
 @ObjectType()
 export class ProtoSignerInfos {
