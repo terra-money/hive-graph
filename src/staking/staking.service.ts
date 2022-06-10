@@ -31,7 +31,7 @@ export class StakingService {
   private fromTerraUnbondingDelegation(delegation: TerraUnbondingDelegation): UnbondingDelegation {
     return {
       delegator_address: delegation.delegator_address,
-      validator_address: delegation.delegator_address,
+      validator_address: delegation.validator_address,
       entries: delegation.entries.map<UnbondingDelegationEntry>((entry) => ({
         initial_balance: entry.initial_balance.toString(),
         balance: entry.balance.toString(),
