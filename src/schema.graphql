@@ -9,17 +9,6 @@ type Account {
   sequence: Int!
 }
 
-type AggregateExchangeRatePrevote {
-  hash: String!
-  submit_block: Int!
-  voter: String!
-}
-
-type AggregateExchangeRateVote {
-  exchange_rate_tuples: [Coin!]!
-  voter: String!
-}
-
 scalar Anything
 
 type ApplicationVersion {
@@ -62,7 +51,7 @@ type BlockData {
 
 type BlockId {
   hash: String!
-  parts: Parts!
+  part_set_header: Parts!
 }
 
 type BlockInfo {
@@ -77,12 +66,12 @@ type CodeInfo {
 
 type Coin {
   amount: String!
-  denom: Denom!
+  denom: String!
 }
 
 input CoinInput {
   amount: String!
-  denom: Denom!
+  denom: String!
 }
 
 type CommissionRates {
@@ -99,7 +88,7 @@ type CommunityPoolSpendContent implements ProposalContent {
 }
 
 type ContractInfo {
-  address: String!
+  address: String
   admin: String
   code_id: Int!
   init_msg: JSON!
@@ -118,29 +107,6 @@ type Delegation {
   delegator_address: String!
   shares: String!
   validator_address: String!
-}
-
-enum Denom {
-  uaud
-  ucad
-  uchf
-  ucny
-  udkk
-  ueur
-  ugbp
-  uhkd
-  uinr
-  ujpy
-  ukrw
-  uluna
-  umnt
-  unok
-  unused
-  usdr
-  usek
-  usgd
-  uthb
-  uusd
 }
 
 type DenomTrace {
@@ -178,7 +144,7 @@ input Event {
 }
 
 type Evidence {
-  evidence: String
+  evidence: [String!]
 }
 
 type GenericAuthorization {
@@ -240,25 +206,13 @@ scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/fi
 type LastCommit {
   block_id: BlockId!
   height: String!
-  round: String!
+  round: Float!
   signatures: [Signature!]!
 }
 
 type LegacyAminoMultisigPublicKey {
   public_keys: [SimplePublicKey!]!
   threshold: Float!
-}
-
-type Market {
-  parameters(height: Float): MarketParams!
-  swapRate(askDenom: Denom!, height: Float, offerCoin: CoinInput!): Coin!
-  terraPoolDelta(height: Float): String!
-}
-
-type MarketParams {
-  base_pool: String
-  min_stability_spread: String
-  pool_recovery_period: Int
 }
 
 type Mint {
@@ -273,7 +227,7 @@ type MintingParams {
   inflation_max: String
   inflation_min: String
   inflation_rate_change: String
-  mint_denom: Denom
+  mint_denom: String
 }
 
 type MsgDeposit {
@@ -302,33 +256,6 @@ type NodeInfo {
   other: OtherInfo!
   protocol_version: ProtocolVersion!
   version: String!
-}
-
-type Oracle {
-  activeDenoms(height: Float): [Denom!]!
-  aggregatePrevote(height: Float, validator: String!): AggregateExchangeRatePrevote!
-  aggregateVote(height: Float, validator: String!): AggregateExchangeRateVote!
-  exchangeRate(denom: Denom!, height: Float): Coin
-  exchangeRates(height: Float): [Coin!]!
-  feederAddress(height: Float, validator: String!): String!
-  misses(height: Float, validator: String!): Int!
-  parameters(height: Float): OracleParams!
-}
-
-type OracleParams {
-  min_valid_per_window: String
-  reward_band: String
-  reward_distribution_window: Int
-  slash_fraction: String
-  slash_window: Int
-  vote_period: Int
-  vote_threshold: String
-  whitelist: [OracleWhitelist!]
-}
-
-type OracleWhitelist {
-  name: String!
-  tobin_tax: String!
 }
 
 enum OrderBy {
@@ -370,13 +297,6 @@ type ParameterChanges {
 type Parts {
   hash: String!
   total: String!
-}
-
-type PolicyConstraints {
-  cap: Coin!
-  change_max: String!
-  rate_max: String!
-  rate_min: String!
 }
 
 type Proposal {
@@ -455,15 +375,12 @@ type Query {
   distribution: Distribution!
   gov: Gov!
   ibc: Ibc!
-  market: Market!
   mint: Mint!
   msgauth: Msgauth!
-  oracle: Oracle!
   ping: String!
   slashing: Slashing!
   staking: Staking!
   tendermint: Tendermint!
-  treasury: Treasury!
   tx: Tx!
   utils: Utils!
   wasm: Wasm!
@@ -568,7 +485,7 @@ type Staking {
 }
 
 type StakingParams {
-  bond_denom: Denom
+  bond_denom: String
   historical_entries: Int
   max_entries: Int
   max_validators: Int
@@ -621,25 +538,6 @@ type TextContent implements ProposalContent {
   title: String!
 }
 
-type Treasury {
-  parameters(denom: Denom!, height: Float): TreasuryParams!
-  rewardWeight(denom: Denom!, height: Float): String!
-  seigniorageProceeds(denom: Denom!, height: Float): Coin!
-  taxCap(denom: Denom!, height: Float): Coin!
-  taxProceeds(denom: Denom!, height: Float): [Coin!]!
-  taxRate(denom: Denom!, height: Float): String!
-}
-
-type TreasuryParams {
-  mining_increment: String
-  reward_policy: PolicyConstraints
-  seigniorage_burden_target: String
-  tax_policy: PolicyConstraints
-  window_long: Int
-  window_probation: Int
-  window_short: Int
-}
-
 type Tx {
   byHeight(height: Float!): [TxInfo!]!
   search(options: TxSearchOptions!): TxSearchResult!
@@ -648,7 +546,7 @@ type Tx {
 
 type TxEventKV {
   key: String!
-  value: String
+  value: String!
 }
 
 type TxEventLog {
@@ -736,7 +634,6 @@ type ValidatorDescription {
 }
 
 type ValidatorSet {
-  block_height: String!
   validators: [DelegateValidator!]!
 }
 

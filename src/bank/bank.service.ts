@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { AccAddress, InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Coin } from 'src/common/models'
+import { AccAddress, InjectLCDClient, LCDClient } from 'src/lcd'
 
 @Injectable()
 export class BankService {

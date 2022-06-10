@@ -1,7 +1,7 @@
 import { Field, ArgsType } from '@nestjs/graphql'
-import { AccAddress, ValAddress } from 'nestjs-terra'
 import { GetBaseArgs } from 'src/common/arguments/base.args'
 import { Denom } from 'src/common/enums'
+import { AccAddress, ValAddress } from 'src/lcd'
 
 @ArgsType()
 export class GetOptionalValidatorArgs extends GetBaseArgs {
@@ -10,7 +10,7 @@ export class GetOptionalValidatorArgs extends GetBaseArgs {
 }
 @ArgsType()
 export class GetOptionalDenomArgs extends GetBaseArgs {
-  @Field(() => Denom, { nullable: true })
+  @Field(() => String, { nullable: true })
   denom?: Denom
 }
 @ArgsType()

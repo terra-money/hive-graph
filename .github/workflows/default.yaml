@@ -10,7 +10,7 @@ jobs:
   integration:
     runs-on: ubuntu-latest
 
-    container: 'node:14'
+    container: 'node:lts'
 
     steps:
       - name: Checkout files
@@ -19,10 +19,10 @@ jobs:
       # - name: Audit
       #   run: npm audit --audit-level=high
 
-      - name: Install Node v14
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.17'
+          node-version: 'lts/*'
 
       - name: Install dependencies from lock.
         run: npm ci
@@ -44,7 +44,7 @@ jobs:
     needs: integration
 
     # deliver on every branch push
-    if: github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
@@ -71,13 +71,21 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push docker image to AWS ECR
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build, tag, and push docker image to AWS ECR & Docker Hub
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.sha }}
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:latest
+            terramoney/hive-graph:${{ github.sha }}
+            terramoney/hive-graph:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: Dockerfile.production

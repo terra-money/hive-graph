@@ -1,9 +1,8 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
-import { Denom } from '../enums'
 
 @ObjectType()
 export class MintingParams {
-  @Field(() => Denom, { nullable: true })
+  @Field({ nullable: true })
   mint_denom?: string
 
   @Field({ nullable: true })

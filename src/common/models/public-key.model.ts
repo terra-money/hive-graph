@@ -3,7 +3,7 @@ import {
   PublicKey as TerraPublicKey,
   SimplePublicKey as TerraSimplePublicKey,
   ValConsPublicKey as TerraValConsPublicKey,
-} from 'nestjs-terra'
+} from 'src/lcd'
 
 @ObjectType()
 export class SimplePublicKey {

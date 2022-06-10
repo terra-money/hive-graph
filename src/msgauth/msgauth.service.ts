@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
-import { InjectLCDClient, LCDClient } from 'nestjs-terra'
 import { LCDClientError } from 'src/common/errors'
 import { Authorization } from 'src/common/models'
+import { InjectLCDClient, LCDClient } from 'src/lcd'
 import { AuthorizationGrant } from './models'
 
 @Injectable()

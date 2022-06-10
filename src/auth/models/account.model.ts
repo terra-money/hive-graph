@@ -1,6 +1,6 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql'
-import { AccAddress } from 'nestjs-terra'
 import { PublicKeyType, PublicKeyUnion } from 'src/common/unions'
+import { AccAddress } from 'src/lcd'
 
 @ObjectType()
 export class Account {

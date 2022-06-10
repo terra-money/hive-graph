@@ -1,6 +1,6 @@
 import { Field, ArgsType } from '@nestjs/graphql'
-import { ValAddress } from 'nestjs-terra'
 import { GetRequiredDelegatorArgs } from 'src/common/arguments/required.args'
+import { ValAddress } from 'src/lcd'
 
 @ArgsType()
 export class GetStakingArgs extends GetRequiredDelegatorArgs {
