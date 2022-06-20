@@ -11,7 +11,7 @@ export class LCDClientError extends Error {
 
     if (err.isAxiosError) {
       const { status = 500, statusText = 'Internal Error' } = err?.response ?? {}
-      const dataError = err?.response?.data?.error ?? 'error'
+      const dataError = err?.response?.data?.error ?? err?.response?.data?.message ?? "Unknown error"
       const message = `[${statusText}] ${dataError}`
 
       this.status = status
