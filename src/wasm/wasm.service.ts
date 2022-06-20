@@ -55,7 +55,7 @@ export class WasmService {
     } catch (err: any) {
       this.logger.error({ err }, 'Error getting the wasm contract %s query.', contractAddress)
 
-      return {"error": (new LCDClientError(err)).toString()}
+      return { error: new LCDClientError(err).toString() }
     }
   }
 
