@@ -63,16 +63,16 @@ export class TendermintService {
 
   public async validatorSet(height?: number): Promise<ValidatorSet> {
     try {
-      const info = await this.lcdService.tendermint.validatorSet(height)
+      const [validators, pagination] = await this.lcdService.tendermint.validatorSet(height)
 
       return {
-        block_height: info.block_height,
-        validators: info.validators.map<DelegateValidator>((validator) => ({
+        validators: validators.map<DelegateValidator>((validator) => ({
           address: validator.address,
-          pub_key: typeof validator.pub_key === 'string' ? validator.pub_key : validator.pub_key.value,
+          pub_key: validator.pub_key.key,
           proposer_priority: validator.proposer_priority,
           voting_power: validator.voting_power,
         })),
+        pagination,
       }
     } catch (err) {
       this.logger.error({ err }, 'Error getting the validator set.')

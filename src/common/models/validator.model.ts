@@ -104,7 +104,7 @@ export class Validator {
   static fromTerraValidator(validator: TerraValidator): Validator {
     return {
       operator_address: validator.operator_address,
-      consensus_pubkey: { key: validator.consensus_pubkey.key },
+      consensus_pubkey: validator.consensus_pubkey.toData(),
       jailed: validator.jailed,
       status: validator.status,
       tokens: validator.tokens.toString(),
