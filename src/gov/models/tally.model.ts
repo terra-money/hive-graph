@@ -1,20 +1,20 @@
-import { Field, ObjectType, Int } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class Tally {
-  @Field(() => Int)
-  yes: number
+  @Field()
+  yes: string
 
-  @Field(() => Int)
-  abstain: number
+  @Field()
+  abstain: string
 
-  @Field(() => Int)
-  no: number
+  @Field()
+  no: string
 
-  @Field(() => Int)
-  no_with_veto: number
+  @Field()
+  no_with_veto: string
 
-  constructor(yes: number, abstain: number, no: number, noWithVeto: number) {
+  constructor(yes: string, abstain: string, no: string, noWithVeto: string) {
     this.yes = yes
     this.abstain = abstain
     this.no = no

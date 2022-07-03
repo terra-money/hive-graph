@@ -508,10 +508,10 @@ type StdSignature {
 }
 
 type Tally {
-  abstain: Int!
-  no: Int!
-  no_with_veto: Int!
-  yes: Int!
+  abstain: String!
+  no: String!
+  no_with_veto: String!
+  yes: String!
 }
 
 type TallyParams {
