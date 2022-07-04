@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { blockIDFlagFromJSON } from '@terra-money/terra.proto/tendermint/types/types'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
 import { InjectLCDClient, LCDClient } from 'src/lcd'
@@ -83,6 +84,13 @@ export class TendermintService {
   public async blockInfo(height?: number): Promise<BlockInfo> {
     try {
       const info = await this.lcdService.tendermint.blockInfo(height)
+
+      info.block.last_commit.signatures.forEach((s) => {
+        // terra.js should be fixed to return number
+        if (typeof s.block_id_flag === 'string') {
+          s.block_id_flag = blockIDFlagFromJSON(s.block_id_flag)
+        }
+      })
 
       return {
         block_id: info.block_id,
