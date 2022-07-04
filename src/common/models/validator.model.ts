@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { bondStatusFromJSON } from '@terra-money/terra.proto/cosmos/staking/v1beta1/staking'
 import { Validator as TerraValidator } from 'src/lcd'
 import { ValConsPublicKey } from './public-key.model'
 
@@ -106,7 +107,8 @@ export class Validator {
       operator_address: validator.operator_address,
       consensus_pubkey: { key: validator.consensus_pubkey.key },
       jailed: validator.jailed,
-      status: validator.status,
+      // terra.js should be fixed to return number
+      status: typeof validator.status === 'string' ? bondStatusFromJSON(validator.status) : validator.status,
       tokens: validator.tokens.toString(),
       delegator_shares: validator.delegator_shares.toString(),
       description: ValidatorDescription.fromTerra(validator.description),
