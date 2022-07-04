@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { voteOptionFromJSON } from '@terra-money/terra.proto/cosmos/gov/v1beta1/gov'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
 import {
@@ -106,7 +107,8 @@ export class GovService {
         proposal_id: vote.proposal_id,
         voter: vote.voter,
         options: vote.options.map((item) => ({
-          option: item.option,
+          // terra.js should be fixed to return number
+          option: typeof item.option === 'string' ? voteOptionFromJSON(item.option) : item.option,
           weight: item.weight.toString(),
         })),
       }))
