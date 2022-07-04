@@ -40,9 +40,9 @@ type Bank {
 
 type Block {
   data: BlockData!
-  evidence: Evidence!
+  evidence: Evidence
   header: Header!
-  last_commit: LastCommit!
+  last_commit: LastCommit
 }
 
 type BlockData {
@@ -429,9 +429,9 @@ type SendAuthorization {
 
 type Signature {
   block_id_flag: Int!
-  signature: String!
+  signature: String
   timestamp: String!
-  validator_address: String!
+  validator_address: String
 }
 
 type SigningInfo {
