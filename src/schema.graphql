@@ -12,13 +12,12 @@ type Account {
 scalar Anything
 
 type ApplicationVersion {
-  build_deps: [String!]!
+  app_name: String!
+  build_deps: [BuildDeps!]!
   build_tags: String!
-  client_name: String!
-  commit: String!
-  go: String!
+  git_commit: String!
+  go_version: String!
   name: String!
-  server_name: String!
   version: String!
 }
 
@@ -57,6 +56,12 @@ type BlockId {
 type BlockInfo {
   block: Block!
   block_id: BlockId!
+}
+
+type BuildDeps {
+  path: String!
+  sum: String!
+  version: String!
 }
 
 type CodeInfo {
