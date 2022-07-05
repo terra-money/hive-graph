@@ -279,12 +279,12 @@ type Pagination {
 }
 
 input PaginationOptions {
-  count_total: String!
-  key: String!
-  limit: String!
-  offset: String!
-  order_by: OrderBy!
-  reverse: String!
+  count_total: String
+  key: String
+  limit: String
+  offset: String
+  order_by: OrderBy
+  reverse: String
 }
 
 type ParameterChangeContent implements ProposalContent {
