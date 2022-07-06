@@ -9,6 +9,10 @@ import {
 export class SimplePublicKey {
   @Field()
   key!: string
+
+  constructor(key: string) {
+    this.key = key
+  }
 }
 
 @ObjectType()
@@ -18,12 +22,21 @@ export class LegacyAminoMultisigPublicKey {
 
   @Field(() => [SimplePublicKey])
   public_keys!: SimplePublicKey[]
+
+  constructor(threshold: number, public_keys: SimplePublicKey[]) {
+    this.threshold = threshold
+    this.public_keys = public_keys
+  }
 }
 
 @ObjectType()
 export class ValConsPublicKey {
   @Field()
   key!: string
+
+  constructor(key: string) {
+    this.key = key
+  }
 }
 
 @ObjectType()
@@ -35,17 +48,19 @@ export class PublicKey {
       return null
     }
 
-    if (key instanceof TerraSimplePublicKey || key instanceof TerraValConsPublicKey) {
-      return {
-        key: key.key,
-      }
+    if (key instanceof TerraSimplePublicKey) {
+      return new SimplePublicKey(key.key)
     }
 
-    return {
-      threshold: key.threshold,
-      public_keys: key.pubkeys.map((pubkey) => ({
+    if (key instanceof TerraValConsPublicKey) {
+      return new ValConsPublicKey(key.key)
+    }
+
+    return new LegacyAminoMultisigPublicKey(
+      key.threshold,
+      key.pubkeys.map((pubkey) => ({
         key: pubkey.key,
       })),
-    }
+    )
   }
 }
