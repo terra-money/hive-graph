@@ -55,7 +55,7 @@ jobs:
 
       - name: Set env IMAGE_TAG
         run: |
-          if [[ $BRANCH == 'refs/heads/classic' ]]; then
+          if [[ $GITHUB_REF == 'refs/heads/classic' ]]; then
             echo "IMAGE_TAG=classic" >> "$GITHUB_ENV"
           else
             echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
