@@ -22,30 +22,39 @@ export class OtherInfo {
 }
 
 @ObjectType()
-export class ApplicationVersion {
+export class BuildDeps {
   @Field()
-  name!: string
-
-  @Field()
-  server_name!: string
-
-  @Field()
-  client_name!: string
+  path!: string
 
   @Field()
   version!: string
 
   @Field()
-  commit!: string
+  sum!: string
+}
+
+@ObjectType()
+export class ApplicationVersion {
+  @Field()
+  name!: string
+
+  @Field()
+  app_name!: string
+
+  @Field()
+  version!: string
+
+  @Field()
+  git_commit!: string
 
   @Field()
   build_tags!: string
 
   @Field()
-  go!: string
+  go_version!: string
 
-  @Field(() => [String])
-  build_deps!: string[]
+  @Field(() => [BuildDeps])
+  build_deps!: BuildDeps[]
 }
 
 @ObjectType()

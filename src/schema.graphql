@@ -12,13 +12,12 @@ type Account {
 scalar Anything
 
 type ApplicationVersion {
-  build_deps: [String!]!
+  app_name: String!
+  build_deps: [BuildDeps!]!
   build_tags: String!
-  client_name: String!
-  commit: String!
-  go: String!
+  git_commit: String!
+  go_version: String!
   name: String!
-  server_name: String!
   version: String!
 }
 
@@ -40,9 +39,9 @@ type Bank {
 
 type Block {
   data: BlockData!
-  evidence: Evidence!
+  evidence: Evidence
   header: Header!
-  last_commit: LastCommit!
+  last_commit: LastCommit
 }
 
 type BlockData {
@@ -57,6 +56,12 @@ type BlockId {
 type BlockInfo {
   block: Block!
   block_id: BlockId!
+}
+
+type BuildDeps {
+  path: String!
+  sum: String!
+  version: String!
 }
 
 type CodeInfo {
@@ -274,12 +279,12 @@ type Pagination {
 }
 
 input PaginationOptions {
-  count_total: String!
-  key: String!
-  limit: String!
-  offset: String!
-  order_by: OrderBy!
-  reverse: String!
+  count_total: String
+  key: String
+  limit: String
+  offset: String
+  order_by: OrderBy
+  reverse: String
 }
 
 type ParameterChangeContent implements ProposalContent {
@@ -429,9 +434,9 @@ type SendAuthorization {
 
 type Signature {
   block_id_flag: Int!
-  signature: String!
+  signature: String
   timestamp: String!
-  validator_address: String!
+  validator_address: String
 }
 
 type SigningInfo {
@@ -508,10 +513,10 @@ type StdSignature {
 }
 
 type Tally {
-  abstain: Int!
-  no: Int!
-  no_with_veto: Int!
-  yes: Int!
+  abstain: String!
+  no: String!
+  no_with_veto: String!
+  yes: String!
 }
 
 type TallyParams {

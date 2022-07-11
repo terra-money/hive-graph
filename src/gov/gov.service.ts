@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { voteOptionFromJSON } from '@terra-money/terra.proto/cosmos/gov/v1beta1/gov'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
 import {
@@ -28,10 +29,10 @@ export class GovService {
 
     if (proposal.final_tally_result) {
       tally = new Tally(
-        proposal.final_tally_result.yes.toNumber(),
-        proposal.final_tally_result.abstain.toNumber(),
-        proposal.final_tally_result.no.toNumber(),
-        proposal.final_tally_result.no_with_veto.toNumber(),
+        proposal.final_tally_result.yes.toString(),
+        proposal.final_tally_result.abstain.toString(),
+        proposal.final_tally_result.no.toString(),
+        proposal.final_tally_result.no_with_veto.toString(),
       )
     }
 
@@ -106,7 +107,8 @@ export class GovService {
         proposal_id: vote.proposal_id,
         voter: vote.voter,
         options: vote.options.map((item) => ({
-          option: item.option,
+          // terra.js should be fixed to return number
+          option: typeof item.option === 'string' ? voteOptionFromJSON(item.option) : item.option,
           weight: item.weight.toString(),
         })),
       }))
@@ -122,10 +124,10 @@ export class GovService {
       const tally = await this.lcdService.gov.tally(proposalId, { height })
 
       return new Tally(
-        tally.yes.toNumber(),
-        tally.abstain.toNumber(),
-        tally.no.toNumber(),
-        tally.no_with_veto.toNumber(),
+        tally.yes.toString(),
+        tally.abstain.toString(),
+        tally.no.toString(),
+        tally.no_with_veto.toString(),
       )
     } catch (err) {
       this.logger.error({ err }, 'Error getting current tally for proposal %d.', proposalId)

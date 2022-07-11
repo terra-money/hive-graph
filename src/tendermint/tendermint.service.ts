@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common'
+import { blockIDFlagFromJSON } from '@terra-money/terra.proto/tendermint/types/types'
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino'
 import { LCDClientError } from 'src/common/errors'
 import { InjectLCDClient, LCDClient } from 'src/lcd'
 import { NodeInfo, ValidatorSet, BlockInfo, DelegateValidator } from './models'
+import { BuildDeps } from './models/node-info.model'
 
 @Injectable()
 export class TendermintService {
@@ -18,30 +20,29 @@ export class TendermintService {
       const data = (await this.lcdService.tendermint.nodeInfo({ height })) as any
 
       return {
-        id: data.node_info.id,
+        id: data.default_node_info.default_node_id,
         protocol_version: {
-          p2p: data.node_info.protocol_version.p2p as string,
-          block: data.node_info.protocol_version.block as string,
-          app: data.node_info.protocol_version.app as string,
+          p2p: data.default_node_info.protocol_version.p2p as string,
+          block: data.default_node_info.protocol_version.block as string,
+          app: data.default_node_info.protocol_version.app as string,
         },
-        listen_addr: data.node_info.listen_addr as string,
-        network: data.node_info.network as string,
-        version: data.node_info.version as string,
-        channels: data.node_info.channels as string,
-        moniker: data.node_info.moniker as string,
+        listen_addr: data.default_node_info.listen_addr as string,
+        network: data.default_node_info.network as string,
+        version: data.default_node_info.version as string,
+        channels: data.default_node_info.channels as string,
+        moniker: data.default_node_info.moniker as string,
         other: {
-          tx_index: data.node_info.other.tx_index as string,
-          rpc_address: data.node_info.other.rpc_address as string,
+          tx_index: data.default_node_info.other.tx_index as string,
+          rpc_address: data.default_node_info.other.rpc_address as string,
         },
         application_version: {
           name: data.application_version.name as string,
-          server_name: data.application_version.server_name as string,
-          client_name: data.application_version.client_name as string,
+          app_name: data.application_version.app_name as string,
           version: data.application_version.version as string,
-          commit: data.application_version.commit as string,
+          git_commit: data.application_version.git_commit as string,
           build_tags: data.application_version.build_tags as string,
-          go: data.application_version.go as string,
-          build_deps: data.application_version.build_deps as string[],
+          go_version: data.application_version.go_version as string,
+          build_deps: data.application_version.build_deps as BuildDeps[],
         },
       }
     } catch (err) {
@@ -83,6 +84,13 @@ export class TendermintService {
   public async blockInfo(height?: number): Promise<BlockInfo> {
     try {
       const info = await this.lcdService.tendermint.blockInfo(height)
+
+      info.block.last_commit.signatures.forEach((s) => {
+        // terra.js should be fixed to return number
+        if (typeof s.block_id_flag === 'string') {
+          s.block_id_flag = blockIDFlagFromJSON(s.block_id_flag)
+        }
+      })
 
       return {
         block_id: info.block_id,

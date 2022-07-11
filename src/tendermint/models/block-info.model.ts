@@ -104,14 +104,14 @@ export class Signature {
   @Field(() => Int)
   block_id_flag!: number
 
-  @Field()
-  validator_address!: string
+  @Field({ nullable: true })
+  validator_address?: string
 
   @Field()
   timestamp!: string
 
-  @Field()
-  signature!: string
+  @Field({ nullable: true })
+  signature?: string
 }
 
 @ObjectType()
@@ -122,10 +122,10 @@ export class Block {
   @Field(() => BlockData)
   data!: BlockData
 
-  @Field(() => Evidence)
+  @Field(() => Evidence, { nullable: true })
   evidence!: Evidence
 
-  @Field(() => LastCommit)
+  @Field(() => LastCommit, { nullable: true })
   last_commit!: LastCommit
 }
 
