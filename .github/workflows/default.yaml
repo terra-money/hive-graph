@@ -2,9 +2,13 @@ name: default
 
 on:
   push:
+    branches:
+      - main
+      - classic
   pull_request:
     branches:
-      - master
+      - main
+      - classic
 
 jobs:
   integration:
@@ -43,11 +47,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: integration
 
-    # deliver on every branch push
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # deliver on push only 
+    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Set env IMAGE_TAG
+        run: |
+          if [[ $BRANCH == 'refs/heads/classic' ]]; then
+            echo "IMAGE_TAG=classic" >> "$GITHUB_ENV"
+          else
+            echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
+          fi
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -83,9 +95,9 @@ jobs:
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.sha }}
-            ${{ steps.login-ecr.outputs.registry }}/hive-graph:latest
+            ${{ steps.login-ecr.outputs.registry }}/hive-graph:${IMAGE_TAG}
             terramoney/hive-graph:${{ github.sha }}
-            terramoney/hive-graph:latest
+            terramoney/hive-graph:${IMAGE_TAG}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           file: Dockerfile.production
