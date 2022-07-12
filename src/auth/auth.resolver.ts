@@ -14,6 +14,6 @@ export class AuthResolver {
 
   @ResolveField(() => Account)
   public async accountInfo(@Args() args: GetAddressArgs): Promise<Account> {
-    return this.authService.accountInfo(args.address)
+    return this.authService.accountInfo(args.address, args.height)
   }
 }
