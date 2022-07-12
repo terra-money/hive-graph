@@ -6,7 +6,7 @@ export class TxSearchOptions {
   limit!: number
 
   @Field(() => Int)
-  page!: number
+  offset!: number
 
   @Field(() => [Event])
   events!: Event[]

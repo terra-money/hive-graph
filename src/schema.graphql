@@ -581,7 +581,7 @@ type TxLog {
 input TxSearchOptions {
   events: [Event!]!
   limit: Int!
-  page: Int!
+  offset: Int!
 }
 
 type TxSearchResult {
