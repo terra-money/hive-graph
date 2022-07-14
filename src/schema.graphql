@@ -482,7 +482,7 @@ type Staking {
   delegations(delegator: String, height: Float, validator: String): [Delegation!]!
   parameters(height: Float): StakingParams!
   pool(height: Float): StakingPool!
-  redelegations(delegator: String!, validatorDst: String, validatorSrc: String): [Redelegation!]!
+  redelegations(delegator: String!, height: Float, validatorDst: String, validatorSrc: String): [Redelegation!]!
   unbondingDelegation(delegator: String, height: Float, validator: String): UnbondingDelegation
   unbondingDelegations(delegator: String, height: Float, validator: String): [UnbondingDelegation!]!
   validator(height: Float, validator: String!): Validator

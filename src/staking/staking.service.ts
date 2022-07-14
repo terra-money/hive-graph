@@ -111,9 +111,16 @@ export class StakingService {
     }
   }
 
-  public async redelegations(delegator: string, validatorSrc?: string, validatorDst?: string): Promise<Redelegation[]> {
+  public async redelegations(
+    delegator: string,
+    validatorSrc?: string,
+    validatorDst?: string,
+    height?: number,
+  ): Promise<Redelegation[]> {
     try {
-      const [redelegations] = await this.lcdService.staking.redelegations(delegator, validatorSrc, validatorDst)
+      const [redelegations] = await this.lcdService.staking.redelegations(delegator, validatorSrc, validatorDst, {
+        height,
+      })
 
       return redelegations.map<Redelegation>((redelegation) => ({
         delegator_address: redelegation.delegator_address,

@@ -50,7 +50,7 @@ export class StakingResolver {
 
   @ResolveField(() => [Redelegation])
   public async redelegations(@Args() args: GetStakingArgs): Promise<Redelegation[]> {
-    return this.stakingService.redelegations(args.delegator, args.validatorSrc, args.validatorDst)
+    return this.stakingService.redelegations(args.delegator, args.validatorSrc, args.validatorDst, args.height)
   }
 
   @ResolveField(() => [Validator])
