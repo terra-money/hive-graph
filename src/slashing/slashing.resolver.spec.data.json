@@ -1,0 +1,819 @@
+{
+  "phoenix-1": {
+    "parameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "downtime_jail_duration": "600",
+        "min_signed_per_window": "0.050000000000000000",
+        "signed_blocks_window": 10000,
+        "slash_fraction_downtime": "0.000100000000000000",
+        "slash_fraction_double_sign": "0.050000000000000000"
+      }
+    },
+    "signingInfos": {
+      "params": { "height": 580019 },
+      "result": [
+        {
+          "address": "terravalcons1qte7zglprydwc66puy08qzcqh6vt5cu2eh2xu9",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1q3cyjdxgjpp23uu5h3hgsx2q7k6vs0ud8te5u7",
+          "index_offset": 460437,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 22038,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1qhe2dtsdmgfev0rt6xd5dr7tnspn8ld6487mvp",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1q6awj3fxq5vd6mk70fjwp5te838crvdv334frt",
+          "index_offset": 557282,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 22735,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1pdgcthlf22y5lxes7v92z2t5nzu3rhjjgmqmpa",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ps54hnr9ghzp9j4w3mftfyqv06szfp8t8nk6jf",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1p3vfrv5xvuxwmvy4x3e2tyqxk2egjsq3uz3cfs",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1purqdae2vw6zcpfd2sj693gevuu8puwnu07q7j",
+          "index_offset": 392767,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 186771,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1p7vgsxvf8xtwtce7me6fppudkq3crp7mrwwach",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1plxzejee39pxxswn4l2wfz0apqus0yn05crp6s",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1zvtqm6lgmnnkgn7p5rpgkx2u2uw740ydpmznhx",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1zleu2w40g995frjs9gmahumwdua3vq7jantyfz",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1zle74qjnjfct29yfct0ume38a76hzynt9l586c",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1r9rm4vl46wq8qht9j3apafuqkw3zgfvyxf5da4",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1r8xsn5kezj0jtv0ytm3539hsj4wumtqh56uy9x",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1r8msdw57jjzm5zll6crt5p2y0v9aa6zaultqs5",
+          "index_offset": 24571,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 15894,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1r2wgg6gcuapj8pt5fq5a5clwv2jt3hun08a50v",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1rtykq2cpyc9at4rvrp63p7vlyjm5scvzleq0ms",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1rvnykqa30l4p389cw87ta2jwc4paakgp2c67wj",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1rvhvqgfyxaweg3fpqhcd9xq5ezzelfa59d25sk",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1yxl42lnp55skxj62x65ncta8dg5mdwuw2ztsyn",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ygd62j2upjl4vgrsjpelstesdqy4c0szaws26n",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ynavthu5qqk6x9hv3vl0z94mzek25qq7ehak38",
+          "index_offset": 6730,
+          "jailed_until": "2022-05-29T02:36:13.431Z",
+          "missed_blocks_counter": 1221,
+          "start_height": 2351,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1y44zrld5tw6ezyu9waxznywdjtlkew6yhed6d7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1yaq5mmsy86jls5qsphh8klu82zapc3tk39utfc",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons19y2fsmxmmspwy3ymleqy9gatk00mjerg0gcaxn",
+          "index_offset": 66806,
+          "jailed_until": "2022-06-24T09:33:59.544Z",
+          "missed_blocks_counter": 0,
+          "start_height": 384771,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons19y0j2ggss8w84m8kuwtdmgaf465ajw0vtahuq9",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons19sjspa9w5v8l2te0va845v0ljw0xzc7ays9etv",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons19hltpfm75w2pkpra4hjfmv7mpnwwmzj9kvywzf",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons19lw07kmyytuw98tamcqdchjweuluwefpgr520s",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1xqsufsn3dre5anydq3u08mdwh6nx8f688kgec0",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1xyazls5upvvyayfwr6sjkh3rcd8fmgqnlsk94w",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1x95xvmh2w6y00yky4wem5r8kwgkftfpu2aygh7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons18zsz9qpesag5zafg9rah9t47ggggzxq83q022w",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons18fwl9y6m7yq9hhp5yqt9wk4nh2kmcuhrqjkzpr",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons182jl0n8p69u7e30588e70px8pqwfkgg0lqnknq",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons18wpj40nrssvf9nv8k0f65gqpsq8tcj0tnuemlq",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons18ctczmd7wm27e3xrarpsc4tlqpcu5tklzpdt5q",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 8,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons18lh46932n992706g7c28sschnc3h9jhsxs9346",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ggdep35vc6p90v5qcu2hzzn2qzphee803mqvzd",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ggwrepmux883v3r3tpywmvdwa3ap9260u8kt3f",
+          "index_offset": 240562,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 339455,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1gts5decs8s64n3sw8k8ffmejxukjw7m3gmkt9f",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 16,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1gtcsqtp8ama546l67mzq5d9jd9f4u74hla24fj",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1g4fetu9kmy7r8cn0ea8yflhmddhn79c2qt7mdt",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1ge0zrnjtar0dk8ya6sydc46egh4rfa8x79jdp7",
+          "index_offset": 567267,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 875,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1fqp0dw6rzlt4a7nlxu8zr6xugxtv7gaqk4fwxc",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1fxcf0xjghlyn05tqsqg0fcx9d7ju7rmgcpxmdn",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 56,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1fvedvxe87ttnw8s7wwuqz2nqcz5zed9g4xcng7",
+          "index_offset": 350575,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1f0aj3v4ktq5h8k39awlmwpl8ynm73shdzysjm7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1fkz8nv9f60lrsp4r605a8wmwqvasa2mlsdfndv",
+          "index_offset": 574646,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 5371,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons129gvlstg6qugf4l5kfpx32x7rq2rthvn9tfjgq",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons12j86vel7xye9j6d2mxd4209mf8tg8qg7tp3ncw",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons12nz990xh73mga9qrq4244wy54x87pzu7qmvywa",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons12eq9z6e3ef6vz7stalg0s23c5l495le8t9uefx",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons126cd7uw9mk2zk8y0g7qhfe4fgq3vwzhn9uw280",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1tpme72es49dtm49vkuxe587wysrgtfz6gc7ym7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1tzp9a7utrw9w6dedxf6zsflluqwkld5z6dtpz7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 4,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1tyzyrcwsz3zlu0ywua274vg8tyxryfn9sgq7w6",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1tvgejwvpxtkk38za30qte8xn3c95jdctk7kr2n",
+          "index_offset": 6471,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 663,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1tn63vcam3v895ackn8w2txr3h4hh03aj6jq9jy",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1vru7k9hyhxvw2pfwgm4zp8rzpllvj6scpulan0",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1v8cp8czwrd8tpaqpav6f9v9jewgkshpppx54k8",
+          "index_offset": 728,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 217,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1v2p7smhpxr26z7ckdlgfvsxyryv4djqjmqtcm5",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1v2v6hyrt2q4rnj5vfunafv5t40wauzp4rwg29a",
+          "index_offset": 22012,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 26,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1vwnzxzy3jflgxze383nwew3p2777tuqc74l79m",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1v6hvmssg2dx4d93n73krx7kg27qwf9p4g3w4k3",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1dp9twudt50s7ldwvexrffxqu545h3e543nty6s",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1drgzj3ltg5xukyl0qsrvjzhlwq39z9hk686k7z",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1dhvx49zmxutse75fjr9vkj9y4kgtfzu9l7lwxg",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1wtzsjufvnw6r0cddxg30svawqpdm3l08dlaq54",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1wmce88egmkrsznjvkcy2drmqny6wfpd64kuee4",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 7,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1waeh8h6g93436ld06hgs0mxg4zsh4qgqx24vmn",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons10pztddr6ftc6xntazyadcmxl2l7g9p8dcf55wd",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons10v7lmskeq8ye7hwdmrzzgt4s8tucfc8f027cph",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons100crvtg2c4vljk42fn0rxneuk463hp4syrzlq3",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons10akq9tsnwkxqsg0jf9ad9fudeeldua3vgreew2",
+          "index_offset": 186991,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 1565,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons107h8erdfaumd4myfls3fx3gp6javjwghr8q2ra",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons10lmzjds8l972hp38wwr63vy5vtu2cp9lzrx5hy",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1sp5sps66r2hvd2mshpn7vjpulu3f0vjppjy4r7",
+          "index_offset": 114,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 1301,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1swalkezkrvy8serh8lghw6gdfkw64ussuywwcl",
+          "index_offset": 172575,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1s0h6a4cv54z9ccuhgc3engq99npz4rne8ldytu",
+          "index_offset": 537549,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1sa7jezk4aweew7zyp22peer7fqrrdww96maa6e",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons13z23evdpnc7825a4d9tck6c26psrd7s4jvtmrj",
+          "index_offset": 67733,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 306348,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons13gm4w4hcs8urksfm8s2uh8jn9qcyukycq8hea7",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons13tsy88nvvccykel235ryj9lucfvma877x6kemc",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons13a406xk65xs30stcc47rw0wkn6a7fvsxtkqq6k",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1jrp6hftwa20cl238qlnhkampr4hxkzsgzuek27",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1jgg45pe4qxrnw0ua9dw2uaumrnkfrk0az52qym",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 7,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1jg4dcxtevwrz29lfwwpjp5zjnldxxv97c2mlrx",
+          "index_offset": 578602,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 1415,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1jjjpzzrg47q8de8q5fjdrudxvhr4pn5p37q56x",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1j6zllkntu8a2425t48mn6ujfvjv9m3w4vqxhes",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1n9hwqurkm78x8yz0nc8gxkmrpk5ny42x93f9xj",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1nwjrnqqqduxpud7c9q296xcws55pwweq3edl3v",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1nc7e7t23nvk695fhk06an74j2ha0kkqjqczekq",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons1nm2zlapv4g09ff02yhakyz3ky7eugz3qnxxxvg",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons15zzp7xhn9d9q7vv9cgsqsww2llnp0hlcratg3m",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 8,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons15tm3h88j28sftcl2upnpmav338devsg9nyyzmm",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons15w3xmvql7f4cz8vy25y8ducmqg35qtq2vpjuja",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons15w3enkzppxk3twc7v4p90v9v3mst4t8wen0cyr",
+          "index_offset": 580018,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 0,
+          "start_height": 0,
+          "tombstoned": false
+        },
+        {
+          "address": "terravalcons15neluccm9wm7383vq7hjmhy96aaqh4v5qd0puu",
+          "index_offset": 160546,
+          "jailed_until": "1970-01-01T00:00:00.000Z",
+          "missed_blocks_counter": 45,
+          "start_height": 419471,
+          "tombstoned": false
+        }
+      ]
+    }
+  }
+}

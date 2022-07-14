@@ -1,0 +1,15 @@
+{
+  "phoenix-1": {
+    "accountInfo": {
+      "params": { "address": "terra1ltegerwren4tcaxpwxpkgs94ztnrcu0sk25qz3", "height": 580019 },
+      "result": {
+        "account_number": 528754,
+        "address": "terra1ltegerwren4tcaxpwxpkgs94ztnrcu0sk25qz3",
+        "public_key": {
+          "key": "A1gAP2HyNeyHsNjEZBe6PLZZEPMeowTDUjuHNtxk6spW"
+        },
+        "sequence": 3
+      }
+    }
+  }
+}

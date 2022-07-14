@@ -1,0 +1,18 @@
+{
+  "phoenix-1": {
+    "parameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "receive_enabled": true,
+        "send_enabled": true
+      }
+    },
+    "denomTrace": {
+      "params": { "hash": "B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4" },
+      "result": {
+        "base_denom": "uusdc",
+        "path": "transfer/channel-6"
+      }
+    }
+  }
+}

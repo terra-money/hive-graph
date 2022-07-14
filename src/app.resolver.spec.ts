@@ -4,7 +4,7 @@ import { AppResolver } from './app.resolver'
 describe('AppResolver', () => {
   let resolver: AppResolver
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [AppResolver],
     }).compile()
@@ -14,5 +14,10 @@ describe('AppResolver', () => {
 
   it('should be defined', () => {
     expect(resolver).toBeDefined()
+  })
+
+  it('should ping pong', () => {
+    const result = resolver.ping()
+    expect(result).toEqual('pong')
   })
 })
