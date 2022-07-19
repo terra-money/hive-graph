@@ -581,7 +581,10 @@ type TxLog {
 input TxSearchOptions {
   events: [Event!]!
   limit: Int!
-  page: Int!
+  offset: Int!
+
+  """Deprecated. Use offset instead."""
+  page: Int
 }
 
 type TxSearchResult {

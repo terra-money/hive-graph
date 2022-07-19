@@ -41,7 +41,11 @@ export class TxService {
 
   public async search(options: Partial<TxSearchOptions>): Promise<TxSearchResult> {
     try {
-      const result = await this.lcdService.tx.search(options)
+      const result = await this.lcdService.tx.search({
+        events: options.events,
+        'pagination.offset': options.offset?.toString(),
+        'pagination.limit': options.limit?.toString(),
+      })
 
       return result
     } catch (err) {

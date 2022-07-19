@@ -6,7 +6,10 @@ export class TxSearchOptions {
   limit!: number
 
   @Field(() => Int)
-  page!: number
+  offset!: number
+
+  @Field(() => Int, { nullable: true, description: 'Deprecated. Use offset instead.' })
+  page?: number
 
   @Field(() => [Event])
   events!: Event[]
