@@ -8,6 +8,9 @@ export class TxSearchOptions {
   @Field(() => Int)
   offset!: number
 
+  @Field(() => Int, { nullable: true, description: 'Deprecated. Use offset instead.' })
+  page?: number
+
   @Field(() => [Event])
   events!: Event[]
 }
