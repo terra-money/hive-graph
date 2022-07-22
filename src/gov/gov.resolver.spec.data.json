@@ -1,0 +1,1116 @@
+{
+  "phoenix-1": {
+    "depositParameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "max_deposit_period": 604800,
+        "min_deposit": [
+          {
+            "denom": "uluna",
+            "amount": "512000000"
+          }
+        ]
+      }
+    },
+    "deposits": {
+      "params": { "proposalId": 446, "height": 580019 },
+      "result": [
+        {
+          "amount": [
+            {
+              "amount": "512000000",
+              "denom": "uluna"
+            }
+          ],
+          "depositor": "terra1u56c8mhw9qgmwgjcrxrarhxgzhg8k5h6cepnhf",
+          "proposal_id": 446
+        }
+      ]
+    },
+    "parameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "deposit_params": {
+          "max_deposit_period": 604800,
+          "min_deposit": [
+            {
+              "denom": "uluna",
+              "amount": "512000000"
+            }
+          ]
+        },
+        "tally_params": {
+          "quorum": "0.100000000000000000",
+          "threshold": "0.500000000000000000",
+          "veto_threshold": "0.334000000000000000"
+        },
+        "voting_params": {
+          "voting_period": 604800
+        }
+      }
+    },
+    "tallyParameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "quorum": "0.100000000000000000",
+        "threshold": "0.500000000000000000",
+        "veto_threshold": "0.334000000000000000"
+      }
+    },
+    "votingParameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "voting_period": 604800
+      }
+    },
+    "proposal": {
+      "params": { "proposalId": 446 },
+      "result": {
+        "content": {
+          "description": "Agora Post: https://agora.terra.money/t/proposed-distribution-method-for-0-5-emergency-luna-allocation/44257\n\nThis proposal outlines parameters to distribute emergency relief to teams and to empower them with runway to continue building on Terra 2.0. While far from perfect, it is the result of exhaustive discussion among builders and community members. \n\nA “YES” vote will signal support to move forward with the distribution plan outlined on Agora and establish a community-led council whose initial membership consists of longstanding Terra community members (Karma, Panterra0x, Cephii, Seb, and GJ). This council will oversee the distribution and allocation of the emergency allocation fund, based on the parameters outlined in the Agora post. Passage of the proposal will enable rapid distribution of funds to enable teams to continue building and to contribute to the revitalization of the Terra 2.0 community.",
+          "title": "Establish Emergency Allocation Distribution Method"
+        },
+        "deposit_end_time": "2022-06-15T06:40:55.719Z",
+        "final_tally_result": {
+          "abstain": "40032230327920",
+          "no": "13136514029",
+          "no_with_veto": "17552500493",
+          "yes": "304228958329803"
+        },
+        "id": 446,
+        "status": 3,
+        "submit_time": "2022-06-08T06:40:55.719Z",
+        "total_deposit": [
+          {
+            "amount": "512190000",
+            "denom": "uluna"
+          }
+        ],
+        "voting_end_time": "2022-06-15T06:49:24.163Z",
+        "voting_start_time": "2022-06-08T06:49:24.163Z"
+      }
+    },
+    "proposals": {
+      "params": { "height": 580019 },
+      "result": 10
+    },
+    "proposer": {
+      "params": { "proposalId": 446 },
+      "result": "terra122les0es7nexaqemnkcfhu3sjvschd7l5yfq7s"
+    },
+    "tally": {
+      "params": { "proposalId": 446 },
+      "result": {
+        "abstain": "40032230327920",
+        "no": "13136514029",
+        "no_with_veto": "17552500493",
+        "yes": "304228958329803"
+      }
+    },
+    "votes": {
+      "params": { "proposalId": 446 },
+      "result": [
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1uwdzp5lfgueteftyfakgqtdce4c5w8z40lvdvs"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1uedge2tu3c7ck257w553240ks7vgl8n3jsypjx"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1ucrp4zkykdpt98h0s2c2uagywynmqxxmzzgm3h"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1wkvpdke05hynvae4qn9w3rjxk7rcxhpp68ruuf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1xtlkxkund5xxsj8uj94y6fmx2sf9unkc9l7lpg"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra12wdq8y0d08sh8mg6lhfe0ncqgm4n3skfz62tyd"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1ld7v4ltkfldlexvcxased7fxr6evffv2k4du0s"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1wgs0sjw2gtcycerk3ch4e7crukgfcu3ek22x77"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1kquy6jltp6ysdj2zhlma7aykdqqccu08k9tq8f"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1ysfy3ws89c3zfspwpeuzxwv2nuhhm89yzup6hl"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1wu6ankh57plqrdpxr3z2s79nzda7lf9areuts3"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1vy0nqje03md92uzw7y7wya0ykz7kctrsulszgn"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1f6wuq93320s6w7vvnkc0576g9mtqfmz9agzak9"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1vmuwjksmy42dzfvg3meng4y35m0u7k40jfe5jf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra17ahaa762ykd83u30a8k84a02wcsetmrwzqyn8f"
+        },
+        {
+          "options": [
+            {
+              "option": 3,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra19mu2wuyavmzegks0qqw5u8z2ndyqf0gk72gzvs"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra120akx7zuqn2uhy9naknct08cajkjr2e2ls5kng"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra16rxwyykxdmw9m5fpyj2j8j4f3x70265tn3hdnh"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1rl30l76ggg7yy5eh5mnmpa8tlvzs26hayw5alf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1gmhgs4zd9pyw0075zrqj639xpyyzqrw6wtcr4p"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1gtw2uxdkdt3tvq790ckjz8jm8qgwkdw3uw8dmq"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra15gs5cy87n5jxddf4vq94efre9uwkrt9xajzcjd"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13z0tmd96k6n3ere45z0y00tq5zfmssazm3krkw"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13z0tmd96k6n3ere45z0y00tq5zfmssazm3krkw"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13qjxhnw98lm36rxc9yjakkmulhpv7zctdc5zlz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1hr7svdp2rga9vf3ry95sx7g5wyspgwmg94qac8"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra14rftkw37eltf74degzajq4s5phg23vjlu2mcdr"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra19k3s3gv5pfm3kh4utry9ty0hsulc2n8sv5shu8"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1pqfpatejuehxu6uyuk5u3xh5yw7sy4a73ultfw"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra15krppdqx02k0pc3yn66zwdx5psmd47z96kd6ld"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1we3rw9n43f6grgk3rgq43kyh84kknnfyn89gjh"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra162mr2tf5p963zcwcpk4uxcyuqar2ham3rrd3e2"
+        },
+        {
+          "options": [
+            {
+              "option": 4,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra14yd779kthp52ng350q7smwmgs58xamxd06stkz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1lg03dktkjh04gy5w5cumrywgnwhg5twm83xp9r"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra19knljg7p8jtnkskw2pujj92exmu2fgf5kasdqg"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1tpmk2h6kmf3jkzhkzlzdp6avp0h6xxnrwgcvs7"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra19k3s3gv5pfm3kh4utry9ty0hsulc2n8sv5shu8"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1cqc26lnatzxvu0z5nd4yx8m4ecllkm7jlj6nna"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1cupj7d70jrtjxqhpr6s3qq68t8ky4smcjvccm4"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1d3dgxxsxmlp6txfjegzjqh7tmf9wrlzwqlztjz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra12mn0q75vz75fm53paa7wf0fxul5sgzz9yc9zer"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra14cm6ddgcjshwz5wcq87t8fxcv679usyv3ypnm2"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1rgy25cyclzvcgze5p5pcep5jmtzvrch8ephsz4"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1rgy25cyclzvcgze5p5pcep5jmtzvrch8ephsz4"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1v74ll3j4wr6yx5dlxvrde89sdnxttvgw33jdwd"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1puzp2yjqps43x7nse33svljc550xjz35jfygpe"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1fltevtujt9z3rasn02m8nyspvzax0j6d4u3luq"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1kepapcnh78hsk8nx2u9nv05rn7vjwwf4fvccj0"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1yxmz0r83s3xy9jn5ywx39xsxtm75esfx896lhr"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1skffgepseg44kurukdt78neddmjggeqnypgdj3"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra16g4fewe38nj6wct4vvh624fd2rgh6t5lkpleez"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1g4e0wrcwnpjseplwyv05j8wz8c0jy3yxgsqlr2"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1dazyw3a0vrhqqz3fzate4yqlp7aguajk9nvnvl"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1qlgyrmaadru03rd9j0w9nr5p2quhthlrhn7trn"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra12lqxx4rcfqjccwqnd4wd4m8s32pplqhx5g77ts"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1wke9k02smhpsa2mtaml6lr5hy27rgwzzskk4js"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1z8nsxv50leltmze9t49yl79yyaulfa274qk60c"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1dmnhhhn2u7vmd2vkp3sqvq6gcz54rw8sq6tpkf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1sqhgsp53mvwxzje7ktfk8kr0yhpqjt226yjynt"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1tm0xkark2ufecmdhgaaw7gqsycyt4qag6wg6kf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1ffh46xgskmzkzr8d74ghkjydjf27xet40vjd49"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1whu94m8p7ums62x4ceg8ww4pr2c8ujszux25hz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1mdtes94sv3mtdqwj7zwxunmntc6u7778kus033"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1plxp55happ379eevsnk2xeuwzsrldsmqdngppf"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1afhtcc0v05sxattfl0wcn9dy4cfy4cd77yfq7j"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1czk6ltagzalplnemy7ptlccr800vjwrqjzva94"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1atjj735q09kqhkjhenr80yapxlr7mpypge975p"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13n2fsvfvj28eqvkjejhqlxf3pch3muxkxnpqgt"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1r2kht9xt8dv7lu6p2rsm3p5mjfnz6v5jgc4h54"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra14ane45ue9c3v46gdxz4555jlph9zkw9ncf9nwx"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1t3zvwaz7v3epg3f33waxajv4nj95mt8ma2g9wm"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1axr9pdaf5u0jryrlzhs4twvyaj4rr49mmrgnr5"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1sntag3g9u3ckpnwspxxju9mywly6xthhgaclpn"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1gtpgu85f3q6muumm0pmv0u403m9m5fmjn98qag"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13wpkzv5xprarwmkduxcnlat242s6ftugmtj5hx"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1f3tcvc6n76f7zx5cdqr9dgcd6kw3td9ecdgjkk"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1xameye083nwdvqv4nx9ydrsd77audpxavrcg4s"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1chzrxuuajgp4huaanpwuz63xtc2wyq3mfddty6"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1ser6r9dxrg7q7u2mmlp8t44zq3z2gujnw5pzt2"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1e2texrvgurz252760xryfnxyhus8e8zacyx6as"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1geyyqpragzznpcffngnt5kw3fqjev89hfzynmg"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra10sfzmhrvfsm4xkjwc2rdgs9c9akk3zagxg6dty"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1cdty5sm6lp3k6h0x7jze9zya0m4zpc8effsyfp"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13canvyexqv36nn6gvyxsv278g8dpxma4kz6840"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1hrv308n74ys6cgs8nwpkvht9z6w65xqvf8e38q"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra15gm7mgv9z3ny82gvv9aehae2rcm20suxuj74m2"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra19mrdt4akpaeejd7u5t462zrrwszd8z20737ynp"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1j7hzvncn873xef508gaqmvmuu5k5zd09vu976h"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1dc4tfjpdkqrka9rvcv5pqx4z82sk7zgnzlryt9"
+        },
+        {
+          "options": [
+            {
+              "option": 2,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1p7wrqyz7eku7296xaxrjzwvxe6hh506jqr8qdg"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1c2x8tpner85lycdssd6nc6wd66rjld6qecs8mz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra13ug4zlkuhtq7xypsl3az3zsqngzc8k0a7zhafr"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1na8aqpfqjcsfwwksmw2s22k52p338acp7fen4u"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra16a0x4us8x6yg2xj5upx88hcum2cymknekkd3cr"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1efgwq5m63d4njhdded6thf6keq6622hjg3qkkm"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1q4x0kxex7upaa59lzuzafalt34v0vq0lfw2yzl"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1e4sju9ya52l8ndjcneut4hg52y228360jqz62s"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1wdymftapg5pcvf2aqw4pd0yuuh5w9m6yqzlpxl"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1gkchs6p8wqaz9rutfnqc3hx0qnh2mwkra6tzfz"
+        },
+        {
+          "options": [
+            {
+              "option": 1,
+              "weight": "1.000000000000000000"
+            }
+          ],
+          "proposal_id": 446,
+          "voter": "terra1kupw4h9yssfu2c63ym9uhfpegn2gae9j74qy0w"
+        }
+      ]
+    }
+  }
+}

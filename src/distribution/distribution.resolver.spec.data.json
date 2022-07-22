@@ -1,0 +1,48 @@
+{
+  "phoenix-1": {
+    "communityPool": {
+      "params": { "height": 580019 },
+      "result": [
+        {
+          "denom": "uluna",
+          "amount": "331383580474865.809657776309756892"
+        }
+      ]
+    },
+    "parameters": {
+      "params": { "height": 580019 },
+      "result": {
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "community_tax": "0.000000000000000000",
+        "withdraw_addr_enabled": true
+      }
+    },
+    "rewards": {
+      "params": [{ "delegator": "terra18pmvpy25zc7x0u8ppefuyyl2zaafe2wutqlxy2" }, { "height": 580019 }],
+      "result": {
+        "total": [
+          {
+            "denom": "uluna",
+            "amount": "47853.676485157800000000"
+          }
+        ],
+        "rewards": [
+          {
+            "validator_address": "terravaloper18pmvpy25zc7x0u8ppefuyyl2zaafe2wut0nm5e",
+            "reward": [
+              {
+                "denom": "uluna",
+                "amount": "47853.676485157800000000"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "withdrawAddress": {
+      "params": [{ "delegator": "terra18pmvpy25zc7x0u8ppefuyyl2zaafe2wutqlxy2" }, { "height": 580019 }],
+      "result": "terra1t849fxw7e8ney35mxemh4h3ayea4zf77dslwna"
+    }
+  }
+}

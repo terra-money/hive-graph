@@ -1,0 +1,50 @@
+{
+  "phoenix-1": {
+    "codeInfo": {
+      "params": { "codeID": "", "height": 580019 },
+      "result": {}
+    },
+    "contractInfo": {
+      "params": ["terra1qdv90q7rdg60tlpyeem93c88avp8lvnwa04sxr3yxsfcnccknnysft59tg", 580019],
+      "result": {
+        "address": "terra1qdv90q7rdg60tlpyeem93c88avp8lvnwa04sxr3yxsfcnccknnysft59tg",
+        "admin": "terra174gu7kg8ekk5gsxdma5jlfcedm653tyg6ayppw",
+        "code_id": 71,
+        "init_msg": {
+          "asset_infos": [
+            {
+              "token": {
+                "contract_addr": "terra1s8u586k3s7xtvasxv4p6ldl0jrxht9w886v8ymkst6crg5hxue3sqn49r9"
+              }
+            },
+            {
+              "token": {
+                "contract_addr": "terra1rwg5kt6kcyxtz69acjgpeut7dgr4y3r7tvntdxqt03dvpqktrfxq4jrvpq"
+              }
+            }
+          ],
+          "factory_addr": "terra14x9fr055x5hvr48hzy2t4q7kvjvfttsvxusa4xsdcy702mnzsvuqprer8r",
+          "init_params": null,
+          "token_code_id": 69
+        },
+        "owner": "terra14x9fr055x5hvr48hzy2t4q7kvjvfttsvxusa4xsdcy702mnzsvuqprer8r"
+      }
+    },
+    "contractQuery": {
+      "params": [
+        "terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26",
+        {
+          "query": {
+            "balance": {
+              "address": "terra174gu7kg8ekk5gsxdma5jlfcedm653tyg6ayppw"
+            }
+          }
+        },
+        580019
+      ],
+      "result": {
+        "balance": "566135443853000"
+      }
+    }
+  }
+}

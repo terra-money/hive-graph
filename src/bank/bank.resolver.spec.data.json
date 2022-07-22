@@ -1,0 +1,121 @@
+{
+  "phoenix-1": {
+    "balance": {
+      "params": { "address": "terra18pmvpy25zc7x0u8ppefuyyl2zaafe2wutqlxy2", "height": 580019 },
+      "result": [{ "denom": "uluna", "amount": "4248686" }]
+    },
+    "total": {
+      "params": { "height": 580019 },
+      "result": [
+        {
+          "amount": "78629489",
+          "denom": "ibc/0471F1C4E7AFD3F07702BEF6DC365268D64570F7C1FDC98EA6098DD6DE59817B"
+        },
+        {
+          "amount": "42000",
+          "denom": "ibc/05D299885B07905B6886F554B39346EA6761246076A1120B1950049B92B922DD"
+        },
+        {
+          "amount": "2000016",
+          "denom": "ibc/10BD6ED30BA132AB96F146D71A23B46B2FC19E7D79F52707DC91F2F3A45040AD"
+        },
+        {
+          "amount": "6400000000000000000",
+          "denom": "ibc/14E4FD1AB72DE9BF1D6725CBA18373C406CB9A7DA17955299F3F4DC5C6131A4E"
+        },
+        {
+          "amount": "3000000000",
+          "denom": "ibc/158C7694575EF99C73CA5926B5539567411F44381E05A06C48DF00769953B93F"
+        },
+        {
+          "amount": "9004000",
+          "denom": "ibc/177904239844D7D0E59D04F864D1278C07A80688EA67BCFA940E954FFA4CF699"
+        },
+        {
+          "amount": "29692002",
+          "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+        },
+        {
+          "amount": "500000000000000000",
+          "denom": "ibc/2E435CEEEBA18CCB2719E0182BC5D142A364D6CCE9957DE6E1AC4D62127D2913"
+        },
+        {
+          "amount": "268039103",
+          "denom": "ibc/30C9FA3DF80892CF4615A84845349EAD427670CB38C6B03B0388BE8543B2AB4D"
+        },
+        {
+          "amount": "1590000",
+          "denom": "ibc/3E35008738AC049C9C1A1E37F785E947A8DAA9811B3EA3B25580664294056151"
+        },
+        {
+          "amount": "117187403",
+          "denom": "ibc/4CD525F166D32B0132C095F353F4C6F033B0FF5C49141470D1EFDA1D63303D04"
+        },
+        {
+          "amount": "21829",
+          "denom": "ibc/52972E681562A29CE11544C6000E97A474BB6C22DFB305CB4A7269F5534638B4"
+        },
+        {
+          "amount": "10000000",
+          "denom": "ibc/649BC3B431F86709E5C27C7628B77E3122E9A3C5E871E05A553D3100DDBB070D"
+        },
+        {
+          "amount": "169",
+          "denom": "ibc/64B3EFE08A6A3EF5D2A7F1D3AF033DDC951DA51F92E06CC31D3F9AF8E8368860"
+        },
+        {
+          "amount": "22241",
+          "denom": "ibc/74C75E6EE1E6A5124DFC1A88388FA543551634A97271764B77A6125F750D9263"
+        },
+        {
+          "amount": "1547101775",
+          "denom": "ibc/815FC81EB6BD612206BD9A9909A02F7691D24A5B97CDFE2124B1BDCA9D4AB14C"
+        },
+        {
+          "amount": "9000000",
+          "denom": "ibc/95534201E6996996054EAF82C508C87DA565BB40ED04A36B61705D578723CE89"
+        },
+        {
+          "amount": "2491638",
+          "denom": "ibc/B090DC21658BD57698522880590CA53947B8B09355764131AA94EC75517D46A5"
+        },
+        {
+          "amount": "1000000",
+          "denom": "ibc/B22B4DD21586965DAEF42A7600BA371EA77C02E90FC8A7F2330BF9F9DE129B07"
+        },
+        {
+          "amount": "888",
+          "denom": "ibc/B249D1E86F588286FEA286AA8364FFCE69EC65604BD7869D824ADE40F00FA25B"
+        },
+        {
+          "amount": "5309981915110",
+          "denom": "ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4"
+        },
+        {
+          "amount": "1119197801020170000",
+          "denom": "ibc/BC8A77AFBD872FDC32A348D3FB10CC09277C266CFE52081DE341C7EC6752E674"
+        },
+        {
+          "amount": "2612343775749",
+          "denom": "ibc/CBF67A2BCF6CAE343FDF251E510C8E18C361FC02B23430C121116E0811835DEF"
+        },
+        {
+          "amount": "3800000000000000000",
+          "denom": "ibc/D54CE4CD2927F744CDCA844DD0E1A5DF88762274C55CD9AAB13E504A29BE8933"
+        },
+        {
+          "amount": "940000000000000000",
+          "denom": "ibc/F992067A054C819B42D2DAB57F5CCE347D38352EB90453E59D566BFE64F1614B"
+        },
+        {
+          "amount": "120040",
+          "denom": "ibc/FA7775734CC73176B7425910DE001A1D2AD9B6D9E93129A5D0750EAD13E4E63A"
+        },
+        {
+          "amount": "1009354216398360",
+          "denom": "uluna"
+        }
+      ]
+    }
+  }
+}

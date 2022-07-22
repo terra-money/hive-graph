@@ -1,0 +1,39 @@
+{
+  "phoenix-1": {
+    "grants_generic": {
+      "params": {
+        "grantee": "terra1yy484hlsmhp6ulc764sfaqyfp3uyqg5ed87hsv",
+        "granter": "terra154w5s9pq57xv5fzlq82t8fjl2njw4a342xufpp",
+        "height": 580019
+      },
+      "result": [
+        { "authorization": { "msg": "/cosmos.staking.v1beta1.MsgDelegate" }, "expiration": "2023-06-10T01:54:06.621Z" }
+      ]
+    },
+    "grants_stake": {
+      "params": {
+        "granter": "terra12e92d84r0nrpzr3wpqnd3kce7lnqdwtxy6l3tl",
+        "grantee": "terra1rqmap037jkzeygkxyjfwuhvp0ghm477nytmw8x",
+        "height": 680019
+      },
+      "result": [
+        {
+          "authorization": {
+            "allow_list": {
+              "addresses": ["terravaloper1rr2g4z2ch4cqwl8s70yj94a5l2vakg0v36nmjh"]
+            },
+            "authorization_type": 1,
+            "deny_list": {
+              "addresses": []
+            },
+            "max_tokens": {
+              "amount": "1000000000",
+              "denom": "uluna"
+            }
+          },
+          "expiration": "2024-07-12T15:00:00.000Z"
+        }
+      ]
+    }
+  }
+}
