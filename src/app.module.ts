@@ -1,7 +1,9 @@
+import { ApolloDriver } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 // import { ThrottlerModule } from '@nestjs/throttler'
+import { createValidation } from 'graphql-no-alias'
 import { LoggerModule } from 'nestjs-pino'
 import { join } from 'path'
 import pino from 'pino'
@@ -23,6 +25,16 @@ import { TendermintModule } from './tendermint/tendermint.module'
 import { TxModule } from './tx/tx.module'
 import { UtilsModule } from './utils/utils.module'
 import { WasmModule } from './wasm/wasm.module'
+
+const permissions = {
+  Query: {
+    '*': 10, // default value for all queries
+  },
+  Mutation: {
+    '*': 10, //default value for all mutations
+  },
+}
+const { validation } = createValidation({ permissions })
 
 @Module({
   imports: [
@@ -57,12 +69,14 @@ import { WasmModule } from './wasm/wasm.module'
     //       }),
     //     }),
     GraphQLModule.forRootAsync({
+      driver: ApolloDriver,
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         registerEnums() // register enums graphql
 
         return {
+          validationRules: [validation],
           sortSchema: config.get<string>('GRAPHQL_SORT_SCHEMA', 'true') === 'true',
           debug: config.get<string>('GRAPHQL_DEBUG', 'false') === 'true',
           playground: config.get<string>('GRAPHQL_PLAYGROUND', 'false') === 'true',
