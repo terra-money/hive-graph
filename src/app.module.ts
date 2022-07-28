@@ -28,10 +28,10 @@ import { WasmModule } from './wasm/wasm.module'
 
 const permissions = {
   Query: {
-    '*': 10, // default value for all queries
+    '*': 50, // default value for all queries
   },
   Mutation: {
-    '*': 10, //default value for all mutations
+    '*': 50, //default value for all mutations
   },
 }
 const { validation } = createValidation({ permissions })
