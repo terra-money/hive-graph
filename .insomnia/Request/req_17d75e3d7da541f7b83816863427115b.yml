@@ -1,0 +1,33 @@
+_id: req_17d75e3d7da541f7b83816863427115b
+type: Request
+parentId: fld_75a253620fc3455d96e25e0dcb0498ba
+modified: 1659112592915
+created: 1659112592915
+url: "{{ _.base_url }}"
+name: /wasm/contractQuery
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($contractAddress: String!, $height: Float!, $query:
+    JSON!) {\n\twasm {\n\t\tcontractQuery(\n\t\t\tcontractAddress:
+    $contractAddress\n\t\t\theight: $height\n\t\t\tquery:
+    $query\n\t\t)\n\t}\n}\n","variables":{"height":580019,"contractAddress":"terra1nsuqsk6kh58ulczatwev87ttq2z6r3pusulg9r24mfj2fvtzd4uq3exn26","query":{"balance":{"address":"terra174gu7kg8ekk5gsxdma5jlfcedm653tyg6ayppw"}}},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.837
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

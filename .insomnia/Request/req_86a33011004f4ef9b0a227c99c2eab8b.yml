@@ -1,0 +1,31 @@
+_id: req_86a33011004f4ef9b0a227c99c2eab8b
+type: Request
+parentId: fld_ea92fc4e6f0f4de3853004ebf4b7a82f
+modified: 1659112592759
+created: 1659112592759
+url: "{{ _.base_url }}"
+name: /mint/inflation
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tmint {\n\t\tinflation(height:
+    $height) \n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.7852
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

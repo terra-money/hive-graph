@@ -1,0 +1,32 @@
+_id: req_0118873072d7474ea2034b65ff93311c
+type: Request
+parentId: fld_1e718ccf912146f3aa5093de487e5f25
+modified: 1659112592740
+created: 1659112592740
+url: "{{ _.base_url }}"
+name: /ibc/denomTrace
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($hash: String!) {\n\tibc {\n\t\tdenomTrace(hash:
+    $hash)
+    {\n\t\t\tpath\n\t\t\tbase_denom\n\t\t}\n\t}\n}\n","variables":{"hash":"B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309729.25
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

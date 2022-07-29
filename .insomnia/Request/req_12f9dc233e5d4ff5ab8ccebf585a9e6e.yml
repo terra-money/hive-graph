@@ -1,0 +1,30 @@
+_id: req_12f9dc233e5d4ff5ab8ccebf585a9e6e
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659112592627
+created: 1659112592627
+url: "{{ _.base_url }}"
+name: /staking/delegationsValidator
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $validator: String!) {\n\tstaking
+    {\n\t\tdelegations(\n\t\t\tvalidator: $validator\n\t\t\theight:
+    $height\n\t\t) {\n\t\t\tbalance
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t\tdelegator_address\n\t\t\tshares\n\t\t\tvalidator_address\n\t\t}\n\t}\n}\n","variables":{"height":580019,"validator":"{{
+    _.validator }}"},"operationName":"Query"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309640.1875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

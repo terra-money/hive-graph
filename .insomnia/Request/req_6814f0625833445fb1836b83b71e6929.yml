@@ -1,0 +1,33 @@
+_id: req_6814f0625833445fb1836b83b71e6929
+type: Request
+parentId: fld_75a253620fc3455d96e25e0dcb0498ba
+modified: 1659112592903
+created: 1659112592903
+url: "{{ _.base_url }}"
+name: /wasm/contractInfo
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($contractAddress: String!, $height: Float!)
+    {\n\twasm {\n\t\tcontractInfo(contractAddress: $contractAddress, height:
+    $height)
+    {\n\t\t\taddress\n\t\t\tadmin\n\t\t\tcode_id\n\t\t\tinit_msg\n\t\t\towner\n\t\t}\n\t}\n}\n","variables":{"height":580019,"contractAddress":"terra1qdv90q7rdg60tlpyeem93c88avp8lvnwa04sxr3yxsfcnccknnysft59tg"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.84
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,43 @@
+_id: req_4100c458ce74495099a531d67a239536
+type: Request
+parentId: fld_5c58dbd9ab4a43f884ca2e744c180c26
+modified: 1659112592692
+created: 1659112592692
+url: "{{ _.base_url }}"
+name: /gov/proposal
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $proposalId: Int!) {\n\tgov
+    {\n\t\tproposal(height: $height, proposalId: $proposalId) {\n\t\t\tcontent
+    {\n\t\t\t\t... on CommunityPoolSpendContent {\n\t\t\t\t\tamount
+    {\n\t\t\t\t\t\tamount\n\t\t\t\t\t\tdenom\n\t\t\t\t\t}\n\t\t\t\t\tdescription\n\t\t\t\t\trecipient\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t\t...
+    on ParameterChangeContent {\n\t\t\t\t\tchanges
+    {\n\t\t\t\t\t\tkey\n\t\t\t\t\t\tsubspace\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\t...
+    on RewardWeightUpdateContent
+    {\n\t\t\t\t\tdescription\n\t\t\t\t\treward_weight\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t\t...
+    on TaxRateUpdateContent
+    {\n\t\t\t\t\tdescription\n\t\t\t\t\ttax_rate\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t\t...
+    on TextContent
+    {\n\t\t\t\t\tdescription\n\t\t\t\t\ttitle\n\t\t\t\t}\n\t\t\t}\n\t\t\tdeposit_end_time\n\t\t\tfinal_tally_result
+    {\n\t\t\t\tabstain\n\t\t\t\tno\n\t\t\t\tno_with_veto\n\t\t\t\tyes\n\t\t\t}\n\t\t\tid\n\t\t\tstatus\n\t\t\tsubmit_time\n\t\t\ttotal_deposit
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t\tvoting_end_time\n\t\t\tvoting_start_time\n\t\t}\n\t}\n}\n","variables":{"height":580019,"proposalId":446},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658798732009.5078
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,32 @@
+_id: req_a3bf9356bf0a411b956693ae4659740b
+type: Request
+parentId: fld_3736e706390b4af693cb1afa8151558b
+modified: 1659112592674
+created: 1659112592674
+url: "{{ _.base_url }}"
+name: /bank/total
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tbank {\n\t\ttotal(height:
+    $height)
+    {\n\t\t\tdenom\n\t\t\tamount\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.6875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,33 @@
+_id: req_668e6dfb731747d78c4cdce5497b70f8
+type: Request
+parentId: fld_5c58dbd9ab4a43f884ca2e744c180c26
+modified: 1659112592684
+created: 1659112592684
+url: "{{ _.base_url }}"
+name: /gov/deposits
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $proposalId: Int!) {\n\tgov
+    {\n\t\tdeposits(height: $height, proposalId: $proposalId)
+    {\n\t\t\tproposal_id\n\t\t\tdepositor\n\t\t\tamount
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"height":580019,"proposalId":446},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658859998723.7188
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,32 @@
+_id: req_7ec879dd386249ce9af1599f850d8597
+type: Request
+parentId: fld_75a253620fc3455d96e25e0dcb0498ba
+modified: 1659112592892
+created: 1659112592892
+url: "{{ _.base_url }}"
+name: /wasm/codeInfo
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($codeID: Int!) {\n\twasm {\n\t\tcodeInfo(codeID:
+    $codeID)
+    {\n\t\t\tcode_creator\n\t\t\tcode_hash\n\t\t}\n\t}\n}\n","variables":{"codeID":71},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8462
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

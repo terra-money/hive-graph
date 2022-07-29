@@ -1,0 +1,51 @@
+_id: ut_c1a70acd24da485ea3c6f757afbc2769
+type: UnitTest
+parentId: uts_b952831b41ac4d13b9f5b3eb313fdcc3
+modified: 1659113660658
+created: 1659112592944
+requestId: req_4e0f9d7321024e929e75c87c8e15410f
+name: /staking/bondedValidators
+code: >-
+  const response1 = await insomnia.send();
+
+  console.log(response1.data)
+
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"bondedValidators": [
+  				{
+  					"commission": {
+  						"commission_rates": {
+  							"max_change_rate": "0.010000000000000000",
+  							"max_rate": "0.200000000000000000",
+  							"rate": "0.050000000000000000"
+  						},
+  						"update_time": "2022-06-02T00:46:08.986Z"
+  					},
+  					"consensus_pubkey": {
+  						"key": "rNCUPK79XpzX49S5MuO5ERD8YP9Aa4vI779TFIT7kF0="
+  					},
+  					"delegator_shares": "4728494146856.000000000000000000",
+  					"description": {
+  						"details": "Chain Builder",
+  						"identity": "814269498C8383BF",
+  						"moniker": "Y",
+  						"security_contact": "sw.yunsuk@gmail.com",
+  						"website": "https://github.com/YunSuk-Yeo"
+  					},
+  					"jailed": false,
+  					"min_self_delegation": "1",
+  					"operator_address": "terravaloper18pmvpy25zc7x0u8ppefuyyl2zaafe2wut0nm5e",
+  					"status": 3,
+  					"tokens": "4728494146856",
+  					"unbonding_height": 0,
+  					"unbonding_time": "1970-01-01T00:00:00.000Z"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);

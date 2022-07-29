@@ -1,0 +1,35 @@
+_id: req_fa1e4bcdb2564c7490da8438c8007934
+type: Request
+parentId: fld_dcf5f34271de4d079670be3f620edb50
+modified: 1659112592669
+created: 1659112592669
+url: "{{ _.base_url }}"
+name: /auth/accountInfo
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $address: String!) {\n\tauth
+    {\n\t\taccountInfo(height: $height, address: $address)
+    {\n\t\t\taccount_number\n\t\t\taddress\n\t\t\tpublic_key {\n\t\t\t\t... on
+    SimplePublicKey {\n\t\t\t\t\tkey\n\t\t\t\t}\n\t\t\t\t#... on
+    ValConsPublicKey
+    {\n\t\t\t\t#\tkey\n\t\t\t\t#}\n\t\t\t}\n\n\t\t\tsequence\n\t\t}\n\t}\n}\n","variables":{"height":580019,"address":"terra1ltegerwren4tcaxpwxpkgs94ztnrcu0sk25qz3"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309746.4375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

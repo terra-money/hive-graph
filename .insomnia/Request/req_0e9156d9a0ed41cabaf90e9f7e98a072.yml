@@ -1,0 +1,34 @@
+_id: req_0e9156d9a0ed41cabaf90e9f7e98a072
+type: Request
+parentId: fld_d57dd483a89d450f88bfa9d2b5171618
+modified: 1659112592820
+created: 1659112592820
+url: "{{ _.base_url }}"
+name: /tendermint/nodeInfo
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query {\n\ttendermint {\n\t\tnodeInfo
+    {\n\t\t\tapplication_version {\n\t\t\t\tapp_name\n\t\t\t\tbuild_deps
+    {\n\t\t\t\t\tpath\n\t\t\t\t\tsum\n\t\t\t\t\tversion\n\t\t\t\t}\n\t\t\t\tbuild_tags\n\t\t\t\tgit_commit\n\t\t\t\tgo_version\n\t\t\t\tname\n\t\t\t\tversion\n\t\t\t}\n\t\t\tchannels\n\t\t\tid\n\t\t\tlisten_addr\n\t\t\tmoniker\n\t\t\tnetwork\n\t\t\tother
+    {\n\t\t\t\trpc_address\n\t\t\t\ttx_index\n\t\t\t}\n\t\t\tprotocol_version
+    {\n\t\t\t\tapp\n\t\t\t\tblock\n\t\t\t\tp2p\n\t\t\t}\n\t\t\tversion\n\t\t}\n\t}\n}\n","operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.849
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

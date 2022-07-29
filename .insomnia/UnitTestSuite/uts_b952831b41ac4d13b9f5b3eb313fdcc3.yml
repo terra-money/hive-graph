@@ -1,0 +1,6 @@
+_id: uts_b952831b41ac4d13b9f5b3eb313fdcc3
+type: UnitTestSuite
+parentId: wrk_3a58acfe0d35459ab08cbb7a818429b7
+modified: 1659112592943
+created: 1659112592943
+name: HiveGraphql - PHOENIX-1

@@ -1,0 +1,32 @@
+_id: req_a18a2e9109ec4d18843db839ebdc868d
+type: Request
+parentId: fld_75a253620fc3455d96e25e0dcb0498ba
+modified: 1659112592927
+created: 1659112592927
+url: "{{ _.base_url }}"
+name: /wasm/parameters - not supported
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\twasm {\n\t\tparameters(height:
+    $height)
+    {\n\t\t\tmax_contract_gas\n\t\t\tmax_contract_size\n\t\t\tmax_contract_msg_size\n\t\t}\n\t}\n}\n","variables":{"height":58001},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8354
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

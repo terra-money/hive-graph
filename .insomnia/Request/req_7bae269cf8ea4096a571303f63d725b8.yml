@@ -1,0 +1,33 @@
+_id: req_7bae269cf8ea4096a571303f63d725b8
+type: Request
+parentId: fld_03ae85b71f294e5eb9cd02e6a5e83324
+modified: 1659112592871
+created: 1659112592871
+url: "{{ _.base_url }}"
+name: /utils/calculateTax - not implemented
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $amount:String!, $denom: String! )
+    {\n\tutils {\n\t\tcalculateTax(coin: { amount: $amount, denom: $denom },
+    height: $height)
+    {\n\t\t\tamount\n\t\t\tdenom\n\t\t}\n\t}\n}\n","variables":{"height":12033,"amount":"23","denom":"uluna"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8467
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

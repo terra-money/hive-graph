@@ -1,0 +1,32 @@
+_id: req_ca94b94d447044a3b246a6064e5805ff
+type: Request
+parentId: fld_5c58dbd9ab4a43f884ca2e744c180c26
+modified: 1659112592715
+created: 1659112592715
+url: "{{ _.base_url }}"
+name: /gov/tallyParameters
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tgov
+    {\n\t\ttallyParameters(height: $height)
+    {\n\t\t\tquorum\n\t\t\tthreshold\n\t\t\tveto_threshold\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658779586161.317
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

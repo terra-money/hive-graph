@@ -1,0 +1,31 @@
+_id: req_c90a2e49100f4122a23f4b898d65da9e
+type: Request
+parentId: fld_d57dd483a89d450f88bfa9d2b5171618
+modified: 1659112592827
+created: 1659112592827
+url: "{{ _.base_url }}"
+name: /tendermint/syncing
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query {\n\ttendermint {\n\t\tsyncing
+    \n\t}\n}\n","operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8477
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

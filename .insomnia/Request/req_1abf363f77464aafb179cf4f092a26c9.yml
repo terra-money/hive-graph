@@ -1,0 +1,32 @@
+_id: req_1abf363f77464aafb179cf4f092a26c9
+type: Request
+parentId: fld_07e453ea10e34e1ab3606de087176f38
+modified: 1659112592798
+created: 1659112592798
+url: "{{ _.base_url }}"
+name: /slashing/parameters
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tslashing
+    {\n\t\tparameters(height: $height)
+    {\n\t\t\tdowntime_jail_duration\n\t\t\tmin_signed_per_window\n\t\t\tsigned_blocks_window\n\t\t\tslash_fraction_double_sign\n\t\t\tslash_fraction_downtime\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8584
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
