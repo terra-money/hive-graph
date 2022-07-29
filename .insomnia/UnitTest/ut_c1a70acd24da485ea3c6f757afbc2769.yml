@@ -1,9 +1,9 @@
 _id: ut_c1a70acd24da485ea3c6f757afbc2769
 type: UnitTest
 parentId: uts_b952831b41ac4d13b9f5b3eb313fdcc3
-modified: 1659113660658
+modified: 1659114284385
 created: 1659112592944
-requestId: req_4e0f9d7321024e929e75c87c8e15410f
+requestId: req_c84b104a38cd4989a90a4b3f11ae9f7f
 name: /staking/bondedValidators
 code: >-
   const response1 = await insomnia.send();

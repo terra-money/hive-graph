@@ -1,9 +1,9 @@
 _id: ut_107e440a77f2465599f663f303071937
 type: UnitTest
 parentId: uts_b952831b41ac4d13b9f5b3eb313fdcc3
-modified: 1659112592946
+modified: 1659114294445
 created: 1659112592946
-requestId: req_2549e5fb8d5b46cf8a15e4a16897841b
+requestId: req_12f9dc233e5d4ff5ab8ccebf585a9e6e
 name: /staking/delegationsValidator
 code: >-
   const response1 = await insomnia.send();
