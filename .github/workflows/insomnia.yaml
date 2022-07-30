@@ -54,9 +54,9 @@ jobs:
 
       - name: Start Hive-GraphQL and run tests
         run: |
-          npm i wait-on & 
-          npm run start&:prod & 
-          npx wait-on http://localhost:8085 &
+          npm i wait-on 
+          npm run start:prod & 
+          npx wait-on http://localhost:8085 
           inso run test uts_b95283 --env env_1c2143a6f3 --ci
 
   # delivery:
