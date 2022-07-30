@@ -1,0 +1,118 @@
+name: insomnia e2e
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'feat/insomnia-ci/cd'
+    paths:
+      - '.github/workflows/insomnia.yaml'
+
+env:
+  THROTTLE_TTL: 60
+  THROTTLE_LIMIT: 20
+  LCD_URL: https://phoenix-lcd.terra.dev
+  CHAIN_ID: phoenix-1
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    container:
+      image: 'node:lts'
+      options: --user 1001 # ← THIS IS THE IMPORTANT LINE!
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v2
+
+      # - name: Audit
+      #   run: npm audit --audit-level=high
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies from lock.
+        run: npm ci
+
+      - name: Linter.
+        run: npm run lint:ci
+
+      - name: Unit tests.
+        run: npm run test:cov
+
+      # - name: E2E tests.
+      #   run: npm run test:e2e
+
+      - name: Build source code.
+        run: npm run build
+
+      - name: Install inso
+        uses: kong/setup-inso@v1
+        with:
+          inso-version: 2.4.0
+
+      - name: Start Hive-GraphQL and run tests
+        run: |
+          #npm i wait-on 
+          npm run start:prod & inso run test uts_b95283 --env env_1c2143a6f3 --ci
+          #npx wait-on http://localhost:8085
+
+  # delivery:
+  #   runs-on: ubuntu-latest
+  #   needs: integration
+
+  #   # deliver on push only
+  #   if: github.event_name == 'push'
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Set env IMAGE_TAG
+  #       run: |
+  #         if [[ $GITHUB_REF == 'refs/heads/classic' ]]; then
+  #           echo "IMAGE_TAG=classic" >> "$GITHUB_ENV"
+  #         else
+  #           echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
+  #         fi
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
+
+  #     - name: Cache Docker layers
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: /tmp/.buildx-cache
+  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-buildx-
+
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+  #         aws-region: ap-northeast-2
+
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
+
+  #     - name: Login to DockerHub
+  #       uses: docker/login-action@v1
+  #       with:
+  #         username: ${{ secrets.DOCKER_HUB_USERNAME }}
+  #         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+  #     - name: Build, tag, and push docker image to AWS ECR & Docker Hub
+  #       uses: docker/build-push-action@v2
+  #       with:
+  #         push: true
+  #         tags: |
+  #           ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ github.sha }}
+  #           ${{ steps.login-ecr.outputs.registry }}/hive-graph:${{ env.IMAGE_TAG }}
+  #           terramoney/hive-graph:${{ github.sha }}
+  #           terramoney/hive-graph:${{ env.IMAGE_TAG }}
+  #         cache-from: type=local,src=/tmp/.buildx-cache
+  #         cache-to: type=local,dest=/tmp/.buildx-cache
+  #         file: Dockerfile.production
