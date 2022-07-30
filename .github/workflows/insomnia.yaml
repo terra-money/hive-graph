@@ -49,7 +49,7 @@ jobs:
 
       - name: Start Hive-graph
         run: |
-          npm i wait-on & npm run start:prod & npx wait-on http://localhost:8085
+          npm i wait-on & npm run start&:prod & npx wait-on http://localhost:8085
 
       - name: Install inso
         uses: kong/setup-inso@v1
