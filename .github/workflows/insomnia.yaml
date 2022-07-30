@@ -47,18 +47,18 @@ jobs:
       - name: Build source code.
         run: npm run build
 
-      - name: Start Hive-graph
-        run: |
-          npm i wait-on & npm run start&:prod & npx wait-on http://localhost:8085
-
       - name: Install inso
         uses: kong/setup-inso@v1
         with:
           inso-version: 2.4.0
 
-      - name: Run insomnia e2e tests
+      - name: Start Hive-GraphQL and run tests
+        run: |
+          npm i wait-on & 
+          npm run start&:prod & 
+          npx wait-on http://localhost:8085 &
+          inso run test uts_b95283 --env env_1c2143a6f3 --ci
 
-        run: inso run test uts_b95283 --env env_1c2143a6f3 --ci
   # delivery:
   #   runs-on: ubuntu-latest
   #   needs: integration
