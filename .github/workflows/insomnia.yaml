@@ -2,6 +2,11 @@ name: insomnia e2e
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'feat/insomnia-ci/cd'
+    paths:
+      - '.github/workflows/insomnia.yaml'
 
 env:
   THROTTLE_TTL: 60
