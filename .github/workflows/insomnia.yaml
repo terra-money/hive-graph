@@ -1,4 +1,4 @@
-name: default
+name: insomnia e2e
 
 on:
   workflow_dispatch:
