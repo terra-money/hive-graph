@@ -17,9 +17,9 @@ env:
 jobs:
   integration:
     runs-on: ubuntu-latest
-
-    container: 'node:lts'
-
+    container:
+      image: 'node:lts'
+      options: --user 1001 # ← THIS IS THE IMPORTANT LINE!
     steps:
       - name: Checkout files
         uses: actions/checkout@v2
@@ -57,6 +57,7 @@ jobs:
           inso-version: 2.4.0
 
       - name: Run insomnia e2e tests
+
         run: inso run test uts_b95283 --env env_1c2143a6f3 --ci
   # delivery:
   #   runs-on: ubuntu-latest
