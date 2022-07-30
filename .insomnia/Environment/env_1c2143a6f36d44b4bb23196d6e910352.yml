@@ -1,15 +1,15 @@
-_id: env_925ab2578b694ead87e1744c5ab44ad0
+_id: env_1c2143a6f36d44b4bb23196d6e910352
 type: Environment
 parentId: env_f6f3c820a50ac9dd504eb499b5198b08cf733cef
-modified: 1659204065091
-created: 1659113977990
-name: phoenix-1
+modified: 1659204363518
+created: 1659203826404
+name: local
 data:
-  base_url: "{{ _.protocol }}://{{ _.prefix }}-{{ _.sub }}.{{ _.domain }}"
-  protocol: https
-  sub: api
-  domain: terra.dev
-  prefix: phoenix
+  base_url: "{{ _.protocol }}://{{ _.domain }}:8085/graphql"
+  protocol: http
+  sub: ""
+  domain: localhost
+  prefix: ""
   delegator: terra18pmvpy25zc7x0u8ppefuyyl2zaafe2wutqlxy2
   validator: terravaloper18pmvpy25zc7x0u8ppefuyyl2zaafe2wut0nm5e
 dataPropertyOrder:
@@ -21,6 +21,6 @@ dataPropertyOrder:
     - prefix
     - delegator
     - validator
-color: "#ff0000"
+color: "#050505"
 isPrivate: false
-metaSortKey: 1659113977990
+metaSortKey: 1659203826404
