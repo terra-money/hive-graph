@@ -1,7 +1,7 @@
 _id: env_1c2143a6f36d44b4bb23196d6e910352
 type: Environment
 parentId: env_f6f3c820a50ac9dd504eb499b5198b08cf733cef
-modified: 1659204363518
+modified: 1659342397288
 created: 1659203826404
 name: local
 data:
@@ -10,8 +10,8 @@ data:
   sub: ""
   domain: localhost
   prefix: ""
-  delegator: terra18pmvpy25zc7x0u8ppefuyyl2zaafe2wutqlxy2
-  validator: terravaloper18pmvpy25zc7x0u8ppefuyyl2zaafe2wut0nm5e
+  delegator: terra1qqqz5f2l5epfft7l08wvp8qddhtapk437fy07t
+  validator: terravaloper188e99yz54744uhr8xjfxmmplhnuw75xea55zfp
 dataPropertyOrder:
   "&":
     - base_url

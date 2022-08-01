@@ -1,7 +1,7 @@
 _id: req_6814f0625833445fb1836b83b71e6929
 type: Request
 parentId: fld_75a253620fc3455d96e25e0dcb0498ba
-modified: 1659203923365
+modified: 1659244998898
 created: 1659112592903
 url: "{{ _.base_url }}"
 name: /wasm/contractInfo

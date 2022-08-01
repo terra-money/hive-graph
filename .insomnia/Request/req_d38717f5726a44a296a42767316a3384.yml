@@ -1,7 +1,7 @@
 _id: req_d38717f5726a44a296a42767316a3384
 type: Request
 parentId: fld_03ae85b71f294e5eb9cd02e6a5e83324
-modified: 1659112592881
+modified: 1659245007149
 created: 1659112592881
 url: "{{ _.base_url }}"
 name: /utils/validatorsWithVotingPower

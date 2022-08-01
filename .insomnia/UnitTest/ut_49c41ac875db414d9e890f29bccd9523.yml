@@ -1,0 +1,31 @@
+_id: ut_49c41ac875db414d9e890f29bccd9523
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659358067811
+created: 1659342667972
+requestId: req_3ae357d8617142999b2d3cc84286d754
+name: /staking/delegation
+code: |-
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"delegation": {
+  				"balance": {
+  					"amount": "0",
+  					"denom": "uluna"
+  				},
+  				"delegator_address": "terra1cxm0m543zpxfa6d7p20tv5wdrjlr9rxf4dkw5p",
+  				"shares": "0",
+  				"validator_address": "terravaloper1gtw2uxdkdt3tvq790ckjz8jm8qgwkdw3uptstn"
+  			}
+  		}
+  	}
+  }
+  var result_obj = JSON.parse(response.data);
+
+  expect(result_obj.data.staking.delegation.balance.amount).to.exist;
+  result_obj.data.staking.delegation.balance.amount = "0";
+  expect(result_obj.data.staking.delegation.shares).to.exist;
+  result_obj.data.staking.delegation.shares= "0";
+  expect(result_obj).to.deep.equal(expected_result);

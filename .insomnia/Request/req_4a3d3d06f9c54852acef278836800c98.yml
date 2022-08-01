@@ -1,7 +1,7 @@
 _id: req_4a3d3d06f9c54852acef278836800c98
 type: Request
 parentId: fld_006124dbf3dc47558311c76d94d2d9b9
-modified: 1659112592643
+modified: 1659355720865
 created: 1659112592643
 url: "{{ _.base_url }}"
 name: /staking/unbondingDelegations
@@ -13,7 +13,7 @@ body:
     String!) {\n\tstaking {\n\t\tunbondingDelegations(\n\t\t\tdelegator:
     $delegator\n\t\t\theight: $height\n\t\t\tvalidator: $validator\n\t\t)
     {\n\t\t\tdelegator_address \n\t\t\tentries
-    {\n\t\t\t\tbalance\n\t\t\t\tcompletion_time\n\t\t\t\tcreation_height\n\t\t\t\tinitial_balance\n\t\t\t}\n\t\t\tvalidator_address\n\t\t}\n\t}\n}\n","variables":{"height":670000,"delegator":"terra1re92s2h7dqrtcl6h4k4yvlwym0e3tfmmhhklwh","validator":"terravaloper1lelhxdzwn9ddecv6sv0kcxj5tguurxnzcfs5wf"},"operationName":"Query"}'
+    {\n\t\t\t\tbalance\n\t\t\t\tcompletion_time\n\t\t\t\tcreation_height\n\t\t\t\tinitial_balance\n\t\t\t}\n\t\t\tvalidator_address\n\t\t}\n\t}\n}\n","variables":{"height":1062421,"delegator":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6","validator":"terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"},"operationName":"Query"}'
 parameters: []
 headers:
   - name: Content-Type

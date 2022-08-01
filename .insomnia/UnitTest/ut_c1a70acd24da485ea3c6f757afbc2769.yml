@@ -1,7 +1,7 @@
 _id: ut_c1a70acd24da485ea3c6f757afbc2769
 type: UnitTest
 parentId: uts_b952831b41ac4d13b9f5b3eb313fdcc3
-modified: 1659114284385
+modified: 1659341884208
 created: 1659112592944
 requestId: req_c84b104a38cd4989a90a4b3f11ae9f7f
 name: /staking/bondedValidators

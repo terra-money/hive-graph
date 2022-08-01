@@ -1,0 +1,56 @@
+_id: ut_222ba887cf8d44a9ad44dce2e313a349
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659342621224
+created: 1659341866213
+requestId: req_c84b104a38cd4989a90a4b3f11ae9f7f
+name: /staking/bondedValidators
+code: >-
+  
+
+  const response1 = await insomnia.send();
+
+  console.log(response1.data)
+
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"bondedValidators": [
+  				{
+  					"commission": {
+  						"commission_rates": {
+  							"max_change_rate": "0.100000000000000000",
+  							"max_rate": "0.100000000000000000",
+  							"rate": "0.000000000000000000"
+  						},
+  						"update_time": "2022-05-26T05:50:23.289Z"
+  					},
+  					"consensus_pubkey": {
+  						"key": "NxHDmVE9XCf/grCT9SI2RTbpIowN3rEajsO+yHodetU="
+  					},
+  					"delegator_shares": "23103130642934.000000000000000000",
+  					"description": {
+  						"details": "",
+  						"identity": "BA19D70D1099E80E",
+  						"moniker": "Terran One",
+  						"security_contact": "",
+  						"website": ""
+  					},
+  					"jailed": false,
+  					"min_self_delegation": "1000000",
+  					"operator_address": "terravaloper1gtw2uxdkdt3tvq790ckjz8jm8qgwkdw3uptstn",
+  					"status": 3,
+  					"tokens": "23103130642934",
+  					"unbonding_height": 0,
+  					"unbonding_time": "1970-01-01T00:00:00.000Z"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);
+
+
+  expect(response1.status).to.equal(200);

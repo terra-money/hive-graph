@@ -1,0 +1,25 @@
+_id: ut_9c13232aa51344e6af64c68c4c6c53a9
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659342588366
+created: 1659341758025
+requestId: req_90ac14c7a2b44a8e99737235d2e8c16b
+name: /staking/parameters
+code: |-
+  const response1 = await insomnia.send();
+  console.log(response1.data)
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"parameters": {
+  				"bond_denom": "uluna",
+  				"historical_entries": 10000,
+  				"max_entries": 7,
+  				"max_validators": 100,
+  				"unbonding_time": "600"
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);
