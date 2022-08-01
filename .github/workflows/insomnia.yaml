@@ -11,8 +11,8 @@ on:
 env:
   THROTTLE_TTL: 60
   THROTTLE_LIMIT: 20
-  LCD_URL: https://phoenix-lcd.terra.dev
-  CHAIN_ID: phoenix-1
+  LCD_URL: https://pisco-lcd.terra.dev
+  CHAIN_ID: pisco-1
 
 jobs:
   integration:
