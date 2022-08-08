@@ -1,0 +1,121 @@
+_id: ut_0d0a9a9a6982448482444901fcc265b4
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659961081855
+created: 1659960551887
+requestId: req_77d767e919ec4034911dbc3a96e7f86f
+name: /tx/txHash
+code: >-
+  const response1 = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"tx": {
+  			"txInfo": {
+  				"code": 0,
+  				"codespace": "",
+  				"gas_used": 66441,
+  				"gas_wanted": 86621,
+  				"height": 1082821,
+  				"logs": [
+  					{
+  						"events": [
+  							{
+  								"attributes": [
+  									{
+  										"key": "msg_type_url",
+  										"value": "\"/cosmos.staking.v1beta1.MsgDelegate\""
+  									},
+  									{
+  										"key": "granter",
+  										"value": "\"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6\""
+  									},
+  									{
+  										"key": "grantee",
+  										"value": "\"terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp\""
+  									}
+  								],
+  								"type": "cosmos.authz.v1beta1.EventGrant"
+  							},
+  							{
+  								"attributes": [
+  									{
+  										"key": "action",
+  										"value": "/cosmos.authz.v1beta1.MsgGrant"
+  									}
+  								],
+  								"type": "message"
+  							}
+  						],
+  						"log": ""
+  					}
+  				],
+  				"raw_log": "[{\"events\":[{\"type\":\"cosmos.authz.v1beta1.EventGrant\",\"attributes\":[{\"key\":\"msg_type_url\",\"value\":\"\\\"/cosmos.staking.v1beta1.MsgDelegate\\\"\"},{\"key\":\"granter\",\"value\":\"\\\"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6\\\"\"},{\"key\":\"grantee\",\"value\":\"\\\"terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp\\\"\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.authz.v1beta1.MsgGrant\"}]}]}]",
+  				"timestamp": "2022-08-02T19:25:36Z",
+  				"tx": {
+  					"auth_info": {
+  						"fee": {
+  							"amount": [
+  								{
+  									"amount": "12994",
+  									"denom": "uluna"
+  								}
+  							],
+  							"granter": "",
+  							"gas_limit": "86621",
+  							"payer": ""
+  						},
+  						"signer_infos": [
+  							{
+  								"mode_info": {
+  									"single": {
+  										"mode": "SIGN_MODE_DIRECT"
+  									}
+  								},
+  								"public_key": {
+  									"@type": "/cosmos.crypto.secp256k1.PubKey",
+  									"key": "AqMwTeMhhFaGSA3Pd6yTkO9Sn0biRBkrQEN7d54GxPGK"
+  								},
+  								"sequence": "6"
+  							}
+  						]
+  					},
+  					"body": {
+  						"memo": "",
+  						"messages": [
+  							{
+  								"@type": "/cosmos.authz.v1beta1.MsgGrant",
+  								"granter": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6",
+  								"grantee": "terra17lmam6zguazs5q5u6z5mmx76uj63gldnse2pdp",
+  								"grant": {
+  									"authorization": {
+  										"@type": "/cosmos.staking.v1beta1.StakeAuthorization",
+  										"authorization_type": "AUTHORIZATION_TYPE_DELEGATE",
+  										"max_tokens": {
+  											"denom": "uluna",
+  											"amount": "100000"
+  										},
+  										"allow_list": {
+  											"address": [
+  												"terravaloper1zdpgj8am5nqqvht927k3etljyl6a52kwqndjz2"
+  											]
+  										}
+  									},
+  									"expiration": "2030-05-09T13:49:54Z"
+  								}
+  							}
+  						],
+  						"timeout_height": 0
+  					},
+  					"signatures": [
+  						"qOP8ffrNtymr3CSVyvQs8/bgAaxEnID4v4tnGPb4aMgsgctwfDNxV5ts+BkYzF5p6W12LyRDJ0/aUJCzhN23TA=="
+  					]
+  				},
+  				"txhash": "F5A058AFC4A7F50544758733B4BC80C74F241DAB64D483360398DE8307CB6B77"
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);

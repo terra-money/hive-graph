@@ -1,0 +1,118 @@
+_id: ut_f21307fdd1d34aeba005f9e97f22d35e
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659961107167
+created: 1659961071686
+requestId: req_35ed139f6f384ce9bc6c3574f1129c20
+name: /tx/search
+code: >-
+  const response1 = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"tx": {
+  			"search": {
+  				"pagination": {
+  					"next_key": null,
+  					"total": 3
+  				},
+  				"txs": [
+  					{
+  						"code": 0,
+  						"codespace": "",
+  						"gas_used": 63870,
+  						"gas_wanted": 200000,
+  						"height": 801412,
+  						"logs": [
+  							{
+  								"events": [
+  									{
+  										"attributes": [
+  											{
+  												"key": "action",
+  												"value": "/cosmos.gov.v1beta1.MsgVote"
+  											},
+  											{
+  												"key": "module",
+  												"value": "governance"
+  											},
+  											{
+  												"key": "sender",
+  												"value": "terra1fhqpktrwcjlkuxwv4qgwf0tmcy2g06swcf6fpj"
+  											}
+  										],
+  										"type": "message"
+  									},
+  									{
+  										"attributes": [
+  											{
+  												"key": "option",
+  												"value": "{\"option\":1,\"weight\":\"1.000000000000000000\"}"
+  											},
+  											{
+  												"key": "proposal_id",
+  												"value": "18"
+  											}
+  										],
+  										"type": "proposal_vote"
+  									}
+  								],
+  								"log": ""
+  							}
+  						],
+  						"raw_log": "[{\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.gov.v1beta1.MsgVote\"},{\"key\":\"module\",\"value\":\"governance\"},{\"key\":\"sender\",\"value\":\"terra1fhqpktrwcjlkuxwv4qgwf0tmcy2g06swcf6fpj\"}]},{\"type\":\"proposal_vote\",\"attributes\":[{\"key\":\"option\",\"value\":\"{\\\"option\\\":1,\\\"weight\\\":\\\"1.000000000000000000\\\"}\"},{\"key\":\"proposal_id\",\"value\":\"18\"}]}]}]",
+  						"timestamp": "2022-07-15T02:39:39Z",
+  						"tx": {
+  							"auth_info": {
+  								"fee": {
+  									"amount": [
+  										{
+  											"amount": "30000",
+  											"denom": "uluna"
+  										}
+  									],
+  									"granter": "",
+  									"gas_limit": "200000",
+  									"payer": ""
+  								},
+  								"signer_infos": [
+  									{
+  										"mode_info": {
+  											"single": {
+  												"mode": "SIGN_MODE_DIRECT"
+  											}
+  										},
+  										"public_key": {
+  											"@type": "/cosmos.crypto.secp256k1.PubKey",
+  											"key": "A0m4R7AJYmHTJUEP0StBfaV/1qCR0cE+ocs63tMdiMpL"
+  										},
+  										"sequence": "111"
+  									}
+  								]
+  							},
+  							"body": {
+  								"memo": "",
+  								"messages": [
+  									{
+  										"@type": "/cosmos.gov.v1beta1.MsgVote",
+  										"proposal_id": "18",
+  										"voter": "terra1fhqpktrwcjlkuxwv4qgwf0tmcy2g06swcf6fpj",
+  										"option": "VOTE_OPTION_YES"
+  									}
+  								],
+  								"timeout_height": 0
+  							},
+  							"signatures": [
+  								"dkUARYkNbjA4vx12rCtlxkkgGrwFO1/pg6FTzMeuBDcygpfgmpZA8SkGF5kU+bsldLX0GOib1YLLwnCIE/Aliw=="
+  							]
+  						},
+  						"txhash": "0CA7259B92A562E8E2B180A1891D7444EB71BF8CCB8EDB9B9513833346B2FE7C"
+  					}
+  				]
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);

@@ -1,0 +1,306 @@
+_id: ut_9c7143a9f7de499896b7257f53682e95
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659961164577
+created: 1659961139550
+requestId: req_e279de493225400fba9fbb968623efe0
+name: /tx/byHeight
+code: >-
+  const response1 = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"tx": {
+  			"byHeight": [
+  				{
+  					"code": 0,
+  					"codespace": "",
+  					"gas_used": 167125,
+  					"gas_wanted": 240971,
+  					"height": 1063175,
+  					"logs": [
+  						{
+  							"events": [
+  								{
+  									"attributes": [
+  										{
+  											"key": "receiver",
+  											"value": "terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97087314uluna"
+  										},
+  										{
+  											"key": "receiver",
+  											"value": "terra1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3nln0mh"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97051033uluna"
+  										}
+  									],
+  									"type": "coin_received"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "spender",
+  											"value": "terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97087314uluna"
+  										},
+  										{
+  											"key": "spender",
+  											"value": "terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97051033uluna"
+  										}
+  									],
+  									"type": "coin_spent"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "validator",
+  											"value": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97051033uluna"
+  										},
+  										{
+  											"key": "new_shares",
+  											"value": "97342768.977255074281250005"
+  										}
+  									],
+  									"type": "delegate"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "action",
+  											"value": "/cosmos.staking.v1beta1.MsgDelegate"
+  										},
+  										{
+  											"key": "sender",
+  											"value": "terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl"
+  										},
+  										{
+  											"key": "module",
+  											"value": "staking"
+  										},
+  										{
+  											"key": "sender",
+  											"value": "terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je"
+  										}
+  									],
+  									"type": "message"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "recipient",
+  											"value": "terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je"
+  										},
+  										{
+  											"key": "sender",
+  											"value": "terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "97087314uluna"
+  										}
+  									],
+  									"type": "transfer"
+  								}
+  							],
+  							"log": null
+  						}
+  					],
+  					"raw_log": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je\"},{\"key\":\"amount\",\"value\":\"97087314uluna\"},{\"key\":\"receiver\",\"value\":\"terra1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3nln0mh\"},{\"key\":\"amount\",\"value\":\"97051033uluna\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl\"},{\"key\":\"amount\",\"value\":\"97087314uluna\"},{\"key\":\"spender\",\"value\":\"terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je\"},{\"key\":\"amount\",\"value\":\"97051033uluna\"}]},{\"type\":\"delegate\",\"attributes\":[{\"key\":\"validator\",\"value\":\"terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx\"},{\"key\":\"amount\",\"value\":\"97051033uluna\"},{\"key\":\"new_shares\",\"value\":\"97342768.977255074281250005\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.staking.v1beta1.MsgDelegate\"},{\"key\":\"sender\",\"value\":\"terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl\"},{\"key\":\"module\",\"value\":\"staking\"},{\"key\":\"sender\",\"value\":\"terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je\"},{\"key\":\"sender\",\"value\":\"terra1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8pm7utl\"},{\"key\":\"amount\",\"value\":\"97087314uluna\"}]}]}]",
+  					"timestamp": "2022-08-01T12:06:53.893932093Z",
+  					"tx": {
+  						"auth_info": {
+  							"fee": {
+  								"amount": [
+  									{
+  										"amount": "36146",
+  										"denom": "uluna"
+  									}
+  								],
+  								"granter": "",
+  								"gas_limit": "240971",
+  								"payer": ""
+  							},
+  							"signer_infos": [
+  								{
+  									"mode_info": {
+  										"single": {
+  											"mode": "SIGN_MODE_DIRECT"
+  										}
+  									},
+  									"public_key": {
+  										"@type": "/cosmos.crypto.secp256k1.PubKey",
+  										"key": "A+Q1ZNHkGfabYf1wRUdLcaJHlqDC62Llxam8fKgoH6mZ"
+  									},
+  									"sequence": "151910"
+  								}
+  							]
+  						},
+  						"body": {
+  							"memo": "by. https://github.com/emidev98",
+  							"messages": [
+  								{
+  									"@type": "/cosmos.staking.v1beta1.MsgDelegate",
+  									"delegator_address": "terra1zdpgj8am5nqqvht927k3etljyl6a52kwqup0je",
+  									"validator_address": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx",
+  									"amount": {
+  										"denom": "uluna",
+  										"amount": "97051033"
+  									}
+  								}
+  							],
+  							"timeout_height": 0
+  						},
+  						"signatures": [
+  							"5PIhsweGYISon59atKaOAqycO5R0bcaPsQu6ETfn6Qg2Pvs6x42clFfkNeRI87Ulw8NPtJoxBoEZRCPKSI37Pg=="
+  						]
+  					},
+  					"txhash": "8B0E3E64946704F181A7EAF520744BEBF3DC1A4C91D568FA519DF503B1C1CC5A"
+  				},
+  				{
+  					"code": 0,
+  					"codespace": "",
+  					"gas_used": 140035,
+  					"gas_wanted": 250608,
+  					"height": 1063175,
+  					"logs": [
+  						{
+  							"events": [
+  								{
+  									"attributes": [
+  										{
+  											"key": "receiver",
+  											"value": "terra1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3nln0mh"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "1000000uluna"
+  										}
+  									],
+  									"type": "coin_received"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "spender",
+  											"value": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "1000000uluna"
+  										}
+  									],
+  									"type": "coin_spent"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "validator",
+  											"value": "terravaloper1rx3psgvgz6u9v29hyeh9ffek4rsk44rhqxa6s0"
+  										},
+  										{
+  											"key": "amount",
+  											"value": "1000000uluna"
+  										},
+  										{
+  											"key": "new_shares",
+  											"value": "1000000.000000000000000000"
+  										}
+  									],
+  									"type": "delegate"
+  								},
+  								{
+  									"attributes": [
+  										{
+  											"key": "action",
+  											"value": "/cosmos.staking.v1beta1.MsgDelegate"
+  										},
+  										{
+  											"key": "module",
+  											"value": "staking"
+  										},
+  										{
+  											"key": "sender",
+  											"value": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"
+  										}
+  									],
+  									"type": "message"
+  								}
+  							],
+  							"log": null
+  						}
+  					],
+  					"raw_log": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"terra1fl48vsnmsdzcv85q5d2q4z5ajdha8yu3nln0mh\"},{\"key\":\"amount\",\"value\":\"1000000uluna\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6\"},{\"key\":\"amount\",\"value\":\"1000000uluna\"}]},{\"type\":\"delegate\",\"attributes\":[{\"key\":\"validator\",\"value\":\"terravaloper1rx3psgvgz6u9v29hyeh9ffek4rsk44rhqxa6s0\"},{\"key\":\"amount\",\"value\":\"1000000uluna\"},{\"key\":\"new_shares\",\"value\":\"1000000.000000000000000000\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.staking.v1beta1.MsgDelegate\"},{\"key\":\"module\",\"value\":\"staking\"},{\"key\":\"sender\",\"value\":\"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6\"}]}]}]",
+  					"timestamp": "2022-08-01T12:06:53.893932093Z",
+  					"tx": {
+  						"auth_info": {
+  							"fee": {
+  								"amount": [
+  									{
+  										"amount": "37592",
+  										"denom": "uluna"
+  									}
+  								],
+  								"granter": "",
+  								"gas_limit": "250608",
+  								"payer": ""
+  							},
+  							"signer_infos": [
+  								{
+  									"mode_info": {
+  										"single": {
+  											"mode": "SIGN_MODE_DIRECT"
+  										}
+  									},
+  									"public_key": {
+  										"@type": "/cosmos.crypto.secp256k1.PubKey",
+  										"key": "AqMwTeMhhFaGSA3Pd6yTkO9Sn0biRBkrQEN7d54GxPGK"
+  									},
+  									"sequence": "3"
+  								}
+  							]
+  						},
+  						"body": {
+  							"memo": "",
+  							"messages": [
+  								{
+  									"@type": "/cosmos.staking.v1beta1.MsgDelegate",
+  									"delegator_address": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6",
+  									"validator_address": "terravaloper1rx3psgvgz6u9v29hyeh9ffek4rsk44rhqxa6s0",
+  									"amount": {
+  										"denom": "uluna",
+  										"amount": "1000000"
+  									}
+  								}
+  							],
+  							"timeout_height": 0
+  						},
+  						"signatures": [
+  							"ym8CyP2UYcyA7+XuMt2gLAN8Y91j6FrhtZKjThlPcGwQ1BFJPaXPy7y00qImhmmnVW3frPDuTya2kPqeRfbGEQ=="
+  						]
+  					},
+  					"txhash": "839F8200CEC8DA8101AC614F2931B50006D88D42F1412FE13D731D23DAFA56A1"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);
