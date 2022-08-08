@@ -1,0 +1,24 @@
+_id: ut_fb91db767c4f48729ce3718bceb3402b
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659369351850
+created: 1659368829667
+requestId: req_80328aaafcf94d0ea9a0a5b2b01115ef
+name: /distribution/parameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"distribution": {
+  			"parameters": {
+  				"base_proposer_reward": "0.010000000000000000",
+  				"bonus_proposer_reward": "0.040000000000000000",
+  				"community_tax": "0.020000000000000000",
+  				"withdraw_addr_enabled": true
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

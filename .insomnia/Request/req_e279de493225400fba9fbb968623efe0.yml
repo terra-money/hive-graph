@@ -1,0 +1,38 @@
+_id: req_e279de493225400fba9fbb968623efe0
+type: Request
+parentId: fld_21a9356028b44ba9900a7ec20602660d
+modified: 1659964197742
+created: 1659112592845
+url: "{{ _.base_url }}"
+name: /tx/byHeight
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float!) {\n\ttx {\n\t\tbyHeight(height:
+    $height)
+    {\n\t\t\tcode\n\t\t\tcodespace\n\t\t\tgas_used\n\t\t\tgas_wanted\n\t\t\theight\n\t\t\tlogs
+    {\n\t\t\t\tevents {\n\t\t\t\t\tattributes
+    {\n\t\t\t\t\t\tkey\n\t\t\t\t\t\tvalue\n\t\t\t\t\t}\n\t\t\t\t\ttype\n\t\t\t\t}\n\t\t\t\tlog\n\t\t\t}\n\t\t\traw_log\n\t\t\ttimestamp\n\t\t\ttx
+    {\n\t\t\t\tauth_info {\n\t\t\t\t\tfee {\n\t\t\t\t\t\tamount
+    {\n\t\t\t\t\t\t\tamount\n\t\t\t\t\t\t\tdenom\n\t\t\t\t\t\t}\n\t\t\t\t\t\tgranter\n\t\t\t\t\t\tgas_limit\n\t\t\t\t\t\tpayer\n\t\t\t\t\t}\n\t\t\t\t\tsigner_infos
+    {\n\t\t\t\t\t\tmode_info\n\t\t\t\t\t\tpublic_key\n\t\t\t\t\t\tsequence\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tbody
+    {\n\t\t\t\t\tmemo\n\t\t\t\t\tmessages\n\t\t\t\t\ttimeout_height\n\t\t\t\t}\n\t\t\t\tsignatures\n\t\t\t}\n\t\t\ttxhash\n\t\t}\n\t}\n}\n","variables":{"height":1063175},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8506
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

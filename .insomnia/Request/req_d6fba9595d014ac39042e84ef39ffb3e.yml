@@ -1,0 +1,32 @@
+_id: req_d6fba9595d014ac39042e84ef39ffb3e
+type: Request
+parentId: fld_d57dd483a89d450f88bfa9d2b5171618
+modified: 1659701664435
+created: 1659112592835
+url: "{{ _.base_url }}"
+name: /tendermint/validatorSet
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Int) {\n\ttendermint {\n\t\tvalidatorSet
+    (height: $height) {\n\t\t\tvalidators
+    {\n\t\t\t\taddress\n\t\t\t\tproposer_priority\n\t\t\t\tpub_key\n\t\t\t\tvoting_power\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.847
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

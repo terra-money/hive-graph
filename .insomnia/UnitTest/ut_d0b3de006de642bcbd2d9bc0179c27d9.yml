@@ -1,0 +1,36 @@
+_id: ut_d0b3de006de642bcbd2d9bc0179c27d9
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659359649106
+created: 1659354670632
+requestId: req_5c37056d03ad4e1ca34e42bfefbaffe2
+name: /staking/redelegations
+code: >+
+  const response1 = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"redelegations": [
+  				{
+  					"delegator_address": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6",
+  					"entries": [
+  						{
+  							"balance": "1000000",
+  							"completion_time": "2022-08-01T11:57:23.780Z",
+  							"creation_height": 1063005,
+  							"initial_balance": "1000000",
+  							"shares_dst": "1000000.000000000000000000"
+  						}
+  					],
+  					"validator_dst_address": "terravaloper1gdmnmpcaywly8jc3qhhwwqmta23jj76v8va9wn",
+  					"validator_src_address": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);
+

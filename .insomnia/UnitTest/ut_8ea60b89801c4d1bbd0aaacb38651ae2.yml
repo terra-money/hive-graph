@@ -1,0 +1,19 @@
+_id: ut_8ea60b89801c4d1bbd0aaacb38651ae2
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659369571775
+created: 1659369350504
+requestId: req_c843651d866d48fe993942ea99766995
+name: /distribution/withdrawAddress
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"distribution": {
+  			"withdrawAddress": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

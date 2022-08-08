@@ -1,0 +1,50 @@
+_id: ut_f9d5f3b753fb470095d52f07b023f4c4
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659377442660
+created: 1659376528044
+requestId: req_885e797d0de64152ba6d99b7e7604ef6
+name: /ibc/denomTraces
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"ibc": {
+  			"denomTraces": {
+  				"denom_traces": [
+  					{
+  						"base_denom": "uausdc",
+  						"path": "transfer/channel-11/transfer/channel-29"
+  					},
+  					{
+  						"base_denom": "wavax-wei",
+  						"path": "transfer/channel-7/transfer/channel-8"
+  					},
+  					{
+  						"base_denom": "ukuji",
+  						"path": "transfer/channel-7"
+  					},
+  					{
+  						"base_denom": "uausdc",
+  						"path": "transfer/channel-8"
+  					},
+  					{
+  						"base_denom": "uaxl",
+  						"path": "transfer/channel-8"
+  					},
+  					{
+  						"base_denom": "weth-wei",
+  						"path": "transfer/channel-8"
+  					}
+  				],
+  				"pagination": {
+  					"next_key": null,
+  					"total": 6
+  				}
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

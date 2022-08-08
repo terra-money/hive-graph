@@ -1,0 +1,32 @@
+_id: req_986c3ad959fd4a8b8f73694df0bc2e17
+type: Request
+parentId: fld_d07e10b096734966ba273837d0014ff5
+modified: 1659376453913
+created: 1659112592677
+url: "{{ _.base_url }}"
+name: /distribution/communityPool
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tdistribution
+    {\n\t\tcommunityPool(height: $height)
+    {\n\t\t\tdenom\n\t\t\tamount\n\t\t}\n\t}\n}\n","variables":{"height":1063175},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309730.8125
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

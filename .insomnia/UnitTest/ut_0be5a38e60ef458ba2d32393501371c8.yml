@@ -1,0 +1,30 @@
+_id: ut_0be5a38e60ef458ba2d32393501371c8
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376369657
+created: 1659376336492
+requestId: req_668e6dfb731747d78c4cdce5497b70f8
+name: /gov/deposits
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"deposits": [
+  				{
+  					"proposal_id": 18,
+  					"depositor": "terra1z75w0td9urxkh254jwqd5m8pd6ulqjfdjsxpj5",
+  					"amount": [
+  						{
+  							"amount": "502000000",
+  							"denom": "uluna"
+  						}
+  					]
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

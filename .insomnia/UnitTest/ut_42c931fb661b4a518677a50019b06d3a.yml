@@ -1,0 +1,50 @@
+_id: ut_42c931fb661b4a518677a50019b06d3a
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659375900435
+created: 1659375824220
+requestId: req_1e36ddc7fd094f1daea10662cd21b268
+name: /gov/votes
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"votes": [
+  				{
+  					"options": [
+  						{
+  							"option": "Yes",
+  							"weight": "1.000000000000000000"
+  						}
+  					],
+  					"proposal_id": 18,
+  					"voter": "terra1pphdny9hgu3v59jhea6gaxjwrtguul6rqtwfqp"
+  				},
+  				{
+  					"options": [
+  						{
+  							"option": "Yes",
+  							"weight": "1.000000000000000000"
+  						}
+  					],
+  					"proposal_id": 18,
+  					"voter": "terra1z75w0td9urxkh254jwqd5m8pd6ulqjfdjsxpj5"
+  				},
+  				{
+  					"options": [
+  						{
+  							"option": "Yes",
+  							"weight": "1.000000000000000000"
+  						}
+  					],
+  					"proposal_id": 18,
+  					"voter": "terra1fhqpktrwcjlkuxwv4qgwf0tmcy2g06swcf6fpj"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

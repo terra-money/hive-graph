@@ -1,0 +1,32 @@
+_id: req_80328aaafcf94d0ea9a0a5b2b01115ef
+type: Request
+parentId: fld_d07e10b096734966ba273837d0014ff5
+modified: 1659369159497
+created: 1659368699423
+url: "{{ _.base_url }}"
+name: /distribution/parameters
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tdistribution
+    {\n\t\tparameters(height: $height)
+    {\n\t\t\tbase_proposer_reward\n\t\t\tbonus_proposer_reward\n\t\t\tcommunity_tax\n\t\t\twithdraw_addr_enabled\n\t\t}\n\t}\n}\n","variables":{"height":1063175},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309730.0312
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,27 @@
+_id: ut_5d532e5b3e09465b94a467744a140550
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376483302
+created: 1659376400189
+requestId: req_f54ff902d9354b3fab5b00a4e3e405b2
+name: /gov/depositParameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"depositParameters": {
+  				"max_deposit_period": 600,
+  				"min_deposit": [
+  					{
+  						"amount": "512000000",
+  						"denom": "uluna"
+  					}
+  				]
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

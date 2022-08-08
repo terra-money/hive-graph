@@ -1,0 +1,19 @@
+_id: ut_d119de92b8274384ad5a31ea641a86b5
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701871085
+created: 1659701688304
+requestId: req_c90a2e49100f4122a23f4b898d65da9e
+name: /tendermint/syncing
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"tendermint": {
+  			"syncing": false
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

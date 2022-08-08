@@ -1,0 +1,24 @@
+_id: ut_7e40c434b7ad4dee88714c47dd66384a
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659368859647
+created: 1659368608596
+requestId: req_986c3ad959fd4a8b8f73694df0bc2e17
+name: /distribution/communityPool
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"distribution": {
+  			"communityPool": [
+  				{
+  					"denom": "uluna",
+  					"amount": "14234790770537.438083322357469886"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

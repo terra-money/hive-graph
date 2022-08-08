@@ -1,0 +1,44 @@
+_id: ut_ea8baf80aa084a6e9c519ab37482fc16
+type: UnitTest
+parentId: uts_b952831b41ac4d13b9f5b3eb313fdcc3
+modified: 1659123485844
+created: 1659123448106
+requestId: req_6814f0625833445fb1836b83b71e6929
+name: /wasm/contractInfo
+code: >-
+  const response1 = await insomnia.send();
+
+  console.log(response1.data)
+
+  var expected_result = {
+  	"data": {
+  		"wasm": {
+  			"contractInfo": {
+  				"address": "terra1qdv90q7rdg60tlpyeem93c88avp8lvnwa04sxr3yxsfcnccknnysft59tg",
+  				"admin": "terra174gu7kg8ekk5gsxdma5jlfcedm653tyg6ayppw",
+  				"code_id": 71,
+  				"init_msg": {
+  					"asset_infos": [
+  						{
+  							"token": {
+  								"contract_addr": "terra1s8u586k3s7xtvasxv4p6ldl0jrxht9w886v8ymkst6crg5hxue3sqn49r9"
+  							}
+  						},
+  						{
+  							"token": {
+  								"contract_addr": "terra1rwg5kt6kcyxtz69acjgpeut7dgr4y3r7tvntdxqt03dvpqktrfxq4jrvpq"
+  							}
+  						}
+  					],
+  					"token_code_id": 69,
+  					"factory_addr": "terra14x9fr055x5hvr48hzy2t4q7kvjvfttsvxusa4xsdcy702mnzsvuqprer8r",
+  					"init_params": null
+  				},
+  				"owner": "terra14x9fr055x5hvr48hzy2t4q7kvjvfttsvxusa4xsdcy702mnzsvuqprer8r"
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);

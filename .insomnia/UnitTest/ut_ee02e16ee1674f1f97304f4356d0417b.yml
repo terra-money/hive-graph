@@ -1,0 +1,10 @@
+_id: ut_ee02e16ee1674f1f97304f4356d0417b
+type: UnitTest
+parentId: uts_8917ccdf1fba4e3e8d7b16f9e9527118
+modified: 1659112592942
+created: 1659112592942
+requestId: req_0666631dff284af4bb1d71d21612dd7c
+name: lcd/health
+code: |-
+  const response1 = await insomnia.send();
+  expect(response1.status).to.equal(200);

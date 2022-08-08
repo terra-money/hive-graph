@@ -1,0 +1,50 @@
+_id: ut_fa31fc96dc4441e7b606f061f987bd5a
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659368375402
+created: 1659368075922
+requestId: req_a3bf9356bf0a411b956693ae4659740b
+name: /bank/total
+code: >+
+  const response = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"bank": {
+  			"total": [
+  				{
+  					"denom": "ibc/13389479588AE69935275331EBCBCE868CBD749E553FC73C586C7C481913FDA3",
+  					"amount": "6000000000000000000"
+  				},
+  				{
+  					"denom": "ibc/6DD0D40C3A5FE38336FC5EF017CC248E11C15E28C76F95C83A8FFE61E1566063",
+  					"amount": "5004400"
+  				},
+  				{
+  					"denom": "ibc/7808A00523CE138C641E86F1F95217FA04AE475895FADAAC56AEA548841A40E3",
+  					"amount": "18000"
+  				},
+  				{
+  					"denom": "ibc/85CE72EE820A66F0ABD5EE3907A34E243E4BE2D6CFAEB4C08DF85BD6C0784FA2",
+  					"amount": "4076000"
+  				},
+  				{
+  					"denom": "ibc/C567713C9D0904098C14BA0FBEB9192C5B68B590757EE6913DC292710C8926E6",
+  					"amount": "6099900000000000000"
+  				},
+  				{
+  					"denom": "ibc/F91EA2C0A23697A1048E08C2F787E3A58AC6F706A1CD2257A504925158CFC0F3",
+  					"amount": "1012400001"
+  				},
+  				{
+  					"denom": "uluna",
+  					"amount": "60711363245340222"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

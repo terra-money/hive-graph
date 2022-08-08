@@ -1,0 +1,35 @@
+_id: req_d38717f5726a44a296a42767316a3384
+type: Request
+parentId: fld_03ae85b71f294e5eb9cd02e6a5e83324
+modified: 1659363669421
+created: 1659112592881
+url: "{{ _.base_url }}"
+name: /utils/validatorsWithVotingPower
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query {\n\tutils {\n\t\tvalidatorsWithVotingPower
+    {\n\t\t\tproposer_priority\n\t\t\tvalidator {\n\t\t\t\tcommission
+    {\n\t\t\t\t\tcommission_rates
+    {\n\t\t\t\t\t\tmax_change_rate\n\t\t\t\t\t\tmax_rate\n\t\t\t\t\t\trate\n\t\t\t\t\t}\n\t\t\t\t\tupdate_time\n\t\t\t\t}\n\t\t\t\tconsensus_pubkey
+    {\n\t\t\t\t\tkey\n\t\t\t\t}\n\t\t\t\tdelegator_shares\n\t\t\t\tdescription
+    {\n\t\t\t\t\tdetails\n\t\t\t\t\tidentity\n\t\t\t\t\tmoniker\n\t\t\t\t\tsecurity_contact\n\t\t\t\t\twebsite\n\t\t\t\t}\n\t\t\t\tjailed\n\t\t\t\tmin_self_delegation\n\t\t\t\toperator_address\n\t\t\t\tstatus\n\t\t\t\ttokens\n\t\t\t\tunbonding_height\n\t\t\t\tunbonding_time\n\t\t\t}\n\t\t\tvoting_power\n\t\t}\n\t}\n}\n","operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8464
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,21 @@
+_id: ut_59ee500f9b924f7fa0870259aee63a21
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659375836893
+created: 1659369564033
+requestId: req_f149b34b604c4730bc911df1d02c0413
+name: /gov/votingParameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"votingParameters": {
+  				"voting_period": 600
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

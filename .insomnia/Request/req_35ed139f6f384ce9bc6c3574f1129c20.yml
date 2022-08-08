@@ -1,0 +1,42 @@
+_id: req_35ed139f6f384ce9bc6c3574f1129c20
+type: Request
+parentId: fld_21a9356028b44ba9900a7ec20602660d
+modified: 1659964167800
+created: 1659112592853
+url: "{{ _.base_url }}"
+name: /tx/search
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query(\n\t$limit: Int!\n\t$offset: Int!\n\t$page:
+    Int!\n\t$key: String!\n\t$value: String!\n) {\n\ttx
+    {\n\t\tsearch(\n\t\t\toptions: {\n\t\t\t\tlimit: $limit\n\t\t\t\toffset:
+    $offset\n\t\t\t\tpage: $page\n\t\t\t\tevents: { key: $key, value: $value
+    }\n\t\t\t}\n\t\t) {\n\t\t\tpagination
+    {\n\t\t\t\tnext_key\n\t\t\t\ttotal\n\t\t\t}\n\t\t\ttxs
+    {\n\t\t\t\tcode\n\t\t\t\tcodespace\n\t\t\t\tgas_used\n\t\t\t\tgas_wanted\n\t\t\t\theight\n\t\t\t\tlogs
+    {\n\t\t\t\t\tevents {\n\t\t\t\t\t\tattributes
+    {\n\t\t\t\t\t\t\tkey\n\t\t\t\t\t\t\tvalue\n\t\t\t\t\t\t}\n\t\t\t\t\t\ttype\n\t\t\t\t\t}\n\t\t\t\t\tlog\n\t\t\t\t}\n\t\t\t\traw_log\n\t\t\t\ttimestamp\n\t\t\t\ttx
+    {\n\t\t\t\t\tauth_info {\n\t\t\t\t\t\tfee {\n\t\t\t\t\t\t\tamount
+    {\n\t\t\t\t\t\t\t\tamount\n\t\t\t\t\t\t\t\tdenom\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\tgranter\n\t\t\t\t\t\t\tgas_limit\n\t\t\t\t\t\t\tpayer\n\t\t\t\t\t\t}\n\t\t\t\t\t\tsigner_infos
+    {\n\t\t\t\t\t\t\tmode_info\n\t\t\t\t\t\t\tpublic_key\n\t\t\t\t\t\t\tsequence\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tbody
+    {\n\t\t\t\t\t\tmemo\n\t\t\t\t\t\tmessages\n\t\t\t\t\t\ttimeout_height\n\t\t\t\t\t}\n\t\t\t\t\tsignatures\n\t\t\t\t}\n\t\t\t\ttxhash\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"limit":2,"offset":2,"page":1,"key":"proposal_vote.proposal_id","value":"18"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8499
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

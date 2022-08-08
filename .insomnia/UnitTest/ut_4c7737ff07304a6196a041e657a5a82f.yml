@@ -1,0 +1,19 @@
+_id: ut_4c7737ff07304a6196a041e657a5a82f
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701265969
+created: 1659377565909
+requestId: req_bda4fb755f01475fbd76335725bc66fd
+name: /mint/annualProvisions
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"mint": {
+  			"annualProvisions": "4249795380040054.390000000000000000"
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

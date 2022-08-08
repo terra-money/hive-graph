@@ -1,0 +1,37 @@
+_id: req_885e797d0de64152ba6d99b7e7604ef6
+type: Request
+parentId: fld_1e718ccf912146f3aa5093de487e5f25
+modified: 1659881941010
+created: 1659112592743
+url: "{{ _.base_url }}"
+name: /ibc/denomTraces
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query(\n\t$count_total: String!\n\t$key:
+    String!\n\t$limit: String!\n\t$offset: String!\n\t$order_by:
+    OrderBy\n\t$reverse: String!\n) {\n\tibc {\n\t\tdenomTraces(\n\t\t\toptions:
+    {\n\t\t\t\tcount_total: $count_total\n\t\t\t\tkey: $key\n\t\t\t\tlimit:
+    $limit\n\t\t\t\toffset: $offset\n\t\t\t\torder_by:
+    $order_by\n\t\t\t\treverse: $reverse\n\t\t\t}\n\t\t) {\n\t\t\tdenom_traces
+    {\n\t\t\t\tbase_denom\n\t\t\t\tpath\n\t\t\t}\n\t\t\tpagination
+    {\n\t\t\t\tnext_key\n\t\t\t\ttotal\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"count_total":"1","key":"2","limit":"1","offset":"1","order_by":"ORDER_BY_ASC","reverse":"false"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309728.4688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,37 @@
+_id: ut_c3c7baebffb843ccad6f5f1b0428279b
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701448852
+created: 1659701391301
+requestId: req_fb13033711334807849b3d5fa256ae79
+name: /msgauth/grants - genericAuth
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"msgauth": {
+  			"grants": [
+  				{
+  					"authorization": {
+  						"spend_limit": [
+  							{
+  								"amount": "100000",
+  								"denom": "uluna"
+  							}
+  						]
+  					},
+  					"expiration": "2023-08-02T12:18:37.000Z"
+  				},
+  				{
+  					"authorization": {
+  						"msg": "/cosmos.gov.v1beta1.MsgVote"
+  					},
+  					"expiration": "2023-08-02T18:22:38.000Z"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

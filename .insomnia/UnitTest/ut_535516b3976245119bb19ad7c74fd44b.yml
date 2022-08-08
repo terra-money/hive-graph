@@ -1,0 +1,52 @@
+_id: ut_535516b3976245119bb19ad7c74fd44b
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659369239312
+created: 1659369214858
+requestId: req_1d412636d8594c10ac5a0bb2b0867603
+name: /distribution/rewards
+code: >+
+  const response = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"distribution": {
+  			"rewards": {
+  				"rewards": [
+  					{
+  						"reward": [],
+  						"validator_address": "terravaloper1rx3psgvgz6u9v29hyeh9ffek4rsk44rhqxa6s0"
+  					},
+  					{
+  						"reward": [
+  							{
+  								"amount": "252.017251775431000000",
+  								"denom": "uluna"
+  							}
+  						],
+  						"validator_address": "terravaloper1gdmnmpcaywly8jc3qhhwwqmta23jj76v8va9wn"
+  					},
+  					{
+  						"reward": [
+  							{
+  								"amount": "554.436839881829999999",
+  								"denom": "uluna"
+  							}
+  						],
+  						"validator_address": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"
+  					}
+  				],
+  				"total": [
+  					{
+  						"amount": "806.454091657260999999",
+  						"denom": "uluna"
+  					}
+  				]
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

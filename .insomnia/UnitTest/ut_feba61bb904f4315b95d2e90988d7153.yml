@@ -1,0 +1,26 @@
+_id: ut_feba61bb904f4315b95d2e90988d7153
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659377510765
+created: 1659377439400
+requestId: req_d216d28c923043868d7c12bf136456ee
+name: /mint/parameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"mint": {
+  			"parameters": {
+  				"blocks_per_year": 6311520,
+  				"goal_bonded": "0.670000000000000000",
+  				"inflation_max": "0.070000000000000000",
+  				"inflation_min": "0.070000000000000000",
+  				"inflation_rate_change": "0.000000000000000000",
+  				"mint_denom": "uluna"
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

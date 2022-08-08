@@ -1,0 +1,32 @@
+_id: req_90ac14c7a2b44a8e99737235d2e8c16b
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659710143766
+created: 1659112592621
+url: "{{ _.base_url }}"
+name: /staking/parameters
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tstaking
+    {\n\t\tparameters(height: $height)
+    {\n\t\t\tbond_denom\n\t\t\thistorical_entries\n\t\t\tmax_entries\n\t\t\tmax_validators\n\t\t\tunbonding_time\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309771.4375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

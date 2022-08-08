@@ -1,0 +1,37 @@
+_id: req_9b1a2713a1364de8a8b8311eb2056d16
+type: Request
+parentId: fld_d57dd483a89d450f88bfa9d2b5171618
+modified: 1659701892802
+created: 1659112592813
+url: "{{ _.base_url }}"
+name: /tendermint/blockInfo
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Int) {\n\ttendermint
+    {\n\t\tblockInfo(height: $height) {\n\t\t\tblock {\n\t\t\t\tdata
+    {\n\t\t\t\t\ttxs\n\t\t\t\t}\n\t\t\t\tevidence
+    {\n\t\t\t\t\tevidence\n\t\t\t\t}\n\t\t\t\theader
+    {\n\t\t\t\t\tapp_hash\n\t\t\t\t\tchain_id\n\t\t\t\t\tconsensus_hash\n\t\t\t\t\tdata_hash\n\t\t\t\t\tevidence_hash\n\t\t\t\t\theight\n\t\t\t\t\tlast_block_id
+    {\n\t\t\t\t\t\thash\n\t\t\t\t\t\tpart_set_header
+    {\n\t\t\t\t\t\t\thash\n\t\t\t\t\t\t\ttotal\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tlast_commit_hash\n\t\t\t\t\tlast_results_hash\n\t\t\t\t\tnext_validators_hash\n\t\t\t\t\tproposer_address\n\t\t\t\t\ttime\n\t\t\t\t\tvalidators_hash\n\t\t\t\t\tversion
+    {\n\t\t\t\t\t\tapp\n\t\t\t\t\t\tblock\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.8523
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

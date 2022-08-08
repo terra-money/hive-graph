@@ -1,0 +1,22 @@
+_id: ut_ba32745b8bd645a6954b5b74368894e0
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376530821
+created: 1659376469597
+requestId: req_a0c5eba8e07840dc8faf6ce4708fb664
+name: /ibc/parameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"ibc": {
+  			"parameters": {
+  				"receive_enabled": true,
+  				"send_enabled": true
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

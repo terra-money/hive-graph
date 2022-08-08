@@ -1,0 +1,32 @@
+_id: req_c843651d866d48fe993942ea99766995
+type: Request
+parentId: fld_d07e10b096734966ba273837d0014ff5
+modified: 1659369449020
+created: 1659369272760
+url: "{{ _.base_url }}"
+name: /distribution/withdrawAddress
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $delegator: String!)
+    {\n\tdistribution {\n\t\twithdrawAddress(height: $height, delegator:
+    $delegator)\n\t}\n}\n","variables":{"height":1063175,"delegator":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309729.4453
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

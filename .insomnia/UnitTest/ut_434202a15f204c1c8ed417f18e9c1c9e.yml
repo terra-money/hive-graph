@@ -1,0 +1,48 @@
+_id: ut_434202a15f204c1c8ed417f18e9c1c9e
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659367985260
+created: 1659359598166
+requestId: req_afd1eabd519a47fe808dd314d1eff0cb
+name: /staking/validator
+code: >+
+  const response = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"validator": {
+  				"commission": {
+  					"commission_rates": {
+  						"max_change_rate": "0.010000000000000000",
+  						"max_rate": "0.050000000000000000",
+  						"rate": "0.010000000000000000"
+  					},
+  					"update_time": "2022-07-20T10:44:48.465Z"
+  				},
+  				"consensus_pubkey": {
+  					"key": "KUqIsRD9yzPt7k9et+ClFp6h8wXwEIcb/TVZPrC57+I="
+  				},
+  				"delegator_shares": "98116645162299.759991405389746657",
+  				"description": {
+  					"details": "iWrite High Quality Code (most of the times (or at least I try))",
+  					"identity": "3868A17E17479F2B",
+  					"moniker": "emidev98",
+  					"security_contact": "",
+  					"website": "https://github.com/emidev98"
+  				},
+  				"jailed": false,
+  				"min_self_delegation": "995000000",
+  				"operator_address": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx",
+  				"status": 3,
+  				"tokens": "97822589880514",
+  				"unbonding_height": 1053430,
+  				"unbonding_time": "2022-07-31T20:24:36.296Z"
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

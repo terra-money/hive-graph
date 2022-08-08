@@ -1,0 +1,53 @@
+_id: ut_f0613b1c3bf84eca9b24a6a0e7df6d50
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701886632
+created: 1659701861394
+requestId: req_9b1a2713a1364de8a8b8311eb2056d16
+name: /tendermint/blockInfo
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"tendermint": {
+  			"blockInfo": {
+  				"block": {
+  					"data": {
+  						"txs": []
+  					},
+  					"evidence": {
+  						"evidence": []
+  					},
+  					"header": {
+  						"app_hash": "w7GgorS/rjYvWJLRF+cGQK7KB2gkhr8HlngqeqU6Wu8=",
+  						"chain_id": "pisco-1",
+  						"consensus_hash": "5mDvFKlRQ9sPPq8vMfF33jNN5atlBXn9CToQy66G1aY=",
+  						"data_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+  						"evidence_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+  						"height": "580019",
+  						"last_block_id": {
+  							"hash": "vH4jLMulSEJFexXr35dy4YFxkQSIPHp66ANJT9xvPPM=",
+  							"part_set_header": {
+  								"hash": "P8Mo6LSkiqQa5wzeiTr9X5kWJCPm9jrkWmgNnvyX9uE=",
+  								"total": "1"
+  							}
+  						},
+  						"last_commit_hash": "eQ9Y/lNZN/2zJboxQ0zODq/WALdE6tCPD6lsHFgZgpI=",
+  						"last_results_hash": "47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+  						"next_validators_hash": "Ftk5OH85eQHDjSYEMLdS6GYey7oxI7SgCHW88wvwsEA=",
+  						"proposer_address": "wkp9IE4KB3Nur4p+doIM2GhWWw4=",
+  						"time": "2022-06-30T12:16:52.771932682Z",
+  						"validators_hash": "Ftk5OH85eQHDjSYEMLdS6GYey7oxI7SgCHW88wvwsEA=",
+  						"version": {
+  							"app": "0",
+  							"block": "11"
+  						}
+  					}
+  				}
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

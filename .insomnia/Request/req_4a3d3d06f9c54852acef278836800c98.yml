@@ -1,0 +1,30 @@
+_id: req_4a3d3d06f9c54852acef278836800c98
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659710203807
+created: 1659112592643
+url: "{{ _.base_url }}"
+name: /staking/unbondingDelegations
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $delegator: String!, $validator:
+    String!) {\n\tstaking {\n\t\tunbondingDelegations(\n\t\t\tdelegator:
+    $delegator\n\t\t\theight: $height\n\t\t\tvalidator: $validator\n\t\t)
+    {\n\t\t\tdelegator_address \n\t\t\tentries
+    {\n\t\t\t\tbalance\n\t\t\t\tcompletion_time\n\t\t\t\tcreation_height\n\t\t\t\tinitial_balance\n\t\t\t}\n\t\t\tvalidator_address\n\t\t}\n\t}\n}\n","variables":{"height":1062421,"delegator":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6","validator":"terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"},"operationName":"Query"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309630.8125
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

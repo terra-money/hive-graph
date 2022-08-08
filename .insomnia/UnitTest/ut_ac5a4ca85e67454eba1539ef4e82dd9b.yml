@@ -1,0 +1,42 @@
+_id: ut_ac5a4ca85e67454eba1539ef4e82dd9b
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376283703
+created: 1659376220729
+requestId: req_4100c458ce74495099a531d67a239536
+name: /gov/proposal
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"proposal": {
+  				"content": {
+  					"description": "update pisco to 2.1.0 for testing",
+  					"title": "Pisco software upgrade 2.1.0"
+  				},
+  				"deposit_end_time": "2022-07-15T02:46:47.432Z",
+  				"final_tally_result": {
+  					"abstain": "0",
+  					"no": "0",
+  					"no_with_veto": "0",
+  					"yes": "89705491674759"
+  				},
+  				"id": "18",
+  				"status": "Passed",
+  				"submit_time": "2022-07-15T02:36:47.432Z",
+  				"total_deposit": [
+  					{
+  						"amount": "512000000",
+  						"denom": "uluna"
+  					}
+  				],
+  				"voting_end_time": "2022-07-15T02:48:02.240Z",
+  				"voting_start_time": "2022-07-15T02:38:02.240Z"
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

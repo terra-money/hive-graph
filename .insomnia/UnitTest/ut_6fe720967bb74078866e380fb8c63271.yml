@@ -1,0 +1,24 @@
+_id: ut_6fe720967bb74078866e380fb8c63271
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659961327146
+created: 1659961297153
+requestId: req_7ec879dd386249ce9af1599f850d8597
+name: /wasm/codeInfo
+code: >+
+  const response = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"wasm": {
+  			"codeInfo": {
+  				"code_creator": "terra1hzt9ywljcdg7urcud5nlcsh8trk72mqyj4g8e4",
+  				"code_hash": "28948543125B845FC50BA899C6CD4A7154BEAF6059088C81B0FFEC849922D599"
+  			}
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

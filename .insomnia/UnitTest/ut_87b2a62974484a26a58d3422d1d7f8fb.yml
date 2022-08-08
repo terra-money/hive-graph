@@ -1,0 +1,55 @@
+_id: ut_87b2a62974484a26a58d3422d1d7f8fb
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701406477
+created: 1659701249258
+requestId: req_6a88c24d3aca49f7b177f05ebc75a64d
+name: /msgauth/grants - stakeAuth
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"msgauth": {
+  			"grants": [
+  				{
+  					"authorization": {
+  						"spend_limit": [
+  							{
+  								"amount": "100000",
+  								"denom": "uluna"
+  							}
+  						]
+  					},
+  					"expiration": "2030-05-09T13:49:54.000Z"
+  				},
+  				{
+  					"authorization": {
+  						"msg": "/cosmos.gov.v1beta1.MsgVote"
+  					},
+  					"expiration": "2030-05-09T13:49:54.000Z"
+  				},
+  				{
+  					"authorization": {
+  						"allow_list": {
+  							"addresses": [
+  								"terravaloper1zdpgj8am5nqqvht927k3etljyl6a52kwqndjz2"
+  							]
+  						},
+  						"authorization_type": 1,
+  						"deny_list": {
+  							"addresses": []
+  						},
+  						"max_tokens": {
+  							"amount": "100000",
+  							"denom": "uluna"
+  						}
+  					},
+  					"expiration": "2030-05-09T13:49:54.000Z"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

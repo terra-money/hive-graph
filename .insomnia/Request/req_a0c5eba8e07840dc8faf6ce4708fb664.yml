@@ -1,0 +1,32 @@
+_id: req_a0c5eba8e07840dc8faf6ce4708fb664
+type: Request
+parentId: fld_1e718ccf912146f3aa5093de487e5f25
+modified: 1659377421347
+created: 1659112592748
+url: "{{ _.base_url }}"
+name: /ibc/parameters
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tibc {\n\t\tparameters(height:
+    $height)
+    {\n\t\t\treceive_enabled\n\t\t\tsend_enabled\n\t\t}\n\t}\n}\n","variables":{"height":1063175},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309728.0781
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

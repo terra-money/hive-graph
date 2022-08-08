@@ -1,0 +1,19 @@
+_id: ut_c81dd443e14f441c82f691fa275c5864
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659377580340
+created: 1659377503765
+requestId: req_86a33011004f4ef9b0a227c99c2eab8b
+name: /mint/inflation
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"mint": {
+  			"inflation": "0.070000000000000000"
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

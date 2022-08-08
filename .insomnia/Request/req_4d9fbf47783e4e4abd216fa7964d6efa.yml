@@ -1,0 +1,31 @@
+_id: req_4d9fbf47783e4e4abd216fa7964d6efa
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659710144974
+created: 1659112592654
+url: "{{ _.base_url }}"
+name: /staking/validators
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tstaking
+    {\n\t\tvalidators(\n\t\t\theight: $height\n\t\t) {\n\t\t\tcommission
+    {\n\t\t\t\tcommission_rates
+    {\n\t\t\t\t\tmax_change_rate\n\t\t\t\t\tmax_rate\n\t\t\t\t\trate\n\t\t\t\t}\n\t\t\t\tupdate_time\n\t\t\t}\n\t\t\tconsensus_pubkey
+    {\n\t\t\t\tkey\n\t\t\t}\n\t\t\tdelegator_shares\n\t\t\tdescription
+    {\n\t\t\t\tdetails\n\t\t\t\tidentity\n\t\t\t\tmoniker\n\t\t\t\tsecurity_contact\n\t\t\t\twebsite\n\t\t\t}\n\t\t\tjailed\n\t\t\tmin_self_delegation\n\t\t\toperator_address\n\t\t\tstatus\n\t\t\ttokens\n\t\t\tunbonding_height\n\t\t\tunbonding_time\n\t\t}\n\t}\n}\n","variables":{"height":1063053},"operationName":"Query"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309623
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

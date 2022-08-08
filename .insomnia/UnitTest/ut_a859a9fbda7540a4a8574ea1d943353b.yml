@@ -1,0 +1,145 @@
+_id: ut_a859a9fbda7540a4a8574ea1d943353b
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376186245
+created: 1659376156973
+requestId: req_429b2cf5f8b34266877ed7589a9746a9
+name: /gov/proposals
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"proposals": [
+  				{
+  					"content": {
+  						"changes": [
+  							{
+  								"key": "UnbondingTime",
+  								"subspace": "staking",
+  								"value": "\"75600000000000\""
+  							}
+  						]
+  					},
+  					"deposit_end_time": "2022-06-27T17:40:41.669Z",
+  					"final_tally_result": {
+  						"abstain": "0",
+  						"no": "0",
+  						"no_with_veto": "0",
+  						"yes": "30642399789510"
+  					},
+  					"id": "11",
+  					"status": "Rejected",
+  					"submit_time": "2022-06-27T17:30:41.669Z",
+  					"total_deposit": [
+  						{
+  							"amount": "512000000",
+  							"denom": "uluna"
+  						}
+  					],
+  					"voting_end_time": "2022-06-27T17:40:41.669Z",
+  					"voting_start_time": "2022-06-27T17:30:41.669Z"
+  				},
+  				{
+  					"content": {
+  						"description": "2.1.0",
+  						"title": "2.1.0"
+  					},
+  					"deposit_end_time": "2022-07-15T00:19:13.422Z",
+  					"final_tally_result": {
+  						"abstain": "0",
+  						"no": "0",
+  						"no_with_veto": "0",
+  						"yes": "72495472934004"
+  					},
+  					"id": "17",
+  					"status": "Rejected",
+  					"submit_time": "2022-07-15T00:09:13.422Z",
+  					"total_deposit": [
+  						{
+  							"amount": "5725000000",
+  							"denom": "uluna"
+  						}
+  					],
+  					"voting_end_time": "2022-07-15T00:21:13.943Z",
+  					"voting_start_time": "2022-07-15T00:11:13.943Z"
+  				},
+  				{
+  					"content": {
+  						"description": "update pisco to 2.1.0 for testing",
+  						"title": "Pisco software upgrade 2.1.0"
+  					},
+  					"deposit_end_time": "2022-07-15T02:46:47.432Z",
+  					"final_tally_result": {
+  						"abstain": "0",
+  						"no": "0",
+  						"no_with_veto": "0",
+  						"yes": "89705491674759"
+  					},
+  					"id": "18",
+  					"status": "Passed",
+  					"submit_time": "2022-07-15T02:36:47.432Z",
+  					"total_deposit": [
+  						{
+  							"amount": "512000000",
+  							"denom": "uluna"
+  						}
+  					],
+  					"voting_end_time": "2022-07-15T02:48:02.240Z",
+  					"voting_start_time": "2022-07-15T02:38:02.240Z"
+  				},
+  				{
+  					"content": {
+  						"description": "Yeah?",
+  						"title": "So what"
+  					},
+  					"deposit_end_time": "2022-07-23T00:47:06.841Z",
+  					"final_tally_result": {
+  						"abstain": "0",
+  						"no": "0",
+  						"no_with_veto": "0",
+  						"yes": "0"
+  					},
+  					"id": "22",
+  					"status": "Rejected",
+  					"submit_time": "2022-07-23T00:37:06.841Z",
+  					"total_deposit": [
+  						{
+  							"amount": "512000000",
+  							"denom": "uluna"
+  						}
+  					],
+  					"voting_end_time": "2022-07-23T00:47:39.652Z",
+  					"voting_start_time": "2022-07-23T00:37:39.652Z"
+  				},
+  				{
+  					"content": {
+  						"description": "Like, bruh pls",
+  						"title": "Please pass"
+  					},
+  					"deposit_end_time": "2022-07-23T08:06:17.129Z",
+  					"final_tally_result": {
+  						"abstain": "0",
+  						"no": "0",
+  						"no_with_veto": "0",
+  						"yes": "1000000000"
+  					},
+  					"id": "23",
+  					"status": "Rejected",
+  					"submit_time": "2022-07-23T07:56:17.129Z",
+  					"total_deposit": [
+  						{
+  							"amount": "512000000",
+  							"denom": "uluna"
+  						}
+  					],
+  					"voting_end_time": "2022-07-23T08:06:17.129Z",
+  					"voting_start_time": "2022-07-23T07:56:17.129Z"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

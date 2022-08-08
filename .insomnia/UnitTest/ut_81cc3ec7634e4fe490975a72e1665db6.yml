@@ -1,0 +1,34 @@
+_id: ut_81cc3ec7634e4fe490975a72e1665db6
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659359642227
+created: 1659350717245
+requestId: req_4a3d3d06f9c54852acef278836800c98
+name: /staking/unbondingDelegations
+code: >+
+  const response1 = await insomnia.send();
+
+  var expected_result = {
+  	"data": {
+  		"staking": {
+  			"unbondingDelegations": [
+  				{
+  					"delegator_address": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6",
+  					"entries": [
+  						{
+  							"balance": "1000000",
+  							"completion_time": "2022-08-01T10:50:18.412Z",
+  							"creation_height": 1062421,
+  							"initial_balance": "1000000"
+  						}
+  					],
+  					"validator_address": "terravaloper1wxt2pfrepgqhgl83n8ernl64mjefzc6phhdmyx"
+  				}
+  			]
+  		}
+  	}
+  }
+
+
+  expect(JSON.parse(response1.data)).to.deep.equal(expected_result);
+

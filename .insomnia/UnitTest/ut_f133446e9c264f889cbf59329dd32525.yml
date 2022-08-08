@@ -1,0 +1,19 @@
+_id: ut_f133446e9c264f889cbf59329dd32525
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376226364
+created: 1659376086223
+requestId: req_29e54f5a00834d40be3b3eaa70f45ea7
+name: /gov/proposer
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"proposer": "terra1z75w0td9urxkh254jwqd5m8pd6ulqjfdjsxpj5"
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

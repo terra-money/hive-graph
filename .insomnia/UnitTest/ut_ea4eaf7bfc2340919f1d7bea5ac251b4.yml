@@ -1,0 +1,25 @@
+_id: ut_ea4eaf7bfc2340919f1d7bea5ac251b4
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659701700173
+created: 1659701574800
+requestId: req_1abf363f77464aafb179cf4f092a26c9
+name: /slashing/parameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"slashing": {
+  			"parameters": {
+  				"downtime_jail_duration": "600",
+  				"min_signed_per_window": "0.500000000000000000",
+  				"signed_blocks_window": 10000,
+  				"slash_fraction_double_sign": "0.010000000000000000",
+  				"slash_fraction_downtime": "0.001000000000000000"
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

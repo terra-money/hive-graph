@@ -1,0 +1,37 @@
+_id: ut_524ddd9b9bf64fc397a4e53a7e11c286
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376339409
+created: 1659376275505
+requestId: req_23c0d1bbe72840f7aea7b6945acfb71d
+name: /gov/parameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"parameters": {
+  				"deposit_params": {
+  					"max_deposit_period": 600,
+  					"min_deposit": [
+  						{
+  							"amount": "512000000",
+  							"denom": "uluna"
+  						}
+  					]
+  				},
+  				"tally_params": {
+  					"quorum": "0.334000000000000000",
+  					"threshold": "0.500000000000000000",
+  					"veto_threshold": "0.334000000000000000"
+  				},
+  				"voting_params": {
+  					"voting_period": 600
+  				}
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

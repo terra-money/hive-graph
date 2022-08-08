@@ -1,0 +1,23 @@
+_id: ut_955711e5a63f4fb4b71e2c339463b9d3
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376034091
+created: 1659375889155
+requestId: req_ca94b94d447044a3b246a6064e5805ff
+name: /gov/tallyParameters
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"gov": {
+  			"tallyParameters": {
+  				"quorum": "0.334000000000000000",
+  				"threshold": "0.500000000000000000",
+  				"veto_threshold": "0.334000000000000000"
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

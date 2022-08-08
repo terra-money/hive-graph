@@ -1,0 +1,30 @@
+_id: req_3ae357d8617142999b2d3cc84286d754
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659710142556
+created: 1659112592624
+url: "{{ _.base_url }}"
+name: /staking/delegation
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $delegator: String!, $validator:
+    String!) {\n\tstaking {\n\t\tdelegation(\n\t\t\tdelegator:
+    $delegator\n\t\t\tvalidator: $validator\n\t\t\theight: $height\n\t\t)
+    {\n\t\t\tbalance
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t\tdelegator_address\n\t\t\tshares\n\t\t\tvalidator_address\n\t\t}\n\t}\n}\n","variables":{"height":580105,"delegator":"terra1cxm0m543zpxfa6d7p20tv5wdrjlr9rxf4dkw5p","validator":"terravaloper1gtw2uxdkdt3tvq790ckjz8jm8qgwkdw3uptstn"},"operationName":"Query"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309671.4375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

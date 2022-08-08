@@ -1,0 +1,32 @@
+_id: req_f12a27814d6c4490b48f229953368576
+type: Request
+parentId: fld_3736e706390b4af693cb1afa8151558b
+modified: 1659881966033
+created: 1659112592671
+url: "{{ _.base_url }}"
+name: /bank/balance
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $address: String!) {\n\tbank
+    {\n\t\tbalance(height: $height, address: $address)
+    {\n\t\t\tdenom\n\t\t\tamount\n\t\t}\n\t}\n}\n","variables":{"height":1063175,"address":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309733.9375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

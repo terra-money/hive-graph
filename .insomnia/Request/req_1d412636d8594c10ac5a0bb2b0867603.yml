@@ -1,0 +1,34 @@
+_id: req_1d412636d8594c10ac5a0bb2b0867603
+type: Request
+parentId: fld_d07e10b096734966ba273837d0014ff5
+modified: 1659369248245
+created: 1659369000317
+url: "{{ _.base_url }}"
+name: /distribution/rewards
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float, $delegator: String!)
+    {\n\tdistribution {\n\t\trewards(height: $height, delegator: $delegator)
+    {\n\t\t\trewards {\n\t\t\t\treward
+    {\n\t\t\t\t\tamount\n\t\t\t\t\tdenom\n\t\t\t\t}\n\t\t\t\tvalidator_address\n\t\t\t}\n\t\t\ttotal
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"height":1063175,"delegator":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309729.6406
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

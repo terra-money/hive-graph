@@ -1,0 +1,41 @@
+_id: req_986d574589264c638ad89e67b3944777
+type: Request
+parentId: fld_9cd65b4f40d642d9b53de2bb1c6ab465
+modified: 1659702606060
+created: 1659112592784
+url: "{{ _.base_url }}"
+name: /msgauth/grants - sendAuth - need to find test case
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query(\n\t$height: Float\n\t$grantee:
+    String!\n\t$granter: String!\n#\t$msgType: String!\n) {\n\tmsgauth
+    {\n\t\tgrants(\n\t\t\theight: $height\n\t\t\tgrantee:
+    $grantee\n\t\t\tgranter: $granter\n\t\t#\tmsgType: $msgType\n\t\t)
+    {\n\t\t\tauthorization {\n\t\t\t\t... on GenericAuthorization
+    {\n\t\t\t\t\tmsg\n\t\t\t\t}\n\t\t\t\t... on SendAuthorization
+    {\n\t\t\t\t\tspend_limit
+    {\n\t\t\t\t\t\tamount\n\t\t\t\t\t\tdenom\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\t...
+    on StakeAuthorization {\n\t\t\t\t\tallow_list
+    {\n\t\t\t\t\t\taddresses\n\t\t\t\t\t}\n\t\t\t\t\tauthorization_type\n\t\t\t\t\tdeny_list
+    {\n\t\t\t\t\t\taddresses\n\t\t\t\t\t}\n\t\t\t\t\tmax_tokens
+    {\n\t\t\t\t\t\tamount\n\t\t\t\t\t\tdenom\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\texpiration\n\t\t}\n\t}\n}\n","variables":{"height":1082139,"grantee":"terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6","granter":"terra1vlv9hr42yhseg9qxp26p39r56swhrerf5yc32h"},"operationName":"Query"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.9072
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,29 @@
+_id: req_30841a699dbe4b16a1114c45547f2ed2
+type: Request
+parentId: fld_006124dbf3dc47558311c76d94d2d9b9
+modified: 1659710140445
+created: 1659112592633
+url: "{{ _.base_url }}"
+name: /staking/pool
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query Query($height: Float) {\n\tstaking
+    {\n\t\tpool(\n\t\t\theight: $height\n\t\t) {\n\t\t\tbonded_tokens
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t\tnot_bonded_tokens
+    {\n\t\t\t\tamount\n\t\t\t\tdenom\n\t\t\t}\n\t\t}\n\t}\n}\n","variables":{"height":580019},"operationName":"Query"}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309633.9375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

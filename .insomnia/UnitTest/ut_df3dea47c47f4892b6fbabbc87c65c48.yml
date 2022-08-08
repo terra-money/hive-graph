@@ -1,0 +1,24 @@
+_id: ut_df3dea47c47f4892b6fbabbc87c65c48
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659368645988
+created: 1659368363355
+requestId: req_f12a27814d6c4490b48f229953368576
+name: /bank/balance
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"bank": {
+  			"balance": [
+  				{
+  					"denom": "uluna",
+  					"amount": "5809279"
+  				}
+  			]
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+

@@ -1,0 +1,30 @@
+_id: req_7683fda881f0436a978612826785b1bb
+type: Request
+parentId: fld_210cbf4e2dd8475c979b571f35329af1
+modified: 1659701476420
+created: 1659112592792
+url: "{{ _.base_url }}"
+name: /ping
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"{\n\tping \n}\n"}'
+parameters:
+  - id: pair_5d26b64a7796412d8da8519bea8ef306
+    name: ""
+    value: ""
+    description: ""
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_5405fb5599ac4e8fbed65665ff7451de
+authentication: {}
+metaSortKey: -1658778309727.834
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

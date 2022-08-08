@@ -1,0 +1,26 @@
+_id: ut_d7246ced15fb46cbac24f016da6f8e9d
+type: UnitTest
+parentId: uts_22a3e90b73164be8a004199902fc3e19
+modified: 1659376404098
+created: 1659367963482
+requestId: req_fa1e4bcdb2564c7490da8438c8007934
+name: /auth/accountInfo
+code: |+
+  const response = await insomnia.send();
+  var expected_result = {
+  	"data": {
+  		"auth": {
+  			"accountInfo": {
+  				"account_number": 10170,
+  				"address": "terra15f6u0du435vdfwm6q6fcrvz7xvffgrgr5x4cf6",
+  				"public_key": {
+  					"key": "AqMwTeMhhFaGSA3Pd6yTkO9Sn0biRBkrQEN7d54GxPGK"
+  				},
+  				"sequence": 4
+  			}
+  		}
+  	}
+  }
+
+  expect(JSON.parse(response.data)).to.deep.equal(expected_result);
+
