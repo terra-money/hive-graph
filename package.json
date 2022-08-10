@@ -37,7 +37,7 @@
     "@terra-money/terra.proto": "~2.0.0",
     "apollo-server": "^3.5.0",
     "apollo-server-express": "^3.4.0",
-    "axios": "^0.26.0",
+    "axios": "^0.27.2",
     "class-transformer": "0.4.0",
     "class-validator": "^0.13.2",
     "compression": "^1.7.4",
